@@ -1,3 +1,9 @@
+% Den første funksjonen i en fil er automatisk main-funksjonen
+function int = main()
+    solve_ode;
+    int = 0;
+end
+
 function solve_ode
     % Tidsrom med linspace
     % VIKTIG: stabilitet av ode45 avhenger av resolution
