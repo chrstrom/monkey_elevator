@@ -1,8 +1,11 @@
+
 % Den første funksjonen i en fil er automatisk main-funksjonen
-function int = main()
+% og skal også ha samme navn som fila, så ikke matlab klager..
+function int = o1_plt()
     solve_ode;
     int = 0;
 end
+
 
 function solve_ode
     % Tidsrom med linspace
@@ -23,16 +26,20 @@ function solve_ode
     [t2, x2] = ode45(@ode2, t2, init_x2);
     
     % Plot
-    plot(t1, x1(:,1));
+    plot(t1, x1, 'LineWidth', 3);
     hold on;
-    plot(t2, x2(:,1));
+    plot(t2, x2, 'LineWidth', 3);
     
     xlabel("tid [s]");
     ylabel("T(t) [°C]");
+    
     % Diffligningene
-  
+    % Det første parameteret i diffligningene svarer til
+    % t, men siden ligningene er tidsinvariante, kan man
+    % bruke ~ i steden, så slipper man matlab-warnings
+    
     % ODE for oppvarming
-    function Dx=ode1(t, x)
+    function Dx=ode1(~, x)
         C = 480; % [J/°C]
         g = 3;   % [W/°C]
         u = 600; % [W]
@@ -40,10 +47,9 @@ function solve_ode
     end
 
     % ODE for avkjøling
-    function Dx=ode2(t, x)
+    function Dx=ode2(~, x)
         C = 480; % [J/°C]
         g = 3;   % [W/°C]
-        u = 600; % [W]
         Dx = -g/C * x(1);
     end
 end
