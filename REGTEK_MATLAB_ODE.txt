@@ -1,0 +1,24 @@
+function solve_ode
+    % Time scale [from :resolution to]
+    t = [0 :1 100];
+    
+    % Initial values
+    init_x = 100;    
+    init_Dx = 20;    
+
+    [t, x] = ode45(@ode, t, [init_x, init_Dx]);
+    
+    plot(t, x(:,1));
+    xlabel("tid [s]");
+    ylabel("x(t)");
+    
+    % System of differential equations
+    % Trenger å spesifisere Dn for systemet av orden n    
+    function Dx=ode(t, x)
+           D1 = x(1)
+           D2 = 
+           
+           Dx=[D1; D2];
+    end
+end
+
