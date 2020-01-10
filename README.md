@@ -12,4 +12,12 @@ push til egen branch ENKEL MÅTE:
 
 git checkout <branchName>
 add, commit, push, VANLIG MÅTE
+  
+  
+  
+Legge til nye filer eller redigere eksisterende filer direkte:
+add, commit, push
+
+Legge filer til fra en branch til en annen:
+merge
  
