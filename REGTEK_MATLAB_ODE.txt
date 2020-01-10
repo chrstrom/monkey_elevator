@@ -1,8 +1,9 @@
 function solve_ode
-    % Time scale [t_start :resolution t_end]
+    % Time scale with linspace
     % VIKTIG: stabilitet av ode45 avhenger av resolution
     %           hvis plottet ser fucka ut, prøv å endre resolution
-    t = [0 :0.001 100];
+    res = 10000;
+    t1 = linspace(0, 960, res);
     
     % Initial values
     init_x = 100;    
