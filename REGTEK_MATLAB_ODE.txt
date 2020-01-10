@@ -1,27 +1,43 @@
 function solve_ode
-    % Time scale with linspace
+    % Tidsrom med linspace
     % VIKTIG: stabilitet av ode45 avhenger av resolution
     %           hvis plottet ser fucka ut, prøv å endre resolution
-    res = 10000;
+    
+    res = 10000;  
+    % Setter av plass for 6 tidskonstanter til hver ode
     t1 = linspace(0, 960, res);
+    t2 = linspace(960, 1920, res);
     
-    % Initial values
-    init_x = 100;    
-    init_Dx = 20;    
-
-    [t, x] = ode45(@ode, t, [init_x, init_Dx]);
+    % IVer
+    init_x = 0;   
+    init_x2 = 200;
+   
+    % Løs diffligningene med ode45
+    [t1, x1] = ode45(@ode1, t1, init_x);
+    [t2, x2] = ode45(@ode2, t2, init_x2);
     
-    plot(t, x(:,1));
+    % Plot
+    plot(t1, x1(:,1));
+    hold on;
+    plot(t2, x2(:,1));
+    
     xlabel("tid [s]");
-    ylabel("x(t)");
-    
-    % System of differential equations
-    % Trenger å spesifisere Dn for systemet av orden n    
-    function Dx=ode(t, x)
-           D1 = x(1)
-           D2 = 
-           
-           Dx=[D1; D2];
+    ylabel("T(t) [°C]");
+    % Diffligningene
+  
+    % ODE for oppvarming
+    function Dx=ode1(t, x)
+        C = 480; % [J/°C]
+        g = 3;   % [W/°C]
+        u = 600; % [W]
+        Dx = -g/C * x(1) + u/C;
+    end
+
+    % ODE for avkjøling
+    function Dx=ode2(t, x)
+        C = 480; % [J/°C]
+        g = 3;   % [W/°C]
+        u = 600; % [W]
+        Dx = -g/C * x(1);
     end
 end
-
