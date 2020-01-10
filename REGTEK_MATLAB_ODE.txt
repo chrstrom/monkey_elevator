@@ -1,6 +1,8 @@
 function solve_ode
-    % Time scale [from :resolution to]
-    t = [0 :1 100];
+    % Time scale [t_start :resolution t_end]
+    % VIKTIG: stabilitet av ode45 avhenger av resolution
+    %           hvis plottet ser fucka ut, prøv å endre resolution
+    t = [0 :0.001 100];
     
     % Initial values
     init_x = 100;    
