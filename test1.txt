@@ -1,0 +1,9 @@
+DETTE ER EN TESTFIL:
+
+Jeg har lyst til å pushe denne til chstr, for å så pushe disse endringene opp
+til staging.
+
+Blir dette en merge? Jeg vet faen meg ikke....
+I guess we'll see
+
+
