@@ -2,6 +2,26 @@
 Søppelkasselignende kode for tilpdat-arbeider utført av inkompetente karer
 
 
+VIKTIG!!!VIKTIG!!!VIKTIG!!!VIKTIG!!!VIKTIG!!!VIKTIG!!!VIKTIG!!!VIKTIG!!!VIKTIG!!!
+Under arbeid, SKAL STAGING ALDRI LIGGE BAK MASTER!!!!!
+
+Gjør dette
+
+1) Gjør lokale endringer i myBranch
+2) Så har vi lyst til å merge til staging
+
+// Update lokale endringer
+git push origin myBranch
+
+// Merge til staging
+git checkout stagig
+git merge myBranch
+git push origin staging
+
+
+
+
+
 push til egen branch VANSKELIG MÅTE:
 
 git add <fil>
