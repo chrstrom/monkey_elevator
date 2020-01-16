@@ -3,7 +3,6 @@
 // Below is a proposed method of commenting on functions
 // If wanted, this can be done for every single function
 
-
 /* !
  * @function    create_matrix
  * @abstract    creates a matrix of a given size
