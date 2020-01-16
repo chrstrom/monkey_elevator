@@ -1,42 +1,45 @@
 #include "headers/cond_mask_matrix.h"
 
+// Below is a proposed method of commenting on functions
+// If wanted, this can be done for every single function
 
 
-void print_mask_matrix() {
-    for(int n = 0; n < MASK_MATRIX_N; n++) {
-        for(int m = 0; m < MASK_MATRIX_M; m++) {
-            printf("%d ", mask_matrix[n][m]);
-            printf("\t");
-        }
-        printf("\n");
+/* !
+ * @function    create_matrix
+ * @abstract    creates a matrix of a given size
+ * @param   rows    amount of rows
+ * @param   cols    amount of columns
+ * @param   values  an array with the values that the matrix is to be filled with
+ * @result      a pointer to a matrix struct with all 0's
+*/
+matrix_s* create_matrix(int rows, int cols, const int values[rows*cols]) {
+    // Allocate memory for a matrix of size rows x cols
+    matrix_s* m = malloc(rows * cols * sizeof(int) + sizeof(matrix_s));
+
+     // Set member variables of the matrix
+    m->rows = rows;
+    m->cols = cols;
+
+    for(int i = 0; i < rows*cols; i++) {
+        m->data[i] = values[i];
+    }
+    
+    return m;
+}
+
+void matrix_AND_data(matrix_s* m, const int input_data[m->cols]) {
+    for(int i = 0; i < m->rows * m->cols; i++) {
+        m->data[i] = m->data[i] & input_data [i / m->cols];  // The floor-division i / m->cols ensures that the correct values are ANDed
     }
 }
 
-int** colwise_AND() {
-    // We first allocate memory space for the double pointer
-    // that will be the return value
-    int** result_matrix = (int**) calloc(MASK_MATRIX_N, sizeof(int*));
-    for (int i  = 0; i < MASK_MATRIX_N; i++) {
-        result_matrix[i] = (int*) calloc( MASK_MATRIX_M, sizeof(int));
-    }
-
-    // Copy values into the allocated memory from mask_matrix in cond_mask_matrix.c
-    for(int n = 0; n < MASK_MATRIX_N; n++) {
-        for(int m = 0; m < MASK_MATRIX_M; m++) {
-            result_matrix[n][m] = mask_matrix[n][m];
+void print_matrix(matrix_s* m) {
+    for(int i = 0; i < m->rows; i++) {
+        for(int j = 0; j < m->cols; j++) {
+            printf("%d ", m->data[i*m->cols + j]);  // [i*m + j] is the equivalent of element [i][j], think "base + offset"
+            printf(" ");
         }
+        printf("\n");
     }
-
-    // Column-wise AND operation
-    for(int m = 0; m < MASK_MATRIX_M; m++) {
-        // result_row and mask_row should be the current row of their respective matrices
-        for(int n = 0; n < MASK_MATRIX_N; n++) {
-            // Set the n-th element of the current result_row to be the ANDed values of the n-th element in data_vec and current mask_row
-            result_matrix[n][m] = data_vec[n] & mask_matrix[n][m];
-            
-        }
-    }
-
-    return result_matrix;
 }
 
