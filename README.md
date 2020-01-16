@@ -2,6 +2,22 @@
 Søppelkasselignende kode for tilpdat-arbeider utført av inkompetente karer
 
 
+VIKTIG!!!VIKTIG!!!VIKTIG!!!VIKTIG!!!VIKTIG!!!VIKTIG!!!VIKTIG!!!VIKTIG!!!VIKTIG!!!
+For vår arbeidsflyt, skal staging ALDRI ligge bak master. Dette skjer når man pusher til master direkte.
+
+Push først til egen branch:
+git push remote <yourbranch>
+
+Så, når man skal merge:
+git checkout staging
+git merge <yourbranch>
+
+
+
+
+
+
+
 push til egen branch VANSKELIG MÅTE:
 
 git add <fil>
