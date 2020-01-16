@@ -5,14 +5,16 @@ Søppelkasselignende kode for tilpdat-arbeider utført av inkompetente karer
 VIKTIG!!!VIKTIG!!!VIKTIG!!!VIKTIG!!!VIKTIG!!!VIKTIG!!!VIKTIG!!!VIKTIG!!!VIKTIG!!!
 For vår arbeidsflyt, skal staging ALDRI ligge bak master. Dette skjer når man pusher til master direkte.
 
-Push først til egen branch:
-git push remote <yourbranch>
+1) Gjør lokale endringer i myBranch
+2) Så har vi lyst til å merge til staging
 
-Så, når man skal merge:
-git checkout staging
-git merge <yourbranch>
+// Update lokale endringer
+git push origin myBranch
 
-
+// Merge til staging
+git checkout stagig
+git merge myBranch
+git push origin staging
 
 
 
