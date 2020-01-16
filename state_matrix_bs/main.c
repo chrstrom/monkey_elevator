@@ -30,6 +30,5 @@ int main(){
     printf("\n\nAfter row-wise comparison:\n");
     print_matrix(rule_vector);
 
-
     return 0;
 }
