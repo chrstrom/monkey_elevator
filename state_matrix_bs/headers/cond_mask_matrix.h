@@ -56,18 +56,12 @@ typedef struct {
     int data[];
 } matrix_s;
 
-/*!
- *@function create_matrix
- *@discussion the function creates a matrix, with rows and columns
- *as specified by the @param values array
- *@param rows amt. of rows, MUST correspond to amt. of rows in the values-array
- *@param cols amt. of columns, MUST correspond to amt. of columns in values-array 
- * 
-*/
+
+matrix_s* create_empty_matrix(int rows, int cols);
 matrix_s* create_matrix(int rows, int cols, const int values[rows*cols]);
 
-void matrix_AND_data(matrix_s* m, const matrix_s* input_vector);
-matrix_s* matrix_COMP_matrix(matrix_s* m1, matrix_s* m2);
+matrix_s* matrix_AND_data(const matrix_s* m, const matrix_s* input_vector);
+matrix_s* matrix_COMP_matrix(const matrix_s* m1, const matrix_s* m2);
 
 void print_matrix(const matrix_s* m);
 
