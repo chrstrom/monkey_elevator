@@ -13,7 +13,7 @@
 
 // 2D matrix containing the conditions for a given operation
 // See "Logikkstyring"-slides, TTK4235 Jan. 16 2020, slide 36
-static const int cond_matrix[COND_MATRIX_N][COND_MATRIX_M] = {
+static const int cond_matrix[COND_MATRIX_N * COND_MATRIX_M] = {
     1, 1, 0, 0, 0, 1,
     1, 1, 0, 0, 1, 0,
     0, 1, 0, 0, 0, 0,
@@ -53,7 +53,9 @@ typedef struct {
 } matrix_s;
 
 matrix_s* create_matrix(int rows, int cols, const int values[rows*cols]);
-void matrix_AND_data(matrix_s* m, const int input_data[m->cols]);
-void print_matrix(matrix_s* m);
+void matrix_AND_data(matrix_s* m, const matrix_s* input_vector);
+matrix_s* matrix_COMP_matrix(matrix_s* m1, matrix_s* m2);
+
+void print_matrix(const matrix_s* m);
 
 #endif // COND_MASK_MATRIX
