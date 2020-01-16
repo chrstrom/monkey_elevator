@@ -3,7 +3,9 @@ Søppelkasselignende kode for tilpdat-arbeider utført av inkompetente karer
 
 
 VIKTIG!!!VIKTIG!!!VIKTIG!!!VIKTIG!!!VIKTIG!!!VIKTIG!!!VIKTIG!!!VIKTIG!!!VIKTIG!!!
-For vår arbeidsflyt, skal staging ALDRI ligge bak master. Dette skjer når man pusher til master direkte.
+Under arbeid, SKAL STAGING ALDRI LIGGE BAK MASTER!!!!!
+
+Gjør dette
 
 1) Gjør lokale endringer i myBranch
 2) Så har vi lyst til å merge til staging
