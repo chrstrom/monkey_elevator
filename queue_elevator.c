@@ -1,4 +1,4 @@
-#include "queue_elevator.h"
+#include "headers/queue_elevator.h"
 
 /*
 @function: get current floor
@@ -13,13 +13,39 @@ void current_floor(){
     //floor_state = get_current_floor();
 }
 
-/*
-@function: produce queue to the elevator
-@abstract: return a Matrix with the current queue, which will all be zero
-during setup of the elevator 
 
-#Additional comments:
-Can most make one order from one floor at a time.
+// Potentially need to handle this in a different way
+// As long as the number here correspond to the location in the vector
+// that will be the result of the mask/conditional matrix operations
+#define FLOOR_1_TASK_IDX 0
+#define FLOOR_2_TASK_IDX 1
+#define STOP_TASK_IDX 5
+/*!
+ * @function: handle_tasks
+ * @abstract: handle the current tasks that potentially need to be executed
+ * @param:  tasks   the matrix (or vector, really) that holds a 1/0 for task/not task
+*/
+void handle_tasks(matrix_s* tasks) {
+
+    // STOP is the most 
+    if(tasks->data[STOP_TASK_IDX]) {
+        //stop_elevator();
+        return;
+    }
+
+    if(tasks->data[FLOOR_1_TASK_IDX]) {
+        //handle_floor_1();
+        return;
+    }
+
+
+
+}
+/*!
+ * @function:   produce queue to the elevator
+ * @abstract:   Return a Matrix with the current queue, which will all be zero
+ * during setup of the elevator 
+ * @discussion: Can most make one order from one floor at a time.
 Must generate orders and edit the matrix afterwards
 */
 matrix_s* generate_initial_queue(){
@@ -111,11 +137,11 @@ queue is full. Throw error?
 */
 void change_queue_direction(matrix_s* queue, int* newFloor, enum Direction* newDir){
 
-    switch (newDir)
+    switch (*newDir)
     {
     case up:
-        delete_first();
-        queue->data[]
+        delete_first(queue);
+        //queue->data[];
         break;
     case down:
         break;
@@ -180,6 +206,7 @@ if(elevator_state == stop && queue[PRIORITY][CALL_FLOOR] == current_floor){
         }
     }
 */
+
 void delete_first(matrix_s* queue){
     //first check if the destination is correct
     matrix_s* current_priority_matrix = get_current_priority(queue);
@@ -190,6 +217,7 @@ void delete_first(matrix_s* queue){
         for(int fl = 0; fl < NUMBER_FLOORS - 1; fl++){
             for(int col = 0; col < QUEUE_COLS; col++){
                 queue->data[fl * col + col] = queue->data[(fl + 1) * col + col];
+                //TODO: set last element to 0
             }
         }
     }
