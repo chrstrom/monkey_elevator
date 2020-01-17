@@ -22,28 +22,72 @@ during setup of the elevator
 Can most make one order from one floor at a time.
 Must generate orders and edit the matrix afterwards
 */
-int** generate_initial_queue(){
+matrix_s* generate_initial_queue(){
     // We first allocate memory space for the double pointer
     // that will be the return value. 
-    int** queue = (int**) calloc(NUMBER_FLOORS, sizeof(int*));
-    for (int i  = 0; i < NUMBER_FLOORS; i++) {
-        queue[i] = (int*) calloc(QUEUE_COLS , sizeof(int));
-        queue[i][PRIORITY] = i + 1; //shows the number of the floor in the matrix
+    matrix_s* queue = malloc(QUEUE_COLS * NUMBER_FLOORS * sizeof(int) + sizeof(matrix_s));
+    queue->cols = QUEUE_COLS;
+    queue->rows = NUMBER_FLOORS;
+    for(int i = 0; i < NUMBER_FLOORS*QUEUE_COLS; i++) {
+        queue->data[i] = 0;
+    }
+    //If we want to prioritize the queue, it is clever to include the priority-variable
+    for(int fl = 0; fl < NUMBER_FLOORS; fl++){
+        queue->data[fl * QUEUE_COLS + PRIORITY] = fl + 1;
     }
     return queue;
 }
+
+/*
+@function: produce empty matrix
+@abstract: return an empty matrix
+
+#Additional comments:
+*/
+matrix_s* create_empty_matrix(int rows, int cols) {
+     // Allocate memory for a matrix of size rows x cols
+    matrix_s* m = malloc(rows * cols * sizeof(int) + sizeof(matrix_s));
+     // Set member variables of the matrix
+    m->rows = rows;
+    m->cols = cols;
+    for(int i = 0; i < rows*cols; i++) {
+        m->data[i] = 0;
+    }
+    return m;
+}
+
+/*
+Disbanded code:
+Went from a int** to matrix_s
+
+ for (int i  = 0; i < NUMBER_FLOORS; i++) {
+        queue[i] = (int*) calloc(QUEUE_COLS , sizeof(int));
+        queue[i][PRIORITY] = i + 1; //shows the number of the floor in the matrix
+    }
+*/
 
 /*
 @function: print out the queue
 @abstract: 
 
 #Additional comments:
-*/
+
+Disbanded code:
 void print_queue(int** queue){
     for(int fl = 0; fl < NUMBER_FLOORS; fl++){
         for(int col = 0; col < QUEUE_COLS; col++){
          printf("%d ", queue[fl][col]);
             printf("\t");
+        }
+        printf("\n");
+    }
+}
+*/
+void print_queue(const matrix_s* queue) {
+    for(int i = 0; i < queue->rows; i++) {
+        for(int j = 0; j < queue->cols; j++) {
+            printf("%d ", queue->data[i*queue->cols + j]);  // [i*m + j] is the equivalent of element [i][j], think "base + offset"
+            printf(" ");
         }
         printf("\n");
     }
@@ -57,18 +101,21 @@ optimize the elevator, making sure it is flexible in the order of floor-stops
 
 #Additional comments:
 Will try to delete the first in queue, however will not to that if that is not fulfilled
+Here it is required to check the number of elements in the queue
+and later set a spesific direction to a spesific floor. Have to take care of the problem if the 
+queue is full. Throw error?
 
 #Known problems:
 "Direction is undefined"
-Not finished - unsure how to move on
+----------------------Not finished - unsure how to move on (AKA Not sure how to use the FSM to solve this) ----------------
 */
-void change_queue_direction(int** queue, int* newFloor, Direction* newDir){
+void change_queue_direction(matrix_s* queue, int* newFloor, Direction* newDir){
 
     switch (newDir)
     {
     case Direction::up:
         delete_first();
-        queue[*(newFloor)][];
+        queue->data[]
         break;
     case Direction::down:
         break;
@@ -77,8 +124,26 @@ void change_queue_direction(int** queue, int* newFloor, Direction* newDir){
     }
 }
 
-void change_queue_floor(int** queue, int* goToFloor){
+/*
+@function: set the destination of a spesific order
+@abstract: Will be invoked when we get the next order during a stop. The function will 
+first check if the elevator has stopped at the correct/set the next floor it will stop on. 
 
+#Additional comments:
+Should only be called when the elevator has reached the correct address
+
+#Known problems:
+*/
+void change_queue_floor(matrix_s* queue, int* goToFloor){
+    matrix_s* first_pri_matrix = get_current_priority(queue);
+    //check if we arrived at the correct floor. If yes, set the next floor
+    if(elevator_state == stop && first_pri_matrix->data[CALL_FLOOR] == floor_state){
+        queue->data[TO_FLOOR] = *(goToFloor);
+    }
+    else{
+        //The function should only be envoked when at the correct floor
+        //Should throw an error?
+    }
 }
 
 /*
@@ -92,8 +157,9 @@ Will try to delete the first in queue, however will not to that if that is not f
 
 #Known problems:
 "Direction is undefined"
+---------------------------Not finished/updated to accompany matrix_s----------------------------------
 */
-void delete_first(int** queue){
+void delete_first(matrix_s* queue, enum bool arrived_dest){
     //first check if the destination is correct
     if(elevator_state == Direction::stop && queue[PRIORITY][CALL_FLOOR] == current_floor){
         //The elevator has arrived to the destination, and can "reduce" the Matrix
@@ -117,13 +183,21 @@ void delete_first(int** queue){
 @abstract: 
 
 #Additional comments:
-*/
-void swap_order(int** queue, int lowPri, int highPri){
-    int temp;
-    for(int col = 0; col < QUEUE_COLS; col++){
+
+Discarded changes:
+for(int col = 0; col < QUEUE_COLS; col++){
         temp = queue[highPri][col];
         queue[highPri][col] = queue[lowPri][col];
         queue[lowPri][col] = temp;
+    }
+*/
+void swap_order(matrix_s* queue, int lowPri, int highPri){
+    matrix_s* temp_matrix = generate_initial_queue();
+    int temp;
+    for(int col = 1; col < QUEUE_COLS; col++){
+        temp = queue->data[(lowPri - 1) * col + col];
+        queue->data[(lowPri - 1) * col + col] = queue->data[(highPri - 1) * col + col];
+        queue->data[(highPri - 1) * col + col] = temp;
     }
 }
 
@@ -139,9 +213,49 @@ Will try to delete the first in queue, however will not to that if that is not f
 #Known problems:
 "Queue_Swap is undefined"
 */
-void change_order_queue(int** queue){
-    if(swap_state == Queue_Swap::Allow){
+void change_order_queue(matrix_s* queue){
+    if(swap_state == Allow){
         //Need to find a good algorithm to sort this
         //We need womething to have good effieciency (right??) 
+        //Base this on FSM, where the direction of the elevator decides the next stop/
+        //queue order
     }
+}
+
+/*
+@function: Check if the queue is full
+@abstract: check the last priority. If all entries are 0, then the queue has space.
+
+#Additional comments:
+
+#Known problems:
+*/
+int check_space_queue(matrix_s* queue){
+    //we know that col == 0 will show the priority of the order, and thus
+    //not be 0
+    for(int col = 1; col < QUEUE_COLS; col++){
+        if(queue->data[(NUMBER_FLOORS - 1) * col] == 1){
+            return 0;
+        }
+    }
+    return 1;
+}
+
+/*
+@function: Get the current top priority in the queue
+@abstract: return a matrix of the queue's top priority. 
+
+#Additional comments:
+
+#Known problems:
+*/
+matrix_s* get_current_priority(matrix_s* queue){
+    int top_pri = 1;
+    //create a temporary matrix_s*
+    matrix_s* temp = create_empty_matrix(top_pri, QUEUE_COLS);
+    for(int col = 0; col < QUEUE_COLS; col++){
+        //fill the matrix with the top data
+        temp->data[col] = queue->data[col];
+    }
+    return temp;
 }
