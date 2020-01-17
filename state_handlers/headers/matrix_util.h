@@ -1,5 +1,5 @@
-#ifndef COND_MASK_MATRIX
-#define COND_MASK_MATRIX
+#ifndef MATRIX_UTIL
+#define MATRIX_UTIL
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -61,8 +61,12 @@ typedef struct {
 matrix_s* create_empty_matrix(int rows, int cols);
 matrix_s* create_matrix(int rows, int cols, const int values[rows*cols]);
 
-matrix_s* matrix_AND_data(const matrix_s* m, const matrix_s* input_vector);
-matrix_s* matrix_COMP_matrix(const matrix_s* m1, const matrix_s* m2);
+
+// Matrix operations needed for operation, both const and non-const types
+void matrix_AND_data(matrix_s* m, const matrix_s* input_vector);
+
+matrix_s* matrix_AND_data_const(const matrix_s* m, const matrix_s* input_vector);
+matrix_s* matrix_COMP_matrix_const(const matrix_s* m1, const matrix_s* m2);
 
 void print_matrix(const matrix_s* m);
 

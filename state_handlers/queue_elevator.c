@@ -14,33 +14,6 @@ void current_floor(){
 }
 
 
-// Potentially need to handle this in a different way
-// As long as the number here correspond to the location in the vector
-// that will be the result of the mask/conditional matrix operations
-#define FLOOR_1_TASK_IDX 0
-#define FLOOR_2_TASK_IDX 1
-#define STOP_TASK_IDX 5
-/*!
- * @function: handle_tasks
- * @abstract: handle the current tasks that potentially need to be executed
- * @param:  tasks   the matrix (or vector, really) that holds a 1/0 for task/not task
-*/
-void handle_tasks(matrix_s* tasks) {
-
-    // STOP is the most 
-    if(tasks->data[STOP_TASK_IDX]) {
-        //stop_elevator();
-        return;
-    }
-
-    if(tasks->data[FLOOR_1_TASK_IDX]) {
-        //handle_floor_1();
-        return;
-    }
-
-
-
-}
 /*!
  * @function:   produce queue to the elevator
  * @abstract:   Return a Matrix with the current queue, which will all be zero
@@ -61,6 +34,7 @@ matrix_s* generate_initial_queue(){
     for(int fl = 0; fl < NUMBER_FLOORS; fl++){
         queue->data[fl * QUEUE_COLS + PRIORITY] = fl + 1;
     }
+    
     return queue;
 }
 

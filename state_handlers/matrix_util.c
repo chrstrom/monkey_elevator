@@ -1,9 +1,8 @@
-#include "headers/cond_mask_matrix.h"
+#include "headers/matrix_util.h"
 
-
-/* !
- * @function    create_empty_matrix
- * @abstract    creates a 0'd matrix of a given size
+/*!
+ * @function:    create_empty_matrix
+ * @abstract:    creates a 0'd matrix of a given size
  * @param   rows    amount of rows
  * @param   cols    amount of columns
  * @result      a pointer to a matrix struct with data as all 0's
@@ -15,15 +14,17 @@ matrix_s* create_empty_matrix(int rows, int cols) {
      // Set member variables of the matrix
     m->rows = rows;
     m->cols = cols;
+    
     for(int i = 0; i < rows*cols; i++) {
         m->data[i] = 0;
     }
+    
     return m;
 }
 
-/* !
- * @function    create_matrix
- * @abstract    creates a matrix of a given size
+/*!
+ * @function:    create_matrix
+ * @abstract:    creates a matrix of a given size
  * @param   rows    amount of rows
  * @param   cols    amount of columns
  * @param   values  an array with the values that the matrix is to be filled with
@@ -44,17 +45,31 @@ matrix_s* create_matrix(int rows, int cols, const int values[rows*cols]) {
     return m;
 }
 
-/* !
- * @function    matrix_AND_data
- * @abstract    Element-wise AND of row-vector and matrix
- * @discussion  All the inputs will be containers of 1's and 0's, and the
+/*!
+ * @function:    matrix_AND_data
+ * @abstract:    Element-wise AND of row-vector and matrix
+ * @discussion:  All the inputs will be containers of 1's and 0's. THIS FUNCTION
+ * ALTERS THE INPUT MATRIX.
+ * @param   m   Matrix to be used for AND CHANGED by
+ * @param   input_vector    Column-vector to be used for the operation
+
+*/
+void matrix_AND_data(matrix_s* m, const matrix_s* input_vector) {
+    for(int i = 0; i < m->rows * m->cols; i++) {
+        m->data[i] &= input_vector->data[i / m->cols];  // The floor-division i / m->cols ensures that the correct values are ANDed
+    }
+}
+/*!
+ * @function:    matrix_AND_data_const
+ * @abstract:    Element-wise AND of row-vector and matrix
+ * @discussion:  All the inputs will be containers of 1's and 0's, and the
  * resulting matrix will be one with identical dimensions as @param m, but with
  * the operation completed
  * @param   m   Matrix to be used for the operation
  * @param   input_vector    Column-vector to be used for the operation
  * @result  a new matrix that is the result of the element-wise AND-operation
 */
-matrix_s* matrix_AND_data(const matrix_s* m, const matrix_s* input_vector) {
+matrix_s* matrix_AND_data_const(const matrix_s* m, const matrix_s* input_vector) {
     // Create a new matrix that will be the output of this operation
     matrix_s* m_out = create_empty_matrix(m->rows, m->cols);
 
@@ -65,10 +80,10 @@ matrix_s* matrix_AND_data(const matrix_s* m, const matrix_s* input_vector) {
     return m_out;
 }
 
-/* !
- * @function    matrix_COMP_matrix
- * @abstract    Column-wise comparison of two matrices
- * @discussion  Both the matrices m1 and m2 must be of the same dimensions for 
+/*!
+ * @function:    matrix_COMP_matrix_const
+ * @abstract:    Column-wise comparison of two matrices
+ * @discussion:  Both the matrices m1 and m2 must be of the same dimensions for 
  * the operation to make sense, as we are comparing column by column in them
  * and checking if they are equal or not.
  * @param   m1  Matrix to be used for the operation
@@ -76,7 +91,7 @@ matrix_s* matrix_AND_data(const matrix_s* m, const matrix_s* input_vector) {
  * @result  a 1D vector (type matrix_s) with 1's in all indices where m1
  * and m2 have equal columns
 */
-matrix_s* matrix_COMP_matrix(const matrix_s* m1, const matrix_s* m2) {
+matrix_s* matrix_COMP_matrix_const(const matrix_s* m1, const matrix_s* m2) {
     // Create output matrix and set values for rows and cols
     matrix_s* m_out = malloc(1 * m2->cols * sizeof(int) + sizeof(matrix_s));
     m_out->rows = 1;
@@ -99,9 +114,9 @@ matrix_s* matrix_COMP_matrix(const matrix_s* m1, const matrix_s* m2) {
     return m_out;
 }
 
-/* !
- * @function    print_matrix
- * @abstract    Print a matrix_s with pretty formatting
+/*!
+ * @function:    print_matrix
+ * @abstract:    Print a matrix_s with pretty formatting
  * @param   m   Matrix to be printed
 */
 void print_matrix(const matrix_s* m) {

@@ -30,17 +30,17 @@ enum Queue_Swap{
 };
 
 /*!
- * @ struct      matrix_s
- * @abstract    Contains the main properties of a matrix
- * @discussion  data will contain rows*cols elements, and makes up the values
+ * @struct       matrix_s
+ * @abstract:    Contains the main properties of a matrix
+ * @discussion:  data will contain rows*cols elements, and makes up the values
  * in the matrix. Note that the data is stored in a 1D array, so any subsequent
  * operations on one single element in a matrix where rows && cols > 1 (2D matrix)
  * must be done with caution to ensure the correct indexation.
  * Example: mat[i][j] ==> [i*mat->cols + j]
  *  Note also that by specfying rows = 1, you are practically making a 1-d vector.
- * @field       rows    The amount of rows in the matrix
- * @field       cols    The amount of columns in the matrix
- * @field       data[]  The data contained by the matrix. Is rows*cols long.
+ * @field:       rows    The amount of rows in the matrix
+ * @field:       cols    The amount of columns in the matrix
+ * @field:       data[]  The data contained by the matrix. Is rows*cols long.
 */
 typedef struct {
     int rows;
@@ -48,10 +48,11 @@ typedef struct {
     int data[];
 } matrix_s;
 
-/*
-enum        Bool
-abstract    Show either true or false of a function
-discussion  Easier to read a code. The intention is more obvious
+
+/*!
+ *@enum:        Bool
+ *@abstract:    Show either true or false of a function
+ *@discussion:  Easier to read a code. The intention is more obvious
 */
 enum Bool {
     false, true
@@ -92,7 +93,7 @@ void print_queue();
 //direction the elevator will travel in. When the destination is known, 
 //change_queue_floor will set the spesific floor the elevator must go to. It 
 //will also update the queue
-void change_queue_direction(matrix_s* queue, int* newFloor, enum Direction newDir);
+void change_queue_direction(matrix_s* queue, int* newFloor, enum Direction* newDir);
 void change_queue_floor(matrix_s* queue, int* goToFloor);
 
 //delete the current queue. It has served it's purpose...
