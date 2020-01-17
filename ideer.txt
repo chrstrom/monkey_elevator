@@ -1,0 +1,9 @@
+Håndtering av flere inputs:
+Regel-vektoren som kommer ut fra matriseoperasjonene med betingelser og masker,
+vi må håndtere disse på riktig måte.
+
+EX: queue = ["etg1knapp", "etg2knapp", ... , "stopp"]
+bruk switch til å håndtere alle tilfellene med riktig prioritet
+
+
+
