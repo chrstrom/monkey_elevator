@@ -153,15 +153,18 @@ if yes, then move the columns in the matrix to the left, and set the rightmost c
 Therefore making it possible to recieve new orders
 
 #Additional comments:
-Will try to delete the first in queue, however will not to that if that is not fulfilled
+Will try to delete the first in queue, however will not to that if that is not fulfilled.
+
+#Improvments:
+Should try to use the number of orders that we have at each time. This will require us to 
+keep updating that variable, and thus reducing the runtime of this exact function. However, it
+will have a greater risk of error.
 
 #Known problems:
 "Direction is undefined"
----------------------------Not finished/updated to accompany matrix_s----------------------------------
-*/
-void delete_first(matrix_s* queue, enum bool arrived_dest){
-    //first check if the destination is correct
-    if(elevator_state == Direction::stop && queue[PRIORITY][CALL_FLOOR] == current_floor){
+
+#Deleted code:
+if(elevator_state == stop && queue[PRIORITY][CALL_FLOOR] == current_floor){
         //The elevator has arrived to the destination, and can "reduce" the Matrix
         for(int fl = 0; fl < NUMBER_FLOORS; fl++){
             for(int col = 0; col < QUEUE_COLS; col++){
@@ -173,6 +176,20 @@ void delete_first(matrix_s* queue, enum bool arrived_dest){
                     //filling the "new" column with 0. Can now get new data
                     queue[fl][col] = 0;
                 }
+            }
+        }
+    }
+*/
+void delete_first(matrix_s* queue){
+    //first check if the destination is correct
+    matrix_s* current_priority_matrix = get_current_priority(queue);
+    current_floor();
+    if(num_orders > 0 && elevator_state == stop && current_priority_matrix->data[TO_FLOOR] == floor_state){
+        //If true, we have arrived at this destination, and we can delete the first entry in the queue
+        //Changing the queue-order
+        for(int fl = 0; fl < NUMBER_FLOORS - 1; fl++){
+            for(int col = 0; col < QUEUE_COLS; col++){
+                queue->data[fl * col + col] = queue->data[(fl + 1) * col + col];
             }
         }
     }

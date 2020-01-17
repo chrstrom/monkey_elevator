@@ -63,6 +63,9 @@ static enum Queue_Swap swap_state = Allow;
 //The floor-number of the elevator. Will influence the queue of the elevator 
 static int floor_state;
 
+//The number of orders at a spesific time
+static int num_orders;
+
 //Enum that shows the elevator's current direction
 enum Direction{
     stop, down, up
