@@ -109,15 +109,15 @@ queue is full. Throw error?
 "Direction is undefined"
 ----------------------Not finished - unsure how to move on (AKA Not sure how to use the FSM to solve this) ----------------
 */
-void change_queue_direction(matrix_s* queue, int* newFloor, Direction* newDir){
+void change_queue_direction(matrix_s* queue, int* newFloor, enum Direction* newDir){
 
     switch (newDir)
     {
-    case Direction::up:
+    case up:
         delete_first();
         queue->data[]
         break;
-    case Direction::down:
+    case down:
         break;
     default:
         break;
