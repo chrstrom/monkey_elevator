@@ -55,10 +55,13 @@ matrix_s* create_matrix(int rows, int cols, const int values[rows*cols]) {
  * @result  a new matrix that is the result of the element-wise AND-operation
 */
 matrix_s* matrix_AND_data(const matrix_s* m, const matrix_s* input_vector) {
+    // Create a new matrix that will be the output of this operation
     matrix_s* m_out = create_empty_matrix(m->rows, m->cols);
+
     for(int i = 0; i < m->rows * m->cols; i++) {
         m_out->data[i] = m->data[i] & input_vector->data[i / m->cols];  // The floor-division i / m->cols ensures that the correct values are ANDed
     }
+
     return m_out;
 }
 

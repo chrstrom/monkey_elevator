@@ -5,6 +5,7 @@
 #include <stdio.h>
 
 // Globals
+// Important to document exactly what these are
 #define COND_MATRIX_N 8
 #define COND_MATRIX_M 6
 
