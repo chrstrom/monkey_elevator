@@ -1,4 +1,4 @@
-#include "headers/task_handler.h"
+#include "../headers/task_handler.h"
 
 // Potentially need to handle this in a different way
 // As long as the number here correspond to the location in the vector
@@ -34,8 +34,9 @@
 // 2) columwise COMP by matrix_COMP_matri
 
 matrix_s* to_task_const(const matrix_s* data, const matrix_s* mask, const matrix_s* cond) {
-    matrix_AND_data(mask, data);
-    matrix_s* task = matrix_COMP_matrix_const(cond, data);
+    matrix_s* ANDed = matrix_AND_data_const(mask, data);
+    matrix_s* task = matrix_COMP_matrix_const(cond, ANDed);
+    free(ANDed);
 
     return task;
 }

@@ -14,7 +14,7 @@
 
 // The 2D matrix containing the conditions (rows) for a given operation (cols)
 // See "Logikkstyring"-slides, TTK4235 Jan. 16 2020, slide 36
-static const int cond_matrix[COND_MATRIX_N * COND_MATRIX_M] = {
+static const int COND[COND_MATRIX_N * COND_MATRIX_M] = {
     1, 1, 0, 0, 0, 1,
     1, 1, 0, 0, 1, 0,
     0, 1, 0, 0, 0, 0,
@@ -27,7 +27,7 @@ static const int cond_matrix[COND_MATRIX_N * COND_MATRIX_M] = {
 
 // The 2D mask matrix used for specify values of importance in cond_matrix
 // See "Logikkstyring"-slides, TTK4235 Jan. 16 2020, slide 36
-static const int mask_matrix[MASK_MATRIX_N * MASK_MATRIX_M] = {
+static const int MASK[MASK_MATRIX_N * MASK_MATRIX_M] = {
     1, 1, 0, 1, 1, 1,
     1, 1, 0, 1, 1, 1,
     0, 1, 0, 0, 0, 0,
