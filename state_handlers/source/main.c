@@ -7,6 +7,10 @@
 // See "Logikkstyring"-slides, TTK4235 Jan. 16 2020, slide 36
 static const int data_vec[MASK_MATRIX_N] = {1, 1, 1, 0, 0, 0, 0, 0};
 
+
+// TODO: There might be a way to eliminate matrix_s* and only operate on int *, as we changed mask/cond to be 1d arrays
+// All arithmetic operations should be the same.
+
 int main(){
 
     // const matrix_s* op_matrix = create_matrix(MASK_MATRIX_N,MASK_MATRIX_M, op_matrix); 
