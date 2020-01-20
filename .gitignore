@@ -2,4 +2,3 @@
 *.swp
 .vscode
 state_handlers/build/
-state_handlers/source/
