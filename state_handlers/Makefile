@@ -1,5 +1,5 @@
 # Program name
-EXECUTABLE := program
+EXECUTABLE := program.out
 
 SOURCES := main.c matrix_util.c task_handler.c
 
