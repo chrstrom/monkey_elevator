@@ -7,9 +7,8 @@
 // See "Logikkstyring"-slides, TTK4235 Jan. 16 2020, slide 36
 static const int data_vec[MASK_MATRIX_N] = {1, 1, 1, 0, 0, 0, 0, 0};
 
-
-// TODO: There might be a way to eliminate matrix_s* and only operate on int *, as we changed mask/cond to be 1d arrays
-// All arithmetic operations should be the same.
+// Using matrix_s allows us to retrieve rows and cols, regardless of where we are in the program, 
+// while at the same time preventing the usage of double pointers (which could result in all hell breaking loose)
 
 int main(){
 
