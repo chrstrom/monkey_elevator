@@ -1,4 +1,4 @@
-<mxfile host="www.draw.io" modified="2020-01-30T12:18:43.667Z" agent="Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:72.0) Gecko/20100101 Firefox/72.0" etag="zDeTy9L75IaWrHVipWu6" version="12.6.2" type="github">
+<mxfile host="www.draw.io" modified="2020-01-30T12:23:27.445Z" agent="Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:72.0) Gecko/20100101 Firefox/72.0" etag="zn1HV1cPsCIFAW9NLqGn" version="12.6.2" type="github">
   <diagram name="Page-1" id="c4acf3e9-155e-7222-9cf6-157b1a14988f">
     <mxGraphModel dx="1360" dy="765" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="#ffffff" math="0" shadow="0">
       <root>
@@ -205,14 +205,17 @@
         <mxCell id="jSJcOj1anCFhKCm4uiTx-14" value="recieved_task / - " style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="1">
           <mxGeometry x="1490" y="473" width="110" height="20" as="geometry"/>
         </mxCell>
-        <mxCell id="jSJcOj1anCFhKCm4uiTx-16" value="&lt;div&gt;queue_successfully_&lt;/div&gt;&lt;div&gt;updated / -&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="1">
-          <mxGeometry x="1480" y="610" width="140" height="30" as="geometry"/>
+        <mxCell id="jSJcOj1anCFhKCm4uiTx-16" value="&lt;div&gt;queue_update_&lt;/div&gt;&lt;div&gt;success / -&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="1">
+          <mxGeometry x="1495" y="610" width="110" height="30" as="geometry"/>
         </mxCell>
         <mxCell id="jSJcOj1anCFhKCm4uiTx-24" value="sequence_end / -" style="text;html=1;" vertex="1" parent="1">
-          <mxGeometry x="1300" y="510" width="110" height="30" as="geometry"/>
+          <mxGeometry x="1285" y="510" width="110" height="30" as="geometry"/>
         </mxCell>
-        <mxCell id="jSJcOj1anCFhKCm4uiTx-26" value="&lt;div&gt;queue_successfully_&lt;/div&gt;&lt;div&gt;updated / -&lt;/div&gt;" style="text;html=1;" vertex="1" parent="1">
+        <mxCell id="jSJcOj1anCFhKCm4uiTx-26" value="&lt;div&gt;queue_update_&lt;/div&gt;&lt;div&gt;success / -&lt;/div&gt;" style="text;html=1;" vertex="1" parent="1">
           <mxGeometry x="1210" y="565" width="110" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="jSJcOj1anCFhKCm4uiTx-27" value="&lt;div&gt;init_success / -&lt;/div&gt;" style="text;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1290" y="250" width="100" height="30" as="geometry"/>
         </mxCell>
       </root>
     </mxGraphModel>
