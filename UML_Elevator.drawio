@@ -1,0 +1,241 @@
+<mxfile host="www.draw.io" modified="2020-02-04T09:22:43.913Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36" etag="jWBVRB5symcV3-h_L3uc" version="12.6.5" type="github">
+  <diagram id="YrEsEyhWu3hXoQOjm_HI" name="Page-1">
+    <mxGraphModel dx="3771" dy="645" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="C38wLQTlaXFm4lsVWahA-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.75;entryDx=0;entryDy=0;" parent="1" target="C38wLQTlaXFm4lsVWahA-3" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1420" y="469" as="sourcePoint"/>
+            <mxPoint x="1570" y="535" as="targetPoint"/>
+            <Array as="points">
+              <mxPoint x="1420" y="510"/>
+              <mxPoint x="1570" y="510"/>
+              <mxPoint x="1570" y="605"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="C38wLQTlaXFm4lsVWahA-3" value="" style="rounded=1;whiteSpace=wrap;html=1;shadow=0;glass=0;comic=0;" parent="1" vertex="1">
+          <mxGeometry x="790" y="110" width="630" height="660" as="geometry"/>
+        </mxCell>
+        <mxCell id="C38wLQTlaXFm4lsVWahA-4" value="&lt;p style=&quot;margin: 0px ; margin-top: 4px ; text-align: center&quot;&gt;&lt;b&gt;Elevator_IO&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;br&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ FLOOR_MAX: const int&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ lights_floor: int[]&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ lights_floor_buttons: int[][]&lt;/p&gt;&amp;nbsp;+ lights_cab_buttons: int[]&lt;br&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ motor_voltage_t: enum&lt;/p&gt;&amp;nbsp;+ motor_dir_t: enum&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ get_floor(): int&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ get_floor_buttons(): int&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ get_cab_buttons(): int&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ get_motor_dir():motor_dir_t&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ get_obstr_signal(): int&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ set_floor_light(floor:int): void&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ set_floor_button_light&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; (floor:int, button:int): void&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ set_cab_lights(button:int): void&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ set_door_light(): void&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ set_stop_light(): void&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ set_motor_dir(dir:motor_dir_t): void&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ open_doors(): void&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ elevator_stop(): void&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ elevator_start(dir:motor_dir_t):void&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;+ elevator_timer(int time_wait): int " style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1" parent="1" vertex="1">
+          <mxGeometry x="40" y="300" width="260" height="460" as="geometry"/>
+        </mxCell>
+        <mxCell id="C38wLQTlaXFm4lsVWahA-5" value="&lt;p style=&quot;margin: 0px ; margin-top: 4px ; text-align: center&quot;&gt;&lt;b&gt;IO_LL&lt;br&gt;&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;{Fyll inn base_offsets, bitplassering,&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;og masker når vi har minnemapping&lt;/p&gt;&lt;div&gt;&amp;nbsp;av hva enn vi nå skal operere på.}&lt;/div&gt;&lt;div&gt;&amp;nbsp;+ GPIO_BASE: hex&lt;br&gt;&lt;/div&gt;&lt;div&gt;&amp;nbsp;+ FLOOR_BUTTON_Msk: hex&lt;br&gt;&lt;/div&gt;&lt;div&gt;&amp;nbsp;+ etc &lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ get_bit(offset:int, base:int): int&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ set_bit(offset:int, base:int): void&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1" parent="1" vertex="1">
+          <mxGeometry x="55" y="40" width="230" height="180" as="geometry"/>
+        </mxCell>
+        <mxCell id="C38wLQTlaXFm4lsVWahA-6" value="&lt;p style=&quot;margin: 0px ; margin-top: 4px ; text-align: center&quot;&gt;&lt;b&gt;Elevator (FSM)(main)&lt;br&gt;&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ queue: queue_t&lt;br&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ main(): int&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;{inne i en while(1)-løkke har vi en&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;FSM som behandler TASKs. Etter&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;FSMen (som er en switch) utfører vi&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;det første elementet i queue&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;før vi hopper inn i switch, sjekk for&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;obstruction signal, og sett tilstand&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;til idle, hvis signal}&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1" parent="1" vertex="1">
+          <mxGeometry x="140" y="810" width="230" height="210" as="geometry"/>
+        </mxCell>
+        <mxCell id="C38wLQTlaXFm4lsVWahA-7" value="&lt;p style=&quot;margin: 0px ; margin-top: 4px ; text-align: center&quot;&gt;&lt;b&gt;Queue_t&lt;br&gt;&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;div&gt;&amp;nbsp;{Gi tall til ulike funksjoner som queue skal&lt;/div&gt;&lt;div&gt;&amp;nbsp;utføre, slik at vi kan bruke en switch som&lt;/div&gt;&lt;div&gt;&amp;nbsp;FSM (forhåpentligvis) uten å fucke opp alt&lt;/div&gt;&lt;div&gt;&amp;nbsp;sammen}&lt;/div&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ TASK_STOP_ELEVATOR = 0&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ TASK_START_ELEVATOR = 1&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ TASK_OPEN_DOORS = 2&lt;br&gt;&lt;/p&gt;&lt;div&gt;&amp;nbsp;+ TASK_SET_LIGHT_FLOOR = 3&lt;br&gt;&lt;/div&gt;&lt;div&gt;&amp;nbsp;+ TASK_SET_LIGHT_FLOOR_BUTTON = 4&lt;br&gt;&lt;/div&gt;&lt;div&gt;&amp;nbsp;+ TASK_SET_LIGHT_CAB_BUTTON = 5&lt;br&gt;&lt;/div&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ add_task(task: int): void&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ rm_task(task: int): void&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1" parent="1" vertex="1">
+          <mxGeometry x="450" y="410" width="270" height="240" as="geometry"/>
+        </mxCell>
+        <mxCell id="C38wLQTlaXFm4lsVWahA-8" value="Use" style="endArrow=open;endSize=12;dashed=1;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;rounded=0;startArrow=open;startFill=0;" parent="1" source="C38wLQTlaXFm4lsVWahA-4" target="C38wLQTlaXFm4lsVWahA-6" edge="1">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="40" y="1040" as="sourcePoint"/>
+            <mxPoint x="200" y="1040" as="targetPoint"/>
+            <Array as="points">
+              <mxPoint x="170" y="760"/>
+              <mxPoint x="170" y="790"/>
+              <mxPoint x="255" y="790"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3VnhiomoSgGUoQ1_OZB9-8" value="Text" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=#ffffff;" parent="C38wLQTlaXFm4lsVWahA-8" vertex="1" connectable="0">
+          <mxGeometry x="0.8519" y="3" relative="1" as="geometry">
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="C38wLQTlaXFm4lsVWahA-9" value="" style="endArrow=none;endSize=12;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;rounded=0;endFill=0;" parent="1" source="C38wLQTlaXFm4lsVWahA-7" target="C38wLQTlaXFm4lsVWahA-6" edge="1">
+          <mxGeometry x="0.5" width="160" relative="1" as="geometry">
+            <mxPoint x="40" y="1040" as="sourcePoint"/>
+            <mxPoint x="200" y="1040" as="targetPoint"/>
+            <Array as="points">
+              <mxPoint x="585" y="915"/>
+            </Array>
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="C38wLQTlaXFm4lsVWahA-10" value="Use" style="endArrow=open;endSize=12;dashed=1;html=1;strokeWidth=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;startArrow=open;startSize=12;startFill=0;rounded=0;" parent="1" source="C38wLQTlaXFm4lsVWahA-4" target="C38wLQTlaXFm4lsVWahA-5" edge="1">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="40" y="1040" as="sourcePoint"/>
+            <mxPoint x="200" y="1040" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3VnhiomoSgGUoQ1_OZB9-6" value="Text" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=#ffffff;" parent="C38wLQTlaXFm4lsVWahA-10" vertex="1" connectable="0">
+          <mxGeometry x="-0.4" y="1" relative="1" as="geometry">
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="C38wLQTlaXFm4lsVWahA-11" value="&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;TODO:&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;Mulig å slå sammen lights_floor og lights_floor_buttons?&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;Hvis ja, kan vi også slå sammen set_floor_lights() og set_floor_button_lights()&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;Hvordan skal argumentene se ut i set-funksjonene i Elevator_IO&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;OBS! set eller toggle for lys?&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;Når vi henter inputs, må vi kanskje&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;utføre matriseoperasjoner for å se&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;hvilke TASKs som faktisk kan utføres?&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;Hvis ja: flere blokker, mindre logikk i Queue_t&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;Hvis nei: mindre blokker, mer logikk i Queue_t&lt;br&gt;&lt;/p&gt;" style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=-6;" parent="1" vertex="1">
+          <mxGeometry x="470" y="50" width="220" height="320" as="geometry"/>
+        </mxCell>
+        <mxCell id="C38wLQTlaXFm4lsVWahA-12" value="0..1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
+          <mxGeometry x="367" y="891" width="40" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="C38wLQTlaXFm4lsVWahA-13" style="edgeStyle=orthogonalEdgeStyle;curved=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;startArrow=none;startFill=0;endArrow=classic;endFill=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="820" y="715"/>
+              <mxPoint x="820" y="215"/>
+            </Array>
+            <mxPoint x="870" y="715" as="sourcePoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="C38wLQTlaXFm4lsVWahA-14" style="edgeStyle=orthogonalEdgeStyle;curved=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;startArrow=none;startFill=0;endArrow=classic;endFill=1;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1219" y="775"/>
+              <mxPoint x="1620" y="775"/>
+              <mxPoint x="1620" y="215"/>
+            </Array>
+            <mxPoint x="1250" y="215" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="C38wLQTlaXFm4lsVWahA-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=1;exitY=0.267;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="C38wLQTlaXFm4lsVWahA-3" target="C38wLQTlaXFm4lsVWahA-17" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1460" y="280" as="sourcePoint"/>
+            <Array as="points">
+              <mxPoint x="1420" y="280"/>
+              <mxPoint x="1580" y="280"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="C38wLQTlaXFm4lsVWahA-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="C38wLQTlaXFm4lsVWahA-17" target="C38wLQTlaXFm4lsVWahA-3" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1560" y="422" as="targetPoint"/>
+            <Array as="points">
+              <mxPoint x="1580" y="422"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="C38wLQTlaXFm4lsVWahA-17" value="&lt;div&gt;Idle&lt;br&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="1530" y="330" width="100" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="C38wLQTlaXFm4lsVWahA-18" value="&lt;div&gt;STOP == 1 /&lt;/div&gt;&lt;div&gt;set_motor_dir(off)&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
+          <mxGeometry x="1440" y="240" width="120" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="C38wLQTlaXFm4lsVWahA-19" value="STOP == 0 / -" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
+          <mxGeometry x="1460" y="430" width="100" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="C38wLQTlaXFm4lsVWahA-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="C38wLQTlaXFm4lsVWahA-21" target="C38wLQTlaXFm4lsVWahA-33" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="C38wLQTlaXFm4lsVWahA-21" value="H" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+          <mxGeometry x="1315" y="185" width="30" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="C38wLQTlaXFm4lsVWahA-22" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" target="C38wLQTlaXFm4lsVWahA-29" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1160" y="475" as="sourcePoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="C38wLQTlaXFm4lsVWahA-23" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" target="C38wLQTlaXFm4lsVWahA-27" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1075" y="475" as="sourcePoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="C38wLQTlaXFm4lsVWahA-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.75;exitY=0;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" parent="1" source="C38wLQTlaXFm4lsVWahA-27" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="874" y="380"/>
+              <mxPoint x="1096" y="380"/>
+            </Array>
+            <mxPoint x="1096" y="440" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="C38wLQTlaXFm4lsVWahA-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="C38wLQTlaXFm4lsVWahA-27" target="C38wLQTlaXFm4lsVWahA-45" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="C38wLQTlaXFm4lsVWahA-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="C38wLQTlaXFm4lsVWahA-27" target="C38wLQTlaXFm4lsVWahA-43" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="C38wLQTlaXFm4lsVWahA-27" value="Preparing to move" style="rounded=1;whiteSpace=wrap;html=1;shadow=0;glass=0;comic=0;" parent="1" vertex="1">
+          <mxGeometry x="805" y="455" width="85" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="C38wLQTlaXFm4lsVWahA-28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" parent="1" source="C38wLQTlaXFm4lsVWahA-29" target="C38wLQTlaXFm4lsVWahA-41" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1352.5" y="600" as="targetPoint"/>
+            <Array as="points">
+              <mxPoint x="1353" y="590"/>
+              <mxPoint x="1141" y="590"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="C38wLQTlaXFm4lsVWahA-29" value="Door opening sequence" style="rounded=1;whiteSpace=wrap;html=1;shadow=0;glass=0;comic=0;" parent="1" vertex="1">
+          <mxGeometry x="1310" y="455" width="85" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="C38wLQTlaXFm4lsVWahA-32" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" parent="1" source="C38wLQTlaXFm4lsVWahA-33" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1138.75" y="440" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="C38wLQTlaXFm4lsVWahA-33" value="Init elevator" style="rounded=1;whiteSpace=wrap;html=1;shadow=0;glass=0;comic=0;" parent="1" vertex="1">
+          <mxGeometry x="1190" y="180" width="85" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="C38wLQTlaXFm4lsVWahA-34" value="&lt;div&gt;reached_target_floor&lt;/div&gt;&lt;div&gt;/-&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
+          <mxGeometry x="965" y="580" width="140" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="C38wLQTlaXFm4lsVWahA-35" value="&lt;div&gt;reached_target_floor / &lt;br&gt;&lt;/div&gt;&lt;div&gt;open_door()&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
+          <mxGeometry x="1165" y="430" width="150" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="C38wLQTlaXFm4lsVWahA-36" value="&lt;div&gt;task_active&lt;br&gt;&lt;/div&gt;&amp;nbsp;/ prepare_move()" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
+          <mxGeometry x="915" y="490" width="120" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="C38wLQTlaXFm4lsVWahA-37" value="&lt;div&gt;reached_target_floor &lt;br&gt;&lt;/div&gt;&lt;div&gt;/ -&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
+          <mxGeometry x="965" y="245" width="140" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="C38wLQTlaXFm4lsVWahA-38" value="&lt;div&gt;elevator_ready&lt;/div&gt;&lt;div&gt;[current_floor &amp;lt; target_floor]&lt;/div&gt;&lt;div&gt;/ -&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
+          <mxGeometry x="855" y="130" width="190" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="C38wLQTlaXFm4lsVWahA-39" value="&lt;div&gt;elevator_ready&lt;/div&gt;&lt;div&gt;[current_floor &amp;gt; target_floor]&lt;/div&gt;&lt;div&gt;/ -&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
+          <mxGeometry x="840" y="700" width="190" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="C38wLQTlaXFm4lsVWahA-40" value="&lt;div&gt;reached_target_floor /&lt;/div&gt;&lt;div&gt;-&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
+          <mxGeometry x="915" y="340" width="150" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="C38wLQTlaXFm4lsVWahA-41" value="&lt;p style=&quot;margin: 4px 0px 0px&quot; align=&quot;center&quot;&gt;Idle&lt;br&gt;&lt;/p&gt;&lt;hr&gt;&lt;div&gt;&amp;nbsp;entry: set_motor_&lt;/div&gt;&lt;div&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; dir(off)&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;br&gt;&lt;/div&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;shadow=0;glass=0;comic=0;rounded=1;" parent="1" vertex="1">
+          <mxGeometry x="1055" y="440" width="115" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="C38wLQTlaXFm4lsVWahA-42" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="C38wLQTlaXFm4lsVWahA-43" target="C38wLQTlaXFm4lsVWahA-41" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="C38wLQTlaXFm4lsVWahA-43" value="&lt;p style=&quot;margin: 4px 0px 0px&quot; align=&quot;center&quot;&gt;Moving up&lt;br&gt;&lt;/p&gt;&lt;hr&gt;&lt;div&gt;&amp;nbsp;entry: set_motor_&lt;/div&gt;&lt;div&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; dir(up)&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;br&gt;&lt;/div&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;shadow=0;glass=0;comic=0;rounded=1;" parent="1" vertex="1">
+          <mxGeometry x="1055" y="145" width="115" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="C38wLQTlaXFm4lsVWahA-44" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="C38wLQTlaXFm4lsVWahA-45" target="C38wLQTlaXFm4lsVWahA-41" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="C38wLQTlaXFm4lsVWahA-45" value="&lt;p style=&quot;margin: 4px 0px 0px&quot; align=&quot;center&quot;&gt;Moving down&lt;br&gt;&lt;/p&gt;&lt;hr&gt;&lt;div&gt;&amp;nbsp;entry: set_motor_&lt;/div&gt;&lt;div&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; dir(down)&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;br&gt;&lt;/div&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;shadow=0;glass=0;comic=0;rounded=1;" parent="1" vertex="1">
+          <mxGeometry x="1055" y="660" width="115" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="C38wLQTlaXFm4lsVWahA-48" value="recieved_task / add_to_queue(task) " style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
+          <mxGeometry x="1420" y="483" width="230" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="C38wLQTlaXFm4lsVWahA-50" value="&lt;div&gt;sequence_end /&lt;/div&gt;&lt;div&gt;update_queue()&lt;/div&gt;" style="text;html=1;" parent="1" vertex="1">
+          <mxGeometry x="1200" y="550" width="110" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="C38wLQTlaXFm4lsVWahA-52" value="&lt;div&gt;init_success / -&lt;/div&gt;" style="text;html=1;" parent="1" vertex="1">
+          <mxGeometry x="1235" y="250" width="100" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="axhyzqgsORcEYQaSA5E--1" value="&lt;p style=&quot;margin: 0px ; margin-top: 4px ; text-align: center&quot;&gt;&lt;b&gt;Light_cont&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;br&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ FLOOR_MAX: const int&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ lights: int[]&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ hardware_command_floor_indicator&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&amp;nbsp; &amp;nbsp; (floor: int): void&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ hardware_command_order_light&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&amp;nbsp; &amp;nbsp; (floor: int, order_type: HardwareOrder,&amp;nbsp;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp;on: int): void&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ hardware_command_stop_light(on: int): void&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ hardware_command_floor_indicator_on&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&amp;nbsp; &amp;nbsp; (floor: int): void&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1" vertex="1" parent="1">
+          <mxGeometry x="-310" y="300" width="260" height="460" as="geometry"/>
+        </mxCell>
+        <mxCell id="axhyzqgsORcEYQaSA5E--2" value="&lt;p style=&quot;margin: 0px ; margin-top: 4px ; text-align: center&quot;&gt;&lt;b&gt;Motor_cont&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;br&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ FLOOR_MAX: const int&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ movement: HardwareMovement&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ hardware_command_movement&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&amp;nbsp; &amp;nbsp; (movement: HardwareMovement): void&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ get_hardware_movement(): HardwareMovement&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ hardware_init(): void&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1" vertex="1" parent="1">
+          <mxGeometry x="-648" y="300" width="288" height="460" as="geometry"/>
+        </mxCell>
+        <mxCell id="axhyzqgsORcEYQaSA5E--3" value="&lt;p style=&quot;margin: 0px ; margin-top: 4px ; text-align: center&quot;&gt;&lt;b&gt;Door_cont&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;br&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ FLOOR_MAX: const int&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ hardware_command_door_open&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;(door_int: int): void&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1" vertex="1" parent="1">
+          <mxGeometry x="-990" y="300" width="260" height="460" as="geometry"/>
+        </mxCell>
+        <mxCell id="axhyzqgsORcEYQaSA5E--4" value="&lt;p style=&quot;margin: 0px ; margin-top: 4px ; text-align: center&quot;&gt;&lt;b&gt;Data_checking&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;br&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ FLOOR_MAX: const int&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ STOP: int&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ OBSTRUCTION: int&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ hardware_read_stop_signal(): int&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ hardware_read_obstruction_signal(): int&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ hardware_read_floor_sensor(floor: int): int&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ hardware_read_order(floor: int,&amp;nbsp;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&amp;nbsp; &amp;nbsp; order_type: HardwareOrder): int&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1" vertex="1" parent="1">
+          <mxGeometry x="-1320" y="300" width="260" height="460" as="geometry"/>
+        </mxCell>
+        <mxCell id="axhyzqgsORcEYQaSA5E--6" value="&lt;p style=&quot;margin: 0px ; margin-top: 4px ; text-align: center&quot;&gt;&lt;b&gt;Timer&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;br&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ Normal_wait_seq: const int&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ get_timed_signal(): int&amp;nbsp;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1" vertex="1" parent="1">
+          <mxGeometry x="-1650" y="300" width="260" height="460" as="geometry"/>
+        </mxCell>
+        <mxCell id="axhyzqgsORcEYQaSA5E--7" value="&lt;p style=&quot;margin: 0px ; margin-top: 4px ; text-align: center&quot;&gt;&lt;b&gt;Queue_t&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;br&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ FLOOR_MAX: const int&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ add_order_to_queue(floor: int,&amp;nbsp;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&amp;nbsp; &amp;nbsp; dir: HardWareOrder): void&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;span&gt;+ flush_queue(): void&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;span&gt;+ remove_last_order(current_floor: int): void&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;span&gt;+ sort_orders(): void&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;span&gt;&amp;nbsp; &amp;nbsp;&amp;nbsp;&lt;/span&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1" vertex="1" parent="1">
+          <mxGeometry x="-1970" y="300" width="260" height="460" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

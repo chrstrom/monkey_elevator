@@ -1,9 +1,4 @@
 # TTK4235
-Søppelkasselignende kode for tilpdat-arbeider utført av inkompetente karer
-
-
-VIKTIG!!!VIKTIG!!!VIKTIG!!!VIKTIG!!!VIKTIG!!!VIKTIG!!!VIKTIG!!!VIKTIG!!!VIKTIG!!!
-Under arbeid, SKAL STAGING ALDRI LIGGE BAK MASTER!!!!!
 
 Gjør dette
 
