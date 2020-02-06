@@ -1,3 +1,8 @@
+/**
+ * @file
+ * @brief main linker point of elevator program
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "hardware.h"
