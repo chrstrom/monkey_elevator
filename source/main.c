@@ -20,7 +20,7 @@ int main(){
     hardware_command_movement(HARDWARE_MOVEMENT_UP);
 
     while(1){
-        if(hardware_read_stop_signal()){
+        if(hardware_regad_stop_signal()){
             hardware_command_movement(HARDWARE_MOVEMENT_STOP);
             break;
         }
