@@ -6,7 +6,8 @@ DOX_DIR := dox
 
 OBJ := $(patsubst %.c,$(BUILD_DIR)/%.o,$(SOURCES))
 
-OUT := elevator.out
+OUT := elevator
+
 DRIVER_ARCHIVE := $(BUILD_DIR)/libdriver.a
 DRIVER_SOURCE := hardware.c io.c
 

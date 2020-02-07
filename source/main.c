@@ -2,7 +2,6 @@
  * @file
  * @brief main linker point of elevator program
  */
-
 #include <stdio.h>
 #include <stdlib.h>
 #include "hardware.h"
@@ -20,7 +19,7 @@ int main(){
     hardware_command_movement(HARDWARE_MOVEMENT_UP);
 
     while(1){
-        if(hardware_regad_stop_signal()){
+        if(hardware_read_stop_signal()){
             hardware_command_movement(HARDWARE_MOVEMENT_STOP);
             break;
         }
