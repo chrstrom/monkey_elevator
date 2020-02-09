@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /**
  * @file
  * @brief main linker point of elevator program
@@ -5,8 +6,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "hardware.h"
+=======
+#include "data_checking.h"
+#include "door_and_light_cont.h"
+#include "motor_cont.h"
+#include "timer_elevator.h"
+>>>>>>> oys
 
 int main(){
+
     int error = hardware_init();
     if(error != 0){
         fprintf(stderr, "Unable to initialize hardware\n");
