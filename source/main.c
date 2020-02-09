@@ -5,6 +5,19 @@
 
 #include "utility.h"
 #include "queue.h"
+#include <stdint.h>
+
+
+
+typedef enum{
+    STATE_IDLE,
+    STATE_MOVING_UP,
+    STATE_MOVING_DOWN,
+    STATE_PREP_MOVE,
+    STATE_SERVE_ORDER,
+    STATE_ERROR
+} elevator_state_t;
+
 
 // Antar:
 
@@ -19,19 +32,17 @@ int elevator_init() {
 }
 
 int main(){
-    task_t tasks[QUEUE_SIZE];
 
-    int floor_orders_up[4] = {0, 0, 0};     // Holder gjeldende opp-ordre, i rekkefølgen knappene ble trykt inn. Oppdateres med add_floor_orders() i queue
-    int floor_orders_down[4] = {0, 0, 0};   // Holder gjeldende ned-ordre, i rekkefølgen knappene ble trykt inn. Oppdateres med add_floor_orders() i queue
-    int cab_orders[5] = {0, 0, 0, 0};       // Holder gjeldende cab ordre, i rekkefølgen knappene ble trykt inn. Oppdateres med add_cab_orders() i queue
+    // ELEVATOR INITIAL SETUP
+    Order queue[QUEUE_SIZE];
 
     int current_floor = -1; //invalid floor to set the elevator's intitial floor-value
-    int door_open;
+    int door_open = -1;
 
-    task_t current_task = {0, 0, CMD_NO_ACTION};
-    time_t last_time = time(NULL);
-    HardwareMovement current_movement;
+    time_t stop_timer = time(NULL);
+    time_t door_timer = time(NULL);
 
+    elevator_state_t elevator_state = STATE_IDLE;
 
     int error = hardware_init();
     if(error != 0){
@@ -46,68 +57,93 @@ int main(){
     }
 
 
+    // ELEVATOR PROGRAM LOOP
+    // If we made new commands for set/get, we can set/get multiple connected things at once
+    // ex: elevator_open_doors() can both open/close the door, and also set the lamp
     while(1){
         if(hardware_read_stop_signal()) {
-            elevator_stop();
+            elevator_state = STATE_IDLE;
             erase_queue();
-            if(at_floor()){//add a function for this later
-                //open doors
+            if(at_floor()){
+                hardware_command_door_open(1);
             }
-            last_time = time(NULL);
-            queue_push_front(0, 0, CMD_TIMER_START, tasks);
-            continue;
+            start_timer(stop_timer);
+
         }
 
         if(hardware_read_obstruction_signal() && door_open) {
-            if(at_floor()){//add a function for this later
-            //basic check. Door should never be open between floors
-                //open doors
-            }
-            last_time = time(NULL);
-            queue_push_front(0, 0, CMD_TIMER_START, tasks);
-            continue;
+            // Restart the door timer when obstruction is activated
+            start_timer(door_timer);
         }
     
-        add_floor_orders(floor_orders_up, floor_orders_down);
-        add_cab_orders(cab_orders);
-        update_current_task(tasks);
-
-        update_floor_button_lights(floor_orders_up, floor_orders_down);
-        update_cab_lights(cab_orders);
+        poll_floor_buttons();
+    
         update_floor_lights(current_floor);
 
         // update next_action in each case
-        switch(current_task.next_action) {
-
-            case CMD_ELEVATOR_UP: {
-
+        // After finishing one order, set the elevator back to idle.
+        Order current_order = queue[0];
+        switch(elevator_state) {
+            case STATE_IDLE: {
+                
+                // Transition into IDLE after every completed order
+                // Transition out immediatly if queue is not empty
+                // Remain in idle if queue is empty
                 break;
             }
-
-            case CMD_ELEVATOR_DOWN: {
-
-                break;
-            }
-
-            case CMD_ELEVATOR_STOP: { 
-
-                break;
-            }
-
-            case CMD_OPEN_DOOR: {
-
-                break;
-            }
-
-            case CMD_TIMER_START: {
-                if((long int)(last_time - time(NULL)) >= NORMAL_WAIT_TIME) {
-                    //should be valid for stop and obstruction
-                    //then do the first element in the queue
-
-
+            case STATE_PREP_MOVE: {
+                hardware_command_door_open(0);
+                if(current_floor < current_order.floor_at) {
+                    elevator_state = STATE_MOVING_UP;
                 }
+                else if(current_floor > current_order.floor_at) {
+                    elevator_state = STATE_MOVING_DOWN;
+                }
+                else if(current_floor == current_order.floor_at){
+                    elevator_state = STATE_SERVE_ORDER;
+                    start_timer(door_timer);
+                }
+                else {
+                    elevator_state = STATE_ERROR;
+                }
+
                 break;
             }
+            case STATE_MOVING_UP: {
+                if(current_floor == current_order.floor_at) {
+                    elevator_state = STATE_SERVE_ORDER;
+                    start_timer(door_timer);
+                }
+                break;  
+            }
+            case STATE_MOVING_DOWN: {
+                if(current_floor == current_order.floor_at) {
+                    elevator_state = STATE_SERVE_ORDER;
+                    start_timer(door_timer);
+                }
+                break;  
+            }
+        
+            case STATE_SERVE_ORDER: {
+                // Upon arrival at the target floor
+                // Stop the elevator and open the doors
+                // Then, if 
+                hardware_command_movement(HARDWARE_MOVEMENT_STOP);
+                hardware_command_door_open(1);
+
+                set_cab_orders(&current_order); 
+
+                if(check_timer(door_timer, NORMAL_WAIT_TIME)) {
+                    elevator_state = STATE_PREP_MOVE;
+                     // We need to clear the cab orders for all orders,
+                    // corresponding to the floor we currently are at.
+                    // This is done when idle at each floor, right before moving
+                    clear_cab_orders(queue, current_floor);
+                }
+  
+                break;
+            }
+         
         }
     }
 }
