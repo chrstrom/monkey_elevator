@@ -9,10 +9,6 @@
 // Antar:
 
     // At cab-knappene kun kan trykkes inn med "Folk" i heisen
-    //   
-
-
-
 
 int elevator_init() {
     hardware_command_door_open(0);
@@ -48,8 +44,6 @@ int main(){
         fprintf(stderr, "Unable to initialize software\n");
         exit(1);
     }
-
-
 
 
     while(1){
