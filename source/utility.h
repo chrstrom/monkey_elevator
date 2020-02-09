@@ -1,14 +1,18 @@
+/**
+* @file
+* @brief Utility-functions. Mostly about getting and adding the current
+* floor and orders for the elevator
+*/
+
 #ifndef UTILITY_H
 #define UTILITY_H
 
-<<<<<<< HEAD
 /**
-* @brief Return the 
+* @brief Find and return the current floor of the elevator
 *
 * @param [out] The current floor the elevator is at. If the elevator is
 * between floors, or out of range, the function will return 0.
 */
-
 int at_floor();
 
 /**
@@ -27,13 +31,6 @@ void add_floor_orders(int* p_up, int* p_down);
 *
 * @param[in] p_cab Floor-orders for the cab
 */
-=======
-// returns the floor the elevator is at, or 0 if the elevator is between floors
-int at_floor();
-
-// pass på å push-back
-void add_floor_orders(int* p_up, int* p_down);
->>>>>>> staging
 void add_cab_orders(int* p_cab);
 
 #endif

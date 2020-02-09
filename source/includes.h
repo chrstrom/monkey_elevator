@@ -13,11 +13,20 @@
 #define MAX_FLOOR 4
 #define MIN_FLOOR 1
 
+/** 
+ * Size of the queue. 512 elements to better suit the CPU
+*/
 #define QUEUE_SIZE 512
 
+/** 
+ * Normal wait-time for the elevator.
+ * Will be used everytime after obstruction and stop 
+*/
 #define NORMAL_WAIT_TIME 3
 
-
+/** 
+ * Enum of the different commands the elevator must handle. 
+*/
 typedef enum{
     CMD_STOP,
     CMD_TIMER_START,
@@ -29,9 +38,6 @@ typedef enum{
     CMD_ELEVATOR_STOP,
     CMD_NO_ACTION
 } CmdType_t;
-
-
-
 
 
 #endif
