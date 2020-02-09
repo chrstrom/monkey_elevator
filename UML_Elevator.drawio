@@ -1,1 +1,449 @@
-<mxfile host="www.draw.io" modified="2020-02-06T09:18:40.052Z" agent="Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:72.0) Gecko/20100101 Firefox/72.0" etag="taHh6_0C7O9fA4oiwpD8" version="12.6.5" type="github"><diagram id="z0SczGEVN_gM085jFo6B" name="Page-1">7T1dd9q6sr/lPrBW+hCWvw2PoWl2u06709Nm37PPE8vBAlyMzbYNTe6vvxpJNrYsgwF/kThnH4qNbI1mRqOZ0cxooH5cv/wRWJvlN99G7kCR7JeBej9QFNmQJPwP3Hmld0Zjhd5YBI7NGu1v/HT+D7Gb7LnF1rFRmGkY+b4bOZvszZnveWgWZe5ZQeD/zjab+2621421QLkbP2eWm7/7H8eOlmwUurS//xk5i2XcsxwPeG3FjdmNcGnZ/u/ULfXTQP0Y+H5Ev61fPiIXkBfjhT73UPBrAliAvKjMA9PV+Mcfn1V9/Ofrv0It+rn+94t7y94SRq/xgJGNx88u/SBa+gvfs9xP+7uTwN96NoK3Svhq3+ar72/wTRnf/IWi6JUR09pGPr61jNYu+xUDHLz+nb74L7xsaOrx9f0Lezu9emVXFFiAsBAHMY9YwQJFBwauJBTArIv8NcL94OcC5FqRs8u+32I8tEjaJY9+9x3csyIxftdMk1Gbsbs5HmffEfrbYIbYY2lq8W8aK9k3jQw9+yY6xNyb7oLAek0120CD8ASQR5p0ImSnPjBW9fQD+AsFOr5KUWR/i3DzCZzNxMzOcreMmjlW3zMyMOLvpROhnxtrBr/+xtIsy7TJ9AVGXLhWGLLvM3/tzDIMukNBhF4Os2ie9WJsyVoWW1p8/XsvfwyV3VumZI9hSMX8mkL26bhUBbg0XNztZJPBqPHPFqTZZI1Z0/EG6h3+Vdq84E+CG4nev41ATsBvWuo3jLHo1nKdBXtuhvGFgv078bcF+5f0/Bzf+OSinRX5wfTLY/wbHuQz3x7f2/D3lgGAH685cU/ygU4D/s5ZCHDRPEphIN8btH34+vj4Y/rt7m+GD98LYVKRqVU8pHrgKRp9cxBAWxd4PZzOXd8PaGNAhj4Z6PftAzR93kYRphEP2CHwrDUIGe853PCvnFnPRS9sgRXXPsyvHVa7sLozZe2Rt12XHxd9he0EosdPnof1DRUvqZSeNx/2iG+FuRJIYkboBEQpxhTA07aEAAgTTiPwpfmuNZD85zAKpiFe2yy3VSp2g0phwtlE2t3EAh2jhCFn52N9pGXYKJdTEFugFCdDj11LaSwOFKznSXQAHcIryA66vt10DjZ7z46dgCfESnKX4NlLVfz/rFwVwNemhGkfAmjrb5BHmCpsn34otpCAqToFjhVEYn5qB7pyrJMZQ+SsUXBD/R3wffrbcqL0Ei/l3A7gHnBmlntHjd17Yg5PmOl7T4Gc+LgVlujgcJg7YK1P5r4XMZearLDrB2vtuOAn+IzcHYK3DjJOi6yrLuPCSLstXOsZuRNrtlqQBz76Lqwk957vgb8P6y7+KvF+yhX4OFR1nPVxJP6MlI9Did0ZaR+HVpuPQ+uyj+PL4/Tr14P8+XyYZ7tkZ5mTh1dKD88DNcUK0dSfz/EqEzLFxYk24GBDgeMtyK1mBYG/IE3DFdBG8gYf1cGdDl93DrCjBV/XGHi0tjYbAmIxfLazK1LqrB28bWeBOCGYIK9n3cGwVpZLV5IA/w8mGP1pODDTDoVsD8c6peLrj++YoyZ3Pz9RLCzRy0HmOqcL6r6a/PX09Pjn9Fu4qq8nFM2ImL3ktSc92o1plFiXeLrc0PmT0f7xtMro1625DcLyMHZ52e9XcX4V1yQ9s4qrpmAVF+1UyKO6VnG9y6t4vFOBn7l5+Pntw83acrwPb2VZJ3P9ny0CxN/FX6cnugY7NBQgzvt21pkTUHJg+ERFgYm9dFx0I3+4dUEVmYxWK5RoRLu4VbNQ4okEb/XXsJ6gpeXZLlHbnu5+/isc4i+fIjo7m4aKIOyGAkYgIjfC3040W+JJL22jOUVigGL0NQujjcA8jYEIIyAltmvXIM4iRnU6nxsGLAYp0bj9zYbgiBoMToJGqkWEv9BqBSPxGyczcexvZ5HjE9oSBz8FitgQWN2hfgE3jDBjNg0d7pesl/ilBKblzgn3YO6NiPftreu1vzO1P86HI8uCQBWh+pcE91Wu/hldVv/+XUIhqkffO2RCm5M/QKBGFsEuFRlb1yEL+3zrrcJfmIOCZIllCwJzTpxpt6eWPibCcYfAD1Es8lcWcQ0FWwJHauWMATmzZ6ot3OClYkmdKRtMPUxLLBnpmky6Slww8+2MAIAXIADPjc7uOLTWeGE96rl5q0J2wjSy6c+nx+/TT18//e/d0+MP8pp7eGXHYLz78ZQHUu4UkI/fP/05vX98/PEzAVA5DcCjjjWKjE9P069f/vj8NCUevaQz9WBn5/jxRN0xB2LSq1Z3rx/vJnyf+ql9dsiItWx7Glnh6gY+Elu29S3AYN01qHot8DwtcCRltUBTpASaIiVQq0sJNHNK4F8hytEOefYd5IfgK9irH0CugZ2mim2FyyQ4PJ298OJEkLwgDXV29d/UL/vMBbiIExeSjAf2UJLzMDic8MBRHfbLOaDJvQfCVyemSNBMhAN4ZFHfR1MpdDGHpBhAjndtL0yvyO0by4nL+dT8ClXXj72qogQLVefSH2SJjaIYNv4Jmc/t4Z8wOFc8/0Q9ORaj3Ex7wsZRbqqBxZSdQ7GIZLaTOuEl6dqxbZpshPBCaj2TVwF/M2yrcWB1ocgbKOqc/CWTQiDoWNYYe/8gydVKT5diGVMoFaXhSJfH2b2RyyZA3ITtofEisgJajgWmc7HIZAsKJzKrkpJcXtixtLCslMQw1SMPjcvkYcIbem6BfN/yMU4HS3pStAP5YU3OidhPVZcqwetjxYqCfGQKiKebdHC6FaoTadB5/SI711rQNrT3pW1UxspyjpXfy1pNZ3GhQL6VhlqWNl1fqmVFsFbXZxw/Pd4/kp+btcm/bTF/DVLO2NDdf6XeVC4lkO26ibPyHpqG/zPdbftlURc39WgT57a/CA8OisuPgQjy/YaiIDuFNOimw6RO9PqBTXDK4iTxU1uyd01CFmCZlrbxNjbG222ymZGENIgzh98J/h4nP/+HYgZWcJcGTUT+YuGSnR8yndzXNiZO+7j5kw/5ZVt8kuNttnGU8jqZuPGOVbj61XisRGYrDYqOBE6IIGTYSjbuKC33YqZxGJc7xyXbaCQmZxBvJc6tVeSEq0Q2poaSZrs2RUwswUmbuUvDsJ9df0VCwwkXOJ5N7rr+wiFhKMAM3FZvwwB7yKGNEuCyIBOuOATviW7wcGltEHEKRKAGHiukwawLTaBKCh3oIX6V4y2eSHUZbIUf0BFPcVxzPjY1jklNO67jNmnHtapIxbrgRY5rOV9nQxoO8yV66tXRoV5PTKOKcG3KJmfhxy9JIVsT4Lo+VGt5K/5o4aPZNtglZvwldY8S+72cfytjqCdbOVm7POWDmEHuDOwIpVxhGZfcIOUhSPwFYh9BWQP/0kpKJ1ctkrmqRbKUdRodf0Iv52WKH1d4n3zc4TFnQGVWn94GyzKekQd1O3ErYvLOMqxuZDcEZFk6wrBjnsVPfuJEFjck8eON+aiMMzi8ump0J+7NiqaGNFQM8/D0wBffUeBgXMFCXbUXlXmGjnpR5VEVkyDPQiM5y0IGH+pZICQvrloXd1Q8N9SDD9SzQRrrPQ1z9Bl7bxXyoDwqyYRKPTw45njQ1JVSYuxkHuRZKu6oXpbKb7oLYt2+kKD/smFrHIueVBdxcLl9oI1G3Nw08rZYUlg1bR/otdkHou3wHJYhmHVAwwShCUSIStBv2YjEbGEVfz7/UJJC12YBaia3laYLUkVlobVdF4XjzlIU5skpxeSU5u42XE5J7Dv42q+eGtx8M0XzTVR+ozZ7XMl7OZpcKE+wiM+1b6pU8spqeeqlK+xlNM1vU37OU9l1nU1Ywm1ohRta33vuvADNK5kIhpENPdHlfHCOKIOpPqkkKrXb/MQoz6zHebBg9/1SLU/ntLyR1Kw7RhEVDLpqSik12YSaordLqXMcZxUaYWb5kKyUL0I5yRlR5epSCRucbEwpSjYKxzxm0GuaceiBY86u3OMNB2Qp7Ti7LkpeaE/jKetS0ArCAxvSeDrk7ikraK6Apu1qsXl/y/cA4QGTwm8SJgYUN9/lo4I7erqEnl2MzVFe441vZQov1qbxjrszZ0oncZknBWdXOGliw+P4pKlJ7TYlZZjloDFvDFV2MI2kZjs6kgSlaWP50AP1+GPVvB/pngWjbpBHhUSI/tkib3YtMiJxv3ZFRqjteoeqkBENKvAXe32KptdoBINqU2lW8y6lL55DI1jj2npXMcV07pCnxJvR2hQrPuMptRERIGu2RFBSIEiOJym924Eb3J69J3V1PnZV5pZJAYVlUcxbbb5FtbjE9VESs32Q8uTLvTcpiH9zuOLlm2ICnWMC4UaL3igTFFdITWEe6nJMrRlZLcqTnKuuAgyzIaYSmoKF9BZ2zhRuwyCJIm5tH1MtrnlWZlZfUE0H6PuOBbpu5rXihgV6vtKJgFDJURWYB+zX8vTVIXgUsJPmFjrF2RukDDdlTrk7iXfeGqcoXDEOTST1xwJOqS2cRS0VNFQDpyx6TjnojeMzzCXBQSgNs0qpyKdDWmJJ0r6jpYPXGgxR9FOjamC8Tp2VQk6roUr7z30emhRTYn+zqD7q0RDFXMrcMtfqgP5J3CsU3n2Y3Qly59QD+Nq+lvgQwkoPQjl5jjZYGq+U0ybrBqpiUvOnX5iiSS0LfDi8z6y6SX2NbtK2vKQacyXWv5NyGU3zHs+mBfU3f0e3MbabXl5XK6+3m15ctySuNZH53qy4VrsjrkuHpbW18a1p1yGuLzlGsmJxjWeZd1Ag9AL7ZIENOO1FdksiezxuXcPO754EaOagHaJl1mMXCK277rOMIfjlw0BwEvDVOTL4rNtRXLLk6JEvtVGk1PZHHIAzRXAK00luqu3GtiK0z/0600NVBfb5IpIjQckaWW7UjVRqB8LxnGgabmczFIbJDDnfp1sJKkfcZo4IlaKM0/pQWeyiP6tUVLVnF0FI29TybFpwcDrzMwciPguWLqFycdKpGPkVsZ5qc9CWHjby7e5vhhffC0ntwLbOzKV1HfeHT1KZ3gooELPxnk/BrJKl3zaK2j4XaWkF9m+INsFq6RqEFS2V6ng21qCi5k+HFNgQgls3dPOsE6fgCLHoBzZipWivAoPsAE4CdfQKlQnhh89sWI9wnzTJGXwdHBp/y/c6zCgh1jkon9x0Gk5OLEz9xg8tvj7JUIeET3+eQj/QSKbkwIImgLixKbdEdRGiBBrKYb89B1FXTyeTuDB7QxBeo4gKnSQhW9XbecXxNR2w874RL25v3tUMD4RDr1EsUmLV5Ft8901I93Mg6I2sTkMgXI3X7XFtGR3q8FRrXTmF6MkEpTGsNx+6IhgyFAc/7s1RjPVaCKeFKKakHNdCRqMmtZB4J6GbWsi9FVnT2RLNVmQnu1dEaoOHlDxsz7kLbR8nP59+/PXx6cvjn72budeAug1BZj2ENBnq9AqxjLPceG1sbSplIfOf8Vq2nUWO7xUD2C1kUs9ciLzQD8Ter67gFrzIIr/zNTiVD7rGj+G5V+949U7lq1e372TS86d9dki9e3LIEVRvSK370w/Wljv9bUGgC/qnA8pd+9K912euAAJoCy6ICE9JW6gltL2etY6ifu/lvGVRMrq3LCpdXhbzh0Ze/8LYJX9HV0RJvyR2GgJoC+H7zEqKg/iv1NaznWBv5P2HM/LaDCUJN3Dobxrp2UNWRABmn+kK3AGCfZupa4UR8wtky6EcDhvp5phCP2CDCa+GFiWmQ+GMPT6aXsHjFDzZ1Lun4HUopbaeovrkqsYDJPWyebb6WMwdzeTZ6pfk2dYfRWU5hzNv61Hs69OHxAtaV7S1GLquRVVB2yvcYO0Q363xRGp1V619Bu/dT2fuyoz5gwqSCmuZZGVB+rjCH1pc3bJVXH33UEUALMrgzasVgn/WG5cINIweYuBhPIWIcFRI42Ukf+gOAVuDj+rgDncpPTuR5+zoJfxyj0jNdHir5UVWBFcWfCx35OYKcvzRfOutwl+QHSFZsJdsLVFAfraR5yE6JVFgkTYQjC+tMR/sd0qHZYb2hb2JTfYYKpsCCNe/l46LbuQPRHtZw+cvhDFBMOJtttDOJyexOG4YWSS/G3+lJA2RB8OdWCFF1h4jthMSpAUo3LoYAwjAgLyhMGmyslw3Hi7+9OCHycjeIc92FvBsjB/SaB5YpCn+2LoOoRTFolcOEVRnwEPy0NJ3SY6S5Pmk552zimiPOytwIOc/SJBBOsSjDjIAEZzuCBas4Bk5pBWhzoO/IQnthDyc1MCTF7aE8aSMYFIeq5XPBIU2yFcpEMobbGPNMH8+Ea361kjk1mXznD+sQhNMcmFB5tpKEuitnuyVOY7+sAlS71H0+rikJWEorVoSbZ/ZJRlpiuHrI4ajgGodKKdXmtp0EW6N2qOuzM3TqdzK3NRbpZYoV4ojX7ZMEVm/1i8LvFoth6DczrA2Eg0tD69pFomEU/ILE9FNv/uhAw3w7YCuEhPbCdCM3cMoheWkkiVL45cs0dEgjR53HwPU/rQ4fcnqgPAzlJLTiRZ5aWs6Ga3Wh71M+F0VlVt1jcZgvjGhOeaiLHWpdaHZ6mbD9QtNvazGWMAZDU0nrStUvk6hWZrKrVqBhsgxd/VCU+aFpjYeD8fpP61lGSrHJT67v2MbYhaO7oKAuLcTvzW+90Cc52wa2VwLfCf1O/Vzx87vgaJK5A84wAqXXPHUauafceG0Yo9yh4EaXGENWeb39Cs6BXgkaeKOaj3U1yiuKtqF7eW+SEcjm48d207uyl5kh/eMu4KitiMi+iIdfZGOgxjjVK4+XoDfRjRE+4jN1uiQpVZNz3egG5u16Mba6EzduDLttbgqewe01z779z1oIb2qeAUQxLpNn/1bCMED/u8hCavC7Z5pGBgw8QqrO463RQGWgnD5i/0EwVaRQ6PGSFhYu2iUx3Bqy0eit7jRIA6PoyF2SxJauKBBbyQOUAUQ0Aq0iGDYNuzfCBIjvLYvSNAbxek+LpFFBK4sl3TubzaAfIgHbBfuABH1B4DxUKKDp7OMIryQO3hUHiFFwAYCI7hdedaGVjc+P12p2eSrZ9cB6lgrUJuCCGIuvyVxlGuLjBHCI6MlVM8hIYvwDjgHBpqNR15IIjqvZsAkWBYCVm/naeHAGHGO1e4QK9mIjY+Gk6bEAwk0dZ1V90cIo1qRTxctFiiRHs+YwR3KwUB5GnHcqcF0f2nvjXC+XjefUSgywpvNKDRGXbal+kSzPtFs0ieavYFEM2ibVJ0oyrlvEBYbuShCnQEH6hEMWOXClsFpXxT12sVZ2oWudDAj0Cg+DqTPCKwvI/Aewx1F1HTZbJLv1N4hPa2otRa+hhFaJz2dkG632SN3EmwpeMQIppbibyeaLRMMrV/hEddfYJIOiAE5SJmODuTrkS4XvzCiCSQZ+FBULscweeMyASRFUq5XxIa5ZxrWJ4oTFTNkAps2ayMSIoQuM4RpgmTyCuIjYN4P2mAVoN0eSyn7E9PMZtQll5FP4LKtyMJcv4jPc4N0yYRQO2c/P2iXxMUAvdK5g5+i43WtRRRTNnRCarQnUjdD470oZr2s/DXMO8zawdtIpzTHWQus/WxKWWo1nfLt74KaLIz9aISuTI+xaCtEN4azm5Z4f0ByswZBf0By1+yRDlv4XUFR2/6r/oDkWrDYH5Dc3tD4W50+eLg/IPntSoY6JHz6sz8g+RAaepfoWea+nDsguf0dV1m6wiKup+XXXqmjoGxp2LYdBZ2uDdufbdnviL8B1eQcCHoPQachyKiS/dmWVYPcn23ZhEl40dmWdQL/QP7LY9tyXTFTUJRfMYpbcskLEB3OrC6UERdFRQtlVBfCp7MwAFIn+8wXui+/DyJAC3FiBgtc6Gpkv0/jDaDOMwwissJfNJaDRi4kUSVkLDRsY4NCZ06CNNqVhhTYQZzA8+w6JGRnBXkVAGtEwPU30DdidawhE4XkXPwrychoFugARdvAo5EsJMjGotVgwB29ptlVNJFkh1yb5FQhbAIHt5sAW8DDYclspN7Lw3l5uufjMQXlttQ7Gs1eEEWzXbtfnTlyHYKkTarSmctup6qfHQu2ge153Bl5nF67rrUJnWfSq0RYdbYNQmeHfiBmnRC/0jaCnj76nodm0SBdLe3C0wqyJJK1cZ5GwspchlQbjQQ1kNQ7YZzDeySZYYyGo5GU/MklCKiKCFhbaKkpKAOg3rH0+/dIspE2OneW1RbeZgryi7AkTFX4eo+U0rsoDwWR2lgeZt2575FYmtQ9YsUlWErW82RVCPFtarRmabTfTUpTqRTmDnBSWXVtJNDWBLgc1YZK+c2gUm4dl8qbwaUmqL/dLC7z8cDUvjyEUd4YfPajCFv3me1WEjjBbaPin5kxOBqk9ooH6ZNbxnqC/oP7rQdXl6O7sKNL91bFRatuZUUaqqm/eBc+JndsDjRUw2qU38S1nXBjkaSZy+j77Pqz1aDwCNYKiHh0h7yIiIwY0lBWDE5XZdOobjLzKzLlxxyZ9y+OG/rzeYjqYYW8s+DQNlUXuEMuywfSMT4wVK0OPlBMY6ibKevVyPaiG9lC4Xr3uEJUornbgr9soM0RrriVhpKSdTfcxvSrmS0Mrdwq0CgjiKodvhFGKCtHzEuP6RKzg2py+rNZkv6V0TbvHSkRB9ChFeB4UF3Z8zFGh41wLBMkVa5ECOSobpinKgUvwq5rlAGnHRRXm111xFGiYd1LSa2q3ORq2zod550mb0eUXnomV9GCCXqSkfxxJB3pzcrLcd5XI4rt6ZKEPC74WqGcyc+yAplXGeVKeIbKhI2Taza7zMHxMPL9XJRzseMXRsdXOHupMZznAZGD+UK+MOUCP9epix9/RE5uN/3kE3Iq5zlRRn13eC4bTVGWmxphkqO0LcskSd2M+FTDmo5R4vvRmjhFKT5drOev1vhrPMqua3Xx13g0EgJcL3+VsPwv5C+mvp63Zp6ZHXYeX5bxEmiNMfBRuVaagbnYNbUe/pVNMbz18q+otuz1829xZmJtnF10kkuXOVvhWC6R+RWzNn8cTSOsnWD7jfF2h3WGsQYBiVlS69ldnNF5nGqOc2821INvroh1BR03xL0lYl6ukHtbkMy0atuVTwBZllqaAXIriglL4O9qCv2Xx1Tix3OuWVAmnah83rE5+Suy6cE5K99GA/O+uKe3mhpcYf627exKjUzQ7qxHOandZwOpfLhussmUksnGaDyMI77Se09jTkctsfeELwMfWGEvoQJrs/yG5xK0+H8=</diagram></mxfile>
+<mxfile host="www.draw.io" modified="2020-02-09T11:03:49.741Z" agent="Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:72.0) Gecko/20100101 Firefox/72.0" etag="xHNj0v8tJ5XSV4GLeBjx" version="12.6.6" type="github">
+  <diagram id="z0SczGEVN_gM085jFo6B" name="Page-1">
+    <mxGraphModel dx="1176" dy="579" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.75;entryDx=0;entryDy=0;" parent="1" target="_k9RGH359NyKs4tSmQxl-2" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="4770" y="799" as="sourcePoint"/>
+            <mxPoint x="4920" y="865" as="targetPoint"/>
+            <Array as="points">
+              <mxPoint x="4770" y="840"/>
+              <mxPoint x="4920" y="840"/>
+              <mxPoint x="4920" y="935"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-2" value="" style="rounded=1;whiteSpace=wrap;html=1;shadow=0;glass=0;comic=0;" parent="1" vertex="1">
+          <mxGeometry x="4140" y="440" width="630" height="660" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-3" value="&lt;p style=&quot;margin: 0px ; margin-top: 4px ; text-align: center&quot;&gt;&lt;b&gt;Elevator_IO&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;br&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ FLOOR_MAX: const int&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ lights_floor: int[]&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ lights_floor_buttons: int[][]&lt;/p&gt;&amp;nbsp;+ lights_cab_buttons: int[]&lt;br&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ motor_voltage_t: enum&lt;/p&gt;&amp;nbsp;+ motor_dir_t: enum&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ get_floor(): int&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ get_floor_buttons(): int&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ get_cab_buttons(): int&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ get_motor_dir():motor_dir_t&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ get_obstr_signal(): int&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ set_floor_light(floor:int): void&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ set_floor_button_light&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; (floor:int, button:int): void&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ set_cab_lights(button:int): void&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ set_door_light(): void&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ set_stop_light(): void&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ set_motor_dir(dir:motor_dir_t): void&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ open_doors(): void&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ elevator_stop(): void&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ elevator_start(dir:motor_dir_t):void&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;+ elevator_timer(int time_wait): int " style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1" parent="1" vertex="1">
+          <mxGeometry x="3390" y="630" width="260" height="460" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-4" value="&lt;p style=&quot;margin: 0px ; margin-top: 4px ; text-align: center&quot;&gt;&lt;b&gt;IO_LL&lt;br&gt;&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;{Fyll inn base_offsets, bitplassering,&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;og masker når vi har minnemapping&lt;/p&gt;&lt;div&gt;&amp;nbsp;av hva enn vi nå skal operere på.}&lt;/div&gt;&lt;div&gt;&amp;nbsp;+ GPIO_BASE: hex&lt;br&gt;&lt;/div&gt;&lt;div&gt;&amp;nbsp;+ FLOOR_BUTTON_Msk: hex&lt;br&gt;&lt;/div&gt;&lt;div&gt;&amp;nbsp;+ etc &lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ get_bit(offset:int, base:int): int&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ set_bit(offset:int, base:int): void&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1" parent="1" vertex="1">
+          <mxGeometry x="3405" y="370" width="230" height="180" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-5" value="&lt;p style=&quot;margin: 0px ; margin-top: 4px ; text-align: center&quot;&gt;&lt;b&gt;Elevator (FSM)(main)&lt;br&gt;&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ queue: queue_t&lt;br&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ main(): int&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;{inne i en while(1)-løkke har vi en&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;FSM som behandler TASKs. Etter&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;FSMen (som er en switch) utfører vi&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;det første elementet i queue&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;før vi hopper inn i switch, sjekk for&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;obstruction signal, og sett tilstand&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;til idle, hvis signal}&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1" parent="1" vertex="1">
+          <mxGeometry x="3490" y="1140" width="230" height="210" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-6" value="&lt;p style=&quot;margin: 0px ; margin-top: 4px ; text-align: center&quot;&gt;&lt;b&gt;Queue_t&lt;br&gt;&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;div&gt;&amp;nbsp;{Gi tall til ulike funksjoner som queue skal&lt;/div&gt;&lt;div&gt;&amp;nbsp;utføre, slik at vi kan bruke en switch som&lt;/div&gt;&lt;div&gt;&amp;nbsp;FSM (forhåpentligvis) uten å fucke opp alt&lt;/div&gt;&lt;div&gt;&amp;nbsp;sammen}&lt;/div&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ TASK_STOP_ELEVATOR = 0&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ TASK_START_ELEVATOR = 1&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ TASK_OPEN_DOORS = 2&lt;br&gt;&lt;/p&gt;&lt;div&gt;&amp;nbsp;+ TASK_SET_LIGHT_FLOOR = 3&lt;br&gt;&lt;/div&gt;&lt;div&gt;&amp;nbsp;+ TASK_SET_LIGHT_FLOOR_BUTTON = 4&lt;br&gt;&lt;/div&gt;&lt;div&gt;&amp;nbsp;+ TASK_SET_LIGHT_CAB_BUTTON = 5&lt;br&gt;&lt;/div&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ add_task(task: int): void&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ rm_task(task: int): void&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1" parent="1" vertex="1">
+          <mxGeometry x="3800" y="740" width="270" height="240" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-7" value="Use" style="endArrow=open;endSize=12;dashed=1;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;rounded=0;startArrow=open;startFill=0;" parent="1" source="_k9RGH359NyKs4tSmQxl-3" target="_k9RGH359NyKs4tSmQxl-5" edge="1">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="3390" y="1370" as="sourcePoint"/>
+            <mxPoint x="3550" y="1370" as="targetPoint"/>
+            <Array as="points">
+              <mxPoint x="3520" y="1090"/>
+              <mxPoint x="3520" y="1120"/>
+              <mxPoint x="3605" y="1120"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-8" value="Text" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=#ffffff;" parent="_k9RGH359NyKs4tSmQxl-7" vertex="1" connectable="0">
+          <mxGeometry x="0.8519" y="3" relative="1" as="geometry">
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-9" value="" style="endArrow=none;endSize=12;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;rounded=0;endFill=0;" parent="1" source="_k9RGH359NyKs4tSmQxl-6" target="_k9RGH359NyKs4tSmQxl-5" edge="1">
+          <mxGeometry x="0.5" width="160" relative="1" as="geometry">
+            <mxPoint x="3390" y="1370" as="sourcePoint"/>
+            <mxPoint x="3550" y="1370" as="targetPoint"/>
+            <Array as="points">
+              <mxPoint x="3935" y="1245"/>
+            </Array>
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-10" value="Use" style="endArrow=open;endSize=12;dashed=1;html=1;strokeWidth=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;startArrow=open;startSize=12;startFill=0;rounded=0;" parent="1" source="_k9RGH359NyKs4tSmQxl-3" target="_k9RGH359NyKs4tSmQxl-4" edge="1">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="3390" y="1370" as="sourcePoint"/>
+            <mxPoint x="3550" y="1370" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-11" value="Text" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=#ffffff;" parent="_k9RGH359NyKs4tSmQxl-10" vertex="1" connectable="0">
+          <mxGeometry x="-0.4" y="1" relative="1" as="geometry">
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-12" value="&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;TODO:&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;Mulig å slå sammen lights_floor og lights_floor_buttons?&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;Hvis ja, kan vi også slå sammen set_floor_lights() og set_floor_button_lights()&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;Hvordan skal argumentene se ut i set-funksjonene i Elevator_IO&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;OBS! set eller toggle for lys?&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;Når vi henter inputs, må vi kanskje&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;utføre matriseoperasjoner for å se&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;hvilke TASKs som faktisk kan utføres?&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;Hvis ja: flere blokker, mindre logikk i Queue_t&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;Hvis nei: mindre blokker, mer logikk i Queue_t&lt;br&gt;&lt;/p&gt;" style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=-6;" parent="1" vertex="1">
+          <mxGeometry x="3820" y="380" width="220" height="320" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-13" value="0..1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
+          <mxGeometry x="3717" y="1221" width="40" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-14" style="edgeStyle=orthogonalEdgeStyle;curved=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;startArrow=none;startFill=0;endArrow=classic;endFill=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="4170" y="1045"/>
+              <mxPoint x="4170" y="545"/>
+            </Array>
+            <mxPoint x="4220" y="1045" as="sourcePoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-15" style="edgeStyle=orthogonalEdgeStyle;curved=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;startArrow=none;startFill=0;endArrow=classic;endFill=1;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="4569" y="1105"/>
+              <mxPoint x="4970" y="1105"/>
+              <mxPoint x="4970" y="545"/>
+            </Array>
+            <mxPoint x="4600" y="545" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=1;exitY=0.267;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="_k9RGH359NyKs4tSmQxl-2" target="_k9RGH359NyKs4tSmQxl-18" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="4810" y="610" as="sourcePoint"/>
+            <Array as="points">
+              <mxPoint x="4770" y="610"/>
+              <mxPoint x="4930" y="610"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="_k9RGH359NyKs4tSmQxl-18" target="_k9RGH359NyKs4tSmQxl-2" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="4910" y="752" as="targetPoint"/>
+            <Array as="points">
+              <mxPoint x="4930" y="752"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-18" value="&lt;div&gt;Idle&lt;br&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="4880" y="660" width="100" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-19" value="&lt;div&gt;STOP == 1 /&lt;/div&gt;&lt;div&gt;set_motor_dir(off)&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
+          <mxGeometry x="4790" y="570" width="120" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-20" value="STOP == 0 / flush_queue()" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
+          <mxGeometry x="4780" y="760" width="160" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="_k9RGH359NyKs4tSmQxl-22" target="_k9RGH359NyKs4tSmQxl-32" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-22" value="H" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+          <mxGeometry x="4665" y="515" width="30" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-23" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" target="_k9RGH359NyKs4tSmQxl-30" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="4510" y="805" as="sourcePoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-24" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" target="_k9RGH359NyKs4tSmQxl-28" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="4425" y="805" as="sourcePoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.75;exitY=0;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" parent="1" source="_k9RGH359NyKs4tSmQxl-28" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="4224" y="710"/>
+              <mxPoint x="4446" y="710"/>
+            </Array>
+            <mxPoint x="4446" y="770" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="_k9RGH359NyKs4tSmQxl-28" target="_k9RGH359NyKs4tSmQxl-44" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-27" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="_k9RGH359NyKs4tSmQxl-28" target="_k9RGH359NyKs4tSmQxl-42" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-28" value="Preparing to move" style="rounded=1;whiteSpace=wrap;html=1;shadow=0;glass=0;comic=0;" parent="1" vertex="1">
+          <mxGeometry x="4155" y="785" width="85" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-29" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" parent="1" source="_k9RGH359NyKs4tSmQxl-30" target="_k9RGH359NyKs4tSmQxl-40" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="4702.5" y="930" as="targetPoint"/>
+            <Array as="points">
+              <mxPoint x="4703" y="920"/>
+              <mxPoint x="4491" y="920"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-30" value="Door opening sequence" style="rounded=1;whiteSpace=wrap;html=1;shadow=0;glass=0;comic=0;" parent="1" vertex="1">
+          <mxGeometry x="4660" y="785" width="85" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-31" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" parent="1" source="_k9RGH359NyKs4tSmQxl-32" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="4488.75" y="770" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-32" value="Init elevator" style="rounded=1;whiteSpace=wrap;html=1;shadow=0;glass=0;comic=0;" parent="1" vertex="1">
+          <mxGeometry x="4540" y="510" width="85" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-33" value="&lt;div&gt;reached_target_floor&lt;/div&gt;&lt;div&gt;/-&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
+          <mxGeometry x="4315" y="910" width="140" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-34" value="&lt;div&gt;reached_target_floor / &lt;br&gt;&lt;/div&gt;&lt;div&gt;open_door()&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
+          <mxGeometry x="4515" y="760" width="150" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-35" value="&lt;div&gt;task_active&lt;br&gt;&lt;/div&gt;&amp;nbsp;/ prepare_move()" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
+          <mxGeometry x="4265" y="820" width="120" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-36" value="&lt;div&gt;reached_target_floor &lt;br&gt;&lt;/div&gt;&lt;div&gt;/ -&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
+          <mxGeometry x="4315" y="575" width="140" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-37" value="&lt;div&gt;elevator_ready&lt;/div&gt;&lt;div&gt;[current_floor &amp;lt; target_floor]&lt;/div&gt;&lt;div&gt;/ -&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
+          <mxGeometry x="4205" y="460" width="190" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-38" value="&lt;div&gt;elevator_ready&lt;/div&gt;&lt;div&gt;[current_floor &amp;gt; target_floor]&lt;/div&gt;&lt;div&gt;/ -&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
+          <mxGeometry x="4190" y="1030" width="190" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-39" value="&lt;div&gt;reached_target_floor /&lt;/div&gt;&lt;div&gt;-&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
+          <mxGeometry x="4265" y="670" width="150" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-40" value="&lt;p style=&quot;margin: 4px 0px 0px&quot; align=&quot;center&quot;&gt;Idle&lt;br&gt;&lt;/p&gt;&lt;hr&gt;&lt;div&gt;&amp;nbsp;entry: set_motor_&lt;/div&gt;&lt;div&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; dir(off)&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;br&gt;&lt;/div&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;shadow=0;glass=0;comic=0;rounded=1;" parent="1" vertex="1">
+          <mxGeometry x="4405" y="770" width="115" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-41" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="_k9RGH359NyKs4tSmQxl-42" target="_k9RGH359NyKs4tSmQxl-40" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-42" value="&lt;p style=&quot;margin: 4px 0px 0px&quot; align=&quot;center&quot;&gt;Moving up&lt;br&gt;&lt;/p&gt;&lt;hr&gt;&lt;div&gt;&amp;nbsp;entry: set_motor_&lt;/div&gt;&lt;div&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; dir(up)&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;br&gt;&lt;/div&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;shadow=0;glass=0;comic=0;rounded=1;" parent="1" vertex="1">
+          <mxGeometry x="4405" y="475" width="115" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-43" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="_k9RGH359NyKs4tSmQxl-44" target="_k9RGH359NyKs4tSmQxl-40" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-44" value="&lt;p style=&quot;margin: 4px 0px 0px&quot; align=&quot;center&quot;&gt;Moving down&lt;br&gt;&lt;/p&gt;&lt;hr&gt;&lt;div&gt;&amp;nbsp;entry: set_motor_&lt;/div&gt;&lt;div&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; dir(down)&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;br&gt;&lt;/div&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;shadow=0;glass=0;comic=0;rounded=1;" parent="1" vertex="1">
+          <mxGeometry x="4405" y="990" width="115" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-45" value="recieved_task / add_to_queue(task) " style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
+          <mxGeometry x="4770" y="813" width="230" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-46" value="&lt;div&gt;sequence_end /&lt;/div&gt;&lt;div&gt;update_queue()&lt;/div&gt;" style="text;html=1;" parent="1" vertex="1">
+          <mxGeometry x="4550" y="880" width="110" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-47" value="&lt;div&gt;init_success / -&lt;/div&gt;" style="text;html=1;" parent="1" vertex="1">
+          <mxGeometry x="4585" y="580" width="100" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-48" value="&lt;p style=&quot;margin: 0px ; margin-top: 4px ; text-align: center&quot;&gt;&lt;b&gt;Door_and_light_cont&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;br&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ FLOOR_MAX: const int&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ lights: int[]&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ door: int&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ hardware_command_floor_indicator&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&amp;nbsp; &amp;nbsp; (floor: int): void&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ hardware_command_order_light&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&amp;nbsp; &amp;nbsp; (floor: int, order_type: HardwareOrder,&amp;nbsp;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp;on: int): void&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ hardware_command_stop_light(on: int): void&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ hardware_command_floor_indicator_on&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&amp;nbsp; &amp;nbsp; (floor: int): void&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px&quot;&gt;+ hardware_command_door_open&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px&quot;&gt;(door_int: int): void&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1" parent="1" vertex="1">
+          <mxGeometry x="3040" y="630" width="260" height="460" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-49" value="&lt;p style=&quot;margin: 0px ; margin-top: 4px ; text-align: center&quot;&gt;&lt;b&gt;Motor_cont&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;br&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ FLOOR_MAX: const int&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ movement: HardwareMovement&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ hardware_command_movement&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&amp;nbsp; &amp;nbsp; (movement: HardwareMovement): void&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ get_hardware_movement(): HardwareMovement&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ hardware_init(): void&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1" parent="1" vertex="1">
+          <mxGeometry x="2702" y="630" width="288" height="460" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-50" value="&lt;p style=&quot;margin: 0px ; margin-top: 4px ; text-align: center&quot;&gt;&lt;b&gt;Data_checking&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;br&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ FLOOR_MAX: const int&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ STOP: int&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ OBSTRUCTION: int&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ hardware_read_stop_signal(): int&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ hardware_read_obstruction_signal(): int&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ hardware_read_floor_sensor(floor: int): int&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ hardware_read_order(floor: int,&amp;nbsp;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&amp;nbsp; &amp;nbsp; order_type: HardwareOrder): int&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1" parent="1" vertex="1">
+          <mxGeometry x="2380" y="630" width="260" height="460" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-51" value="&lt;p style=&quot;margin: 0px ; margin-top: 4px ; text-align: center&quot;&gt;&lt;b&gt;Timer&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;br&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ Normal_wait_seq: const int&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ get_timed_signal(): int&amp;nbsp;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1" parent="1" vertex="1">
+          <mxGeometry x="2060" y="630" width="260" height="460" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-52" value="&lt;p style=&quot;margin: 0px ; margin-top: 4px ; text-align: center&quot;&gt;&lt;b&gt;Queue_t&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;br&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ FLOOR_MAX: const int&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ add_order_to_queue(floor: int,&amp;nbsp;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&amp;nbsp; &amp;nbsp; dir: HardWareOrder): void&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;span&gt;+ flush_queue(): void&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;span&gt;+ remove_last_order(current_floor: int): void&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;span&gt;+ sort_orders(): void&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;span&gt;&amp;nbsp; &amp;nbsp;&amp;nbsp;&lt;/span&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1" parent="1" vertex="1">
+          <mxGeometry x="1750" y="630" width="260" height="460" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-53" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="_k9RGH359NyKs4tSmQxl-54" target="_k9RGH359NyKs4tSmQxl-59" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-54" value="&lt;p style=&quot;margin: 0px ; margin-top: 4px ; text-align: center&quot;&gt;&lt;b&gt;Main&lt;br&gt;&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ current_floor: int&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ current_movement: HardwareMovement&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ STOP: int&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ OBSTRUCTION: int&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ main(): int&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1" parent="1" vertex="1">
+          <mxGeometry x="2392.5" y="150" width="235" height="210" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-55" value="&lt;br&gt;&lt;br&gt;Har ikke implementert diverse masking o.l. på bitnivå. Det er antatt at hver klassefunksjon abstraherer denne interaksjonen med hardware.&lt;br&gt;&lt;br&gt;Inne i main er det en while(1) som sjekker input og tilstand til heisen. Basert på disse resultatene, så kaller den nødvendige funksjoner fra de ulike klassene.&lt;br&gt;&lt;br&gt;Main inneholder noen viktige variabler som de andre funksjonene vil arbeide med/oppdatere." style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=-6;" parent="1" vertex="1">
+          <mxGeometry x="2660" y="40" width="220" height="320" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-56" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="_k9RGH359NyKs4tSmQxl-59" target="_k9RGH359NyKs4tSmQxl-62" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-57" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.506;exitY=0.501;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="_k9RGH359NyKs4tSmQxl-59" target="_k9RGH359NyKs4tSmQxl-50" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-58" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="_k9RGH359NyKs4tSmQxl-59" target="_k9RGH359NyKs4tSmQxl-65" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-59" value="" style="html=1;shape=mxgraph.flowchart.annotation_2;align=left;labelPosition=right;direction=south;" parent="1" vertex="1">
+          <mxGeometry x="2460" y="410" width="100" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-60" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="_k9RGH359NyKs4tSmQxl-62" target="_k9RGH359NyKs4tSmQxl-48" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-61" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="_k9RGH359NyKs4tSmQxl-62" target="_k9RGH359NyKs4tSmQxl-49" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-62" value="" style="html=1;shape=mxgraph.flowchart.annotation_2;align=left;labelPosition=right;direction=south;" parent="1" vertex="1">
+          <mxGeometry x="2980" y="500" width="100" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-63" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="_k9RGH359NyKs4tSmQxl-65" target="_k9RGH359NyKs4tSmQxl-51" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-64" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="_k9RGH359NyKs4tSmQxl-65" target="_k9RGH359NyKs4tSmQxl-52" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-65" value="" style="html=1;shape=mxgraph.flowchart.annotation_2;align=left;labelPosition=right;direction=south;" parent="1" vertex="1">
+          <mxGeometry x="1980" y="499.99999999999994" width="100" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-105" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;startArrow=none;startFill=0;endArrow=none;endFill=0;strokeColor=#000000;dashed=1;" parent="1" source="_k9RGH359NyKs4tSmQxl-66" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="640" y="1160" as="targetPoint"/>
+            <Array as="points">
+              <mxPoint x="804" y="1160"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-66" value="&lt;p style=&quot;margin: 0px ; margin-top: 4px ; text-align: center&quot;&gt;&lt;b&gt;Motor_cont&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;br&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ FLOOR_MAX: const int&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ movement: HardwareMovement&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ init_elevator(): void&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ drive_elevator_to_floor(floor: int): void&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;//Utdelt kode:&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ hardware_command_movement&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&amp;nbsp; &amp;nbsp; (movement: HardwareMovement): void&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ get_hardware_movement(): HardwareMovement&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ hardware_init(): void&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1" parent="1" vertex="1">
+          <mxGeometry x="660" y="640" width="330" height="460" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-104" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;startArrow=none;startFill=0;endArrow=none;endFill=0;strokeColor=#000000;dashed=1;" parent="1" source="_k9RGH359NyKs4tSmQxl-67" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="480" y="1160" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-67" value="&lt;p style=&quot;margin: 0px ; margin-top: 4px ; text-align: center&quot;&gt;&lt;b&gt;Timer&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;br&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ Normal_wait_seq: const int&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ get_timed_signal(): int&amp;nbsp;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;//Funksjonen bør kontinuerlig kjøre tiden fra&amp;nbsp;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;1970, helt til det har gått 3 sekunder.&amp;nbsp;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;Men trenger en funksjon som skal stoppe og&amp;nbsp;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;restarte ned&lt;span&gt;tellingen dersom stopp-knappen&amp;nbsp;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;span&gt;blir aktivert. Må man da threade alt? Ønsker&amp;nbsp;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;span&gt;at main-funksjonen skal fortsette å kjøre, slik&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;span&gt;at man kan legge til bestillinger o.l.&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1" parent="1" vertex="1">
+          <mxGeometry x="350" y="640" width="260" height="460" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-68" value="&lt;p style=&quot;margin: 0px ; margin-top: 4px ; text-align: center&quot;&gt;&lt;b&gt;Main&lt;br&gt;&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ current_floor: int&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ current_movement: HardwareMovement&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ STOP: int&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ OBSTRUCTION: int&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ main(): int&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ add_orders(): void&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ delete_orders(): void&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ sort orders(): void&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1" parent="1" vertex="1">
+          <mxGeometry x="522.5" y="150" width="235" height="210" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-69" value="&lt;br&gt;&lt;br&gt;Har ikke implementert diverse masking o.l. på bitnivå. Det er antatt at hver klassefunksjon abstraherer denne interaksjonen med hardware.&lt;br&gt;&lt;br&gt;Inne i main er det en while(1) som sjekker input og tilstand til heisen. Deretter oppretter man et køsystem som de andre funksjonene vil arbeide på. Bruker da en switch med mye logikk for å iterere gjennom køsystemet.&lt;br&gt;&lt;br&gt;Må ha en funksjon for å endre på køen inne i main, legge til og slette fra køen. Men dette krever da at man sender inn store datamengder, noe som vi ikke ønsker. Har derfor lagt de siste &quot;funksjonene&quot; som kommentarer." style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=-6;" parent="1" vertex="1">
+          <mxGeometry x="790" y="40" width="220" height="320" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-106" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;startArrow=none;startFill=0;endArrow=none;endFill=0;strokeColor=#000000;dashed=1;" parent="1" source="_k9RGH359NyKs4tSmQxl-73" target="_k9RGH359NyKs4tSmQxl-102" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-73" value="&lt;p style=&quot;margin: 0px ; margin-top: 4px ; text-align: center&quot;&gt;&lt;b&gt;Door_and_light_cont&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;br&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ FLOOR_MAX: const int&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ lights: int[]&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ door: int&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;//Utdelt kode:&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ hardware_command_floor_indicator&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&amp;nbsp; &amp;nbsp; (floor: int): void&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ hardware_command_order_light&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&amp;nbsp; &amp;nbsp; (floor: int, order_type: HardwareOrder,&amp;nbsp;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp;on: int): void&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ hardware_command_stop_light(on: int): void&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ hardware_command_floor_indicator_on&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&amp;nbsp; &amp;nbsp; (floor: int): void&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px&quot;&gt;+ hardware_command_door_open&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px&quot;&gt;(door_int: int): void&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1" parent="1" vertex="1">
+          <mxGeometry x="1040" y="640" width="260" height="460" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-103" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;startArrow=none;startFill=0;endArrow=none;endFill=0;strokeColor=#000000;dashed=1;" parent="1" source="_k9RGH359NyKs4tSmQxl-74" target="_k9RGH359NyKs4tSmQxl-102" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-74" value="&lt;p style=&quot;margin: 0px ; margin-top: 4px ; text-align: center&quot;&gt;&lt;b&gt;Data_checking&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;br&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ FLOOR_MAX: const int&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ STOP: int&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ OBSTRUCTION: int&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ check_emergency(): int&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ check_floor_sensors(): int&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;//Utdelt kode:&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ hardware_read_stop_signal(): int&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ hardware_read_obstruction_signal(): int&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ hardware_read_floor_sensor(floor: int): int&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ hardware_read_order(floor: int,&amp;nbsp;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&amp;nbsp; &amp;nbsp; order_type: HardwareOrder): int&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;//+ hardware_read_all_sensor(floor: int,&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&amp;nbsp; &amp;nbsp; order_type: HardwareOrder): int[]&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;//+ hardware_scan(): int&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;span&gt;&lt;br&gt;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;span&gt;//Bør man ha en egen funksjon som itererer&amp;nbsp;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;over alle etasjene og sjekker om en spesifikk&amp;nbsp;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;etasje har blitt kalt enten opp eller ned? Kan da&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;returnere et array, men blir veldig error-prone...&amp;nbsp;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1" parent="1" vertex="1">
+          <mxGeometry x="20" y="640" width="300" height="460" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-75" value=":Main" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;" parent="1" vertex="1">
+          <mxGeometry x="230" y="1490" width="100" height="600" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-76" value=":Door_and_light_cont" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;" parent="1" vertex="1">
+          <mxGeometry x="668.8800000000001" y="1490" width="130" height="610" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-77" value=":Timer" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;" parent="1" vertex="1">
+          <mxGeometry x="848" y="1490" width="100" height="620" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-78" value=":Motor_cont" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;" parent="1" vertex="1">
+          <mxGeometry x="530" y="1490" width="100" height="600" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-79" value=":Data_checking" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;" parent="1" vertex="1">
+          <mxGeometry x="400" y="1490" width="100" height="600" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-80" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;" parent="_k9RGH359NyKs4tSmQxl-79" vertex="1">
+          <mxGeometry x="40" y="80" width="20" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-81" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;" parent="_k9RGH359NyKs4tSmQxl-79" vertex="1">
+          <mxGeometry x="40" y="180" width="20" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-82" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;" parent="_k9RGH359NyKs4tSmQxl-79" vertex="1">
+          <mxGeometry x="40" y="400" width="20" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-83" value="return" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;exitX=0;exitY=0.95;" parent="_k9RGH359NyKs4tSmQxl-79" source="_k9RGH359NyKs4tSmQxl-82" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-120.33333333333303" y="476" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-84" value="dispatch" style="html=1;verticalAlign=bottom;endArrow=block;entryX=0;entryY=0;" parent="_k9RGH359NyKs4tSmQxl-79" target="_k9RGH359NyKs4tSmQxl-82" edge="1">
+          <mxGeometry x="0.1268" y="10" relative="1" as="geometry">
+            <mxPoint x="-120.33333333333303" y="400" as="sourcePoint"/>
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-85" value="hardware_read_stop_signal()" style="html=1;verticalAlign=bottom;endArrow=block;entryX=0;entryY=0;" parent="1" target="_k9RGH359NyKs4tSmQxl-80" edge="1">
+          <mxGeometry x="0.1634" y="10" relative="1" as="geometry">
+            <mxPoint x="276.57000000000016" y="1569.9999999999995" as="sourcePoint"/>
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-86" value="" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;exitX=0;exitY=0.95;" parent="1" source="_k9RGH359NyKs4tSmQxl-80" edge="1">
+          <mxGeometry x="-0.021" y="-16" relative="1" as="geometry">
+            <mxPoint x="276.57000000000016" y="1646" as="targetPoint"/>
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-87" value="" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;exitX=0;exitY=0.95;" parent="1" source="_k9RGH359NyKs4tSmQxl-81" target="_k9RGH359NyKs4tSmQxl-75" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="370" y="1746" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-88" value="hardware_read_obstruction_signal()" style="html=1;verticalAlign=bottom;endArrow=block;entryX=0;entryY=0;" parent="1" source="_k9RGH359NyKs4tSmQxl-75" target="_k9RGH359NyKs4tSmQxl-81" edge="1">
+          <mxGeometry x="0.0031" relative="1" as="geometry">
+            <mxPoint x="370" y="1670" as="sourcePoint"/>
+            <mxPoint x="1" as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-89" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;" parent="1" vertex="1">
+          <mxGeometry x="440.3299999999999" y="1780" width="20" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-90" value="2" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;exitX=0;exitY=0.95;" parent="1" source="_k9RGH359NyKs4tSmQxl-89" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="279.9966666666669" y="1856" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-91" value="hardware_read_order(" style="html=1;verticalAlign=bottom;endArrow=block;entryX=0;entryY=0;" parent="1" target="_k9RGH359NyKs4tSmQxl-89" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="279.9966666666669" y="1780" as="sourcePoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-92" value="" style="startArrow=none;startFill=0;startSize=7;endArrow=none;endFill=0;endSize=10;dashed=1;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="_k9RGH359NyKs4tSmQxl-68" edge="1">
+          <mxGeometry width="100" relative="1" as="geometry">
+            <mxPoint x="710" y="400" as="sourcePoint"/>
+            <mxPoint x="640" y="460" as="targetPoint"/>
+            <Array as="points"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-93" value="" style="startArrow=none;startFill=0;startSize=7;endArrow=none;endFill=0;endSize=10;dashed=1;html=1;rounded=0;" parent="1" edge="1">
+          <mxGeometry width="100" relative="1" as="geometry">
+            <mxPoint x="640" y="460" as="sourcePoint"/>
+            <mxPoint x="320" y="560" as="targetPoint"/>
+            <Array as="points">
+              <mxPoint x="320" y="460"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-94" value="" style="startArrow=none;startFill=0;startSize=7;endArrow=none;endFill=0;endSize=10;dashed=1;html=1;rounded=0;" parent="1" edge="1">
+          <mxGeometry width="100" relative="1" as="geometry">
+            <mxPoint x="640" y="460" as="sourcePoint"/>
+            <mxPoint x="989" y="560" as="targetPoint"/>
+            <Array as="points">
+              <mxPoint x="988" y="460"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-97" value="" style="startArrow=none;startFill=0;startSize=7;endArrow=open;endFill=0;endSize=10;dashed=1;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;rounded=0;" parent="1" target="_k9RGH359NyKs4tSmQxl-74" edge="1">
+          <mxGeometry width="100" relative="1" as="geometry">
+            <mxPoint x="320" y="560" as="sourcePoint"/>
+            <mxPoint x="90" y="630" as="targetPoint"/>
+            <Array as="points">
+              <mxPoint x="170" y="560"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-98" value="" style="startArrow=none;startFill=0;startSize=7;endArrow=open;endFill=0;endSize=10;dashed=1;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#000000;rounded=0;" parent="1" target="_k9RGH359NyKs4tSmQxl-67" edge="1">
+          <mxGeometry width="100" relative="1" as="geometry">
+            <mxPoint x="320" y="560" as="sourcePoint"/>
+            <mxPoint x="270" y="640" as="targetPoint"/>
+            <Array as="points">
+              <mxPoint x="480" y="560"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-100" value="" style="startArrow=none;startFill=0;startSize=7;endArrow=open;endFill=0;endSize=10;dashed=1;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;rounded=0;" parent="1" edge="1">
+          <mxGeometry width="100" relative="1" as="geometry">
+            <mxPoint x="948.88" y="559.9999999999998" as="sourcePoint"/>
+            <mxPoint x="798.88" y="639.9999999999998" as="targetPoint"/>
+            <Array as="points">
+              <mxPoint x="798.88" y="560"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-101" value="" style="startArrow=none;startFill=0;startSize=7;endArrow=open;endFill=0;endSize=10;dashed=1;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#000000;rounded=0;" parent="1" target="_k9RGH359NyKs4tSmQxl-73" edge="1">
+          <mxGeometry width="100" relative="1" as="geometry">
+            <mxPoint x="948.88" y="559.9999999999998" as="sourcePoint"/>
+            <mxPoint x="1108.88" y="639.9999999999998" as="targetPoint"/>
+            <Array as="points">
+              <mxPoint x="1170" y="560"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_k9RGH359NyKs4tSmQxl-102" value="&lt;p style=&quot;margin: 0px ; margin-top: 4px ; text-align: center&quot;&gt;&lt;b&gt;IO&lt;/b&gt;&lt;br&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;{Utdelt kode}&lt;br&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1" parent="1" vertex="1">
+          <mxGeometry x="300" y="1220" width="689.76" height="90" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
