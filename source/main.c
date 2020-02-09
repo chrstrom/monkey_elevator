@@ -1,17 +1,12 @@
-<<<<<<< HEAD
 /**
  * @file
  * @brief main linker point of elevator program
  */
-#include <stdio.h>
-#include <stdlib.h>
-#include "hardware.h"
-=======
+
 #include "data_checking.h"
 #include "door_and_light_cont.h"
 #include "motor_cont.h"
 #include "timer_elevator.h"
->>>>>>> oys
 
 int main(){
 
@@ -21,22 +16,9 @@ int main(){
         exit(1);
     }
 
-    printf("=== Example Program ===\n");
-    printf("Press the stop button on the elevator panel to exit\n");
-
-    hardware_command_movement(HARDWARE_MOVEMENT_UP);
-
     while(1){
-        if(hardware_read_stop_signal()){
-            hardware_command_movement(HARDWARE_MOVEMENT_STOP);
-            break;
-        }
+        // Check all external order buttons, stop, and obstruction
 
-        if(hardware_read_floor_sensor(0)){
-            hardware_command_movement(HARDWARE_MOVEMENT_UP);
-        }
-        if(hardware_read_floor_sensor(HARDWARE_NUMBER_OF_FLOORS - 1)){
-            hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
-        }
+        // Switch for the command for the first element in the queue
     }
 }
