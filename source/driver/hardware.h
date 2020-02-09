@@ -94,10 +94,11 @@ int hardware_read_order(int floor, HardwareOrder order_type);
  * @param door_open A truthy value (non-zero) to open the door;
  * 0 to close.
  */
-void hardware_command_door_open(int door_            case CMD_STOP:
+void hardware_command_door_open(int door_open);            
+                //case CMD_STOP:
                 //set stop_lights
                 //check if at a floor.
-                // if at a floor, open the bloody dooropen);
+                // if at a floor, open the bloody door
 
 /**
  * @brief Commands the hardware to turn on the floor indicator

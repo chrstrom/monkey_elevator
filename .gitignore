@@ -1,10 +1,6 @@
 *.out
 *.swp
-<<<<<<< HEAD
-.vscode/
 build/
 dox/
 elevator
-=======
 .vscode
->>>>>>> oys
