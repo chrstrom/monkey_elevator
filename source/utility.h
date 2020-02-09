@@ -10,7 +10,7 @@
 /**
 * @brief Find and return the current floor of the elevator
 *
-* @param [out] The current floor the elevator is at. If the elevator is
+* @return The current floor the elevator is at. If the elevator is
 * between floors, or out of range, the function will return 0.
 */
 int at_floor();

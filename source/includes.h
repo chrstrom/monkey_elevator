@@ -19,7 +19,7 @@
 #define QUEUE_SIZE 512
 
 /** 
- * Normal wait-time for the elevator.
+ * Normal wait-time, in seconds, for the elevator.
  * Will be used everytime after obstruction and stop 
 */
 #define NORMAL_WAIT_TIME 3
