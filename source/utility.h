@@ -1,6 +1,7 @@
 #ifndef UTILITY_H
 #define UTILITY_H
 
+<<<<<<< HEAD
 /**
 * @brief Return the 
 *
@@ -26,6 +27,13 @@ void add_floor_orders(int* p_up, int* p_down);
 *
 * @param[in] p_cab Floor-orders for the cab
 */
+=======
+// returns the floor the elevator is at, or 0 if the elevator is between floors
+int at_floor();
+
+// pass på å push-back
+void add_floor_orders(int* p_up, int* p_down);
+>>>>>>> staging
 void add_cab_orders(int* p_cab);
 
 #endif
