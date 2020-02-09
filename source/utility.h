@@ -7,6 +7,7 @@
 #ifndef UTILITY_H
 #define UTILITY_H
 
+#include <time.h>
 /**
 * @brief Find and return the current floor of the elevator
 *
@@ -26,11 +27,12 @@ int at_floor();
 void add_floor_orders(int* p_up, int* p_down);
 
 
-/**
-* @brief Add the floor orders to the cab.
-*
-* @param[in] p_cab Floor-orders for the cab
-*/
-void add_cab_orders(int* p_cab);
 
+
+
+// Set the timer to the current time
+void start_timer(time_t* timer);
+
+// Return true when sec has passed since the timer was started
+int check_timer(time_t* timer, double sec);
 #endif

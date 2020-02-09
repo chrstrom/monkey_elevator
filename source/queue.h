@@ -20,16 +20,12 @@ typedef struct{
 */
 void update_queue(Order* p_queue);
 
-/**
-* @brief Add the floor orders to the cab.
-*
-* @return The last button that was pressed
-*/
-void set_cab_orders(Order* order);
+// Set the cab orders for the current_order
+void set_cab_orders(Order* current_order);
 
-// Sets the element corresponding to current_floor in the order's floor_to[] 
-// to 0
-void clear_cab_order(Order* current_order, int current_floor);
+// Sets the element corresponding to current_floor in EVERY ORDER'S
+// floor_to[] to 0
+void clear_cab_orders(Order* queue, int current_floor);
 
 
 #endif
