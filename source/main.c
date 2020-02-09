@@ -29,6 +29,8 @@ int elevator_init() {
     if(!at_floor()) {
         hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
     }
+    
+    return 0;
 }
 
 int main(){
