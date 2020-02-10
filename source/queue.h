@@ -65,16 +65,6 @@ void add_floor_orders(int* p_up, int* p_down);
 // * invalidate
 // */
 // //void reset_orders(int* p_order);
-// /*
-// /**
-// * @brief Reset the order's to a pointer containing only 
-// * invalid orders. In this case, we use -1 to symbolize
-// * invalid floors/orders.
-// *
-// * @param[in] p_order The pointer we would like to reset/
-// * invalidate
-// */
-// /*
 
 
 #endif
