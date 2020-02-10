@@ -2,59 +2,42 @@
 * @file
 * @brief Updating the elevator's queue. 
 */
-
 #ifndef QUEUE_H
 #define QUEUE_H
 
 #include "includes.h"
 
-typedef struct {
-    int floor_at;
-    int floor_to;
-    int next_action;
-} task_t;
+typedef struct{
+    int floor_at;               // Floor at which the floor button was pressed
+    int floor_to[MAX_FLOOR];    // The cab orders
+    int dir;                    // 1 = up, -1 = down
+} Order;
 
 /**
  * @brief Update a queue by removing the first element.
  * 
  * @param[in] p_queue Pointer to the queue.
 */
-void update_queue(int* p_queue);
+void update_queue(Order* p_queue);
 
 /**
- * @brief Add a new order to the back of the queue.
+ * @brief Set the cab orders for a given @c Order
  * 
- * @param[in] floor_at The floor the elevator goes from
- * 
- * @param[in] floor_to Where the elevator will go to
- * 
- * @param[in] cmd The nececarry command to do the task
- * 
- * @param[in] p_tasks Pointer to the tasks-queue. Will add
- * to the back of this queue
+ * @param[in][out] p_current_order  A pointer to the @c Order to which the cab orders will be set
 */
-void queue_push_back(int floor_at, int floor_to, CmdType_t cmd, task_t* p_tasks);
+void set_cab_orders(Order* p_current_order);
 
 /**
- * @brief Add a new order to the front of the queue.
+ * @brief Clear a given @c Order of a cab order  a given floor
  * 
- * @param[in] floor_at The floor the elevator goes from
- * 
- * @param[in] floor_to Where the elevator will go to
- * 
- * @param[in] cmd The nececarry command to do the task
- * 
- * @param[in] p_tasks Pointer to the tasks-queue. Will add
- * to the front of this queue
 */
-void queue_push_front(int floor_at, int floor_to, CmdType_t cmd, task_t* p_tasks);
+void clear_cab_orders(Order* p_current_order, int current_floor);
 
-/**
- * @brief Update the tasks-queue and find the next task.
- * 
- * @param[in] p_tasks Pointer to the necessary tasks.
-*/
-void update_current_task(task_t* p_tasks);
+
+void add_floor_orders(int* p_up, int* p_down) {
+
+}
+
 
 /* ALT DETTE KAN LIGGE I UTILITIES OG I QUEUE
 Men det er bedre at det ligger i queue, da alle disse 

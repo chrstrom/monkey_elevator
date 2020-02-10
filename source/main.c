@@ -3,12 +3,16 @@
  * @brief main linker point of elevator program
  */
 
-#include "utility.h"
+#include "timer.h"
 #include "queue.h"
+#include "elevator_fsm.h"
+
 
 // Antar:
 
     // At cab-knappene kun kan trykkes inn med "Folk" i heisen
+
+
 
 int elevator_init() {
     hardware_command_door_open(0);
@@ -16,24 +20,24 @@ int elevator_init() {
     if(!at_floor()) {
         hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
     }
+    
+    return 0;
 }
 
-int main(){
-    task_t tasks[QUEUE_SIZE];
 
-    int floor_orders_up[4] = {0, 0, 0};     // Holder gjeldende opp-ordre, i rekkefølgen knappene ble trykt inn. Oppdateres med add_floor_orders() i queue
-    int floor_orders_down[4] = {0, 0, 0};   // Holder gjeldende ned-ordre, i rekkefølgen knappene ble trykt inn. Oppdateres med add_floor_orders() i queue
-    int cab_orders[5] = {0, 0, 0, 0};       // Holder gjeldende cab ordre, i rekkefølgen knappene ble trykt inn. Oppdateres med add_cab_orders() i queue
+int main(){
+
+    // ELEVATOR INITIAL SETUP
+    Order queue[QUEUE_SIZE];
 
     int current_floor = -1; //invalid floor to set the elevator's intitial floor-value
-    int last_floor = -1;
-    int door_open;
+    int door_open = -1;
+    int next_action  = -1;
+    time_t stop_timer = time(NULL);
+    time_t door_timer = time(NULL);
 
-    task_t current_task = {0, 0, CMD_NO_ACTION};
-    time_t last_time = time(NULL);
-    HardwareMovement current_movement;
-
-
+    elevator_state_t elevator_state = STATE_IDLE;
+    
     int error = hardware_init();
     if(error != 0){
         fprintf(stderr, "Unable to initialize hardware\n");
@@ -47,68 +51,42 @@ int main(){
     }
 
 
+    // ELEVATOR PROGRAM LOOP
+    // If we made new commands for set/get, we can set/get multiple connected things at once
+    // ex: elevator_open_doors() can both open/close the door, and also set the lamp
     while(1){
+
+
+        // Can be part of update_state and next action!!!
         if(hardware_read_stop_signal()) {
-            elevator_stop();
+            elevator_state = STATE_IDLE;
             erase_queue();
-            if(at_floor()){//add a function for this later
-                //open doors
+            if(at_floor()){
+                hardware_command_door_open(1);
             }
-            last_time = time(NULL);
-            queue_push_front(0, 0, CMD_TIMER_START, tasks);
-            continue;
+            start_timer(stop_timer);
+
         }
 
         if(hardware_read_obstruction_signal() && door_open) {
-            if(at_floor()){//add a function for this later
-            //basic check. Door should never be open between floors
-                //open doors
-            }
-            last_time = time(NULL);
-            queue_push_front(0, 0, CMD_TIMER_START, tasks);
-            continue;
+            // Restart the door timer when obstruction is activated
+            start_timer(door_timer);
         }
     
-        add_floor_orders(floor_orders_up, floor_orders_down);
-        add_cab_orders(cab_orders);
-        update_current_task(tasks);
-
-        update_floor_button_lights(floor_orders_up, floor_orders_down);
-        update_cab_lights(cab_orders);
+        poll_floor_buttons();
+    
         update_floor_lights(current_floor);
 
         // update next_action in each case
-        switch(current_task.next_action) {
+        // After finishing one order, set the elevator back to idle.
+        Order current_order = queue[0];
+        next_action = update_state(elevator_state);
 
-            case CMD_ELEVATOR_UP: {
-
-                break;
-            }
-
-            case CMD_ELEVATOR_DOWN: {
-
-                break;
-            }
-
-            case CMD_ELEVATOR_STOP: { 
-
-                break;
-            }
-
-            case CMD_OPEN_DOOR: {
-
-                break;
-            }
-
-            case CMD_TIMER_START: {
-                if((long int)(last_time - time(NULL)) >= NORMAL_WAIT_TIME) {
-                    //should be valid for stop and obstruction
-                    //then do the first element in the queue
-
-
-                }
-                break;
-            }
+        switch(next_action) {
+            case START_DOOR_TIMER:
+                start_timer(door_timer);
+                
         }
+
     }
 }
