@@ -22,7 +22,7 @@ elevator_state_t update_state(elevator_state_t* elevator_state) {
             else if(current_floor == current_order.floor_at){
                 elevator_state = STATE_SERVE_ORDER;
                 //start_timer(door_timer);
-                next_action = 2;
+                next_action = START_DOOR_TIMER;
             }
             else {
                 elevator_state = STATE_ERROR;
@@ -34,7 +34,7 @@ elevator_state_t update_state(elevator_state_t* elevator_state) {
             if(current_floor == current_order.floor_at) {
                 elevator_state = STATE_SERVE_ORDER;
                 //start_timer(door_timer);    //return action, can use function pointer to return
-                next_action = 2;
+                next_action = START_DOOR_TIMER;
             }
             break;  
         }

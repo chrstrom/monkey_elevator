@@ -24,6 +24,7 @@ int elevator_init() {
     return 0;
 }
 
+
 int main(){
 
     // ELEVATOR INITIAL SETUP
@@ -54,6 +55,9 @@ int main(){
     // If we made new commands for set/get, we can set/get multiple connected things at once
     // ex: elevator_open_doors() can both open/close the door, and also set the lamp
     while(1){
+
+
+        // Can be part of update_state and next action!!!
         if(hardware_read_stop_signal()) {
             elevator_state = STATE_IDLE;
             erase_queue();
@@ -79,7 +83,7 @@ int main(){
         next_action = update_state(elevator_state);
 
         switch(next_action) {
-            case START_TIMER:
+            case START_DOOR_TIMER:
                 start_timer(door_timer);
                 
         }

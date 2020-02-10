@@ -20,21 +20,23 @@ typedef struct{
 */
 void update_queue(Order* p_queue);
 
-// Set the cab orders for the current_order
-void set_cab_orders(Order* current_order);
+/**
+ * @brief Set the cab orders for a given @c Order
+ * 
+ * @param[in][out] p_current_order  A pointer to the @c Order to which the cab orders will be set
+*/
+void set_cab_orders(Order* p_current_order);
 
-// Sets the element corresponding to current_floor in EVERY ORDER'S
-// floor_to[] to 0
-void clear_cab_orders(Order* queue, int current_floor);
+/**
+ * @brief Clear a given @c Order of a cab order  a given floor
+ * 
+*/
+void clear_cab_orders(Order* p_current_order, int current_floor);
 
 
 void add_floor_orders(int* p_up, int* p_down) {
 
 }
 
-
-int at_floor() {
-    // returns the floor the elevator is at, or 0 if the elevator is between floors
-}
 
 #endif

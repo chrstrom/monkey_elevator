@@ -1,4 +1,4 @@
-#include "lights.h"
+#include "elevator_io.h"
 
 void update_floor_lights(int* p_up, int* p_down) {
 

@@ -2,10 +2,10 @@
 #define ELEVATOR_FSM_H
 
 
+// List of all possible resulting commands from the fsm
+#define 
+#define START_DOOR_TIMER 2
 
-
-#define SET_FLOOR_LIGHT 1
-#define START_TIMER 2
 typedef enum{
     STATE_IDLE,
     STATE_MOVING_UP,
@@ -15,11 +15,7 @@ typedef enum{
     STATE_ERROR
 } elevator_state_t;
 
-
-
 int update_state(elevator_state_t* current_state);
 
-
-
-static int state_transition_table[][];
+// static int state_transition_table[][];
 #endif
