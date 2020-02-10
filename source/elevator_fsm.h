@@ -48,13 +48,19 @@ typedef enum{
  * @brief Update the elevator state
  * 
  * @param[in][out]  p_elevator_state    A pointer to the elevator state, updates on transitions.
- * @param[in][out]  p_ref_time,         Not sure what this is
- * @param[in][out]  queue               
- * @param[in]       last_dir
- * @param[in]       last_floor
+ * @param[in][out]  p_door_timer        A pointer to the door_timer, used to control the door open/close sequence
+ * @param[in][out]  p_queue             A pointer to the elevator's queue                     
+ * @param[in]       last_dir            The last direction of the elevator
+ * @param[in]       last_floor          The last floor the elevator was at
+ * 
+ * @return One of the possible commands resulting from the current state.
+ * 
+ * This function updates the elevator's state machine, and yields a resulting
+ * function to be executed for any given state. It contains most of the logic flow
+ * used to control the elevator's movements, depending on the given inputs.
  */
 int update_state(elevator_state_t* p_elevator_state,
-                 time_t* p_ref_time,
+                 time_t* p_door_timer,
                  Order* p_queue,
                  HardwareMovement last_dir,
                  int last_floor);
