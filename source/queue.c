@@ -7,7 +7,7 @@ void update_queue(Order* p_queue) {
 
 void set_cab_orders(Order* p_current_order){
     //Funksjonen skal 
-    p_current_order->push_back(next_order);
+    
 }
 
 //Just invalidating the values of the order
