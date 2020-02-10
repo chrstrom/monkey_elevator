@@ -2,7 +2,6 @@
  * @file
  * @brief main linker point of elevator program
  */
-
 #include "timer.h"
 #include "queue.h"
 #include "elevator_fsm.h"
@@ -33,13 +32,14 @@ int main(){
     int order_up[MAX_FLOOR + 1];
     int order_down[MAX_FLOOR + 1];
 
-    int current_floor = -1; //invalid floor to set the elevator's intitial floor-value
-    HardwareMovement last_movement;
+    //int current_floor = -1; //invalid floor to set the elevator's intitial floor-value
+    //HardwareMovement last_movement;
     int door_open = DOOR_CLOSED;
     int next_action  = -1;
 
-    time_t* stop_button_timer;
-    time_t* door_timer;
+    time_t* stop_button_timer = (time_t*)time(NULL);
+    time_t* door_timer = (time_t*)time(NULL);
+    
     start_timer(stop_button_timer);
     start_timer(door_timer);
 
@@ -67,7 +67,7 @@ int main(){
         if(hardware_read_stop_signal()) {
             hardware_command_stop_light(LIGHT_ON);
             elevator_state = STATE_IDLE;
-            erase_queue();
+            erase_queue(queue);
             if(at_floor() != -1){
                 hardware_command_door_open(DOOR_OPEN);
                 door_open = DOOR_OPEN;
@@ -103,7 +103,7 @@ int main(){
         // transition and execute output in FSM?
 
         Order current_order = queue[0];
-        next_action = update_state(elevator_state);
+        next_action = update_state(&elevator_state, door_timer, current_order);
 
         switch(next_action) {
             case START_DOOR_TIMER:

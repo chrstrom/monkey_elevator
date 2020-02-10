@@ -30,7 +30,7 @@ typedef enum{
     //STATE_ERROR
 } elevator_state_t;
 
-int update_state(elevator_state_t* p_current_state, time_t* p_ref_time, Order* p_current_order);
+int update_state(elevator_state_t* p_current_state, time_t* p_ref_time, Order current_order);
 
 // static int state_transition_table[][];
 

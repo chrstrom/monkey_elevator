@@ -1,12 +1,12 @@
 #include "elevator_fsm.h"
 
-int update_state(elevator_state_t* p_current_state, time_t* p_ref_time, Order* p_current_order) {
-    int next_action; //ikke lenger nødvendig??
+int update_state(elevator_state_t* p_current_state, time_t* p_ref_time, Order current_order) {
+    int next_action = -1; //ikke lenger nødvendig??
     int current_floor = at_floor(); 
-    switch(*(p_current_state)) {
+    switch(*p_current_state) {
         case STATE_IDLE: {
-            if(p_current_order = NULL){
-                return;
+            if(current_order.dir == 0){
+                return 0;
             }
             //int time_diff = check_timer(p_ref_time); //Men må da vite om hva som var forrige timer!!
             //Burde ikke være et problem, siden vi kun skal endre den verdien inne i state_moving_up/down
@@ -52,7 +52,7 @@ int update_state(elevator_state_t* p_current_state, time_t* p_ref_time, Order* p
         */
         case STATE_MOVING_UP: {
             for(int fl = MIN_FLOOR; fl <= MAX_FLOOR; fl++){
-                if (current_floor == p_current_order->floor_to[fl]){
+                if (current_floor == current_order.floor_to[fl]){
                     p_current_state = STATE_IDLE;
                     start_timer(p_ref_time);
                     hardware_command_floor_indicator_on(fl);
@@ -66,7 +66,7 @@ int update_state(elevator_state_t* p_current_state, time_t* p_ref_time, Order* p
         }
         case STATE_MOVING_DOWN: {
             for(int fl = MIN_FLOOR; fl <= MAX_FLOOR; fl++){
-                if (current_floor == p_current_order->floor_to[fl]){ //må også sjekke at det er i riktig retning
+                if (current_floor == current_order.floor_to[fl]){ //må også sjekke at det er i riktig retning
                     p_current_state = STATE_IDLE;
                     start_timer(p_ref_time);
                     //må her legge til en mulighet/endring for å slette dette
@@ -101,3 +101,4 @@ int update_state(elevator_state_t* p_current_state, time_t* p_ref_time, Order* p
     }
 
     return next_action;
+}
