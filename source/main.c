@@ -38,9 +38,9 @@ int main(){
     int door_open = DOOR_CLOSED;
     int next_action  = -1;
 
-    time_t* stop_timer;
+    time_t* stop_button_timer;
     time_t* door_timer;
-    start_timer(stop_timer);
+    start_timer(stop_button_timer);
     start_timer(door_timer);
 
     elevator_state_t elevator_state = STATE_IDLE;
@@ -72,11 +72,11 @@ int main(){
                 hardware_command_door_open(DOOR_OPEN);
                 door_open = DOOR_OPEN;
             }
-            start_timer(stop_timer);
+            start_timer(stop_button_timer);
         }
         else{
             hardware_command_stop_light(LIGHT_OFF);
-            if(check_timer(stop_timer) && door_open == DOOR_OPEN){
+            if(check_timer(stop_button_timer) && door_open == DOOR_OPEN){
                 door_open = DOOR_CLOSED;
                 hardware_command_door_open(DOOR_CLOSED);
             }
