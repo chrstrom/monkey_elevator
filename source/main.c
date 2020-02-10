@@ -3,25 +3,16 @@
  * @brief main linker point of elevator program
  */
 
-#include "utility.h"
+#include "timer.h"
 #include "queue.h"
-#include <stdint.h>
-
-
-
-typedef enum{
-    STATE_IDLE,
-    STATE_MOVING_UP,
-    STATE_MOVING_DOWN,
-    STATE_PREP_MOVE,
-    STATE_SERVE_ORDER,
-    STATE_ERROR
-} elevator_state_t;
+#include "elevator_fsm.h"
 
 
 // Antar:
 
     // At cab-knappene kun kan trykkes inn med "Folk" i heisen
+
+
 
 int elevator_init() {
     hardware_command_door_open(0);
@@ -40,12 +31,12 @@ int main(){
 
     int current_floor = -1; //invalid floor to set the elevator's intitial floor-value
     int door_open = -1;
-
+    int next_action  = -1;
     time_t stop_timer = time(NULL);
     time_t door_timer = time(NULL);
 
     elevator_state_t elevator_state = STATE_IDLE;
-
+    
     int error = hardware_init();
     if(error != 0){
         fprintf(stderr, "Unable to initialize hardware\n");
@@ -85,67 +76,13 @@ int main(){
         // update next_action in each case
         // After finishing one order, set the elevator back to idle.
         Order current_order = queue[0];
-        switch(elevator_state) {
-            case STATE_IDLE: {
+        next_action = update_state(elevator_state);
+
+        switch(next_action) {
+            case START_TIMER:
+                start_timer(door_timer);
                 
-                // Transition into IDLE after every completed order
-                // Transition out immediatly if queue is not empty
-                // Remain in idle if queue is empty
-                break;
-            }
-            case STATE_PREP_MOVE: {
-                hardware_command_door_open(0);
-                if(current_floor < current_order.floor_at) {
-                    elevator_state = STATE_MOVING_UP;
-                }
-                else if(current_floor > current_order.floor_at) {
-                    elevator_state = STATE_MOVING_DOWN;
-                }
-                else if(current_floor == current_order.floor_at){
-                    elevator_state = STATE_SERVE_ORDER;
-                    start_timer(door_timer);
-                }
-                else {
-                    elevator_state = STATE_ERROR;
-                }
-
-                break;
-            }
-            case STATE_MOVING_UP: {
-                if(current_floor == current_order.floor_at) {
-                    elevator_state = STATE_SERVE_ORDER;
-                    start_timer(door_timer);
-                }
-                break;  
-            }
-            case STATE_MOVING_DOWN: {
-                if(current_floor == current_order.floor_at) {
-                    elevator_state = STATE_SERVE_ORDER;
-                    start_timer(door_timer);
-                }
-                break;  
-            }
-        
-            case STATE_SERVE_ORDER: {
-                // Upon arrival at the target floor
-                // Stop the elevator and open the doors
-                // Then, if 
-                hardware_command_movement(HARDWARE_MOVEMENT_STOP);
-                hardware_command_door_open(1);
-
-                set_cab_orders(&current_order); 
-
-                if(check_timer(door_timer, NORMAL_WAIT_TIME)) {
-                    elevator_state = STATE_PREP_MOVE;
-                     // We need to clear the cab orders for all orders,
-                    // corresponding to the floor we currently are at.
-                    // This is done when idle at each floor, right before moving
-                    clear_cab_orders(queue, current_floor);
-                }
-  
-                break;
-            }
-         
         }
+
     }
 }

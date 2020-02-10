@@ -28,4 +28,13 @@ void set_cab_orders(Order* current_order);
 void clear_cab_orders(Order* queue, int current_floor);
 
 
+void add_floor_orders(int* p_up, int* p_down) {
+
+}
+
+
+int at_floor() {
+    // returns the floor the elevator is at, or 0 if the elevator is between floors
+}
+
 #endif
