@@ -1,6 +1,5 @@
 #include "elevator_fsm.h"
 
-// If we add last_dir as a part of main, and pass it here, we can avoid the dir in Order!!
 int update_state(elevator_state_t* p_elevator_state, time_t* p_ref_time, Order* queue) {
 
     int current_floor = at_floor(); 
