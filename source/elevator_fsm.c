@@ -22,22 +22,14 @@ int update_state(elevator_state_t* p_elevator_state, time_t* p_ref_time, Order* 
             //         floor_at: We have transitioned into IDLE, but we are not at the target floor!
             // Case 4:
 
-
-            // Case 2
-            if(current_order.floor_at == current_floor) {
+            // Case 2 and 3 will execute the same exact sequence, we can therefor add them
+            // to the same check
+            // Case 2 & 3
+            if(current_order.floor_at == current_floor || ???) {
 
                 p_elevator_state = STATE_PREP_MOVE;
                 return OPEN_DOOR;
             } 
-
-            // Case 3 We open the doors and prepare to move
-            if(current_order.floor_at != current_floor && current_floor != -1) {
-            
-                p_elevator_state = STATE_PREP_MOVE;
-                return OPEN_DOOR;
-            }
-
-            // Handle 
 
             //int time_diff = check_timer(p_ref_time); //Men må da vite om hva som var forrige timer!!
             //Burde ikke være et problem, siden vi kun skal endre den verdien inne i state_moving_up/down
