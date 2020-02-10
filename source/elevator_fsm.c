@@ -1,6 +1,6 @@
 #include "elevator_fsm.h"
 
-int update_state(elevator_state_t* p_elevator_state, time_t* door_timer, Order* p_queue, HardwareMovement last_dir, int last_floor) {
+int update_state(elevator_state_t* p_elevator_state, time_t* p_door_timer, Order* p_queue, HardwareMovement last_dir, int last_floor, int door_open) {
 
     int current_floor = at_floor(); 
     Order current_order = p_queue[0];
@@ -39,8 +39,13 @@ int update_state(elevator_state_t* p_elevator_state, time_t* door_timer, Order* 
         }
 
         case STATE_PREP_MOVE: {
+            // We firstly need to check for the obstruction signal
+            if(hardware_read_obstruction_signal() && door_open == DOOR_OPEN) {
+                return START_DOOR_TIMER;
+            }
+  
             // If enough time has passed, close the doors and start moving
-            if(check_timer(door_timer)){ 
+            if(check_timer(p_door_timer)){ 
                 // Then determine which direction we should move in
                 if(current_floor < current_order.floor_at) {
                     p_elevator_state= STATE_MOVING_UP;

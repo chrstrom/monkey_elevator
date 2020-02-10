@@ -52,6 +52,7 @@ typedef enum{
  * @param[in][out]  p_queue             A pointer to the elevator's queue                     
  * @param[in]       last_dir            The last direction of the elevator
  * @param[in]       last_floor          The last floor the elevator was at
+ * @param[in]       door_open           An int representing whether or not the door is open
  * 
  * @return One of the possible commands resulting from the current state.
  * 
@@ -63,7 +64,8 @@ int update_state(elevator_state_t* p_elevator_state,
                  time_t* p_door_timer,
                  Order* p_queue,
                  HardwareMovement last_dir,
-                 int last_floor);
+                 int last_floor,
+                 int door_open);
 
 
 #endif
