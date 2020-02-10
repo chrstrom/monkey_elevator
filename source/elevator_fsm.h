@@ -6,13 +6,20 @@
 #define 
 #define START_DOOR_TIMER 2
 
+
+// In idle state:
+// If queue empty, do nothing
+// If queue[0].floor_at == current_floor
+    // """Handle the cab orders"""
+// If queue[0].floor_at > current_floor
+    // MOVE UP
+// If queue[0].floor_at < current_floor
+    // MOVE DOWN
+
 typedef enum{
     STATE_IDLE,
     STATE_MOVING_UP,
     STATE_MOVING_DOWN,
-    STATE_PREP_MOVE,
-    STATE_SERVE_ORDER,
-    STATE_ERROR
 } elevator_state_t;
 
 int update_state(elevator_state_t* current_state);
