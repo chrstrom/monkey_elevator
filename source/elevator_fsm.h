@@ -3,9 +3,8 @@
 
 
 // List of all possible resulting commands from the fsm
-#define 
-#define START_DOOR_TIMER 2
 
+#define START_DOOR_TIMER 2
 
 // In idle state:
 // If queue empty, do nothing
