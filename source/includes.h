@@ -29,6 +29,15 @@
 */
 #define NORMAL_WAIT_TIME 3
 
+/**
+ * Normal defines. Mostly true/false
+ */
+#define DOOR_CLOSED 0
+#define DOOR_OPEN 1
+
+#define LIGHT_OFF 0
+#define LIGHT_ON 1
+
 /** 
  * Enum of the different commands the elevator must handle. 
 */
