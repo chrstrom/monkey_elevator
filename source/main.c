@@ -6,13 +6,6 @@
 #include "queue.h"
 #include "elevator_fsm.h"
 
-
-// Antar:
-
-    // At cab-knappene kun kan trykkes inn med "Folk" i heisen
-
-
-
 int elevator_init() {
     hardware_command_door_open(0);
     
@@ -59,57 +52,72 @@ int main(){
 
 
     // ELEVATOR PROGRAM LOOP
-    // If we made new commands for set/get, we can set/get multiple connected things at once
-    // ex: elevator_open_doors() can both open/close the door, and also set the lamp
     while(1){
 
-        // Can potentially be part of update_state and next action
+        // The check for the stop button is done independently of the FSM, as it is the most important
+        // safety feature to be right
+        // Although if it can seamlessly be incoorporated in the FSM, that is to be preferred.
         if(hardware_read_stop_signal()) {
             hardware_command_stop_light(LIGHT_ON);
-            elevator_state = STATE_IDLE;
-            erase_queue(queue);
-            if(at_floor() != -1){
+            hardware_command_movement(HARDWARE_MOVEMENT_STOP);
+    
+            // If the elevator is at a floor, open the doors
+            if(at_floor() != -1) {
                 hardware_command_door_open(DOOR_OPEN);
                 door_open = DOOR_OPEN;
             }
+
+            erase_queue(queue);
             start_timer(stop_button_timer);
         }
-        else{
-            hardware_command_stop_light(LIGHT_OFF);
-            if(check_timer(stop_button_timer) && door_open == DOOR_OPEN){
-                door_open = DOOR_CLOSED;
-                hardware_command_door_open(DOOR_CLOSED);
-            }
+        else if(!check_timer(stop_button_timer)) {
+           // If the stop button has been released, but less than NORMAL_WAIT_TIME has passed
+
         }
+        else {
+ 
+            poll_floor_buttons(order_up, order_down);
+            set_floor_button_lights(order_up, order_down);
 
-        if(hardware_read_obstruction_signal() && door_open == DOOR_OPEN) {
-            start_timer(door_timer);
-        }
-        else if(!hardware_read_obstruction_signal() && door_open == DOOR_OPEN){
-            if(check_timer(door_timer)){
-                door_open = DOOR_CLOSED;
-                hardware_command_door_open(DOOR_CLOSED);
-                //skal nå transisere til neste state
-                //denne staten er da avhengig av køen av elementer
-            }
-        }
-    
-        poll_floor_buttons(order_up, order_down);
-        set_floor_button_lights(order_up, order_down);
+            next_action = update_state(&elevator_state, door_timer, queue, last_dir, last_floor, door_open);
 
-        // update next_action in each case
-        // After finishing one order, set the elevator back to idle.
-        // !! Do we use next_action to split output from transition in the FSM, or do we 
-        // transition and execute output in FSM?
+            switch(next_action) {
+                case DO_NOTHING:
+                    break;
 
-        next_action = update_state(&elevator_state, door_timer, queue, last_dir, last_floor);
+                // case CHECK_OBSTRUCTION:
+                //     break;
 
-        switch(next_action) {
-            case START_DOOR_TIMER:
-                start_timer(door_timer);
-                break;
+                case START_DOOR_TIMER:
+                    start_timer(door_timer);
+                    break;
+
+                case OPEN_DOOR:
+                    hardware_command_door_open(DOOR_OPEN);
+                    door_open = DOOR_OPEN;
+                    break;
+
+                case CLOSE_DOOR:
+                    hardware_command_door_open(DOOR_CLOSED);
+                    door_open = DOOR_CLOSED;
+                    break;
+
+                case MOVE_UP:
+                    hardware_command_movement(HARDWARE_MOVEMENT_UP);
+                    break;
                 
-        }
+                case MOVE_DOWN:
+                    hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
+                    break;
 
+                case STOP_MOVEMENT:
+                    hardware_command_movement(HARDWARE_MOVEMENT_STOP);
+                    break;
+                
+                default:
+                    fprintf(stderr, "Default case reached in switch in main. This should not happen\n");
+            }
+
+        }
     }
 }
