@@ -41,11 +41,8 @@ int hardware_init();
 
 /**
  * @brief Commands the elevator to either move up or down,
- * or commands it to halt.            case CMD_STOP:
-                //set stop_lights
-                //check if at a floor.
-                // if at a floor, open the bloody door
- *
+ * or commands it to halt. 
+ * 
  * @param movement Commanded movement.
  */
 void hardware_command_movement(HardwareMovement movement);
