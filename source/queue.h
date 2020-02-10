@@ -75,14 +75,6 @@ void add_floor_orders(int* p_up, int* p_down);
 // * invalidate
 // */
 // /*
-// /**
-// * @brief Add floors the elevator should visit. The function will differentiate
-// * between orders going up and orders going down. 
-// *
-// * @param[in] p_up Elevator queue up
-// *
-// * @param[in] p_down Elevator queue down
-// */
-// //void add_floor_orders(int* p_up, int* p_down);
+
 
 #endif
