@@ -16,7 +16,7 @@
 int elevator_init() {
     hardware_command_door_open(0);
     
-    if(!at_floor()) {
+    if(at_floor() != -1) {
         hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
     }
     
@@ -37,14 +37,14 @@ int main(){
     int door_open = DOOR_CLOSED;
     int next_action  = -1;
 
+    elevator_state_t elevator_state = STATE_IDLE;
     time_t* stop_button_timer = (time_t*)time(NULL);
     time_t* door_timer = (time_t*)time(NULL);
-    
+
     start_timer(stop_button_timer);
     start_timer(door_timer);
 
-    elevator_state_t elevator_state = STATE_IDLE;
-    
+
     int error = hardware_init();
     if(error != 0){
         fprintf(stderr, "Unable to initialize hardware\n");
@@ -63,7 +63,7 @@ int main(){
     // ex: elevator_open_doors() can both open/close the door, and also set the lamp
     while(1){
 
-        // Can be part of update_state and next action!!!
+        // Can potentially be part of update_state and next action
         if(hardware_read_stop_signal()) {
             hardware_command_stop_light(LIGHT_ON);
             elevator_state = STATE_IDLE;
@@ -102,8 +102,7 @@ int main(){
         // !! Do we use next_action to split output from transition in the FSM, or do we 
         // transition and execute output in FSM?
 
-        Order current_order = queue[0];
-        next_action = update_state(&elevator_state, door_timer, current_order);
+        next_action = update_state(&elevator_state, door_timer, queue);
 
         switch(next_action) {
             case START_DOOR_TIMER:

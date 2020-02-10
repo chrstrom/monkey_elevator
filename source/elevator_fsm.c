@@ -1,25 +1,56 @@
 #include "elevator_fsm.h"
 
-int update_state(elevator_state_t* p_current_state, time_t* p_ref_time, Order current_order) {
-    int next_action = -1; //ikke lenger nødvendig??
+int update_state(elevator_state_t* p_elevator_state, time_t* p_ref_time, Order* queue) {
+
     int current_floor = at_floor(); 
-    switch(*p_current_state) {
+    Order current_order = queue[0];
+
+    switch(*p_elevator_state) {
         case STATE_IDLE: {
-            if(current_order.dir == 0){
-                return 0;
+          
+            if(queue_is_empty(queue)) {
+                return DO_NOTHING;
             }
+        
+            // If the queue is not empty, we will transition to IDLE with one of four cases:
+            // Case 1: Stop button was pressed
+                // Because the queue is emptied when the stop button is pressed, this
+                // case will be caught by the first check
+
+            // Case 2: We arrive at the given floor_at for the current order
+            // Case 3: We stop to pick up an order thats been set in the same direction on the way to
+            //         floor_at: We have transitioned into IDLE, but we are not at the target floor!
+            // Case 4:
+
+
+            // Case 2
+            if(current_order.floor_at == current_floor) {
+
+                p_elevator_state = STATE_PREP_MOVE;
+                return OPEN_DOOR;
+            } 
+
+            // Case 3 We open the doors and prepare to move
+            if(current_order.floor_at != current_floor && current_floor != -1) {
+            
+                p_elevator_state = STATE_PREP_MOVE;
+                return OPEN_DOOR;
+            }
+
+            // Handle 
+
             //int time_diff = check_timer(p_ref_time); //Men må da vite om hva som var forrige timer!!
             //Burde ikke være et problem, siden vi kun skal endre den verdien inne i state_moving_up/down
             //Pekeren burde altså ha rett verdi
             if(check_timer(p_ref_time)){
-                hardware_command_door_open(DOOR_CLOSED);
+                next_action = CLOSE_DOOR;
                 //skal her lukke dør
             }
             else{
                 //enda ikke gått x antall sekunder
-                hardware_command_door_open(DOOR_OPEN);
+                next_action = OPEN_DOOR;
             }
-
+ 
             // Transition into IDLE after every completed order
             // Transition out immediatly if queue is not empty
             // Remain in idle if queue is empty
@@ -29,52 +60,69 @@ int update_state(elevator_state_t* p_current_state, time_t* p_ref_time, Order cu
 
             break;
         }
-        /*
-        case STATE_PREP_MOVE: {
-            hardware_command_door_open(0);
-            if(current_floor < current_order.floor_at) {
-                elevator_state = STATE_MOVING_UP;
+
+        // Need to add a way to check for last floor that was served
+        case STATE_MOVING_UP: {
+            for(int floor = last_floor; floor <= MAX_FLOOR; floor++){
+                if (current_floor == current_order.floor_to[floor]){
+
+                    p_elevator_state = STATE_IDLE;
+                    return START_DOOR_TIMER;
+            
+                    //må her legge til en mulighet/endring for å slette dette
+                    //elementet i køen
+                }
             }
-            else if(current_floor > current_order.floor_at) {
-                elevator_state = STATE_MOVING_DOWN;
-            }
-            else if(current_floor == current_order.floor_at){
-                elevator_state = STATE_SERVE_ORDER;
-                //start_timer(door_timer);
-                next_action = START_DOOR_TIMER;
-            }
-            else {
-                elevator_state = STATE_ERROR;
+            return MOVE_UP;
+        }
+
+
+        case STATE_MOVING_DOWN: {
+            for(int floor = last_floor; floor > MIN_FLOOR; floor--) {
+                if (current_floor == current_order.floor_to[floor]) { //må også sjekke at det er i riktig retning
+
+                    p_elevator_state = STATE_IDLE;
+                    return START_DOOR_TIMER;
+                    //må her legge til en mulighet/endring for å slette dette
+                    //elementet i køen
+                }
+                
             }
 
+            return MOVE_DOWN;
+        }
+
+
+   
+        case STATE_PREP_MOVE: {
+            // If enough time has passed, close the doors and start moving
+            if(check_timer(door_timer)){ 
+                if(current_floor < current_order.floor_at) {
+                    p_elevator_state= STATE_MOVING_UP;
+                    return CLOSE_DOOR;
+                }
+                else if(current_floor > current_order.floor_at) {
+                    p_elevator_state = STATE_MOVING_DOWN;
+                    return CLOSE_DOOR;
+                }
+                else if(current_floor == current_order.floor_at){
+                    // We need to update floor_at for the current order
+                    // with one of the cab buttons pressed
+                    update_floor_at();
+                    p_elevator_state = STATE_PREP_MOVE;
+                    return START_DOOR_TIMER;
+                }
+            }
+            else {
+                // Not enough time has passed: Doors remain open and we do nothing
+                p_elevator_state = STATE_PREP_MOVE;
+                return DO_NOTHING;
+            }
             break;
         }
-        */
-        case STATE_MOVING_UP: {
-            for(int fl = MIN_FLOOR; fl <= MAX_FLOOR; fl++){
-                if (current_floor == current_order.floor_to[fl]){
-                    p_current_state = STATE_IDLE;
-                    start_timer(p_ref_time);
-                    hardware_command_floor_indicator_on(fl);
-                    
-                    break;
-                    //må her legge til en mulighet/endring for å slette dette
-                    //elementet i køen
-                }
-            }
-            break;  
-        }
-        case STATE_MOVING_DOWN: {
-            for(int fl = MIN_FLOOR; fl <= MAX_FLOOR; fl++){
-                if (current_floor == current_order.floor_to[fl]){ //må også sjekke at det er i riktig retning
-                    p_current_state = STATE_IDLE;
-                    start_timer(p_ref_time);
-                    //må her legge til en mulighet/endring for å slette dette
-                    //elementet i køen
-                }
-                break;
-            }
-        }
+        
+
+
         /*
         case STATE_SERVE_ORDER: {
             // Upon arrival at the target floor
@@ -100,5 +148,5 @@ int update_state(elevator_state_t* p_current_state, time_t* p_ref_time, Order cu
         
     }
 
-    return next_action;
+    return DO_NOTHING;
 }

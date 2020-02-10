@@ -12,9 +12,14 @@
 /**
  * List of all possible resulting commands from the fsm
  */
-#define CHECK_STOP 0
+#define DO_NOTHING 0
 #define CHECK_OBSTRUCTION 1
 #define START_DOOR_TIMER 2
+#define OPEN_DOOR 3
+#define CLOSE_DOOR 4
+#define MOVE_UP 5
+#define MOVE_DOWN 6
+#define STOP_MOVEMENT 7
 
 #include "includes.h"
 #include "queue.h"
@@ -24,14 +29,15 @@
 typedef enum{
     STATE_IDLE,
     STATE_MOVING_UP,
-    STATE_MOVING_DOWN
-    //STATE_PREP_MOVE,
+    STATE_MOVING_DOWN,
+    STATE_PREP_MOVE,
     //STATE_SERVE_ORDER,
     //STATE_ERROR
 } elevator_state_t;
 
-int update_state(elevator_state_t* p_current_state, time_t* p_ref_time, Order current_order);
 
-// static int state_transition_table[][];
+
+int update_state(elevator_state_t* p_elevator_state, time_t* p_ref_time, Order* queue);
+
 
 #endif
