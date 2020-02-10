@@ -1,6 +1,6 @@
 /**
 * @file
-* @brief IO library for elevator, spanning set/get -functions for buttons and lights
+* @brief IO library for elevator, spanning set/get-functions for buttons and lights
 */
 
 #ifndef ELEVATOR_IO_H
@@ -13,8 +13,11 @@
 /**
  * @brief Find what floor the elevator is at
  * 
- * @return 0 if the elevator is between floors, and an int corresponding to the current floor
+ * @return -1 if the elevator is between floors, and an int corresponding to the current floor
  * if the elevator is at a floor
+ * 
+ * @warning Because the elevator hardware's floors are indexed at 0, a non-truthy value (0) will
+ * be returned when the elevator is at the first floor
  */
 int at_floor();
 
@@ -33,14 +36,17 @@ int at_floor();
  */
 void poll_floor_buttons(Order* queue, int* p_order_up, int* p_order_down);
 
+
 /**
  * @brief Set the floor button lights 
  * 
  * @param[in] p_order_up       A pointer to an array containing the states of the up-buttons
  * @param[in] p_order_down     A pointer to an array containing the states of the down-buttons
  * 
+ * Set the lights on/off for each floor button, in accordance to the values 1/0 in @p p_order_up and @p p_order_down
  */
 void set_floor_button_lights(int* p_order_up, int* p_order_down);
+
 
 /**
  * @brief Set the cab button requests for an @c Order

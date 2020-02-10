@@ -7,7 +7,7 @@ int at_floor() {
        }
     }
 
-    return 0;
+    return -1;
 }
 
 // By passing p_order up/down, we make sure to not add a new order for floors that already
@@ -38,10 +38,26 @@ void poll_floor_buttons(Order* queue, int* p_order_up, int* p_order_down) {
 
     if(order_floor != 0){ 
         Order order = {.floor_at = order_floor};
-        queue->push_back(order);
+        queue_push_back(queue, order);
     }
 
 }
+
+void set_floor_button_lights(int* p_order_up, int* p_order_down) {
+    // The last floor does not have an up-button: Start at 0.
+    for(int floor_up = 0; floor_up < MAX_FLOOR; floor_up++) {
+        int on = (p_order_up[floor_up] ? 1 : 0);
+        hardware_command_order_light(floor_up, HARDWARE_ORDER_UP, on);
+    }
+
+    // The first floor does not have a down-button: Start at 1.
+    for(int floor_down = 1; floor_down <= MAX_FLOOR; floor_down++) {
+        int on = (p_order_down[floor_down] ? 1 : 0);
+        hardware_command_order_light(floor_down, HARDWARE_ORDER_UP, on);
+    }
+}
+
+
 
 //May want to change the in-argument to queue
 void update_cab_buttons(Order* p_current_order) {
@@ -49,3 +65,5 @@ void update_cab_buttons(Order* p_current_order) {
         p_current_order->floor_to[cab_button] = hardware_read_order(cab_button, HARDWARE_ORDER_INSIDE);
     }
 }
+
+
