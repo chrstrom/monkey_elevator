@@ -23,25 +23,27 @@ int update_state(elevator_state_t* p_elevator_state, time_t* p_ref_time, Order* 
             // Case 4:
 
             // Case 2 and 3 will execute the same exact sequence, we can therefor add them
-            // to the same check
+            // to the same check. 
+            // check_order_match() will return a truth value if the queue contains an order whos floor_at is equal
+            // to the current floor AND is an order in the same direction as last_dir
             // Case 2 & 3
-            if(current_order.floor_at == current_floor || ???) {
-
+            if(current_order.floor_at == current_floor || check_order_match(queue, current_floor, last_dir) {
                 p_elevator_state = STATE_PREP_MOVE;
                 return OPEN_DOOR;
             } 
 
+            // Because of prep_move we dont need to mess with timers here
             //int time_diff = check_timer(p_ref_time); //Men må da vite om hva som var forrige timer!!
             //Burde ikke være et problem, siden vi kun skal endre den verdien inne i state_moving_up/down
             //Pekeren burde altså ha rett verdi
-            if(check_timer(p_ref_time)){
-                next_action = CLOSE_DOOR;
-                //skal her lukke dør
-            }
-            else{
-                //enda ikke gått x antall sekunder
-                next_action = OPEN_DOOR;
-            }
+            // if(check_timer(p_ref_time)){
+            //     next_action = CLOSE_DOOR;
+            //     //skal her lukke dør
+            // }
+            // else{
+            //     //enda ikke gått x antall sekunder
+            //     next_action = OPEN_DOOR;
+            // }
  
             // Transition into IDLE after every completed order
             // Transition out immediatly if queue is not empty
