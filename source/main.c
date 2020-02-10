@@ -30,9 +30,13 @@ int main(){
     // ELEVATOR INITIAL SETUP
     Order queue[QUEUE_SIZE];
 
+    int order_up[MAX_FLOOR + 1];
+    int order_down[MAX_FLOOR + 1];
+
     int current_floor = -1; //invalid floor to set the elevator's intitial floor-value
     int door_open = -1;
     int next_action  = -1;
+
     time_t stop_timer = time(NULL);
     time_t door_timer = time(NULL);
 
@@ -61,7 +65,7 @@ int main(){
         if(hardware_read_stop_signal()) {
             elevator_state = STATE_IDLE;
             erase_queue();
-            if(at_floor()){
+            if(at_floor() != -1){
                 hardware_command_door_open(1);
             }
             start_timer(stop_timer);
@@ -75,10 +79,13 @@ int main(){
     
         poll_floor_buttons();
     
-        update_floor_lights(current_floor);
+        set_floor_button_lights(order_up, order_down);
 
         // update next_action in each case
         // After finishing one order, set the elevator back to idle.
+        // !! Do we use next_action to split output from transition in the FSM, or do we 
+        // transition and execute output in FSM?
+
         Order current_order = queue[0];
         next_action = update_state(elevator_state);
 
