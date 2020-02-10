@@ -72,10 +72,7 @@ int hardware_read_floor_sensor(int floor);
 
 /**
  * @brief Polls the hardware for the status of orders from
- * floor @p floor of type @p order_type.            case CMD_STOP:
-                //set stop_lights
-                //check if at a floor.
-                // if at a floor, open the bloody door
+ * floor @p floor of type @p order_type. 
  *
  * @param floor Inquired floor.
  * @param order_type

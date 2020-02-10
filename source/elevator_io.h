@@ -25,16 +25,17 @@ int at_floor();
 /**
  * @brief Poll all floor buttons
  * 
- * @param[out] queue                A pointer to the queue, to which an @c Order object will be added if a
- * floor button is pressed
  * @param[in][out] p_order_up       A pointer to an array containing the states of the up-buttons
  * @param[in][out] p_order_down     A pointer to an array containing the states of the down-buttons
+ * 
+ * @warning This function operates on the assumption that @p p_order_up and @p p_order_down are 
+ * set with 0's and 1's, respectively for "button not clicked" and "button clicked"
  * 
  * The function checks every external elevator button, from the first floor to the last floor.
  * Upon finding a button that is clicked, that has not already been clicked ( by checking the @p p_order_up, @p p_order_down arrays ), a new @c Order
  * is added to the @p queue .
  */
-void poll_floor_buttons(Order* queue, int* p_order_up, int* p_order_down);
+void poll_floor_buttons(int* p_order_up, int* p_order_down);
 
 
 /**

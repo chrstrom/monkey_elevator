@@ -94,8 +94,7 @@ int main(){
             }
         }
     
-        poll_floor_buttons();
-    
+        poll_floor_buttons(order_up, order_down);
         set_floor_button_lights(order_up, order_down);
 
         // update next_action in each case
