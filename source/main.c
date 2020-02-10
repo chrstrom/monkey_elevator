@@ -26,6 +26,7 @@ int main(){
     int cab_orders[5] = {0, 0, 0, 0};       // Holder gjeldende cab ordre, i rekkefølgen knappene ble trykt inn. Oppdateres med add_cab_orders() i queue
 
     int current_floor = -1; //invalid floor to set the elevator's intitial floor-value
+    int last_floor = -1;
     int door_open;
 
     task_t current_task = {0, 0, CMD_NO_ACTION};

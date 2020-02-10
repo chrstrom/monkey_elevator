@@ -7,13 +7,34 @@
 #ifndef UTILITY_H
 #define UTILITY_H
 
+#include "includes.h"
+
 /**
 * @brief Find and return the current floor of the elevator
 *
 * @param [out] The current floor the elevator is at. If the elevator is
-* between floors, or out of range, the function will return 0.
+* between floors, or out of range, the function will return -1.
 */
 int at_floor();
+
+/**
+* @brief Reset the order's to a pointer containing only 
+* invalid orders. In this case, we use -1 to symbolize
+* invalid floors/orders.
+*
+* @param[in] p_order The pointer we would like to reset/
+* invalidate
+*/
+void reset_orders(int* p_order);
+
+/**
+* @brief Reset the order's to a pointer containing only 
+* invalid orders. In this case, we use -1 to symbolize
+* invalid floors/orders.
+*
+* @param[in] p_order The pointer we would like to reset/
+* invalidate
+*/
 
 /**
 * @brief Add floors the elevator should visit. The function will differentiate
