@@ -10,7 +10,14 @@
 #include <time.h>
 #include "driver/hardware.h"
 
+/**
+ * The top floor that the elevator runs to. Note that this is 0-indexed 
+ */
 #define MAX_FLOOR 3
+
+/**
+ * The bottom floor that the elevator runs to. Note that this is 0-indexed 
+ */
 #define MIN_FLOOR 0
 
 /** 
@@ -31,12 +38,22 @@
 #define NORMAL_WAIT_TIME 3
 
 /**
- * Normal defines. Mostly true/false
+ * Macro for closed door
  */
 #define DOOR_CLOSED 0
+
+/**
+ * Macro for open door
+ */
 #define DOOR_OPEN 1
 
+/**
+ * Macro for light off 
+ */
 #define LIGHT_OFF 0
+/**
+ * Macro for light on
+ */
 #define LIGHT_ON 1
 
 
