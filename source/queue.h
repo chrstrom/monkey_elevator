@@ -10,7 +10,7 @@
 typedef struct{
     int floor_at;               // Floor at which the floor button was pressed
     int floor_to[MAX_FLOOR];    // The cab orders
-    int dir;
+    int dir;                    // Direction of the order, needed to check for intermediary stops
 } Order;
 
 /**
