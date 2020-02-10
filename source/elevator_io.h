@@ -15,12 +15,10 @@
 /**
  * @brief Find what floor the elevator is at
  * 
- * @return 0 if the elevator is between floors, and an int corresponding to the current floor
+ * @return -1 if the elevator is between floors, and an int corresponding to the current floor
  * if the elevator is at a floor
  */
-int at_floor() {
-
-}
+int at_floor();
 
 
 /**

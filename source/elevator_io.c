@@ -22,3 +22,12 @@ void set_stop_light(int stop_light) {
 void set_door_open_light(int door_open){
     
 }
+
+int at_floor(){
+    for (int fl = MIN_FLOOR; fl <= MAX_FLOOR; fl++){
+        if (hardware_read_floor_sensor(fl)){
+            return fl;
+        }
+    }
+    return -1;
+}
