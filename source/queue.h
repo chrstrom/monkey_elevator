@@ -28,15 +28,13 @@ void update_queue(Order* p_queue);
 void set_cab_orders(Order* p_current_order);
 
 /**
- * @brief Clear a given @c Order of a cab order  a given floor
+ * @brief Clear a given @c Order of a cab order at a given floor
  * 
 */
 void clear_cab_orders(Order* p_current_order, int current_floor);
 
 
-void add_floor_orders(int* p_up, int* p_down) {
-
-}
+void add_floor_orders(int* p_up, int* p_down);
 
 
 /* ALT DETTE KAN LIGGE I UTILITIES OG I QUEUE

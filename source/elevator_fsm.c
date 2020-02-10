@@ -1,7 +1,7 @@
 
 #include "elevator_fsm.h"
 
-elevator_state_t update_state(elevator_state_t* elevator_state) {
+int update_state(elevator_state_t* elevator_state) {
     int next_action;
     switch(elevator_state) {
         case STATE_IDLE: {
