@@ -19,12 +19,16 @@
 #define QUEUE_SIZE 512
 
 /** 
+<<<<<<< HEAD
  * Size of the orders. One to spare for each floor
 */
 #define ORDER_SIZE 5
 
 /** 
  * Normal wait-time for the elevator.
+=======
+ * Normal wait-time, in seconds, for the elevator.
+>>>>>>> d6b77122ce569f13278cf68362a36b0f7f934212
  * Will be used everytime after obstruction and stop 
 */
 #define NORMAL_WAIT_TIME 3
