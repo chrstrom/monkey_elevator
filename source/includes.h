@@ -10,13 +10,14 @@
 #include <time.h>
 #include "driver/hardware.h"
 
-#define MAX_FLOOR 4
-#define MIN_FLOOR 1
+#define MAX_FLOOR 3
+#define MIN_FLOOR 0
 
 /** 
- * Size of the queue. 512 elements to better suit the CPU
+ * Size of the queue. The max amount of concurrent elements in the queue will be at most 2 * ( MAX_FLOOR + 1 )  - 2
+ * In this case it will be 6, but we set it to 8 because its a power of 2 (nice) :)
 */
-#define QUEUE_SIZE 512
+#define QUEUE_SIZE 8
 
 /** 
  * Normal wait-time, in seconds, for the elevator.
