@@ -2,7 +2,6 @@
 * @file
 * @brief IO library for elevator, spanning set/get-functions for buttons and lights
 */
-
 #ifndef ELEVATOR_IO_H
 #define ELEVATOR_IO_H
 
@@ -54,9 +53,10 @@ void set_floor_button_lights(int* p_order_up, int* p_order_down);
  * 
  * @param[out] p_queue  A pointer to the queue
  * 
- * @warning This function also handles all the lights for the cab buttons.
+ * @warning If the first element of the queue is not passed to this function, we might
+ * encounter problems. This function also handles all the lights for the cab buttons.
  * 
- * The function updates 
+ * The function updates the cab orders for the current Order 
  */
 void update_cab_buttons(Order* p_queue);
 

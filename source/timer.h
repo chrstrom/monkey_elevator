@@ -1,9 +1,7 @@
 /**
 * @file
-* @brief Timer-functions. Mostly about getting and adding the current
-* floor and orders for the elevator
+* @brief Library for the elevator's timer.
 */
-
 #ifndef TIMER_H
 #define TIMER_H
 
@@ -15,6 +13,7 @@
  * @param[in/out] t_timer The time of initializing
 */
 void start_timer(time_t* p_timer);
+
 
 /**
  * @brief Return true when a spesific time has passed

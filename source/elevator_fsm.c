@@ -1,14 +1,14 @@
 #include "elevator_fsm.h"
 
-int update_state(elevator_state_t* p_elevator_state, time_t* p_ref_time, Order* queue) {
+int update_state(elevator_state_t* p_elevator_state, time_t* p_ref_time, Order* p_queue, HardwareMovement last_dir, int last_floor) {
 
     int current_floor = at_floor(); 
-    Order current_order = queue[0];
-
+    Order current_order = p_queue[0];
+    int last_dir;
     switch(*p_elevator_state) {
         case STATE_IDLE: {
           
-            if(queue_is_empty(queue)) {
+            if(queue_is_empty(p_queue)) {
                 return DO_NOTHING;
             }
         
@@ -27,7 +27,7 @@ int update_state(elevator_state_t* p_elevator_state, time_t* p_ref_time, Order* 
             // check_order_match() will return a truth value if the queue contains an order whos floor_at is equal
             // to the current floor AND is an order in the same direction as last_dir
             // Case 2 & 3
-            if(current_order.floor_at == current_floor || check_order_match(queue, current_floor, last_dir) {
+            if(current_order.floor_at == current_floor || check_order_match(p_queue, current_floor, last_dir)) {
                 p_elevator_state = STATE_PREP_MOVE;
                 return OPEN_DOOR;
             } 
@@ -58,7 +58,7 @@ int update_state(elevator_state_t* p_elevator_state, time_t* p_ref_time, Order* 
         // Need to add a way to check for last floor that was served
         case STATE_MOVING_UP: {
             for(int floor = last_floor; floor <= MAX_FLOOR; floor++){
-                if (current_floor == current_order.floor_to[floor]){
+                if (current_floor == current_order.floor_to[floor] && check_order_match(p_queue, current_floor, last_dir)){
 
                     p_elevator_state = STATE_IDLE;
                     return START_DOOR_TIMER;
@@ -73,7 +73,7 @@ int update_state(elevator_state_t* p_elevator_state, time_t* p_ref_time, Order* 
 
         case STATE_MOVING_DOWN: {
             for(int floor = last_floor; floor > MIN_FLOOR; floor--) {
-                if (current_floor == current_order.floor_to[floor]) { //må også sjekke at det er i riktig retning
+                if (current_floor == current_order.floor_to[floor] && check_order_match(p_queue, current_floor, last_dir)) {
 
                     p_elevator_state = STATE_IDLE;
                     return START_DOOR_TIMER;
@@ -90,7 +90,7 @@ int update_state(elevator_state_t* p_elevator_state, time_t* p_ref_time, Order* 
    
         case STATE_PREP_MOVE: {
             // If enough time has passed, close the doors and start moving
-            if(check_timer(door_timer)){ 
+            if(check_timer(p_ref_time)){ 
                 if(current_floor < current_order.floor_at) {
                     p_elevator_state= STATE_MOVING_UP;
                     return CLOSE_DOOR;
@@ -108,7 +108,7 @@ int update_state(elevator_state_t* p_elevator_state, time_t* p_ref_time, Order* 
                 }
             }
             else {
-                // Not enough time has passed: Doors remain open and we do nothing
+                // Not enough time has passed => Doors remain open and we do nothing
                 p_elevator_state = STATE_PREP_MOVE;
                 return DO_NOTHING;
             }

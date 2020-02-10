@@ -1,17 +1,22 @@
 /**
-* @file
-* @brief Updating the elevator's queue. 
+ * @file
+ * @brief Library for managing the elevator's queue system
 */
 #ifndef QUEUE_H
 #define QUEUE_H
 
 #include "includes.h"
 
+/**
+ * @struct Order
+ * 
+ * @brief  A struct for holding information about an order
+ */
 typedef struct{
-    int floor_at;               // Floor at which the floor button was pressed
-    int floor_to[MAX_FLOOR];    // The cab orders
-    int dir;                    // Direction of the order, needed to check for intermediary stops
+    int floor_at;               /**< The floor at which the order comes from */
+    int floor_to[MAX_FLOOR];    /**< an array of truthy values representing cab buttons pressed */
 } Order;
+
 
 /**
  * @brief Update a queue by removing the first element.
@@ -19,7 +24,6 @@ typedef struct{
  * @param[in] p_queue Pointer to the queue.
  */
 void update_queue(Order* p_queue);
-
 
 
 /**
@@ -45,12 +49,26 @@ void set_cab_orders(Order* p_current_order);
  * @param[in]  floor    The floor to be used for clearing the cab orders in the 
  * 
  * Any given order can have MAX_FLOOR amount of cab orders. Upon arrival at a floor,
- * all cab orders for the queue shall be considered handled; thereby clearing the order.
+ * all cab orders corresponding to this floor shall be marked as handled. 
  */
 void clear_cab_orders(Order* p_queue, int floor);
 
 
-void add_floor_orders(int* p_up, int* p_down);
+/**
+ * @brief Check if the queue has a valid order to handle  
+ * 
+ * @param[in] queue             The queue which is checked for valid orders
+ * @param[in] current_floor     The floor of which we check for valid orders
+ * @param[in] last_dir          The last direction of the elevator, for validity check
+ * 
+ * @return 1 if any @c Order in @p queue has a valid order, and 0 if no @c Order
+ * is valid for the @p current_floor .
+ * 
+ * The function checks if any @c Order in the @p queue has an order set for the @p current_floor .
+ * @p last_dir is used to check whether or not we should stop for it.
+ */
+int check_order_match(Order* queue, int current_floor, HardwareMovement last_dir);
+
 
 
 // /* ALT DETTE KAN LIGGE I UTILITIES OG I QUEUE

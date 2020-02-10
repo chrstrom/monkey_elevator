@@ -32,8 +32,8 @@ int main(){
     int order_up[MAX_FLOOR + 1];
     int order_down[MAX_FLOOR + 1];
 
-    //int current_floor = -1; //invalid floor to set the elevator's intitial floor-value
-    //HardwareMovement last_movement;
+    int last_floor = -1; //invalid floor to set the elevator's intitial floor-value
+    HardwareMovement last_dir = HARDWARE_MOVEMENT_STOP;
     int door_open = DOOR_CLOSED;
     int next_action  = -1;
 
@@ -102,7 +102,7 @@ int main(){
         // !! Do we use next_action to split output from transition in the FSM, or do we 
         // transition and execute output in FSM?
 
-        next_action = update_state(&elevator_state, door_timer, queue);
+        next_action = update_state(&elevator_state, door_timer, queue, last_dir, last_floor);
 
         switch(next_action) {
             case START_DOOR_TIMER:
