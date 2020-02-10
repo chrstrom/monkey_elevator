@@ -55,6 +55,18 @@ void clear_cab_orders(Order* p_queue, int floor);
 
 
 /**
+ * @brief Update the @c floor_at value for a the current order 
+ * 
+ * @param[out] p_current_order  A pointer to the current order we are updating
+ * @param[in]  floor            The floor we wish to update the order's @c floor_at value to.
+ * 
+ * This function "handles" part of an @c Order by changing the @c floor_at value of the current
+ * order we are dealing with, to one of the floors in @c floor_to. If this value is set to -1,
+ * the entire order is considered fully handled.
+ */
+void update_queue_floor_at(Order* p_current_order, int floor);
+
+/**
  * @brief Check if the queue has a valid order to handle  
  * 
  * @param[in] queue             The queue which is checked for valid orders
@@ -83,6 +95,5 @@ int check_order_match(Order* queue, int current_floor, HardwareMovement last_dir
 // * invalidate
 // */
 // //void reset_orders(int* p_order);
-
 
 #endif
