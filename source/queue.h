@@ -85,12 +85,4 @@ void add_floor_orders(int* p_up, int* p_down);
 // */
 // //void add_floor_orders(int* p_up, int* p_down);
 
-// /*
-// /**
-// * @brief Add the floor orders to the cab.
-// *
-// * @param[in] p_cab Floor-orders for the cab
-// */
-// //void add_cab_orders(int* p_cab);
-
 #endif
