@@ -34,7 +34,7 @@ int main(){
     int order_down[MAX_FLOOR + 1];
 
     int current_floor = -1; //invalid floor to set the elevator's intitial floor-value
-    
+    HardwareMovement last_movement;
     int door_open = DOOR_CLOSED;
     int next_action  = -1;
 
