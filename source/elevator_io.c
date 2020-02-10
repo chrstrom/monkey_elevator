@@ -10,8 +10,9 @@ int at_floor() {
     return 0;
 }
 
-// Naive approach; iterate through the floors, and set order_floor accordingly
-// Does not account for buttons already pressed
+// By passing p_order up/down, we make sure to not add a new order for floors that already
+// have orders to them. Note that these arrays are only updated by external buttons.
+// The internal cab-buttons will have no impact on this.
 void poll_floor_buttons(Order* queue, int* p_order_up, int* p_order_down) {
     
     int order_floor = 0;
