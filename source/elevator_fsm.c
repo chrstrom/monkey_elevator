@@ -1,16 +1,35 @@
-
 #include "elevator_fsm.h"
 
-elevator_state_t update_state(elevator_state_t* elevator_state) {
-    int next_action;
-    switch(elevator_state) {
+int update_state(elevator_state_t* p_current_state, time_t* p_ref_time, Order* p_current_order) {
+    int next_action; //ikke lenger nødvendig??
+    int current_floor = at_floor(); 
+    switch(*(p_current_state)) {
         case STATE_IDLE: {
-            
+            if(p_current_order = NULL){
+                return;
+            }
+            //int time_diff = check_timer(p_ref_time); //Men må da vite om hva som var forrige timer!!
+            //Burde ikke være et problem, siden vi kun skal endre den verdien inne i state_moving_up/down
+            //Pekeren burde altså ha rett verdi
+            if(check_timer(p_ref_time)){
+                hardware_command_door_open(DOOR_CLOSED);
+                //skal her lukke dør
+            }
+            else{
+                //enda ikke gått x antall sekunder
+                hardware_command_door_open(DOOR_OPEN);
+            }
+
             // Transition into IDLE after every completed order
             // Transition out immediatly if queue is not empty
             // Remain in idle if queue is empty
+
+            //må sjekke om rekkefølgen i order. Her skal vi da ta for oss plutselig endring
+            //slik at man sikrer at rekkefølgen håndteres av programmet
+
             break;
         }
+        /*
         case STATE_PREP_MOVE: {
             hardware_command_door_open(0);
             if(current_floor < current_order.floor_at) {
@@ -30,22 +49,33 @@ elevator_state_t update_state(elevator_state_t* elevator_state) {
 
             break;
         }
+        */
         case STATE_MOVING_UP: {
-            if(current_floor == current_order.floor_at) {
-                elevator_state = STATE_SERVE_ORDER;
-                //start_timer(door_timer);    //return action, can use function pointer to return
-                next_action = START_DOOR_TIMER;
+            for(int fl = MIN_FLOOR; fl <= MAX_FLOOR; fl++){
+                if (current_floor == p_current_order->floor_to[fl]){
+                    p_current_state = STATE_IDLE;
+                    start_timer(p_ref_time);
+                    hardware_command_floor_indicator_on(fl);
+                    
+                    break;
+                    //må her legge til en mulighet/endring for å slette dette
+                    //elementet i køen
+                }
             }
             break;  
         }
         case STATE_MOVING_DOWN: {
-            if(current_floor == current_order.floor_at) {
-                elevator_state = STATE_SERVE_ORDER;
-                start_timer(door_timer);
+            for(int fl = MIN_FLOOR; fl <= MAX_FLOOR; fl++){
+                if (current_floor == p_current_order->floor_to[fl]){ //må også sjekke at det er i riktig retning
+                    p_current_state = STATE_IDLE;
+                    start_timer(p_ref_time);
+                    //må her legge til en mulighet/endring for å slette dette
+                    //elementet i køen
+                }
+                break;
             }
-            break;  
         }
-    
+        /*
         case STATE_SERVE_ORDER: {
             // Upon arrival at the target floor
             // Stop the elevator and open the doors
@@ -66,6 +96,7 @@ elevator_state_t update_state(elevator_state_t* elevator_state) {
 
             break;
         }
+        */
         
     }
 

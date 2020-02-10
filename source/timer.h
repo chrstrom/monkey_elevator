@@ -7,13 +7,24 @@
 #ifndef TIMER_H
 #define TIMER_H
 
-#include <time.h>
+#include "includes.h"
 
+/**
+ * @brief Start the timer with the current time-value. 
+ * 
+ * @param[in/out] t_timer The time of initializing
+*/
+void start_timer(time_t* p_timer);
 
-// Set the timer to the current time
-void start_timer(time_t* timer);
-
+/**
+ * @brief Return true when a spesific time has passed
+ * 
+ * @param[in] p_timer The initial time we would like to check 
+ * against as a reference.
+ * 
+ * @param[out] int If time > compare, return 1. Else return 0
+ */
 // Return true when sec has passed since the timer was started
-int check_timer(time_t* timer, double sec);
+int check_timer(time_t* p_timer);
 
 #endif

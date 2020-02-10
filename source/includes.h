@@ -20,10 +20,24 @@
 #define QUEUE_SIZE 8
 
 /** 
- * Normal wait-time, in seconds, for the elevator.
+ * Size of the orders. One to spare for each floor
+*/
+#define ORDER_SIZE 5
+
+/** 
+ * Normal wait-time for the elevator.
  * Will be used everytime after obstruction and stop 
 */
 #define NORMAL_WAIT_TIME 3
+
+/**
+ * Normal defines. Mostly true/false
+ */
+#define DOOR_CLOSED 0
+#define DOOR_OPEN 1
+
+#define LIGHT_OFF 0
+#define LIGHT_ON 1
 
 /** 
  * Enum of the different commands the elevator must handle. 
