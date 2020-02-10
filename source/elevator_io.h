@@ -60,6 +60,5 @@ void set_floor_button_lights(int* p_order_up, int* p_order_down);
  */
 void update_cab_buttons(Order* p_queue);
 
-
 #endif
 
