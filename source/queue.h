@@ -14,7 +14,8 @@
  */
 typedef struct{
     int target_floor;               /**< The floor at which the order comes from */
-    int floor_to[MAX_FLOOR];        /**< an array of truthy values representing cab buttons pressed */
+    int cab_orders[MAX_FLOOR + 1];        /**< an array of truthy values representing cab buttons pressed */
+    HardwareOrder dir;
 } Order;
 
 
@@ -41,7 +42,7 @@ int queue_is_empty(Order* p_queue);
  * 
  * Upon arrival at the target floor for an @c Order , we need to set the cab orders for this current order.
  */
-void set_cab_orders(Order* p_current_order);
+void set_cab_orders(Order* p_current_order, int current_idx);
 
 
 /**
@@ -85,6 +86,7 @@ void update_queue_target_floor(Order* p_current_order, int floor);
 int check_order_match(Order* queue, int current_floor, HardwareMovement last_dir);
 
 
+Order initialize_new_order();
 
 // /* ALT DETTE KAN LIGGE I UTILITIES OG I QUEUE
 // Men det er bedre at det ligger i queue, da alle disse 
