@@ -10,8 +10,8 @@ void update_queue(Order* p_queue) {
     Order next_order = p_queue[1];
     for(int i = 0; i < QUEUE_SIZE - 1; i++){
         current_order.target_floor = next_order.target_floor;
-        for (int fl = MIN_FLOOR; fl < MAX_FLOOR; fl++){
-            current_order.cab_orders[fl] = next_order.cab_orders[fl];
+        for(int floor = 0; floor < SIZEOF_ARR(current_order.cab_orders); floor++){
+            current_order.cab_orders[floor] = next_order.cab_orders[floor];
         }
         p_queue[i] = current_order;
         if (i + 2 <= QUEUE_SIZE - 1){
