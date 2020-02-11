@@ -6,38 +6,32 @@
 #include "queue.h"
 #include "elevator_fsm.h"
 
+
 int elevator_init() {
-    hardware_command_door_open(0);
-    
-    while(at_floor() != -1) {
-        hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
+    hardware_command_door_open(CLOSE_DOOR);
+    for(int floor_up = 0; floor_up < MAX_FLOOR; floor_up++) {
+        hardware_command_order_light(floor_up, HARDWARE_ORDER_UP, LIGHT_OFF);
+    }
+
+    for(int floor_down = 0; floor_down < MAX_FLOOR; floor_down++) {
+        hardware_command_order_light(floor_down, HARDWARE_ORDER_DOWN, LIGHT_OFF);
     }
     
+    hardware_command_stop_light(LIGHT_OFF);
+    
+    while(at_floor() == -1) {
+        hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
+         
+    }
+
+    hardware_command_floor_indicator_on(at_floor());
+    hardware_command_movement(HARDWARE_MOVEMENT_STOP);
+   
     return 0;
 }
 
 
 int main(){
-
-    // ELEVATOR INITIAL SETUP
-    Order queue[QUEUE_SIZE];
-    // Needs an init function
-
-    int order_up[MAX_FLOOR + 1];
-    int order_down[MAX_FLOOR + 1];
-
-    int last_floor = -1; //invalid floor to set the elevator's intitial floor-value
-    HardwareMovement last_dir = HARDWARE_MOVEMENT_STOP;
-    int door_open = DOOR_CLOSED;
-    int next_action  = -1;
-
-    elevator_state_t elevator_state = STATE_IDLE;
-    time_t stop_button_timer = time(NULL);
-    time_t door_timer = time(NULL);
-
-    start_timer(&stop_button_timer);
-    start_timer(&door_timer);
-
 
     int error = hardware_init();
     if(error != 0){
@@ -51,6 +45,25 @@ int main(){
         exit(1);
     }
 
+    // ELEVATOR INITIAL SETUP
+    Order queue[QUEUE_SIZE];
+    // Needs an init function
+
+    int order_up[MAX_FLOOR + 1];
+    int order_down[MAX_FLOOR + 1];
+
+    HardwareMovement last_dir = HARDWARE_MOVEMENT_STOP;
+    int door_open = DOOR_CLOSED;
+    int next_action  = STOP_MOVEMENT;
+
+    elevator_state_t elevator_state = STATE_IDLE;
+    time_t stop_button_timer = time(NULL);
+    time_t door_timer = time(NULL);
+
+    start_timer(&stop_button_timer);
+    start_timer(&door_timer);
+
+    int last_floor = at_floor(); //should reach a valid floor during elevator_init
 
     // ELEVATOR PROGRAM LOOP
     while(1){
@@ -67,12 +80,16 @@ int main(){
                 hardware_command_door_open(DOOR_OPEN);
                 door_open = DOOR_OPEN;
             }
-
+            //delete the queue and the orders
             erase_queue(queue);
+            //erase_order(order_up);
+            //erase_order(order_down);
             start_timer(&stop_button_timer);
         }
         else if(!check_timer(&stop_button_timer)) {
            // If the stop button has been released, but less than NORMAL_WAIT_TIME has passed
+            poll_floor_buttons(order_up, order_down);
+            set_floor_button_lights(order_up, order_down);
 
         }
         else {

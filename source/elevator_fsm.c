@@ -6,7 +6,8 @@ int update_state(elevator_state_t* p_elevator_state, time_t* p_door_timer, Order
 
     int current_floor = at_floor(); 
     Order current_order = p_queue[0];
-
+    hardware_command_floor_indicator_on(last_floor);
+    
     switch(*p_elevator_state) {
         case STATE_IDLE: {
           

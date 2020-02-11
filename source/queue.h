@@ -28,10 +28,25 @@ void update_queue(Order* p_queue);
 
 /**
  * @brief Empty the queue by removing all elements
+ *
+ * @param p_queue Pointer to the queue
  */
 void erase_queue(Order* p_queue);
 
+/**
+ * @brief Clear the order by removing all elements
+ *
+ * @param p_order Pointer to the orders up or down
+ */
+void erase_order(int* p_order);
 
+/**
+ * @brief Check if the queue is empty
+ * 
+ * @param p_queue Pointer to the @c Order queue. 
+ * 
+ * Return 1 if empty and 0 if not
+ */
 int queue_is_empty(Order* p_queue);
 
 /**
