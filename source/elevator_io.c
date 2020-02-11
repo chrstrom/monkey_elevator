@@ -27,7 +27,7 @@ void poll_floor_buttons(int* p_order_up, int* p_order_down) {
     }
 
     // if(order_floor != 0){ 
-    //     Order order = {.floor_at = order_floor};
+    //     Order order = {.target_floor = order_floor};
     //     queue_push_back(queue, order);
     // }
 
