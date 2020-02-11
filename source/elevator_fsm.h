@@ -12,11 +12,11 @@
 #include "elevator_io.h"
 // In idle state:
 // If queue empty, do nothing
-// If queue[0].floor_at == current_floor
+// If queue[0].target_floor == current_floor
     // """Handle the cab orders"""
-// If queue[0].floor_at > current_floor
+// If queue[0].target_floor > current_floor
     // MOVE UP
-// If queue[0].floor_at < current_floor
+// If queue[0].target_floor < current_floor
     // MOVE DOWN
 
 /**
@@ -38,7 +38,7 @@ typedef enum{
     STATE_IDLE,         /**< Elevator standing still*/
     STATE_MOVING_UP,    /**< Elevator moving up*/
     STATE_MOVING_DOWN,  /**< Elevator moving down*/
-    STATE_PREP_MOVE,    /**< Elevator preparing to move in any direction*/
+    //STATE_HANDLE_ORDER, 
     //STATE_SERVE_ORDER,
     //STATE_ERROR
 } elevator_state_t;
@@ -52,7 +52,7 @@ typedef enum{
  * @param[in][out]  p_queue             A pointer to the elevator's queue                     
  * @param[in]       last_dir            The last direction of the elevator
  * @param[in]       last_floor          The last floor the elevator was at
- * @param[in]       door_open           An int representing whether or not the door is open
+ * @param[in]       p_door_open         A pointer to an int representing whether or not the door is open
  * 
  * @return One of the possible commands resulting from the current state.
  * 
@@ -65,7 +65,7 @@ int update_state(elevator_state_t* p_elevator_state,
                  Order* p_queue,
                  HardwareMovement last_dir,
                  int last_floor,
-                 int door_open);
+                 int* p_door_open);
 
 
 #endif
