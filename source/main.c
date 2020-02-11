@@ -9,7 +9,7 @@
 int elevator_init() {
     hardware_command_door_open(0);
     
-    if(at_floor() != -1) {
+    while(at_floor() != -1) {
         hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
     }
     
@@ -21,6 +21,7 @@ int main(){
 
     // ELEVATOR INITIAL SETUP
     Order queue[QUEUE_SIZE];
+    // Needs an init function
 
     int order_up[MAX_FLOOR + 1];
     int order_down[MAX_FLOOR + 1];
@@ -31,11 +32,11 @@ int main(){
     int next_action  = -1;
 
     elevator_state_t elevator_state = STATE_IDLE;
-    time_t* stop_button_timer = (time_t*)time(NULL);
-    time_t* door_timer = (time_t*)time(NULL);
+    time_t stop_button_timer = time(NULL);
+    time_t door_timer = time(NULL);
 
-    start_timer(stop_button_timer);
-    start_timer(door_timer);
+    start_timer(&stop_button_timer);
+    start_timer(&door_timer);
 
 
     int error = hardware_init();
@@ -68,9 +69,9 @@ int main(){
             }
 
             erase_queue(queue);
-            start_timer(stop_button_timer);
+            start_timer(&stop_button_timer);
         }
-        else if(!check_timer(stop_button_timer)) {
+        else if(!check_timer(&stop_button_timer)) {
            // If the stop button has been released, but less than NORMAL_WAIT_TIME has passed
 
         }
@@ -79,7 +80,7 @@ int main(){
             poll_floor_buttons(order_up, order_down);
             set_floor_button_lights(order_up, order_down);
 
-            next_action = update_state(&elevator_state, door_timer, queue, last_dir, last_floor, door_open);
+            next_action = update_state(&elevator_state, &door_timer, queue, last_dir, last_floor, &door_open);
 
             switch(next_action) {
                 case DO_NOTHING:
@@ -89,7 +90,7 @@ int main(){
                 //     break;
 
                 case START_DOOR_TIMER:
-                    start_timer(door_timer);
+                    start_timer(&door_timer);
                     break;
 
                 case OPEN_DOOR:
