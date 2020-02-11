@@ -1,0 +1,29 @@
+Queue:
+
+Implementer:
+
+void update_queue(Order* p_queue) {
+    //slette første element i køen
+}
+
+void set_cab_orders(Order* p_current_order){
+    //Funksjonen skal 
+    
+}
+
+void erase_queue(Order* p_queue){
+
+}
+
+int queue_is_empty(Order* p_queue) {
+    return 0;
+}
+
+void update_queue_target_floor(Order* p_current_order, int floor) {
+
+}
+
+
+int check_order_match(Order* queue, int current_floor, HardwareMovement last_dir) {
+    return 0;   // Just to compile properly for now
+}
