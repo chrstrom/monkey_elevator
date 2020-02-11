@@ -7,14 +7,18 @@
 
 #include "includes.h"
 
+// !! Not 100% sure if we need to dereference the pointers in sizeof
+#define SIZEOF_ARR(X) sizeof(*X)/sizeof(X[0])
+
 /**
  * @struct Order
  * 
  * @brief  A struct for holding information about an order
  */
 typedef struct{
-    int target_floor;               /**< The floor at which the order comes from */
-    int floor_to[MAX_FLOOR];        /**< an array of truthy values representing cab buttons pressed */
+    int target_floor;                   /**< The floor at which the order comes from */
+    int cab_orders[MAX_FLOOR + 1];        /**< an array of truthy values representing cab buttons pressed */
+    HardwareMovement dir;
 } Order;
 
 
@@ -75,10 +79,10 @@ void clear_cab_orders(Order* p_queue, int floor);
  * @brief Update the @c target_floor value for a the current order 
  * 
  * @param[out] p_current_order  A pointer to the current order we are updating
- * @param[in]  floor            The floor we wish to update the order's @c target_floor value to.
+ * @param[in]  current_floor    The floor we wish to update the order's @c target_floor value to.
  * 
  * This function "handles" part of an @c Order by changing the @c target_floor value of the current
- * order we are dealing with, to one of the floors in @c floor_to. If this value is set to -1,
+ * order we are dealing with, to one of the floors in @c cab_orders. If this value is set to -1,
  * the entire order is considered fully handled.
  */
 void update_queue_target_floor(Order* p_current_order, int floor);
@@ -95,7 +99,8 @@ void update_queue_target_floor(Order* p_current_order, int floor);
  * is valid for the @p current_floor .
  * 
  * The function checks if any @c Order in the @p queue has an order set for the @p current_floor .
- * @p last_dir is used to check whether or not we should stop for it.
+ * @p last_dir is used to check whether or not we should stop for it. We also check if any
+ * of the orders have a cab-order that we can handle.
  */
 int check_order_match(Order* queue, int current_floor, HardwareMovement last_dir);
 
