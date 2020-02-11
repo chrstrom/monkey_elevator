@@ -13,8 +13,8 @@
  * @brief  A struct for holding information about an order
  */
 typedef struct{
-    int floor_at;               /**< The floor at which the order comes from */
-    int floor_to[MAX_FLOOR];    /**< an array of truthy values representing cab buttons pressed */
+    int target_floor;               /**< The floor at which the order comes from */
+    int floor_to[MAX_FLOOR];        /**< an array of truthy values representing cab buttons pressed */
 } Order;
 
 
@@ -31,6 +31,8 @@ void update_queue(Order* p_queue);
  */
 void erase_queue(Order* p_queue);
 
+
+int queue_is_empty(Order* p_queue);
 
 /**
  * @brief Set the cab orders for a given @c Order
@@ -55,16 +57,17 @@ void clear_cab_orders(Order* p_queue, int floor);
 
 
 /**
- * @brief Update the @c floor_at value for a the current order 
+ * @brief Update the @c target_floor value for a the current order 
  * 
  * @param[out] p_current_order  A pointer to the current order we are updating
- * @param[in]  floor            The floor we wish to update the order's @c floor_at value to.
+ * @param[in]  floor            The floor we wish to update the order's @c target_floor value to.
  * 
- * This function "handles" part of an @c Order by changing the @c floor_at value of the current
+ * This function "handles" part of an @c Order by changing the @c target_floor value of the current
  * order we are dealing with, to one of the floors in @c floor_to. If this value is set to -1,
  * the entire order is considered fully handled.
  */
-void update_queue_floor_at(Order* p_current_order, int floor);
+void update_queue_target_floor(Order* p_current_order, int floor);
+
 
 /**
  * @brief Check if the queue has a valid order to handle  
