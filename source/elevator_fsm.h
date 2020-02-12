@@ -10,6 +10,7 @@
 #include "queue.h"
 #include "timer.h"
 #include "elevator_io.h"
+
 // In idle state:
 // If queue empty, do nothing
 // If queue[0].target_floor == current_floor

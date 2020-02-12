@@ -17,8 +17,15 @@ int elevator_init() {
     for(int floor_down = 0; floor_down < MAX_FLOOR; floor_down++) {
         hardware_command_order_light(floor_down, HARDWARE_ORDER_DOWN, LIGHT_OFF);
     }
+
+    // Clear all order arrays just in case;
+    for(int floor = 0; floor < MAX_FLOOR + 1; floor++) {
+        UP_ORDERS[floor] = 0;
+        DOWN_ORDERS[floor] = 0;
+        CAB_ORDERS[floor] = 0;
+    }
     hardware_command_stop_light(LIGHT_OFF);
-    hardware_command_floor_indicator_on(at_floor());
+   
 
 
     // Close the door and, if not in a floor already, move to a floor
@@ -27,6 +34,7 @@ int elevator_init() {
         hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
     }
     hardware_command_movement(HARDWARE_MOVEMENT_STOP);
+    hardware_command_floor_indicator_on(at_floor());
    
     return 0;
 }
@@ -49,9 +57,6 @@ int main(){
     // ELEVATOR INITIAL SETUP
 
     Order queue[QUEUE_SIZE];
-
-    int order_up[MAX_FLOOR + 1] = {0, 0, 0, 0};
-    int order_down[MAX_FLOOR + 1] = {0, 0, 0, 0};
 
     int door_open = DOOR_CLOSED;
     int next_action  = STOP_MOVEMENT;
@@ -86,14 +91,20 @@ int main(){
             continue;
         }
         else if(check_timer(&stop_button_timer) == 0) {
+            poll_floor_buttons(UP_ORDERS, DOWN_ORDERS);
+            set_floor_button_lights(UP_ORDERS, DOWN_ORDERS);
+
             continue;
            // If the stop button has been released, but less than NORMAL_WAIT_TIME has passed
            // According to specifications, we shouldnt take in orders here
         }
-       
+        else if(check_timer(&stop_button_timer) == 1 && door_open == DOOR_OPEN) {
+            hardware_command_door_open(DOOR_CLOSED);
+            door_open = DOOR_CLOSED;
+        }
  
-        poll_floor_buttons(order_up, order_down);
-        set_floor_button_lights(order_up, order_down);
+        poll_floor_buttons(UP_ORDERS, DOWN_ORDERS);
+        set_floor_button_lights(UP_ORDERS, DOWN_ORDERS);
 
         next_action = update_state(&elevator_state, &door_timer, queue, last_dir, last_floor, &door_open);
 
