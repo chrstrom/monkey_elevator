@@ -1,6 +1,6 @@
-<mxfile host="www.draw.io" modified="2020-02-12T14:16:10.111Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.100 Safari/537.36" etag="Gs1GIWpJQXdm3GR6QRiv" version="12.6.8" type="github">
+<mxfile host="www.draw.io" modified="2020-02-12T14:30:18.598Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.100 Safari/537.36" etag="xkFITTd4vwk-FUJfnY_C" version="12.6.8" type="github">
   <diagram id="z0SczGEVN_gM085jFo6B" name="Page-1">
-    <mxGraphModel dx="731" dy="1503" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="5623" dy="4200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0"/>
         <mxCell id="1" parent="0"/>
@@ -450,7 +450,7 @@
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
         <mxCell id="SXKG6bMCXq2TJBxTNTQu-7" value="Bør vi flytte mye av funksjonaliteteten fra main over i FSM? Akkurat nå lagrer vi alle tilstandene i main, men dette er overhode ikke god koding. Da kan det være bedre å først inititlisiere ting i main, og så overlate mye av ansvaret over til FSM. Da får man muligheten til å abstrahere ting direkte i fsm-modulen, slik at man ikke nødvendigvis trenger å la main ha så stor avhengighet med resten av programmet.&lt;br&gt;&lt;br&gt;Vi har kanskje tenkt feil på stop-knappen. Den skal ikke ta inn ordre når stopp-knappen er aktivert, og skal stoppes øyeblikkelig.Når stopp-knappen slippes, skal den stå i ro inntil heisen får en ny ordre!! Døra skal lukkes etter tre sekunder dersom heisen er i en etasje" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="791" y="26.049999999999997" width="360" height="287.95" as="geometry"/>
+          <mxGeometry x="966.5" y="-330" width="360" height="287.95" as="geometry"/>
         </mxCell>
       </root>
     </mxGraphModel>
