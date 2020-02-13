@@ -10,6 +10,10 @@
 // !! Not 100% sure if we need to dereference the pointers in sizeof
 #define SIZEOF_ARR(X) sizeof(*X)/sizeof(X[0])
 
+static int UP_ORDERS[MAX_FLOOR + 1] = {0, 0, 0, 0};
+static int DOWN_ORDERS[MAX_FLOOR + 1] = {0, 0, 0, 0};
+static int CAB_ORDERS[MAX_FLOOR + 1] = {0, 0, 0, 0};
+
 /**
  * @struct Order
  * 
@@ -17,7 +21,6 @@
  */
 typedef struct{
     int target_floor;                   /**< The floor at which the order comes from */
-    int cab_orders[MAX_FLOOR + 1];        /**< an array of truthy values representing cab buttons pressed */
     HardwareMovement dir;
 } Order;
 
@@ -29,6 +32,12 @@ typedef struct{
  */
 void update_queue(Order* p_queue);
 
+/**
+ * 
+ */
+void add_order_to_queue(Order* p_queue);
+
+int check_queue_for_order(Order* p_queue, int floor, HardwareMovement dir);
 
 /**
  * @brief Empty the queue by removing all elements
@@ -53,41 +62,33 @@ void erase_order(int* p_order);
  */
 int queue_is_empty(Order* p_queue);
 
-int queue_is_empty(Order* p_queue);
 
 /**
- * @brief Set the cab orders for a given @c Order
+ * @brief Set the cab orders according to cab buttons pressed
  * 
- * @param[in][out] p_current_order  A pointer to the @c Order to which the cab orders will be set
- * 
- * Upon arrival at the target floor for an @c Order , we need to set the cab orders for this current order.
+ * Whenever we are idle at a floor and are accepting orders, we need to set the cab orders.
  */
-void set_cab_orders(Order* p_current_order, int current_idx);
+void set_cab_orders();
 
 
 /**
- * @brief Clear a given @c Order of a cab order for a given floor
+ * @brief Clear a cab order for a given floor
  * 
- * @param[out] p_queue  A pointer to the queue
- * @param[in]  floor    The floor to be used for clearing the cab orders in the 
- * 
- * Any given order can have MAX_FLOOR amount of cab orders. Upon arrival at a floor,
- * all cab orders corresponding to this floor shall be marked as handled. 
+ * @param[in]  current_floor    The floor to be used for clearing the cab orders in the 
  */
-void clear_cab_orders(Order* p_queue, int floor);
+void clear_cab_orders(int current_floor);
 
 
 /**
  * @brief Update the @c target_floor value for a the current order 
  * 
  * @param[out] p_current_order  A pointer to the current order we are updating
- * @param[in]  current_floor    The floor we wish to update the order's @c target_floor value to.
+ * @param[in]  floor            The floor we wish to update the order's @c target_floor value to.
  * 
  * This function "handles" part of an @c Order by changing the @c target_floor value of the current
- * order we are dealing with, to one of the floors in @c cab_orders. If this value is set to -1,
- * the entire order is considered fully handled.
+ * order we are dealing with, to one of the floors @c CAB_ORDERS
  */
-void update_queue_target_floor(Order* p_current_order, int floor);
+void update_queue_target_floor(Order* p_current_order, int current_floor);
 
 
 /**
@@ -106,6 +107,7 @@ void update_queue_target_floor(Order* p_current_order, int floor);
  */
 int check_order_match(Order* queue, int current_floor, HardwareMovement last_dir);
 
+void push_back_queue(Order* queue, int floor, HardwareMovement dir);
 
 Order initialize_new_order();
 

@@ -10,6 +10,7 @@
 #include "queue.h"
 #include "timer.h"
 #include "elevator_io.h"
+
 // In idle state:
 // If queue empty, do nothing
 // If queue[0].target_floor == current_floor
@@ -22,17 +23,18 @@
 /**
  * List of all possible resulting commands from the fsm
  */
-#define DO_NOTHING 0
-#define CHECK_OBSTRUCTION 1
-#define START_DOOR_TIMER 2
-#define OPEN_DOOR 3             //vil bli forvirring med navngivning. Får potensiell navnekollisjon med
-                                //det som ligger i includes!!!!
-#define CLOSE_DOOR 4
-#define MOVE_UP 5
-#define MOVE_DOWN 6
-#define STOP_MOVEMENT 7
-#define EMERGENCY 8
-#define NOT_EMERGENCY 9
+#define CMD_DO_NOTHING 0
+#define CMD_CHECK_OBSTRUCTION 1
+#define CMD_START_DOOR_TIMER 2
+#define CMD_OPEN_DOOR 3             
+#define CMD_CLOSE_DOOR 4
+#define CMD_MOVE_UP 5
+#define CMD_MOVE_DOWN 6
+#define CMD_STOP_MOVEMENT 7
+#define CMD_EMERGENCY 8
+#define CMD_NOT_EMERGENCY 9
+#define CMD_NOT_OBSTRUCTION 10
+#define CMD_OBSTRUCTION 11
 
 /**
  * Enum containing the possible states of the FSM 
@@ -88,6 +90,11 @@ int determine_direction(elevator_state_t* p_elevator_state,
                 Order* p_current_order, 
                 int current_floor);
 
-int emergency_action(Order* p_queue, time_t* p_stop_button_timer, int* p_door_open, int* p_emergency);
+int emergency_action(Order* p_queue,  
+                time_t* p_door_timer, 
+                int* p_door_open);                
+
+int obstruction_check(time_t* p_door_timer, 
+                int* p_door_open);
 
 #endif
