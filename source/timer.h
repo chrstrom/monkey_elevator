@@ -34,4 +34,10 @@ void start_timer(time_t* p_timer);
 // Return true when sec has passed since the timer was started
 int check_timer(time_t* p_timer);
 
+
+
+time_t LAST_TIME = -1;
+void start_timer_new();
+int check_timer_new(int time_req);
+
 #endif
