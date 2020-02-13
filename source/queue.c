@@ -26,18 +26,28 @@ void update_queue(Order* p_queue) {
 }
 
 void add_order_to_queue(Order* p_queue) {
-    for(int idx = 0; idx < SIZEOF_ARR(UP_ORDERS); idx++) {
-        if(UP_ORDERS[idx] == 1 && check_) {
+    for(int floor_up = 0; floor_up < SIZEOF_ARR(UP_ORDERS); floor_up++) {
+        if(UP_ORDERS[floor_up] == 1 && check_queue_for_order(p_queue, floor_up, HARDWARE_MOVEMENT_UP) == 0) {
+            push_back_queue(p_queue, floor_up, HARDWARE_MOVEMENT_UP);
+        }
+    }
+
+    for(int floor_down = 0; floor_down < SIZEOF_ARR(DOWN_ORDERS); floor_down++) {
+        if(DOWN_ORDERS[floor_down] == 1 && check_queue_for_order(p_queue, floor_down, HARDWARE_MOVEMENT_DOWN) == 0) {
+            push_back_queue(p_queue, floor_down, HARDWARE_MOVEMENT_DOWN);
         }
     }
 
 }
 
 int check_queue_for_order(Order* p_queue, int floor, HardwareMovement dir) {
-    
+    for(int order = 0; order < QUEUE_SIZE; order++) {
+        if(p_queue[order].target_floor == floor && p_queue[order].dir == dir) {
+            return 1;
+        }
+    }
+    return 0;
 }
-
-
 
 void set_cab_orders(){
     for(int floor = MIN_FLOOR; floor < MAX_FLOOR; floor++){
