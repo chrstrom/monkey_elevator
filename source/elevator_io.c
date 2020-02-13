@@ -53,7 +53,11 @@ void set_cab_button_lights() {
     }
 }
 
-
+void set_floor_indicator_light(int last_floor) {
+    if(last_floor != -1) {
+        hardware_command_floor_indicator_on(last_floor);
+    }
+}
 
 //May want to change the in-argument to queue
 void update_cab_buttons(Order* p_queue) {

@@ -55,6 +55,15 @@ void set_floor_button_lights();
  */
 void set_cab_button_lights();
 
+/**
+ * @brief Set the floor indicator light
+ * 
+ * @param[in] last_floor    The last floor the elevator was at
+ * 
+ * Sets the floor light indicator to the last floor the elevator was on. The floor
+ * indicator should still light for the last floor it visited, when it is between floors. 
+ */
+void set_floor_indicator_light(int last_floor);
 
 /**
  * @brief Set the cab button requests for an @c Order
