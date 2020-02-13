@@ -26,18 +26,27 @@ void update_queue(Order* p_queue) {
 }
 
 void add_order_to_queue(Order* p_queue) {
-    for(int floor_up = 0; floor_up < SIZEOF_ARR(UP_ORDERS); floor_up++) {
-        if(UP_ORDERS[floor_up] == 1 && check_queue_for_order(p_queue, floor_up, HARDWARE_MOVEMENT_UP) == 0) {
+    for(int floor_up = 0; floor_up < SIZEOF_ARR(ORDERS_UP); floor_up++) {
+        if(ORDERS_UP[floor_up] == 1 && check_queue_for_order(p_queue, floor_up, HARDWARE_MOVEMENT_UP) == 0) {
             push_back_queue(p_queue, floor_up, HARDWARE_MOVEMENT_UP);
         }
     }
 
-    for(int floor_down = 0; floor_down < SIZEOF_ARR(DOWN_ORDERS); floor_down++) {
-        if(DOWN_ORDERS[floor_down] == 1 && check_queue_for_order(p_queue, floor_down, HARDWARE_MOVEMENT_DOWN) == 0) {
+    for(int floor_down = 0; floor_down < SIZEOF_ARR(ORDERS_DOWN); floor_down++) {
+        if(ORDERS_DOWN[floor_down] == 1 && check_queue_for_order(p_queue, floor_down, HARDWARE_MOVEMENT_DOWN) == 0) {
             push_back_queue(p_queue, floor_down, HARDWARE_MOVEMENT_DOWN);
         }
     }
 
+}
+
+void push_back_queue(Order* p_queue, int floor, HardwareMovement dir) {
+    Order new_order = {.target_floor = floor, .dir = dir};
+     for(int order = 0; order < SIZEOF_ARR(p_queue); order++) {
+        if(p_queue[order].target_floor == -1) {
+            p_queue[order] = new_order;
+        }
+    }
 }
 
 int check_queue_for_order(Order* p_queue, int floor, HardwareMovement dir) {
@@ -51,7 +60,7 @@ int check_queue_for_order(Order* p_queue, int floor, HardwareMovement dir) {
 
 void set_cab_orders(){
     for(int floor = MIN_FLOOR; floor < MAX_FLOOR; floor++){
-        CAB_ORDERS[floor] = hardware_read_order(floor, HARDWARE_ORDER_INSIDE);
+        ORDERS_CAB[floor] = hardware_read_order(floor, HARDWARE_ORDER_INSIDE);
     }
 }
 
@@ -62,8 +71,8 @@ void clear_cab_orders(int current_floor){
     }
 
     for(int floor = MIN_FLOOR; floor <= MAX_FLOOR; floor++) {
-        if(CAB_ORDERS[floor] == current_floor){
-            CAB_ORDERS[floor] = 0;
+        if(ORDERS_CAB[floor] == current_floor){
+            ORDERS_CAB[floor] = 0;
         }
     }
 }
@@ -87,10 +96,10 @@ int queue_is_empty(Order* p_queue) {
 }
 
 void update_queue_target_floor(Order* p_current_order, int current_floor) {
-    for(int floor; floor < SIZEOF_ARR(CAB_ORDERS); floor++) {
-        if(CAB_ORDERS[floor] == 1 & floor != current_floor) {
+    for(int floor; floor < SIZEOF_ARR(ORDERS_CAB); floor++) {
+        if(ORDERS_CAB[floor] == 1 && floor != current_floor) {
             p_current_order->target_floor = floor;
-            CAB_ORDERS[floor] = 0;
+            ORDERS_CAB[floor] = 0;
             return;
         }
     }
@@ -108,9 +117,9 @@ int check_order_match(Order* queue, int current_floor, HardwareMovement last_dir
             return 1;
         }
 
-        for(int floor = 0; floor < SIZEOF_ARR(CAB_ORDERS); floor++) {
+        for(int floor = 0; floor < SIZEOF_ARR(ORDERS_CAB); floor++) {
             // Only handle cab orders if we have a cab order AT THE CURRENT FLOOR
-            if(CAB_ORDERS[floor] && floor == current_floor) {
+            if(ORDERS_CAB[floor] && floor == current_floor) {
                 return 1;
             }
         }
@@ -120,14 +129,5 @@ int check_order_match(Order* queue, int current_floor, HardwareMovement last_dir
 
 Order initialize_new_order(){
     Order new_order = {.target_floor = -1, .dir = HARDWARE_ORDER_INSIDE};
-
-}
-
-void push_back_queue(Order* queue, int floor, HardwareMovement dir) {
-    Order new_order = {.target_floor = floor, .dir = dir};
-     for(int order = 0; order < SIZEOF_ARR(queue); order++) {
-        if(queue[order].target_floor == -1) {
-            queue[order] = new_order;
-        }
-    }
+    return new_order;
 }

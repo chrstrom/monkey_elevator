@@ -14,3 +14,12 @@ int check_timer(time_t* p_timer){
 }
 
 
+void start_timer_new() {
+    LAST_TIME = time(NULL);
+}
+
+int check_timer_new(int time_req) {
+    unsigned int time_diff = (unsigned int)(time(NULL)) - LAST_TIME;
+    return time_diff >= time_req;
+}
+

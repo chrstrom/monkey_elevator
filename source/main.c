@@ -20,9 +20,9 @@ int elevator_init() {
 
     // Clear all order arrays just in case;
     for(int floor = 0; floor < MAX_FLOOR + 1; floor++) {
-        UP_ORDERS[floor] = 0;
-        DOWN_ORDERS[floor] = 0;
-        CAB_ORDERS[floor] = 0;
+        ORDERS_UP[floor] = 0;
+        ORDERS_DOWN[floor] = 0;
+        ORDERS_CAB[floor] = 0;
     }
     hardware_command_stop_light(LIGHT_OFF);
    
@@ -84,9 +84,9 @@ int main(){
 
         }
         else{
-            poll_floor_buttons(UP_ORDERS, DOWN_ORDERS);
+            poll_floor_buttons();
             add_order_to_queue(queue);
-            set_floor_button_lights(UP_ORDERS, DOWN_ORDERS);
+            set_floor_button_lights();
             if(next_action != CMD_EMERGENCY && next_action != CMD_OBSTRUCTION){
                 next_action = update_state(&elevator_state, &door_timer, queue, last_dir, last_floor, &door_open);
             }

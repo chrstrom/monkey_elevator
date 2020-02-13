@@ -10,9 +10,9 @@
 // !! Not 100% sure if we need to dereference the pointers in sizeof
 #define SIZEOF_ARR(X) sizeof(*X)/sizeof(X[0])
 
-static int UP_ORDERS[MAX_FLOOR + 1] = {0, 0, 0, 0};
-static int DOWN_ORDERS[MAX_FLOOR + 1] = {0, 0, 0, 0};
-static int CAB_ORDERS[MAX_FLOOR + 1] = {0, 0, 0, 0};
+static int ORDERS_UP[MAX_FLOOR + 1] = {0, 0, 0, 0};
+static int ORDERS_DOWN[MAX_FLOOR + 1] = {0, 0, 0, 0};
+static int ORDERS_CAB[MAX_FLOOR + 1] = {0, 0, 0, 0};
 
 /**
  * @struct Order
@@ -21,7 +21,7 @@ static int CAB_ORDERS[MAX_FLOOR + 1] = {0, 0, 0, 0};
  */
 typedef struct{
     int target_floor;                   /**< The floor at which the order comes from */
-    HardwareMovement dir;
+    HardwareMovement dir;               /**< The direction of the order */
 } Order;
 
 
@@ -33,10 +33,25 @@ typedef struct{
 void update_queue(Order* p_queue);
 
 /**
+ * @brief Add orders to the @p p_queue according to the @c ORDERS_UP and @c ORDERS_DOWN arrays
  * 
+ * @param[in][out]  p_queue A pointer the queue.
+ * 
+ * The function checks each element in the  @p p_queue, and pushes a new @c Order
+ * to it for each truthy value in @c ORDERS_UP and @c ORDERS_DOWN , if the @p p_queue does not
+ * have an @c Order for either of them already.
  */
 void add_order_to_queue(Order* p_queue);
 
+/**
+ * @brief Checks the @p p_queue for an order with specified parameters
+ * 
+ * @param[in] p_queue   A pointer to the queue
+ * @param[in] floor     The floor to check the queue for
+ * @param[in] dir       The direction to check the queue for
+ * 
+ * @return 1 if the queue contains a matching order, and 0 if it does not
+ */
 int check_queue_for_order(Order* p_queue, int floor, HardwareMovement dir);
 
 /**
@@ -46,12 +61,14 @@ int check_queue_for_order(Order* p_queue, int floor, HardwareMovement dir);
  */
 void erase_queue(Order* p_queue);
 
+
 /**
  * @brief Clear the order by removing all elements
  *
  * @param p_order Pointer to the orders up or down
  */
 void erase_order(int* p_order);
+
 
 /**
  * @brief Check if the queue is empty
@@ -74,7 +91,7 @@ void set_cab_orders();
 /**
  * @brief Clear a cab order for a given floor
  * 
- * @param[in]  current_floor    The floor to be used for clearing the cab orders in the 
+ * @param[in]  current_floor    The floor to be used for clearing the cab orders
  */
 void clear_cab_orders(int current_floor);
 
@@ -82,7 +99,7 @@ void clear_cab_orders(int current_floor);
 /**
  * @brief Update the @c target_floor value for a the current order 
  * 
- * @param[out] p_current_order  A pointer to the current order we are updating
+ * @param[out] p_current_order  A pointer to the curreORDERS_CABe are updating
  * @param[in]  floor            The floor we wish to update the order's @c target_floor value to.
  * 
  * This function "handles" part of an @c Order by changing the @c target_floor value of the current
@@ -107,7 +124,18 @@ void update_queue_target_floor(Order* p_current_order, int current_floor);
  */
 int check_order_match(Order* queue, int current_floor, HardwareMovement last_dir);
 
-void push_back_queue(Order* queue, int floor, HardwareMovement dir);
+/**
+ * @brief Pushes a new @c Order to the @p p_queue 
+ * 
+ * @param[in][out]  p_queue A pointer to the queue.
+ * @param[in]       floor   The floor that the @c Order came from
+ * @param[in]       dir     The direction of the @c Order
+ * 
+ * The function finds the first element in the queue that has its @c target_floor
+ * value set to -1, and updates this element with @p floor and @p dir .
+ */
+void push_back_queue(Order* p_queue, int floor, HardwareMovement dir);
+
 
 Order initialize_new_order();
 
