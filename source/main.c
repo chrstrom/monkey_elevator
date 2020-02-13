@@ -143,8 +143,9 @@ int main(){
                 break;
             
             case CHECK_OBSTRUCTION:
-                obstruction_check();
-
+                obstruction_check(); //ta inn peker til dør og lukk den eventuelt dersom obstruksjon er lav
+                break;
+                
             case START_DOOR_TIMER:
                 start_timer(&door_timer);
                 break;
