@@ -10,9 +10,9 @@
 // !! Not 100% sure if we need to dereference the pointers in sizeof
 #define SIZEOF_ARR(X) sizeof(*X)/sizeof(X[0])
 
-static int   UP_ORDERS[MAX_FLOOR + 1] = {0, 0, 0, 0};
-static int DOWN_ORDERS[MAX_FLOOR + 1] = {0, 0, 0, 0};
-static int CAB_ORDERS[MAX_FLOOR + 1] = {0, 0, 0, 0};
+static int   ORDERS_UP[MAX_FLOOR + 1] = {0, 0, 0, 0};
+static int ORDERS_DOWN[MAX_FLOOR + 1] = {0, 0, 0, 0};
+static int ORDERS_CAB[MAX_FLOOR + 1] = {0, 0, 0, 0};
 
 /**
  * @struct Order
@@ -33,12 +33,12 @@ typedef struct{
 void update_queue(Order* p_queue);
 
 /**
- * @brief Add orders to the @p p_queue according to the @c UP_ORDERS and @c DOWN_ORDERS arrays
+ * @brief Add orders to the @p p_queue according to the @c ORDERS_UP and @c ORDERS_DOWN arrays
  * 
  * @param[in][out]  p_queue A pointer the queue.
  * 
  * The function checks each element in the  @p p_queue, and pushes a new @c Order
- * to it for each truthy value in @c UP_ORDERS and @c DOWN_ORDERS , if the @p p_queue does not
+ * to it for each truthy value in @c ORDERS_UP and @c ORDERS_DOWN , if the @p p_queue does not
  * have an @c Order for either of them already.
  */
 void add_order_to_queue(Order* p_queue);
@@ -99,7 +99,7 @@ void clear_cab_orders(int current_floor);
 /**
  * @brief Update the @c target_floor value for a the current order 
  * 
- * @param[out] p_current_order  A pointer to the current order we are updating
+ * @param[out] p_current_order  A pointer to the curreORDERS_CABe are updating
  * @param[in]  floor            The floor we wish to update the order's @c target_floor value to.
  * 
  * This function "handles" part of an @c Order by changing the @c target_floor value of the current

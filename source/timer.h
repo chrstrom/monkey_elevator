@@ -7,6 +7,14 @@
 
 #include "includes.h"
 
+
+// TODO:
+// If everything works as is, we can try to change the timer module to
+// only use one timer, and update a variable in timer.h, as well as letting
+// check_timer take a double as a "time passed" argument instead of NORMAL_WAIT_TIME
+// in the function
+
+
 /**
  * @brief Start the timer with the current time-value. 
  * 

@@ -43,7 +43,7 @@ int update_state(elevator_state_t* p_elevator_state, time_t* p_door_timer, Order
 
             // We start the loop at last_floor because we only wish to check for floors we are moving towards.
             for(int floor = last_floor; floor <= MAX_FLOOR; floor++){
-                if (current_floor == CAB_ORDERS[floor] && check_order_match(p_queue, current_floor, last_dir)){
+                if (current_floor == ORDERS_CAB[floor] && check_order_match(p_queue, current_floor, last_dir)){
                     // Here we have found a valid floor to stop at!
 
                     update_queue_target_floor(&current_order, current_floor);
@@ -70,7 +70,7 @@ int update_state(elevator_state_t* p_elevator_state, time_t* p_door_timer, Order
 
             // We start the loop at last_floor because we only wish to check for floors we are moving towards.
             for(int floor = last_floor; floor > MIN_FLOOR; floor--) {
-                if (current_floor == CAB_ORDERS[floor] && check_order_match(p_queue, current_floor, last_dir)) {
+                if (current_floor == ORDERS_CAB[floor] && check_order_match(p_queue, current_floor, last_dir)) {
                     // Here we have found a valid floor to stop at!
 
                     update_queue_target_floor(&current_order, current_floor);
