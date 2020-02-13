@@ -88,6 +88,8 @@ int main(){
             add_order_to_queue(queue);
             set_floor_button_lights();
             set_cab_button_lights();
+            set_floor_indicator_light(last_floor);
+            
             if(emergency == CMD_NOT_EMERGENCY){
                 next_action = update_state(&elevator_state, &door_timer, queue, last_dir, last_floor, &door_open);
             }
