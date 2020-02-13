@@ -81,17 +81,10 @@ void clear_cab_orders(Order* p_queue, int floor);
  * @brief Update the @c target_floor value for a the current order 
  * 
  * @param[out] p_current_order  A pointer to the current order we are updating
-<<<<<<< HEAD
  * @param[in]  current_floor    The floor we wish to update the order's @c target_floor value to.
  * 
  * This function "handles" part of an @c Order by changing the @c target_floor value of the current
  * order we are dealing with, to one of the floors in @c cab_orders. If this value is set to -1,
-=======
- * @param[in]  floor            The floor we wish to update the order's @c target_floor value to.
- * 
- * This function "handles" part of an @c Order by changing the @c target_floor value of the current
- * order we are dealing with, to one of the floors in @c floor_to. If this value is set to -1,
->>>>>>> 2daa69d4315502c1ba22d737928012a8f1a41d29
  * the entire order is considered fully handled.
  */
 void update_queue_target_floor(Order* p_current_order, int floor);

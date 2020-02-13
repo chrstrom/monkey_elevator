@@ -69,10 +69,6 @@ int queue_is_empty(Order* p_queue) {
     return 0;
 }
 
-void update_queue_target_floor(Order* p_current_order, int floor) {
-
-}
-
 int queue_is_empty(Order* p_queue) {
     return 0;
 }
