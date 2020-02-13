@@ -41,8 +41,8 @@ int hardware_init();
 
 /**
  * @brief Commands the elevator to either move up or down,
- * or commands it to halt. 
- * 
+ * or commands it to halt.
+ *
  * @param movement Commanded movement.
  */
 void hardware_command_movement(HardwareMovement movement);
@@ -72,7 +72,7 @@ int hardware_read_floor_sensor(int floor);
 
 /**
  * @brief Polls the hardware for the status of orders from
- * floor @p floor of type @p order_type. 
+ * floor @p floor of type @p order_type.
  *
  * @param floor Inquired floor.
  * @param order_type
@@ -88,7 +88,7 @@ int hardware_read_order(int floor, HardwareOrder order_type);
  * @param door_open A truthy value (non-zero) to open the door;
  * 0 to close.
  */
-void hardware_command_door_open(int door_open);            
+void hardware_command_door_open(int door_open);
 
 /**
  * @brief Commands the hardware to turn on the floor indicator
