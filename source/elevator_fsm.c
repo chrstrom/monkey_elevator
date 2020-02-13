@@ -36,6 +36,7 @@ int update_state(elevator_state_t* p_elevator_state, time_t* p_door_timer, Order
         }
 
         case STATE_MOVING_UP: {
+            
             if(current_floor >= MAX_FLOOR) {
                 *p_elevator_state = STATE_IDLE;
                 return CMD_STOP_MOVEMENT;
@@ -63,7 +64,8 @@ int update_state(elevator_state_t* p_elevator_state, time_t* p_door_timer, Order
 
 
         case STATE_MOVING_DOWN: {
-             if(current_floor <= MIN_FLOOR) {
+            // må ta hensyn til at at_floor() = -1 ved 
+            if(current_floor <= MIN_FLOOR) {
                 *p_elevator_state = STATE_IDLE;
                 return CMD_STOP_MOVEMENT;
             }
@@ -118,28 +120,36 @@ int determine_direction(elevator_state_t* p_elevator_state, Order* p_current_ord
     return -1;
 }
 
-int emergency_action(Order* p_queue, time_t* p_stop_button_timer, int* p_door_open, int* p_emergency){
+int emergency_action(Order* p_queue, time_t* p_door_timer, int* p_door_open){
     if(hardware_read_stop_signal()){
-        p_emergency = CMD_EMERGENCY;
         erase_queue(p_queue);
         hardware_command_movement(HARDWARE_MOVEMENT_STOP);
-        start_timer(p_stop_button_timer);
+        start_timer(p_door_timer);
         if (at_floor() != -1){
-            p_door_open = DOOR_OPEN;
+            *p_door_open = DOOR_OPEN;
             hardware_command_door_open(DOOR_OPEN);
         }
         return CMD_EMERGENCY;
     }
     else{
-        p_emergency = CMD_NOT_EMERGENCY;
-        if(at_floor == -1){
+        if(at_floor() == -1){
             return CMD_DO_NOTHING;
         }
-        else if(check_timer(p_stop_button_timer) && hardware_read_obstruction_signal()){
+        else if(check_timer(p_door_timer)){
             return CMD_CHECK_OBSTRUCTION;
         }
+        return CMD_EMERGENCY;
+    }
+}
+
+int obstruction_check(time_t* p_door_timer, int* p_door_open){
+    if(hardware_read_obstruction_signal()){
+        return CMD_CHECK_OBSTRUCTION;
+    }
+    if(check_timer(p_door_timer) && *p_door_open == DOOR_OPEN){
         return CMD_CLOSE_DOOR;
     }
+    return CMD_CHECK_OBSTRUCTION;
 }
 
       // In STATE_IDLE:

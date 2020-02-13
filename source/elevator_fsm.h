@@ -33,6 +33,8 @@
 #define CMD_STOP_MOVEMENT 7
 #define CMD_EMERGENCY 8
 #define CMD_NOT_EMERGENCY 9
+#define CMD_NOT_OBSTRUCTION 10
+#define CMD_OBSTRUCTION 11
 
 /**
  * Enum containing the possible states of the FSM 
@@ -88,6 +90,11 @@ int determine_direction(elevator_state_t* p_elevator_state,
                 Order* p_current_order, 
                 int current_floor);
 
-int emergency_action(Order* p_queue, time_t* p_stop_button_timer, int* p_door_open, int* p_emergency);
+int emergency_action(Order* p_queue,  
+                time_t* p_door_timer, 
+                int* p_door_open);                
+
+int obstruction_check(time_t* p_door_timer, 
+                int* p_door_open);
 
 #endif

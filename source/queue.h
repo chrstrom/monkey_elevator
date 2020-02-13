@@ -10,7 +10,7 @@
 // !! Not 100% sure if we need to dereference the pointers in sizeof
 #define SIZEOF_ARR(X) sizeof(*X)/sizeof(X[0])
 
-static int   UP_ORDERS[MAX_FLOOR + 1] = {0, 0, 0, 0};
+static int UP_ORDERS[MAX_FLOOR + 1] = {0, 0, 0, 0};
 static int DOWN_ORDERS[MAX_FLOOR + 1] = {0, 0, 0, 0};
 static int CAB_ORDERS[MAX_FLOOR + 1] = {0, 0, 0, 0};
 
