@@ -40,6 +40,15 @@ void add_order_to_queue(Order* p_queue) {
 
 }
 
+void push_back_queue(Order* p_queue, int floor, HardwareMovement dir) {
+    Order new_order = {.target_floor = floor, .dir = dir};
+     for(int order = 0; order < SIZEOF_ARR(p_queue); order++) {
+        if(p_queue[order].target_floor == -1) {
+            p_queue[order] = new_order;
+        }
+    }
+}
+
 int check_queue_for_order(Order* p_queue, int floor, HardwareMovement dir) {
     for(int order = 0; order < QUEUE_SIZE; order++) {
         if(p_queue[order].target_floor == floor && p_queue[order].dir == dir) {
@@ -121,13 +130,4 @@ int check_order_match(Order* queue, int current_floor, HardwareMovement last_dir
 Order initialize_new_order(){
     Order new_order = {.target_floor = -1, .dir = HARDWARE_ORDER_INSIDE};
 
-}
-
-void push_back_queue(Order* queue, int floor, HardwareMovement dir) {
-    Order new_order = {.target_floor = floor, .dir = dir};
-     for(int order = 0; order < SIZEOF_ARR(queue); order++) {
-        if(queue[order].target_floor == -1) {
-            queue[order] = new_order;
-        }
-    }
 }
