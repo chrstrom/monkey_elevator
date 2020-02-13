@@ -121,7 +121,7 @@ int determine_direction(elevator_state_t* p_elevator_state, Order* p_current_ord
 }
 
       // In STATE_IDLE:
-      // If the queue is not empty, we will transition to IDLE with one of four cases:
+      // If the queue is not empty, we will transition to IDLE with one of four cases: 
             // Case 1: Stop button was pressed
                 // Because the queue is emptied when the stop button is pressed, this
                 // case will be caught by the first check
