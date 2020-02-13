@@ -7,8 +7,8 @@
 
 #include "includes.h"
 
-// !! Not 100% sure if we need to dereference the pointers in sizeof
 #define SIZEOF_ARR(X) sizeof(*X)/sizeof(X[0])
+
 
 static int ORDERS_UP[MAX_FLOOR + 1] = {0, 0, 0, 0};
 static int ORDERS_DOWN[MAX_FLOOR + 1] = {0, 0, 0, 0};
