@@ -25,11 +25,14 @@
 #define DO_NOTHING 0
 #define CHECK_OBSTRUCTION 1
 #define START_DOOR_TIMER 2
-#define OPEN_DOOR 3
+#define OPEN_DOOR 3             //vil bli forvirring med navngivning. Får potensiell navnekollisjon med
+                                //det som ligger i includes!!!!
 #define CLOSE_DOOR 4
 #define MOVE_UP 5
 #define MOVE_DOWN 6
 #define STOP_MOVEMENT 7
+#define EMERGENCY 8
+#define NOT_EMERGENCY 9
 
 /**
  * Enum containing the possible states of the FSM 
@@ -67,5 +70,24 @@ int update_state(elevator_state_t* p_elevator_state,
                  int last_floor,
                  int* p_door_open);
 
+/**
+ * @brief Calculate the next direction the elevator must drive in
+ * 
+ * @param[in]  p_elevator_state    A pointer to the elevator state.
+ * @param[in]  p_door_timer        A pointer to the door_timer, used to control the door open/close sequence
+ * @param[in]  p_current_order     A pointer to the elevator's current order being handled                    
+ * @param[in]  current_floor       The current floor of the elevator
+ * 
+ * @return The next direction the elevator will drive in
+ * 
+ * This function updates the elevator's state machine, and yields a resulting
+ * function to be executed for any given state. It contains most of the logic flow
+ * used to control the elevator's movements, depending on the given inputs.
+ */
+int determine_direction(elevator_state_t* p_elevator_state, 
+                Order* p_current_order, 
+                int current_floor);
+
+int emergency_action(Order* p_queue, time_t* p_stop_button_timer, int* p_door_open, int* p_emergency);
 
 #endif

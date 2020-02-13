@@ -1,7 +1,5 @@
 #include "elevator_fsm.h"
 
-int determine_direction(elevator_state_t* p_elevator_state, Order* p_current_order, int current_floor);
-
 int update_state(elevator_state_t* p_elevator_state, time_t* p_door_timer, Order* p_queue, HardwareMovement last_dir, int last_floor, int* p_door_open) {
 
     int current_floor = at_floor(); 
@@ -94,6 +92,7 @@ int update_state(elevator_state_t* p_elevator_state, time_t* p_door_timer, Order
 }
 
 int determine_direction(elevator_state_t* p_elevator_state, Order* p_current_order, int current_floor) {
+    
     if(current_floor < MIN_FLOOR || current_floor > MAX_FLOOR) {
         return -1;
     }
@@ -118,6 +117,30 @@ int determine_direction(elevator_state_t* p_elevator_state, Order* p_current_ord
 
     // We should never reach this point
     return -1;
+}
+
+int emergency_action(Order* p_queue, time_t* p_stop_button_timer, int* p_door_open, int* p_emergency){
+    if(hardware_read_stop_signal()){
+        p_emergency = EMERGENCY;
+        erase_queue(p_queue);
+        hardware_command_movement(HARDWARE_MOVEMENT_STOP);
+        start_timer(p_stop_button_timer);
+        if (at_floor() != -1){
+            p_door_open = DOOR_OPEN;
+            hardware_command_door_open(DOOR_OPEN);
+        }
+        return EMERGENCY;
+    }
+    else{
+        p_emergency = NOT_EMERGENCY;
+        if(at_floor == -1){
+            return DO_NOTHING;
+        }
+        else if(check_timer(p_stop_button_timer) && hardware_read_obstruction_signal()){
+            return CHECK_OBSTRUCTION;
+        }
+        return CLOSE_DOOR;
+    }
 }
 
       // In STATE_IDLE:
