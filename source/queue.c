@@ -97,7 +97,7 @@ int queue_is_empty(Order* p_queue) {
 
 void update_queue_target_floor(Order* p_current_order, int current_floor) {
     for(int floor; floor < SIZEOF_ARR(ORDERS_CAB); floor++) {
-        if(ORDERS_CAB[floor] == 1 & floor != current_floor) {
+        if(ORDERS_CAB[floor] == 1 && floor != current_floor) {
             p_current_order->target_floor = floor;
             ORDERS_CAB[floor] = 0;
             return;
@@ -129,5 +129,5 @@ int check_order_match(Order* queue, int current_floor, HardwareMovement last_dir
 
 Order initialize_new_order(){
     Order new_order = {.target_floor = -1, .dir = HARDWARE_ORDER_INSIDE};
-
+    return new_order;
 }
