@@ -101,6 +101,7 @@ void update_queue_target_floor(Order* p_current_order, int current_floor);
  */
 int check_order_match(Order* queue, int current_floor, HardwareMovement last_dir);
 
+void push_back_queue(Order* queue, int floor, HardwareMovement dir);
 
 Order initialize_new_order();
 
