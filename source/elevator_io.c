@@ -51,10 +51,10 @@ void set_floor_button_lights(int* p_order_up, int* p_order_down) {
 
 //May want to change the in-argument to queue
 void update_cab_buttons(Order* p_queue) {
-    for(int cab_button = MIN_FLOOR; cab_button <= MAX_FLOOR; cab_button++) {
-        int order = hardware_read_order(cab_button, HARDWARE_ORDER_INSIDE);
-        p_queue[0].cab_orders[cab_button] = order;
-        hardware_command_order_light(cab_button, HARDWARE_ORDER_INSIDE, order);
+    for(int floor = MIN_FLOOR; floor <= MAX_FLOOR; floor++) {
+        int order = hardware_read_order(floor, HARDWARE_ORDER_INSIDE);
+        CAB_ORDERS[floor] = order;
+        hardware_command_order_light(floor, HARDWARE_ORDER_INSIDE, order);
     }
 }
 
