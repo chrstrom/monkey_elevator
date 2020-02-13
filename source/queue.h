@@ -32,6 +32,12 @@ typedef struct{
  */
 void update_queue(Order* p_queue);
 
+/**
+ * 
+ */
+void add_order_to_queue(Order* p_queue);
+
+int check_queue_for_order(Order* p_queue, int floor, HardwareMovement dir);
 
 /**
  * @brief Empty the queue by removing all elements

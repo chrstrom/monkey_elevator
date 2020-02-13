@@ -25,6 +25,20 @@ void update_queue(Order* p_queue) {
     }
 }
 
+void add_order_to_queue(Order* p_queue) {
+    for(int idx = 0; idx < SIZEOF_ARR(UP_ORDERS); idx++) {
+        if(UP_ORDERS[idx] == 1 && check_) {
+        }
+    }
+
+}
+
+int check_queue_for_order(Order* p_queue, int floor, HardwareMovement dir) {
+    
+}
+
+
+
 void set_cab_orders(){
     for(int floor = MIN_FLOOR; floor < MAX_FLOOR; floor++){
         CAB_ORDERS[floor] = hardware_read_order(floor, HARDWARE_ORDER_INSIDE);
