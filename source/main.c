@@ -10,16 +10,16 @@
 int elevator_init() {
 
     // Turn off all button lights
-    for(int floor_up = 0; floor_up < MAX_FLOOR; floor_up++) {
+    for(int floor_up = 0; floor_up < HARDWARE_NUMBER_OF_FLOORS; floor_up++) {
         hardware_command_order_light(floor_up, HARDWARE_ORDER_UP, LIGHT_OFF);
     }
 
-    for(int floor_down = 0; floor_down < MAX_FLOOR; floor_down++) {
+    for(int floor_down = 0; floor_down < HARDWARE_NUMBER_OF_FLOORS; floor_down++) {
         hardware_command_order_light(floor_down, HARDWARE_ORDER_DOWN, LIGHT_OFF);
     }
 
     // Clear all order arrays just in case;
-    for(int floor = 0; floor < MAX_FLOOR + 1; floor++) {
+    for(int floor = 0; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
         ORDERS_UP[floor] = 0;
         ORDERS_DOWN[floor] = 0;
         ORDERS_CAB[floor] = 0;
@@ -58,9 +58,8 @@ int main(){
     }
 
     // ELEVATOR INITIAL SETUP
-
-    Order queue[QUEUE_SIZE];
-
+    
+    
     int door_open = DOOR_CLOSED;
     int next_action  = CMD_STOP_MOVEMENT;
     int last_floor = at_floor(); //should reach a valid floor during elevator_init
@@ -80,15 +79,16 @@ int main(){
         if(hardware_read_stop_signal()){
             hardware_command_stop_light(LIGHT_ON);
             hardware_command_movement(HARDWARE_MOVEMENT_STOP);
-            next_action = emergency_action(queue, &door_timer, &door_open);
+            next_action = emergency_action(&door_timer, &door_open);
+
         }
         
         else{
             poll_floor_buttons();
-            add_order_to_queue(queue);
+            add_order_to_queue(QUEUE);
             set_floor_button_lights();
             if(next_action != CMD_EMERGENCY && next_action != CMD_OBSTRUCTION){
-                next_action = update_state(&elevator_state, &door_timer, queue, last_dir, last_floor, &door_open);
+                next_action = update_state(&elevator_state, &door_timer, last_dir, last_floor, &door_open);
             }
         }
 
@@ -98,7 +98,7 @@ int main(){
                 break;
 
             case CMD_EMERGENCY:
-                next_action = emergency_action(queue, &door_timer, &door_open);
+                next_action = emergency_action(&door_timer, &door_open);
                 break;
             
             case CMD_CHECK_OBSTRUCTION:

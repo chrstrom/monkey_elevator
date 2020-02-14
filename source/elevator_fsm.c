@@ -1,14 +1,15 @@
 #include "elevator_fsm.h"
 
-int update_state(elevator_state_t* p_elevator_state, time_t* p_door_timer, Order* p_queue, HardwareMovement last_dir, int last_floor, int* p_door_open) {
+int update_state(elevator_state_t* p_elevator_state, time_t* p_door_timer, HardwareMovement last_dir, int last_floor, int* p_door_open) {
 
     int current_floor = at_floor(); 
-    Order current_order = p_queue[0];
+    Order current_order = QUEUE[0];
     hardware_command_floor_indicator_on(last_floor);
 
     switch(*p_elevator_state) {
         case STATE_IDLE: {
             hardware_command_movement(HARDWARE_MOVEMENT_STOP);
+<<<<<<< HEAD
             
             // If the door is closed and the queue is empty, all orders are served
             if(queue_is_empty(p_queue) && p_door_open == DOOR_CLOSED) {
@@ -27,6 +28,17 @@ int update_state(elevator_state_t* p_elevator_state, time_t* p_door_timer, Order
             // action before the next order might be started with
             if(*p_door_open == DOOR_OPEN){
                 return CMD_CHECK_OBSTRUCTION;
+=======
+
+            if(queue_is_empty(QUEUE)) {
+                return CMD_DO_NOTHING;
+            }
+
+            // If the QUEUE is not empty, we firstly need to check for the obstruction signal
+            // and whether or not the door is open.
+            if(hardware_read_obstruction_signal() && *p_door_open == DOOR_OPEN) {
+                return CMD_START_DOOR_TIMER;
+>>>>>>> chr
             }
   
             // If the door is closed, the elevator may go to the next order in the queue
@@ -39,17 +51,17 @@ int update_state(elevator_state_t* p_elevator_state, time_t* p_door_timer, Order
 
         case STATE_MOVING_UP: {
             
-            if(current_floor >= MAX_FLOOR) {
+            if(current_floor >= HARDWARE_NUMBER_OF_FLOORS) {
                 *p_elevator_state = STATE_IDLE;
                 return CMD_STOP_MOVEMENT;
             }
 
             // We start the loop at last_floor because we only wish to check for floors we are moving towards.
-            for(int floor = last_floor; floor <= MAX_FLOOR; floor++){
-                if (current_floor == ORDERS_CAB[floor] && check_order_match(p_queue, current_floor, last_dir)){
+            for(int floor = last_floor; floor < HARDWARE_NUMBER_OF_FLOORS; floor++){
+                if (current_floor == ORDERS_CAB[floor] && check_order_match(current_floor, last_dir)){
                     // Here we have found a valid floor to stop at!
 
-                    update_queue_target_floor(&current_order, current_floor);
+                    update_target_floor(&current_order, current_floor);
                     clear_cab_orders(current_floor);
 
                     *p_elevator_state = STATE_IDLE;
@@ -74,10 +86,10 @@ int update_state(elevator_state_t* p_elevator_state, time_t* p_door_timer, Order
 
             // We start the loop at last_floor because we only wish to check for floors we are moving towards.
             for(int floor = last_floor; floor > MIN_FLOOR; floor--) {
-                if (current_floor == ORDERS_CAB[floor] && check_order_match(p_queue, current_floor, last_dir)) {
+                if (current_floor == ORDERS_CAB[floor] && check_order_match(current_floor, last_dir)) {
                     // Here we have found a valid floor to stop at!
 
-                    update_queue_target_floor(&current_order, current_floor);
+                    update_target_floor(&current_order, current_floor);
                     clear_cab_orders(current_floor);
 
                     *p_elevator_state = STATE_IDLE;
@@ -95,8 +107,12 @@ int update_state(elevator_state_t* p_elevator_state, time_t* p_door_timer, Order
 }
 
 int determine_direction(elevator_state_t* p_elevator_state, Order* p_current_order, int current_floor) {
+    // This needs to be a two part operation.
+    // Before moving for the second time (after going to the floor we clicked the floor button at),
+    // we need to update p_current_order->target floor with one of the cab orders,
+    // using update_target_floor()
     
-    if(current_floor < MIN_FLOOR || current_floor > MAX_FLOOR) {
+    if(current_floor < MIN_FLOOR || current_floor > HARDWARE_NUMBER_OF_FLOORS) {
         return -1;
     }
     
@@ -113,7 +129,7 @@ int determine_direction(elevator_state_t* p_elevator_state, Order* p_current_ord
         // so to not be stuck in this. If we do not update target_floor, the check above
         // will always return true.
 
-        update_queue_target_floor(p_current_order, current_floor);
+        update_target_floor(p_current_order, current_floor);
         *p_elevator_state = STATE_IDLE;
         return CMD_START_DOOR_TIMER;
     }
@@ -122,9 +138,9 @@ int determine_direction(elevator_state_t* p_elevator_state, Order* p_current_ord
     return -1;
 }
 
-int emergency_action(Order* p_queue, time_t* p_door_timer, int* p_door_open){
+int emergency_action(time_t* p_door_timer, int* p_door_open){
     if(hardware_read_stop_signal()){
-        erase_queue(p_queue);
+        erase_queue(QUEUE);
         hardware_command_movement(HARDWARE_MOVEMENT_STOP);
         start_timer(p_door_timer);
         if (at_floor() != -1){
@@ -155,9 +171,9 @@ int obstruction_check(time_t* p_door_timer, int* p_door_open){
 }
 
       // In STATE_IDLE:
-      // If the queue is not empty, we will transition to IDLE with one of four cases: 
+      // If the QUEUE is not empty, we will transition to IDLE with one of four cases: 
             // Case 1: Stop button was pressed
-                // Because the queue is emptied when the stop button is pressed, this
+                // Because the QUEUE is emptied when the stop button is pressed, this
                 // case will be caught by the first check
 
             // Case 2: We arrive at the given target_floor for the current order
@@ -168,7 +184,7 @@ int obstruction_check(time_t* p_door_timer, int* p_door_open){
 
             // Case 2 and 3 will execute the same exact sequence, we can therefore add them
             // to the same check. 
-            // check_order_match() will return a truth value if the queue contains an order whos target_floor is equal
+            // check_order_match() will return a truth value if the QUEUE contains an order whos target_floor is equal
             // to the current floor AND is an order in the same direction as last_dir
             // if(current_order.target_floor == current_floor || check_order_match(p_queue, current_floor, last_dir)) {
             //     *p_elevator_state = STATE_HANDLE_ORDER;
