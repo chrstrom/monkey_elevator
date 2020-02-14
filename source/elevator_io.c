@@ -30,7 +30,7 @@ void poll_floor_buttons() {
 
     // if(order_floor != 0){ 
     //     Order order = {.target_floor = order_floor};
-    //     queue_push_back(queue, order);
+    //     queue_push_back(QUEUE, order);
     // }
 
 }
@@ -59,8 +59,8 @@ void set_floor_indicator_light(int last_floor) {
     }
 }
 
-//May want to change the in-argument to queue
-void update_cab_buttons(Order* p_queue) {
+//May want to change the in-argument to QUEUE
+void update_cab_buttons() {
     for(int floor = MIN_FLOOR; floor <= HARDWARE_NUMBER_OF_FLOORS; floor++) {
         int order = hardware_read_order(floor, HARDWARE_ORDER_INSIDE);
         ORDERS_CAB[floor] = order;

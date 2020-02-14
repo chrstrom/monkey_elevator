@@ -21,7 +21,7 @@
 #define MIN_FLOOR 0
 
 /** 
- * Size of the queue. The max amount of concurrent elements in the queue will be at most 2 * (HARDWARE_NUMBER_OF_FLOORS + 1 )  - 2
+ * Size of the QUEUE. The max amount of concurrent elements in the QUEUE will be at most 2 * (HARDWARE_NUMBER_OF_FLOORS + 1 )  - 2
  * In this case it will be 6, but we set it to 8 because its a power of 2 (nice) :)
 */
 #define QUEUE_SIZE 8

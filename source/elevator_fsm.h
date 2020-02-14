@@ -12,12 +12,12 @@
 #include "elevator_io.h"
 
 // In idle state:
-// If queue empty, do nothing
-// If queue[0].target_floor == current_floor
+// If QUEUE empty, do nothing
+// If QUEUE[0].target_floor == current_floor
     // """Handle the cab orders"""
-// If queue[0].target_floor > current_floor
+// If QUEUE[0].target_floor > current_floor
     // MOVE UP
-// If queue[0].target_floor < current_floor
+// If QUEUE[0].target_floor < current_floor
     // MOVE DOWN
 
 /**
@@ -53,8 +53,7 @@ typedef enum{
  * @brief Update the elevator state
  * 
  * @param[in][out]  p_elevator_state    A pointer to the elevator state, updates on transitions.
- * @param[in][out]  p_door_timer        A pointer to the door_timer, used to control the door open/close sequence
- * @param[in][out]  p_queue             A pointer to the elevator's queue                     
+ * @param[in][out]  p_door_timer        A pointer to the door_timer, used to control the door open/close sequence                  
  * @param[in]       last_dir            The last direction of the elevator
  * @param[in]       last_floor          The last floor the elevator was at
  * @param[in]       p_door_open         A pointer to an int representing whether or not the door is open
@@ -67,7 +66,6 @@ typedef enum{
  */
 int update_state(elevator_state_t* p_elevator_state,
                  time_t* p_door_timer,
-                 Order* p_queue,
                  HardwareMovement last_dir,
                  int last_floor,
                  int* p_door_open);
@@ -90,11 +88,8 @@ int determine_direction(elevator_state_t* p_elevator_state,
                 Order* p_current_order, 
                 int current_floor);
 
-int emergency_action(Order* p_queue,  
-                time_t* p_door_timer, 
-                int* p_door_open);                
+int emergency_action(time_t* p_door_timer, int* p_door_open);                
 
-int obstruction_check(time_t* p_door_timer, 
-                int* p_door_open);
+int obstruction_check(time_t* p_door_timer, int* p_door_open);
 
 #endif

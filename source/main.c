@@ -58,7 +58,7 @@ int main(){
     }
 
     // ELEVATOR INITIAL SETUP
-    Order queue[QUEUE_SIZE];
+    
     
     int door_open = DOOR_CLOSED;
     int next_action  = CMD_STOP_MOVEMENT;
@@ -79,15 +79,15 @@ int main(){
         if(hardware_read_stop_signal()){
             hardware_command_stop_light(LIGHT_ON);
             hardware_command_movement(HARDWARE_MOVEMENT_STOP);
-            next_action = emergency_action(queue, &door_timer, &door_open);
+            next_action = emergency_action(&door_timer, &door_open);
 
         }
         else{
             poll_floor_buttons();
-            add_order_to_queue(queue);
+            add_order_to_queue(QUEUE);
             set_floor_button_lights();
             if(next_action != CMD_EMERGENCY && next_action != CMD_OBSTRUCTION){
-                next_action = update_state(&elevator_state, &door_timer, queue, last_dir, last_floor, &door_open);
+                next_action = update_state(&elevator_state, &door_timer, last_dir, last_floor, &door_open);
             }
         }
 
@@ -97,7 +97,7 @@ int main(){
                 break;
 
             case CMD_EMERGENCY:
-                next_action = emergency_action(queue, &door_timer, &door_open);
+                next_action = emergency_action(&door_timer, &door_open);
                 break;
             
             case CMD_CHECK_OBSTRUCTION:
