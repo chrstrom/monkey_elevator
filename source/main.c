@@ -10,16 +10,16 @@
 int elevator_init() {
 
     // Turn off all button lights
-    for(int floor_up = 0; floor_up < MAX_FLOOR; floor_up++) {
+    for(int floor_up = 0; floor_up < HARDWARE_NUMBER_OF_FLOORS; floor_up++) {
         hardware_command_order_light(floor_up, HARDWARE_ORDER_UP, LIGHT_OFF);
     }
 
-    for(int floor_down = 0; floor_down < MAX_FLOOR; floor_down++) {
+    for(int floor_down = 0; floor_down < HARDWARE_NUMBER_OF_FLOORS; floor_down++) {
         hardware_command_order_light(floor_down, HARDWARE_ORDER_DOWN, LIGHT_OFF);
     }
 
     // Clear all order arrays just in case;
-    for(int floor = 0; floor < MAX_FLOOR + 1; floor++) {
+    for(int floor = 0; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
         ORDERS_UP[floor] = 0;
         ORDERS_DOWN[floor] = 0;
         ORDERS_CAB[floor] = 0;
@@ -58,9 +58,8 @@ int main(){
     }
 
     // ELEVATOR INITIAL SETUP
-
     Order queue[QUEUE_SIZE];
-
+    
     int door_open = DOOR_CLOSED;
     int next_action  = CMD_STOP_MOVEMENT;
     int last_floor = at_floor(); //should reach a valid floor during elevator_init

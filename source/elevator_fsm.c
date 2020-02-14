@@ -37,13 +37,13 @@ int update_state(elevator_state_t* p_elevator_state, time_t* p_door_timer, Order
 
         case STATE_MOVING_UP: {
             
-            if(current_floor >= MAX_FLOOR) {
+            if(current_floor >= HARDWARE_NUMBER_OF_FLOORS) {
                 *p_elevator_state = STATE_IDLE;
                 return CMD_STOP_MOVEMENT;
             }
 
             // We start the loop at last_floor because we only wish to check for floors we are moving towards.
-            for(int floor = last_floor; floor <= MAX_FLOOR; floor++){
+            for(int floor = last_floor; floor < HARDWARE_NUMBER_OF_FLOORS; floor++){
                 if (current_floor == ORDERS_CAB[floor] && check_order_match(p_queue, current_floor, last_dir)){
                     // Here we have found a valid floor to stop at!
 
@@ -94,7 +94,7 @@ int update_state(elevator_state_t* p_elevator_state, time_t* p_door_timer, Order
 
 int determine_direction(elevator_state_t* p_elevator_state, Order* p_current_order, int current_floor) {
     
-    if(current_floor < MIN_FLOOR || current_floor > MAX_FLOOR) {
+    if(current_floor < MIN_FLOOR || current_floor > HARDWARE_NUMBER_OF_FLOORS) {
         return -1;
     }
     

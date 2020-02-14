@@ -59,18 +59,18 @@ int check_queue_for_order(Order* p_queue, int floor, HardwareMovement dir) {
 }
 
 void set_cab_orders(){
-    for(int floor = MIN_FLOOR; floor < MAX_FLOOR; floor++){
+    for(int floor = MIN_FLOOR; floor < HARDWARE_NUMBER_OF_FLOORS; floor++){
         ORDERS_CAB[floor] = hardware_read_order(floor, HARDWARE_ORDER_INSIDE);
     }
 }
 
 
 void clear_cab_orders(int current_floor){
-    if(current_floor > MAX_FLOOR || current_floor < MIN_FLOOR) {
+    if(current_floor > HARDWARE_NUMBER_OF_FLOORS || current_floor < MIN_FLOOR) {
         printf("current_floor out of bounds in clear_cab_order()!");
     }
 
-    for(int floor = MIN_FLOOR; floor <= MAX_FLOOR; floor++) {
+    for(int floor = MIN_FLOOR; floor <= HARDWARE_NUMBER_OF_FLOORS; floor++) {
         if(ORDERS_CAB[floor] == current_floor){
             ORDERS_CAB[floor] = 0;
         }
@@ -80,7 +80,7 @@ void clear_cab_orders(int current_floor){
 void erase_queue(Order* p_queue){
     //skal her slette hele køen
     //skal kun bli kalt dersom man trykker på stop
-    for(int qu = 0; qu < QUEUE_SIZE; qu++){
+    for(int qu = 0; qu < SIZEOF_ARR(p_queue); qu++){
         p_queue[qu].dir = HARDWARE_ORDER_INSIDE;
         p_queue[qu].target_floor = -1;
 
@@ -96,7 +96,7 @@ int queue_is_empty(Order* p_queue) {
 }
 
 void update_queue_target_floor(Order* p_current_order, int current_floor) {
-    for(int floor; floor < SIZEOF_ARR(ORDERS_CAB); floor++) {
+    for(int floor; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
         if(ORDERS_CAB[floor] == 1 && floor != current_floor) {
             p_current_order->target_floor = floor;
             ORDERS_CAB[floor] = 0;
@@ -108,16 +108,16 @@ void update_queue_target_floor(Order* p_current_order, int current_floor) {
 }
 
 
-int check_order_match(Order* queue, int current_floor, HardwareMovement last_dir) {
-    for(int order = 0; order < SIZEOF_ARR(queue); order++) {
-        Order current_order = queue[order];
+int check_order_match(Order* p_queue, int current_floor, HardwareMovement last_dir) {
+    for(int order = 0; order < SIZEOF_ARR(p_queue); order++) {
+        Order current_order = p_queue[order];
         // Only handle Orders if we have an order AT THIS FLOOR
         // We also need to check if its direction is the same as the last_dir of the elevator
         if(current_order.target_floor == current_floor && current_order.dir == last_dir) {
             return 1;
         }
 
-        for(int floor = 0; floor < SIZEOF_ARR(ORDERS_CAB); floor++) {
+        for(int floor = 0; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
             // Only handle cab orders if we have a cab order AT THE CURRENT FLOOR
             if(ORDERS_CAB[floor] && floor == current_floor) {
                 return 1;

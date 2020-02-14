@@ -9,11 +9,6 @@
 
 #define SIZEOF_ARR(X) sizeof(*X)/sizeof(X[0])
 
-
-static int ORDERS_UP[MAX_FLOOR + 1] = {0, 0, 0, 0};
-static int ORDERS_DOWN[MAX_FLOOR + 1] = {0, 0, 0, 0};
-static int ORDERS_CAB[MAX_FLOOR + 1] = {0, 0, 0, 0};
-
 /**
  * @struct Order
  * 
@@ -23,6 +18,18 @@ typedef struct{
     int target_floor;                   /**< The floor at which the order comes from */
     HardwareMovement dir;               /**< The direction of the order */
 } Order;
+
+
+
+// Externs: We choose to make these arrays global, as we operate on them
+// in almost every single major function. The alternative would be to pass
+// pointers to every function, which in this case here unneccesarily clutters
+// the code.
+
+int ORDERS_UP[HARDWARE_NUMBER_OF_FLOORS] = {0, 0, 0, 0};
+int ORDERS_DOWN[HARDWARE_NUMBER_OF_FLOORS] = {0, 0, 0, 0};
+int ORDERS_CAB[HARDWARE_NUMBER_OF_FLOORS] = {0, 0, 0, 0};
+
 
 
 /**
@@ -111,18 +118,18 @@ void update_queue_target_floor(Order* p_current_order, int current_floor);
 /**
  * @brief Check if the queue has a valid order to handle  
  * 
- * @param[in] queue             The queue which is checked for valid orders
+ * @param[in] p_queue           A pointer to the queue which is checked for valid orders
  * @param[in] current_floor     The floor of which we check for valid orders
  * @param[in] last_dir          The last direction of the elevator, for validity check
  * 
- * @return 1 if any @c Order in @p queue has a valid order, and 0 if no @c Order
+ * @return 1 if any @c Order in @p p_queue has a valid order, and 0 if no @c Order
  * is valid for the @p current_floor .
  * 
- * The function checks if any @c Order in the @p queue has an order set for the @p current_floor .
+ * The function checks if any @c Order in the @p p_queue has an order set for the @p current_floor .
  * @p last_dir is used to check whether or not we should stop for it. We also check if any
  * of the orders have a cab-order that we can handle.
  */
-int check_order_match(Order* queue, int current_floor, HardwareMovement last_dir);
+int check_order_match(Order* p_queue, int current_floor, HardwareMovement last_dir);
 
 /**
  * @brief Pushes a new @c Order to the @p p_queue 
