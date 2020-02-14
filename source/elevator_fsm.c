@@ -9,30 +9,32 @@ int update_state(elevator_state_t* p_elevator_state, time_t* p_door_timer, Order
     switch(*p_elevator_state) {
         case STATE_IDLE: {
             hardware_command_movement(HARDWARE_MOVEMENT_STOP);
-
-            if(queue_is_empty(p_queue)) {
+            
+            // If the door is closed and the queue is empty, all orders are served
+            if(queue_is_empty(p_queue) && p_door_open == DOOR_CLOSED) {
                 return CMD_DO_NOTHING;
             }
 
-            // If the queue is not empty, we firstly need to check for the obstruction signal
-            // and whether or not the door is open.
-            if(hardware_read_obstruction_signal() && *p_door_open == DOOR_OPEN) {
-                return CMD_START_DOOR_TIMER;
+            // The elevator has arrived at the current floor, but not opened the door yet
+            // Might be a bug here, where the elevator will assume that the current floor is
+            // the target floor of the next order, even though it has just been served. Will
+            // then be stuck in an endless loop
+            if(current_floor == current_order.target_floor && *p_door_open == DOOR_CLOSED){
+                return CMD_OPEN_DOOR;
+            }
+
+            // If the door is open, an order is not fully served. We must therefore step into that
+            // action before the next order might be started with
+            if(*p_door_open == DOOR_OPEN){
+                return CMD_CHECK_OBSTRUCTION;
             }
   
-            // If the do, close the doors and start moving
-            if(check_timer(p_door_timer) && !hardware_read_obstruction_signal()){ 
-                // Then determine which direction we should move in
+            // If the door is closed, the elevator may go to the next order in the queue
+            if(*p_door_open == DOOR_CLOSED){ 
                 return determine_direction(p_elevator_state, &current_order, current_floor);
- 
-            }
-            else {
-                // Not enough time has passed => Doors remain open and we do nothing
-                *p_elevator_state = STATE_IDLE;
-                return CMD_DO_NOTHING;
             }
 
-            return CMD_DO_NOTHING;  // We shouldnt get to this point
+            return CMD_DO_NOTHING;
         }
 
         case STATE_MOVING_UP: {

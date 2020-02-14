@@ -81,8 +81,8 @@ int main(){
             hardware_command_stop_light(LIGHT_ON);
             hardware_command_movement(HARDWARE_MOVEMENT_STOP);
             next_action = emergency_action(queue, &door_timer, &door_open);
-
         }
+        
         else{
             poll_floor_buttons(UP_ORDERS, DOWN_ORDERS);
             add_order_to_queue(queue);
@@ -105,18 +105,26 @@ int main(){
                 next_action = obstruction_check(&door_timer, &door_open);
                 break;
 
+            /*
             case CMD_START_DOOR_TIMER:
                 start_timer(&door_timer);
                 break;
+            */
 
             case CMD_OPEN_DOOR:
                 hardware_command_door_open(DOOR_OPEN);
+                start_timer(door_timer);
                 door_open = DOOR_OPEN;
+                next_action = CMD_CHECK_OBSTRUCTION;
                 break;
 
             case CMD_CLOSE_DOOR:
+                // We assume that the check for obstruction is done preemptivaly                
+                // Here we go out of the obstruction-state with CMD_DO_NOTHING, such that
+                // the elevator can calculate the next action/state
                 hardware_command_door_open(DOOR_CLOSED);
                 door_open = DOOR_CLOSED;
+                next_action = CMD_DO_NOTHING;
                 break;
 
             case CMD_MOVE_UP:
