@@ -127,7 +127,18 @@ int check_order_match(Order* queue, int current_floor, HardwareMovement last_dir
     return 0;
 }
 
+//Pherhaps just delete this! Isn't used anywhere in the code, and has zero
+//use in the code, since we already have defined the orders
 Order initialize_new_order(){
     Order new_order = {.target_floor = -1, .dir = HARDWARE_ORDER_INSIDE};
     return new_order;
+}
+
+void push_back_queue(Order* p_queue, int floor, HardwareMovement dir) {
+    Order new_order = {.target_floor = floor, .dir = dir};
+     for(int order = 0; order < SIZEOF_ARR(p_queue); order++) {
+        if(p_queue[order].target_floor == -1) {
+            p_queue[order] = new_order;
+        }
+    }
 }

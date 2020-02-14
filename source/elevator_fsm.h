@@ -90,10 +90,27 @@ int determine_direction(elevator_state_t* p_elevator_state,
                 Order* p_current_order, 
                 int current_floor);
 
+/**
+ * @brief Performs the necessary actions when the stop-button is activated.
+ * The function will delete/reset the queue, and return the next state the
+ * elevator will go into. 
+ * 
+ * @param[in/out] p_queue           A pointer to the queue to be reset
+ * @param[in/out] p_door_timer      A pointer to the door-timer. Will be initialized inside the function.
+ *                                  Will be used to close the door later (if the elevator is at a floor)
+ * @param[in/out] p_door_open       A pointer to the door-state (closed/open). The function will open the
+ *                                  door if the elevator is at a floor when the stop-button is pressed
+ */
 int emergency_action(Order* p_queue,  
                 time_t* p_door_timer, 
                 int* p_door_open);                
 
+/**
+ * @brief Closes the door if a certain amount of time has passed and the obstruction signal is low
+ * 
+ * @param[in] p_door_timer      A pointer to the door-timer.
+ * @param[in] p_door_open       A pointer to the door-state. 
+ */
 int obstruction_check(time_t* p_door_timer, 
                 int* p_door_open);
 

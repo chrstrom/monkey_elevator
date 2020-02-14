@@ -111,7 +111,7 @@ void update_queue_target_floor(Order* p_current_order, int current_floor);
 /**
  * @brief Check if the queue has a valid order to handle  
  * 
- * @param[in] queue             The queue which is checked for valid orders
+ * @param[in] p_queue           The queue which is checked for valid orders
  * @param[in] current_floor     The floor of which we check for valid orders
  * @param[in] last_dir          The last direction of the elevator, for validity check
  * 
@@ -122,7 +122,16 @@ void update_queue_target_floor(Order* p_current_order, int current_floor);
  * @p last_dir is used to check whether or not we should stop for it. We also check if any
  * of the orders have a cab-order that we can handle.
  */
-int check_order_match(Order* queue, int current_floor, HardwareMovement last_dir);
+int check_order_match(Order* p_queue, int current_floor, HardwareMovement last_dir);
+
+/**
+ * @brief Add a new order on the back of a 
+ * 
+ * @param[in/out] p_queue       Pointer to the queue
+ * @param[in] floor             The destination of the order
+ * @param[in] dir               The direction the order will travel in
+ */
+void push_back_queue(Order* p_queue, int floor, HardwareMovement dir);
 
 /**
  * @brief Pushes a new @c Order to the @p p_queue 
