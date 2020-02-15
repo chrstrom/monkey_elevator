@@ -8,6 +8,7 @@
 #include "includes.h"
 #include "queue.h"
 
+// Med denne structen kan vi kanskje også holde alle arrays med knapper, samt queue?
 typedef struct{
     int door_open;
     int next_action;
