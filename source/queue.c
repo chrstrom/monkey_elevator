@@ -120,7 +120,7 @@ int check_order_match(int current_floor, HardwareMovement last_dir) {
 
         for(int floor = 0; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
             // Only handle cab orders if we have a cab order AT THE CURRENT FLOOR
-            if(ORDERS_CAB[floor] && floor == current_floor) {
+            if(ORDERS_CAB[floor] == 1 && floor == current_floor) {
                 return 1;
             }
         }

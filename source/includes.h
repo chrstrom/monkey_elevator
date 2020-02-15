@@ -10,51 +10,22 @@
 #include <time.h>
 #include "driver/hardware.h"
 
-/**
- * The top floor that the elevator runs to. Note that this is 0-indexed 
- */
-//#define HARDWARE_NUMBER_OF_FLOORS 3
-
-/**
- * The bottom floor that the elevator runs to. Note that this is 0-indexed 
- */
-#define MIN_FLOOR 0
-
 /** 
  * Size of the QUEUE. The max amount of concurrent elements in the QUEUE will be at most 2 * (HARDWARE_NUMBER_OF_FLOORS + 1 )  - 2
  * In this case it will be 6, but we set it to 8 because its a power of 2 (nice) :)
 */
 #define QUEUE_SIZE 8
 
-/** 
- * Size of the orders. One to spare for each floor
-*/
-#define ORDER_SIZE 5
+#define ORDER_SIZE 5        /** Size of the orders. One to spare for each floor */
 
-/** 
- * Normal wait-time for the elevator.
- * Will be used everytime after obstruction and stop 
-*/
-#define NORMAL_WAIT_TIME 3
+#define MIN_FLOOR 0         /**The bottom floor that the elevator runs to. Note that this is 0-indexed */
 
-/**
- * Macro for closed door
- */
-#define DOOR_CLOSE 0
+#define NORMAL_WAIT_TIME 3  /** Normal wait-time for the elevator, for obstruction and stop timers */
 
-/**
- * Macro for open door
- */
-#define DOOR_OPEN 1
+#define DOOR_CLOSE 0        /** Macro for door closed/close door */
+#define DOOR_OPEN 1         /** Macro for door open/open door */
 
-/**
- * Macro for light off 
- */
-#define LIGHT_OFF 0
-
-/**
- * Macro for light on
- */
-#define LIGHT_ON 1
+#define LIGHT_OFF 0         /** Macro for light off */
+#define LIGHT_ON 1          /** Macro for light on */
 
 #endif

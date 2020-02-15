@@ -9,30 +9,19 @@
 
 int elevator_init() {
 
-    // Turn off all button lights
-    for(int floor_up = 0; floor_up < HARDWARE_NUMBER_OF_FLOORS; floor_up++) {
-        hardware_command_order_light(floor_up, HARDWARE_ORDER_UP, LIGHT_OFF);
-    }
-
-    for(int floor_down = 0; floor_down < HARDWARE_NUMBER_OF_FLOORS; floor_down++) {
-        hardware_command_order_light(floor_down, HARDWARE_ORDER_DOWN, LIGHT_OFF);
-    }
-
-    // Clear all order arrays just in case;
+    // Turn off all button lights and clear all order light arrays (just in case)
     for(int floor = 0; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
+        hardware_command_order_light(floor, HARDWARE_ORDER_UP, LIGHT_OFF);
+        hardware_command_order_light(floor, HARDWARE_ORDER_DOWN, LIGHT_OFF);
         ORDERS_UP[floor] = 0;
         ORDERS_DOWN[floor] = 0;
         ORDERS_CAB[floor] = 0;
     }
+
     hardware_command_stop_light(LIGHT_OFF);
-   
-
-
-    // Close the door and, if not in a floor already, move to a floor
-    // Set the floor-indicator
-
+   hardware_command_door_open(DOOR_CLOSE);
     //Kan man anta at obstruksjonsbryteren aldri skal være høy i inittialiseringsfasen?
-    hardware_command_door_open(DOOR_CLOSED);
+    
     while(at_floor() == -1) {
         hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
     }
@@ -42,9 +31,8 @@ int elevator_init() {
     return 0;
 }
 
-
 int main(){
-
+    // ELEVATOR INITIAL SETUP
     int error = hardware_init();
     if(error != 0){
         fprintf(stderr, "Unable to initialize hardware\n");
@@ -57,77 +45,60 @@ int main(){
         exit(1);
     }
 
-    // ELEVATOR INITIAL SETUP
-    
-    
-    int door_open = DOOR_CLOSED;
-    int next_action  = ACTION_STOP_MOVEMENT;
-    int last_floor = at_floor(); //should reach a valid floor during elevator_init
-    HardwareMovement last_dir = HARDWARE_MOVEMENT_STOP;
-    elevator_state_t elevator_state = STATE_IDLE;
-
-    time_t stop_button_timer = time(NULL);
-    time_t door_timer = time(NULL);
-    start_timer(&stop_button_timer);
-    start_timer(&door_timer);
+    elevator_data_t elevator_data = {DOOR_CLOSE, ACTION_STOP_MOVEMENT, at_floor(), HARDWARE_MOVEMENT_STOP, STATE_IDLE};
+    time_t timer = time(NULL);
 
     // ELEVATOR PROGRAM LOOP
     while(1){
-        
-        // First check if the stop-button is pressed! This must be done before the fsm, as this is the most
-        //important safety-check
-        if(hardware_read_stop_signal()){
-            hardware_command_stop_light(LIGHT_ON);
-            hardware_command_movement(HARDWARE_MOVEMENT_STOP);
-            next_action = emergency_action(&door_timer, &door_open);
+        // Get events
+        floor_button_event_handler();
+        // Set floor light
+        hardware_command_floor_indicator_on(elevator_data.last_floor);
 
-        }
-        else{
-            poll_floor_buttons();
-            add_order_to_queue();
-            set_floor_button_lights();
-            if(next_action != ACTION_EMERGENCY && next_action == ACTION_OBSTRUCTION){
-                next_action = update_state(&elevator_state, &door_timer, last_dir, last_floor, &door_open);
-            }
-        }
+        // Determine next action
+        elevator_data.next_action = update_state(&elevator_data, &timer);
 
-        switch(next_action) {
+        // Execute next action
+        switch(elevator_data.next_action) {
             case ACTION_DO_NOTHING:
                 hardware_command_movement(HARDWARE_MOVEMENT_STOP);
                 break;
 
             case ACTION_EMERGENCY:
-                next_action = emergency_action(&door_timer, &door_open);
+                emergency_action(&timer, &elevator_data.door_open);
                 break;
             
             case ACTION_CHECK_OBSTRUCTION:
-                next_action = obstruction_check(&door_timer, &door_open);
+                obstruction_check(&timer, &elevator_data.door_open);
                 break;
 
             case ACTION_START_DOOR_TIMER:
-                start_timer(&door_timer);
+                start_timer(&timer);
                 break;
 
             case ACTION_OPEN_DOOR:
                 hardware_command_door_open(DOOR_OPEN);
-                door_open = DOOR_OPEN;
+                elevator_data.door_open = DOOR_OPEN;
                 break;
 
             case ACTION_CLOSE_DOOR:
-                hardware_command_door_open(DOOR_CLOSED);
-                door_open = DOOR_CLOSED;
+                hardware_command_door_open(DOOR_CLOSE);
+                elevator_data.door_open = DOOR_CLOSE;
                 break;
 
             case ACTION_MOVE_UP:
                 hardware_command_movement(HARDWARE_MOVEMENT_UP);
+                elevator_data.last_dir = HARDWARE_MOVEMENT_UP;
                 break;
             
             case ACTION_MOVE_DOWN:
                 hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
+                elevator_data.last_dir = HARDWARE_MOVEMENT_DOWN;
                 break;
 
             case ACTION_STOP_MOVEMENT:
                 hardware_command_movement(HARDWARE_MOVEMENT_STOP);
+                elevator_data.last_dir = HARDWARE_MOVEMENT_STOP;
                 break;
             
             default:

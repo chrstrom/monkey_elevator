@@ -48,14 +48,6 @@ typedef enum{
     //STATE_ERROR
 } elevator_state_t;
 
-typedef struct{
-    int door_open;
-    int next_action;
-    int last_floor;
-    HardwareMovement last_dir;
-    elevator_state_t state;
-} elevator_data_t;
-
 /**
  * @brief Update the elevator state
  * 
@@ -70,11 +62,11 @@ typedef struct{
  */
 int update_state(elevator_data_t* p_elevator_data, time_t* p_door_timer);
 
+
 /**
  * @brief Calculate the next direction the elevator must drive in
  * 
  * @param[in]  p_elevator_state    A pointer to the elevator state.
- * @param[in]  p_door_timer        A pointer to the door_timer, used to control the door open/close sequence
  * @param[in]  p_current_order     A pointer to the elevator's current order being handled                    
  * @param[in]  current_floor       The current floor of the elevator
  * 
@@ -84,9 +76,7 @@ int update_state(elevator_data_t* p_elevator_data, time_t* p_door_timer);
  * function to be executed for any given state. It contains most of the logic flow
  * used to control the elevator's movements, depending on the given inputs.
  */
-int determine_direction(elevator_state_t* p_elevator_state, 
-                Order* p_current_order, 
-                int current_floor);
+int determine_direction(elevator_state_t* p_elevator_state, Order* p_current_order, int current_floor);
 
 int emergency_action(time_t* p_door_timer, int* p_door_open);                
 
