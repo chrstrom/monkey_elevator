@@ -61,7 +61,7 @@ int main(){
     
     
     int door_open = DOOR_CLOSED;
-    int next_action  = CMD_STOP_MOVEMENT;
+    int next_action  = ACTION_STOP_MOVEMENT;
     int last_floor = at_floor(); //should reach a valid floor during elevator_init
     HardwareMovement last_dir = HARDWARE_MOVEMENT_STOP;
     elevator_state_t elevator_state = STATE_IDLE;
@@ -84,49 +84,49 @@ int main(){
         }
         else{
             poll_floor_buttons();
-            add_order_to_queue(QUEUE);
+            add_order_to_queue();
             set_floor_button_lights();
-            if(next_action != CMD_EMERGENCY && next_action != CMD_OBSTRUCTION){
+            if(next_action != ACTION_EMERGENCY && next_action == ACTION_OBSTRUCTION){
                 next_action = update_state(&elevator_state, &door_timer, last_dir, last_floor, &door_open);
             }
         }
 
         switch(next_action) {
-            case CMD_DO_NOTHING:
+            case ACTION_DO_NOTHING:
                 hardware_command_movement(HARDWARE_MOVEMENT_STOP);
                 break;
 
-            case CMD_EMERGENCY:
+            case ACTION_EMERGENCY:
                 next_action = emergency_action(&door_timer, &door_open);
                 break;
             
-            case CMD_CHECK_OBSTRUCTION:
+            case ACTION_CHECK_OBSTRUCTION:
                 next_action = obstruction_check(&door_timer, &door_open);
                 break;
 
-            case CMD_START_DOOR_TIMER:
+            case ACTION_START_DOOR_TIMER:
                 start_timer(&door_timer);
                 break;
 
-            case CMD_OPEN_DOOR:
+            case ACTION_OPEN_DOOR:
                 hardware_command_door_open(DOOR_OPEN);
                 door_open = DOOR_OPEN;
                 break;
 
-            case CMD_CLOSE_DOOR:
+            case ACTION_CLOSE_DOOR:
                 hardware_command_door_open(DOOR_CLOSED);
                 door_open = DOOR_CLOSED;
                 break;
 
-            case CMD_MOVE_UP:
+            case ACTION_MOVE_UP:
                 hardware_command_movement(HARDWARE_MOVEMENT_UP);
                 break;
             
-            case CMD_MOVE_DOWN:
+            case ACTION_MOVE_DOWN:
                 hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
                 break;
 
-            case CMD_STOP_MOVEMENT:
+            case ACTION_STOP_MOVEMENT:
                 hardware_command_movement(HARDWARE_MOVEMENT_STOP);
                 break;
             

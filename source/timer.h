@@ -24,20 +24,21 @@ void start_timer(time_t* p_timer);
 
 
 /**
- * @brief Return true when a spesific time has passed
+ * @brief Check if a certain amount of time has passed
  * 
  * @param[in] p_timer The initial time we would like to check 
  * against as a reference.
  * 
- * @param[out] int If time > compare, return 1. Else return 0
+ * @return 1 if enough time has passed, 0 if not.
  */
 // Return true when sec has passed since the timer was started
 int check_timer(time_t* p_timer);
 
 
-// time_t LAST_TIME = -1;
-// void start_timer_new();
-// int check_timer_new(int time_req);
+static time_t LAST_TIME = -1;
+
+void start_timer_new();
+int check_timer_new(int time_req);
 
 
 #endif

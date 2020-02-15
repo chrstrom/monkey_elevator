@@ -23,18 +23,18 @@
 /**
  * List of all possible resulting commands from the fsm
  */
-#define CMD_DO_NOTHING 0
-#define CMD_CHECK_OBSTRUCTION 1
-#define CMD_START_DOOR_TIMER 2
-#define CMD_OPEN_DOOR 3             
-#define CMD_CLOSE_DOOR 4
-#define CMD_MOVE_UP 5
-#define CMD_MOVE_DOWN 6
-#define CMD_STOP_MOVEMENT 7
-#define CMD_EMERGENCY 8
-#define CMD_NOT_EMERGENCY 9
-#define CMD_NOT_OBSTRUCTION 10
-#define CMD_OBSTRUCTION 11
+#define ACTION_DO_NOTHING 0
+#define ACTION_CHECK_OBSTRUCTION 1
+#define ACTION_START_DOOR_TIMER 2
+#define ACTION_OPEN_DOOR 3             
+#define ACTION_CLOSE_DOOR 4
+#define ACTION_MOVE_UP 5
+#define ACTION_MOVE_DOWN 6
+#define ACTION_STOP_MOVEMENT 7
+#define ACTION_EMERGENCY 8
+#define ACTION_NOT_EMERGENCY 9
+#define ACTION_NOT_OBSTRUCTION 10
+#define ACTION_OBSTRUCTION 11
 
 /**
  * Enum containing the possible states of the FSM 
@@ -48,15 +48,19 @@ typedef enum{
     //STATE_ERROR
 } elevator_state_t;
 
+typedef struct{
+    int door_open;
+    int next_action;
+    int last_floor;
+    HardwareMovement last_dir;
+    elevator_state_t state;
+} elevator_data_t;
 
 /**
  * @brief Update the elevator state
  * 
- * @param[in][out]  p_elevator_state    A pointer to the elevator state, updates on transitions.
+ * @param[in][out]  p_elevator_data    A pointer to the elevator data, updates on transitions.
  * @param[in][out]  p_door_timer        A pointer to the door_timer, used to control the door open/close sequence                  
- * @param[in]       last_dir            The last direction of the elevator
- * @param[in]       last_floor          The last floor the elevator was at
- * @param[in]       p_door_open         A pointer to an int representing whether or not the door is open
  * 
  * @return One of the possible commands resulting from the current state.
  * 
@@ -64,11 +68,7 @@ typedef enum{
  * function to be executed for any given state. It contains most of the logic flow
  * used to control the elevator's movements, depending on the given inputs.
  */
-int update_state(elevator_state_t* p_elevator_state,
-                 time_t* p_door_timer,
-                 HardwareMovement last_dir,
-                 int last_floor,
-                 int* p_door_open);
+int update_state(elevator_data_t* p_elevator_data, time_t* p_door_timer);
 
 /**
  * @brief Calculate the next direction the elevator must drive in

@@ -40,7 +40,7 @@
 /**
  * Macro for closed door
  */
-#define DOOR_CLOSED 0
+#define DOOR_CLOSE 0
 
 /**
  * Macro for open door

@@ -13,7 +13,7 @@ int at_floor() {
 // By passing p_order up/down, we make sure to not add a new order for floors that already
 // have orders to them. Note that these arrays are only updated by external buttons.
 // The internal cab-buttons will have no impact on this.
-void poll_floor_buttons() {
+void floor_button_event_handler() {
   
     for(int floor_up = 0; floor_up < HARDWARE_NUMBER_OF_FLOORS; floor_up++) {
         if(ORDERS_UP[floor_up] == 0 && hardware_read_order(floor_up, HARDWARE_ORDER_UP) == 1){
@@ -28,11 +28,10 @@ void poll_floor_buttons() {
         }
     }
 
-    // if(order_floor != 0){ 
-    //     Order order = {.target_floor = order_floor};
-    //     queue_push_back(QUEUE, order);
-    // }
 
+    // After getting all button events, add orders to queue and set the button lights
+    add_order_to_queue();
+    set_floor_button_lights();
 }
 
 void set_floor_button_lights() {
@@ -60,12 +59,13 @@ void set_floor_indicator_light(int last_floor) {
 }
 
 //May want to change the in-argument to QUEUE
-void update_cab_buttons() {
+void cab_button_event_handler() {
     for(int floor = MIN_FLOOR; floor <= HARDWARE_NUMBER_OF_FLOORS; floor++) {
         int order = hardware_read_order(floor, HARDWARE_ORDER_INSIDE);
         ORDERS_CAB[floor] = order;
-        hardware_command_order_light(floor, HARDWARE_ORDER_INSIDE, order);
     }
+
+    set_cab_button_lights();
 }
 
 

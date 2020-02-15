@@ -11,13 +11,13 @@ int update_state(elevator_state_t* p_elevator_state, time_t* p_door_timer, Hardw
             hardware_command_movement(HARDWARE_MOVEMENT_STOP);
 
             if(queue_is_empty(QUEUE)) {
-                return CMD_DO_NOTHING;
+                return ACTION_DO_NOTHING;
             }
 
             // If the QUEUE is not empty, we firstly need to check for the obstruction signal
             // and whether or not the door is open.
             if(hardware_read_obstruction_signal() && *p_door_open == DOOR_OPEN) {
-                return CMD_START_DOOR_TIMER;
+                return ACTION_START_DOOR_TIMER;
             }
   
             // If the do, close the doors and start moving
@@ -29,17 +29,17 @@ int update_state(elevator_state_t* p_elevator_state, time_t* p_door_timer, Hardw
             else {
                 // Not enough time has passed => Doors remain open and we do nothing
                 *p_elevator_state = STATE_IDLE;
-                return CMD_DO_NOTHING;
+                return ACTION_DO_NOTHING;
             }
 
-            return CMD_DO_NOTHING;  // We shouldnt get to this point
+            return ACTION_DO_NOTHING;  // We shouldnt get to this point
         }
 
         case STATE_MOVING_UP: {
             
             if(current_floor >= HARDWARE_NUMBER_OF_FLOORS) {
                 *p_elevator_state = STATE_IDLE;
-                return CMD_STOP_MOVEMENT;
+                return ACTION_STOP_MOVEMENT;
             }
 
             // We start the loop at last_floor because we only wish to check for floors we are moving towards.
@@ -56,10 +56,10 @@ int update_state(elevator_state_t* p_elevator_state, time_t* p_door_timer, Hardw
                         *p_door_open = DOOR_OPEN;
                     }
 
-                    return CMD_STOP_MOVEMENT;
+                    return ACTION_STOP_MOVEMENT;
                 }
             }
-            return CMD_MOVE_UP;
+            return ACTION_MOVE_UP;
         }
 
 
@@ -67,7 +67,7 @@ int update_state(elevator_state_t* p_elevator_state, time_t* p_door_timer, Hardw
             // må ta hensyn til at at_floor() = -1 ved 
             if(current_floor <= MIN_FLOOR) {
                 *p_elevator_state = STATE_IDLE;
-                return CMD_STOP_MOVEMENT;
+                return ACTION_STOP_MOVEMENT;
             }
 
             // We start the loop at last_floor because we only wish to check for floors we are moving towards.
@@ -80,16 +80,16 @@ int update_state(elevator_state_t* p_elevator_state, time_t* p_door_timer, Hardw
 
                     *p_elevator_state = STATE_IDLE;
 
-                    return CMD_STOP_MOVEMENT;
+                    return ACTION_STOP_MOVEMENT;
                 } 
             }
 
-            return CMD_MOVE_DOWN;
+            return ACTION_MOVE_DOWN;
         }
         
     } // EOF switch
 
-    return CMD_DO_NOTHING;
+    return ACTION_DO_NOTHING;
 }
 
 int determine_direction(elevator_state_t* p_elevator_state, Order* p_current_order, int current_floor) {
@@ -104,11 +104,11 @@ int determine_direction(elevator_state_t* p_elevator_state, Order* p_current_ord
     
     if(current_floor < p_current_order->target_floor) {
         *p_elevator_state= STATE_MOVING_UP;
-        return CMD_CLOSE_DOOR;
+        return ACTION_CLOSE_DOOR;
     }
     else if(current_floor > p_current_order->target_floor) {
         *p_elevator_state = STATE_MOVING_DOWN;
-        return CMD_CLOSE_DOOR;
+        return ACTION_CLOSE_DOOR;
     }
     else if(current_floor == p_current_order->target_floor){
         // This is incomplete. We need to update target_floor for the current order
@@ -117,7 +117,7 @@ int determine_direction(elevator_state_t* p_elevator_state, Order* p_current_ord
 
         update_target_floor(p_current_order, current_floor);
         *p_elevator_state = STATE_IDLE;
-        return CMD_START_DOOR_TIMER;
+        return ACTION_START_DOOR_TIMER;
     }
 
     // We should never reach this point
@@ -133,27 +133,27 @@ int emergency_action(time_t* p_door_timer, int* p_door_open){
             *p_door_open = DOOR_OPEN;
             hardware_command_door_open(DOOR_OPEN);
         }
-        return CMD_EMERGENCY;
+        return ACTION_EMERGENCY;
     }
     else{
         if(at_floor() == -1){
-            return CMD_DO_NOTHING;
+            return ACTION_DO_NOTHING;
         }
         else if(check_timer(p_door_timer)){
-            return CMD_CHECK_OBSTRUCTION;
+            return ACTION_CHECK_OBSTRUCTION;
         }
-        return CMD_EMERGENCY;
+        return ACTION_EMERGENCY;
     }
 }
 
 int obstruction_check(time_t* p_door_timer, int* p_door_open){
     if(hardware_read_obstruction_signal()){
-        return CMD_CHECK_OBSTRUCTION;
+        return ACTION_CHECK_OBSTRUCTION;
     }
     if(check_timer(p_door_timer) && *p_door_open == DOOR_OPEN){
-        return CMD_CLOSE_DOOR;
+        return ACTION_CLOSE_DOOR;
     }
-    return CMD_CHECK_OBSTRUCTION;
+    return ACTION_CHECK_OBSTRUCTION;
 }
 
       // In STATE_IDLE:
