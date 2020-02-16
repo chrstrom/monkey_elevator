@@ -90,14 +90,14 @@ void erase_queue(){
     //skal kun bli kalt dersom man trykker på stop
     for(int order = 0; order < QUEUE_SIZE; order++){
         QUEUE[order].dir = HARDWARE_ORDER_INSIDE;
-        QUEUE[order].target_floor = -1;
+        QUEUE[order].target_floor = INVALID_ORDER;
 
     }
 }
 
 int queue_is_empty() {
     //We assume that the first element is always updated and thus always correct
-    if(QUEUE[0].target_floor == -1){
+    if(QUEUE[0].target_floor == INVALID_ORDER){
         return 1;
     }
     return 0;
@@ -113,7 +113,7 @@ void update_target_floor(Order* p_current_order, int current_floor) {
     }
     // If we make it to this point, all orders are 0
     // We can therefore set the order to be handled!
-    p_current_order->target_floor = -1;
+    p_current_order->target_floor = INVALID_ORDER;
 }
 
 
