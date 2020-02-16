@@ -14,85 +14,78 @@ int update_state(elevator_data_t* p_elevator_data, time_t* p_door_timer) {
     //the current way for us to calculate, must take into account the importance for some functions 
     //over other
     elevator_event_t current_event;
-    elevator_guard_t current_guard;
+    elevator_guard_t guards;
 
     switch(p_elevator_data->state) {
         case STATE_IDLE: {
             hardware_command_movement(HARDWARE_MOVEMENT_STOP);
-            switch (current_event)  {
-                case EVENT_QUEUE_NOT_EMPTY:{
 
-                    switch (current_guard){
-                        case GUARD_TARGET_FLOOR_ABOVE: {
-                            p_elevator_data->state = STATE_MOVING_UP;
-                            return ACTION_MOVE_UP;
-                        }
-                        case GUARD_TARGET_FLOOR_BELOW: {
-                            p_elevator_data->state = STATE_MOVING_DOWN;
-                            return ACTION_MOVE_DOWN;
-                        }
-                        case GUARD_AT_FLOOR:{
-                            p_elevator_data->state = STATE_DOOR_OPEN;
-                            return ACTION_START_DOOR_TIMER;
-                        }
-                        default:{
-                            break;
-                        }
+            switch (current_event)  {
+                case EVENT_QUEUE_EMPTY:{
+                    p_elevator_data->state = STATE_IDLE;
+                    return ACTION_DO_NOTHING;
+                }
+                
+                case EVENT_QUEUE_NOT_EMPTY:{
+                    if(guards.TARGET_FLOOR_ABOVE) {
+                        p_elevator_data->state = STATE_MOVING_UP;
+                        return ACTION_MOVE_UP;
+                    }
+
+                    if(guards.TARGET_FLOOR_EQUAL) {
+                        p_elevator_data->state = STATE_DOOR_OPEN;
+                        return ACTION_START_DOOR_TIMER;
+                    }
+
+                    if(guards.TARGET_FLOOR_BELOW) {
+                        p_elevator_data->state = STATE_MOVING_DOWN;
+                        return ACTION_MOVE_DOWN;
                     }
                 }
 
-                case EVENT_QUEUE_EMPTY:{
-                    return ACTION_DO_NOTHING;
-                }
+       
+
                 case EVENT_STOP_BUTTON_HIGH:{
                     p_elevator_data->state = STATE_EMERGENCY;
                     return ACTION_EMERGENCY;
                 }
-                default:
+
+                default: {
                     p_elevator_data->state = STATE_IDLE;
                     return ACTION_DO_NOTHING;
+                }
             }
         }
 
         case STATE_DOOR_OPEN: {
-           hardware_command_movement(HARDWARE_MOVEMENT_STOP);
-           hardware_command_door_open(DOOR_OPEN);
-           switch (current_event)
-           {
-           case EVENT_QUEUE_EMPTY:{
-               switch (current_guard)
-               {
-                   //guard to goto correct state depending on the timer
-               case GUARD_TIMER:
-                   
-                   break;
-               
-               default:
-                   
-                   break;
-               }
-               p_elevator_data->state = STATE_IDLE;
-               hardware_command_door_open(DOOR_CLOSE);
-               return EVENT_QUEUE_EMPTY;
-           }
-           case EVENT_OBSTRUCTION_HIGH: {
-               p_elevator_data->state = STATE_DOOR_OPEN;
-               return ACTION_CHECK_OBSTRUCTION;
-           } 
-           case EVENT_TARGET_FLOOR_ABOVE:{
-               hardware_command_door_open(DOOR_CLOSE);
-               p_elevator_data->state = STATE_MOVING_UP;
-               return ACTION_MOVE_UP;
-           }
-           case EVENT_TARGET_FLOOR_BELOW:{
-               hardware_command_door_open(DOOR_CLOSE);
-               return ACTION_MOVE_DOWN;
-           }
-           case EVENT_STOP_BUTTON_HIGH:{
+            hardware_command_movement(HARDWARE_MOVEMENT_STOP);
+            hardware_command_door_open(DOOR_OPEN);
+            switch (current_event) {
+                case EVENT_QUEUE_EMPTY:{
+                    
+                p_elevator_data->state = STATE_IDLE;
+                hardware_command_door_open(DOOR_CLOSE);
+                return EVENT_QUEUE_EMPTY;
+            }
+            case EVENT_OBSTRUCTION_HIGH: {
+                p_elevator_data->state = STATE_DOOR_OPEN;
+                return ACTION_CHECK_OBSTRUCTION;
+            } 
+
+            case EVENT_TARGET_FLOOR_ABOVE:{
+                hardware_command_door_open(DOOR_CLOSE);
+                p_elevator_data->state = STATE_MOVING_UP;
+                return ACTION_MOVE_UP;
+            }
+            case EVENT_TARGET_FLOOR_BELOW:{
+                hardware_command_door_open(DOOR_CLOSE);
+                return ACTION_MOVE_DOWN;
+            }
+            case EVENT_STOP_BUTTON_HIGH:{
                p_elevator_data->state = STATE_EMERGENCY;
                return ACTION_EMERGENCY;
-           }
-           default:
+            }
+            default:
                break;
            }
         }
