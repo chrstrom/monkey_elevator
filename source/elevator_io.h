@@ -8,15 +8,6 @@
 #include "includes.h"
 #include "queue.h"
 
-// Med denne structen kan vi kanskje også holde alle arrays med knapper, samt queue?
-typedef struct{
-    int door_open;
-    int next_action;
-    int last_floor;
-    HardwareMovement last_dir;
-    elevator_state_t state;
-} elevator_data_t;
-
 /**
  * @brief Find what floor the elevator is at
  * 

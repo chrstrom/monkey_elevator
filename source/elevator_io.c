@@ -1,12 +1,11 @@
 #include "elevator_io.h"
 
 int at_floor() {
-    for(int floor = MIN_FLOOR; floor <= HARDWARE_NUMBER_OF_FLOORS; floor++) {
+    for(int floor = MIN_FLOOR; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
        if(hardware_read_floor_sensor(floor)) {
            return floor;
        }
     }
-
     return -1;
 }
 

@@ -43,10 +43,16 @@ typedef enum{
     STATE_IDLE,         /**< Elevator standing still*/
     STATE_MOVING_UP,    /**< Elevator moving up*/
     STATE_MOVING_DOWN,  /**< Elevator moving down*/
-    //STATE_HANDLE_ORDER, 
-    //STATE_SERVE_ORDER,
-    //STATE_ERROR
 } elevator_state_t;
+
+// Med denne structen kan vi kanskje også holde alle arrays med knapper, samt queue?
+typedef struct{
+    int door_open;
+    int next_action;
+    int last_floor;
+    HardwareMovement last_dir;
+    elevator_state_t state;
+} elevator_data_t;
 
 /**
  * @brief Update the elevator state

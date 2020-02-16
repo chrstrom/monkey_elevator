@@ -32,7 +32,7 @@ void start_timer(time_t* p_timer);
  * @return 1 if enough time has passed, 0 if not.
  */
 // Return true when sec has passed since the timer was started
-int check_timer(time_t* p_timer, int time_req);
+int check_timer(time_t* p_timer, unsigned int time_req);
 
 
 #endif

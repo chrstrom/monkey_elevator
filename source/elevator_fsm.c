@@ -2,7 +2,8 @@
 
 int update_state(elevator_data_t* p_elevator_data, time_t* p_door_timer) {
 
-    int current_floor = at_floor(); 
+    int current_floor = at_floor();
+    
     Order current_order = QUEUE[0];
 
     // If the stop signal is high, we return right away, no matter what
@@ -17,6 +18,7 @@ int update_state(elevator_data_t* p_elevator_data, time_t* p_door_timer) {
             // Entry action
             if(p_elevator_data->last_dir != HARDWARE_MOVEMENT_STOP){
                 hardware_command_movement(HARDWARE_MOVEMENT_STOP);
+                p_elevator_data->last_dir = HARDWARE_MOVEMENT_STOP;
             }
             
             if(queue_is_empty(QUEUE)) {
@@ -35,12 +37,12 @@ int update_state(elevator_data_t* p_elevator_data, time_t* p_door_timer) {
             
             if(current_floor < current_order.target_floor && current_floor != -1) {
                 p_elevator_data->state = STATE_MOVING_UP;
-                return ACTION_CLOSE_DOOR;
+                return ACTION_CHECK_OBSTRUCTION;
             }
 
             if(current_floor > current_order.target_floor && current_floor != -1) {
                 p_elevator_data->state = STATE_MOVING_DOWN;
-                return ACTION_CLOSE_DOOR;
+                return ACTION_CHECK_OBSTRUCTION;
             }
 
 
@@ -88,12 +90,7 @@ int update_state(elevator_data_t* p_elevator_data, time_t* p_door_timer) {
     return ACTION_DO_NOTHING;
 }
 
-int determine_direction(elevator_state_t* p_elevator_state, Order* p_current_order, int current_floor) {
-    // This needs to be a two part operation.
-    // Before moving for the second time (after going to the floor we clicked the floor button at),
-    // we need to update p_current_order->target floor with one of the cab orders,
-    // using update_target_floor()
-    
+int determine_direction(elevator_state_t* p_elevator_state, Order* p_current_order, int current_floor) {    
     if(current_floor < MIN_FLOOR || current_floor > HARDWARE_NUMBER_OF_FLOORS) {
         return -1;
     }

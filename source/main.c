@@ -19,11 +19,12 @@ int elevator_init() {
     }
 
     hardware_command_stop_light(LIGHT_OFF);
-   hardware_command_door_open(DOOR_CLOSE);
+    hardware_command_door_open(DOOR_CLOSE);
     //Kan man anta at obstruksjonsbryteren aldri skal være høy i inittialiseringsfasen?
     
     while(at_floor() == -1) {
         hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
+        hardware_command_floor_indicator_on(at_floor());
     }
     hardware_command_movement(HARDWARE_MOVEMENT_STOP);
     hardware_command_floor_indicator_on(at_floor());
@@ -50,6 +51,10 @@ int main(){
 
     // ELEVATOR PROGRAM LOOP
     while(1){
+        if(hardware_read_stop_signal()){
+            exit(1);
+        }
+
         // Get events
         floor_button_event_handler();
         // Set floor light
@@ -65,11 +70,11 @@ int main(){
                 break;
 
             case ACTION_EMERGENCY:
-                emergency_action(&timer, &elevator_data.door_open);
+                elevator_data.next_action = emergency_action(&timer, &elevator_data.door_open);
                 break;
             
             case ACTION_CHECK_OBSTRUCTION:
-                obstruction_check(&timer, &elevator_data.door_open);
+                elevator_data.next_action = obstruction_check(&timer, &elevator_data.door_open);
                 break;
 
             case ACTION_START_DOOR_TIMER:
