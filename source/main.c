@@ -27,6 +27,7 @@ int elevator_init() {
 
     hardware_command_floor_indicator_on(at_floor());
    
+    init_queue();
     return 0;
 }
 
@@ -64,14 +65,6 @@ int main(){
         switch(elevator_data.next_action) {
             case ACTION_DO_NOTHING:
                 hardware_command_movement(HARDWARE_MOVEMENT_STOP);
-                break;
-
-            case ACTION_EMERGENCY:
-                elevator_data.next_action = emergency_action(&timer, &elevator_data.door_open);
-                break;
-            
-            case ACTION_CHECK_OBSTRUCTION:
-                elevator_data.next_action = obstruction_check(&timer, &elevator_data.door_open);
                 break;
 
             case ACTION_START_DOOR_TIMER:
