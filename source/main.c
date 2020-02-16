@@ -48,28 +48,15 @@ int main(){
 
     // ELEVATOR PROGRAM LOOP
     while(1){
-        if(hardware_read_stop_signal()){
-            exit(1);
-        }
 
-        // Get events
+        // Set floor light   
+        set_floor_indicator_light(at_floor());
+
+        // Handle button press events
         floor_button_event_handler();
         cab_button_event_handler();
 
-
-        // Set floor light
-        
-        if(at_floor() != -1) {
-            elevator_data.last_floor = at_floor();
-        }
-
-        hardware_command_floor_indicator_on(elevator_data.last_floor);
         // Determine next action
-        if(hardware_read_stop_signal()){
-            hardware_command_stop_light(LIGHT_ON);
-            elevator_data.state = STATE_EMERGENCY;
-        }
-        
         elevator_data.next_action = update_state(&elevator_data, &timer);
 
         //Execute next action

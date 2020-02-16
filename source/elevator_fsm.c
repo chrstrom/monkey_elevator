@@ -1,7 +1,12 @@
 #include "elevator_fsm.h"
 
 int update_state(elevator_data_t* p_elevator_data, time_t* p_door_timer) {
-    
+    if(hardware_read_stop_signal()){
+        hardware_command_stop_light(LIGHT_ON);
+        p_elevator_data->state = STATE_EMERGENCY;
+        return ACTION_EMERGENCY;
+    }
+
 
     int current_floor = at_floor();
     

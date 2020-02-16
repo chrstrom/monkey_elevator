@@ -59,41 +59,41 @@ typedef enum {
 
 
 
-// We have a choice between enum and struct for the FSM guards.
-// Enums are good because they allow us to use a nested switch for the guard cases,
-// but it does not encapsulate the idea of guards being on or off (0/1). Because of this
-// only one guard can be active at a time.
+// // We have a choice between enum and struct for the FSM guards.
+// // Enums are good because they allow us to use a nested switch for the guard cases,
+// // but it does not encapsulate the idea of guards being on or off (0/1). Because of this
+// // only one guard can be active at a time.
 
-// With a struct, we cannot use the nested switches, but have to resort to if() checks,
-// but this also allows for multiple guards to be used at once.
-
-/**
- * Enum of transition guards for the FSM. 
- */
-typedef enum{
-    GUARD_TIMER,                /**< Guard for timer complete*/
-    GUARD_DIRECTION,            /**< Guard for matching direction for elevator and order*/
-    GUARD_TARGET_FLOOR_ABOVE,   /**< Guard for target floor located above current floor*/
-    GUARD_TARGET_FLOOR_EQUAL,   /**< Guard for target floor located at current floor*/
-    GUARD_TARGET_FLOOR_BELOW,   /**< Guard for target floor located below current floor*/
-    GUARD_AT_FLOOR,             /**< Guard for elevator located at a floor*/
-    GUARD_NOT_AT_FLOOR          /**< Guard for elevator located between floors*/
-} elevator_guard_t;
-
+// // With a struct, we cannot use the nested switches, but have to resort to if() checks,
+// // but this also allows for multiple guards to be used at once.
 
 // /**
-//  * Struct of transition guards for the FSM. 0 = not fulfilled  1 = fulfilled.
-//  * If a guard is not fulfilled, any state transition depending on it will not happen.
+//  * Enum of transition guards for the FSM. 
 //  */
-// typedef struct{
-//     int GUARD_TIMER;                    /**< Guard for whether or not the timer done counting. 1 = timer is done, 0 = timer still going */
-//     int GUARD_DIRECTION;                /**< Guard for checking matching elevator direction. 1 = going in the same direction as order, 0 = not going in same dir as order*/
-//     int GUARD_TARGET_FLOOR_ABOVE;       /**< Guard for checking target floor location, 1 = target floor above current floor. 0 = target floor at/below current floor*/
-//     int GUARD_TARGET_FLOOR_EQUAL;       /**< Guard for checking target floor location, 1 = target floor at current floor. 0 = target floor not at current floor*/
-//     int GUARD_TARGET_FLOOR_BELOW;       /**< Guard for checking target floor location, 1 = target floor below current floor. 0 = target floor at/above current floor */
-//     int GUARD_AT_FLOOR;                 /**< Guard for checking elevator location. 1 = elevator at floor. 0 = elevator not at floor*/
-//     int GUARD_NOT_AT_FLOOR;             /**< Guard for checking elevator location. 1 = elevator not at floor. 0 = elevator at floor*/
+// typedef enum{
+//     GUARD_TIMER,                /**< Guard for timer complete*/
+//     GUARD_DIRECTION,            /**< Guard for matching direction for elevator and order*/
+//     GUARD_TARGET_FLOOR_ABOVE,   /**< Guard for target floor located above current floor*/
+//     GUARD_TARGET_FLOOR_EQUAL,   /**< Guard for target floor located at current floor*/
+//     GUARD_TARGET_FLOOR_BELOW,   /**< Guard for target floor located below current floor*/
+//     GUARD_AT_FLOOR,             /**< Guard for elevator located at a floor*/
+//     GUARD_NOT_AT_FLOOR          /**< Guard for elevator located between floors*/
 // } elevator_guard_t;
+
+
+/**
+ * Struct of transition guards for the FSM. 0 = not fulfilled  1 = fulfilled.
+ * If a guard is not fulfilled, any state transition depending on it will not happen.
+ */
+typedef struct{
+    int GUARD_TIMER;                    /**< Guard for whether or not the timer done counting. 1 = timer is done, 0 = timer still going */
+    int GUARD_DIRECTION;                /**< Guard for checking matching elevator direction. 1 = going in the same direction as order, 0 = not going in same dir as order*/
+    int GUARD_TARGET_FLOOR_ABOVE;       /**< Guard for checking target floor location, 1 = target floor above current floor. 0 = target floor at/below current floor*/
+    int GUARD_TARGET_FLOOR_EQUAL;       /**< Guard for checking target floor location, 1 = target floor at current floor. 0 = target floor not at current floor*/
+    int GUARD_TARGET_FLOOR_BELOW;       /**< Guard for checking target floor location, 1 = target floor below current floor. 0 = target floor at/above current floor */
+    int GUARD_AT_FLOOR;                 /**< Guard for checking elevator location. 1 = elevator at floor. 0 = elevator not at floor*/
+    int GUARD_NOT_AT_FLOOR;             /**< Guard for checking elevator location. 1 = elevator not at floor. 0 = elevator at floor*/
+} elevator_guard_t;
 
 
 /**

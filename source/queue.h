@@ -7,8 +7,6 @@
 
 #include "includes.h"
 
-#define SIZEOF_ARR(X) sizeof(*X)/sizeof(X[0])
-
 /**
  * @struct Order
  * 
@@ -32,14 +30,13 @@ static int ORDERS_UP[HARDWARE_NUMBER_OF_FLOORS] = {0, 0, 0, 0};
 static int ORDERS_DOWN[HARDWARE_NUMBER_OF_FLOORS] = {0, 0, 0, 0};
 static int ORDERS_CAB[HARDWARE_NUMBER_OF_FLOORS] = {0, 0, 0, 0};
 
-static Order QUEUE[QUEUE_SIZE] = {{.target_floor = INVALID_ORDER, .dir = HARDWARE_MOVEMENT_STOP},
-                                  {.target_floor = INVALID_ORDER, .dir = HARDWARE_MOVEMENT_STOP},
-                                  {.target_floor = INVALID_ORDER, .dir = HARDWARE_MOVEMENT_STOP},
-                                  {.target_floor = INVALID_ORDER, .dir = HARDWARE_MOVEMENT_STOP},
-                                  {.target_floor = INVALID_ORDER, .dir = HARDWARE_MOVEMENT_STOP},
-                                  {.target_floor = INVALID_ORDER, .dir = HARDWARE_MOVEMENT_STOP},
-                                  {.target_floor = INVALID_ORDER, .dir = HARDWARE_MOVEMENT_STOP},
-                                  {.target_floor = INVALID_ORDER, .dir = HARDWARE_MOVEMENT_STOP}};
+static Order QUEUE[QUEUE_SIZE];
+
+
+/**
+ * @brief Initialize the @c QUEUE with all invalid orders
+ */
+void init_queue();
 
 
 /**
