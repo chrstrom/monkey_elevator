@@ -1,6 +1,14 @@
 #include "queue.h"
 
-void update_queue() {
+void init_queue() {
+    for(int i = 0; i < QUEUE_SIZE; i++) {
+        QUEUE[i].target_floor = -2;
+        QUEUE[i].dir = HARDWARE_MOVEMENT_STOP;
+    }
+}
+
+
+void update_queue(){
     //tar inn en kø og skal så slette dette elementet, ved at det er ferdig håndtert.
     //skal da left-skifte resten
     if(QUEUE_SIZE < 2){
@@ -26,13 +34,13 @@ void update_queue() {
 }
 
 void add_order_to_queue() {
-    for(int floor_up = 0; floor_up < SIZEOF_ARR(ORDERS_UP); floor_up++) {
+    for(int floor_up = 0; floor_up < HARDWARE_NUMBER_OF_FLOORS; floor_up++) {
         if(ORDERS_UP[floor_up] == 1 && check_queue_for_order(floor_up, HARDWARE_MOVEMENT_UP) == 0) {
             push_back_queue(floor_up, HARDWARE_MOVEMENT_UP);
         }
     }
 
-    for(int floor_down = 0; floor_down < SIZEOF_ARR(ORDERS_DOWN); floor_down++) {
+    for(int floor_down = 0; floor_down < HARDWARE_NUMBER_OF_FLOORS; floor_down++) {
         if(ORDERS_DOWN[floor_down] == 1 && check_queue_for_order(floor_down, HARDWARE_MOVEMENT_DOWN) == 0) {
             push_back_queue(floor_down, HARDWARE_MOVEMENT_DOWN);
         }
@@ -42,7 +50,7 @@ void add_order_to_queue() {
 
 void push_back_queue(int floor, HardwareMovement dir) {
     Order new_order = {.target_floor = floor, .dir = dir};
-     for(int order = 0; order < SIZEOF_ARR(QUEUE); order++) {
+     for(int order = 0; order < QUEUE_SIZE; order++) {
         if(QUEUE[order].target_floor == -1) {
             QUEUE[order] = new_order;
         }
@@ -50,7 +58,7 @@ void push_back_queue(int floor, HardwareMovement dir) {
 }
 
 int check_queue_for_order(int floor, HardwareMovement dir) {
-    for(int order = 0; order < SIZEOF_ARR(QUEUE); order++) {
+    for(int order = 0; order < QUEUE_SIZE; order++) {
         if(QUEUE[order].target_floor == floor && QUEUE[order].dir == dir) {
             return 1;
         }
@@ -80,7 +88,7 @@ void clear_cab_orders(int current_floor){
 void erase_queue(){
     //skal her slette hele køen
     //skal kun bli kalt dersom man trykker på stop
-    for(int order = 0; order < SIZEOF_ARR(QUEUE); order++){
+    for(int order = 0; order < QUEUE_SIZE; order++){
         QUEUE[order].dir = HARDWARE_ORDER_INSIDE;
         QUEUE[order].target_floor = -1;
 
@@ -110,7 +118,7 @@ void update_target_floor(Order* p_current_order, int current_floor) {
 
 
 int check_order_match(int current_floor, HardwareMovement last_dir) {
-    for(int order = 0; order < SIZEOF_ARR(QUEUE); order++) {
+    for(int order = 0; order < QUEUE_SIZE; order++) {
         Order current_order = QUEUE[order];
         // Only handle Orders if we have an order AT THIS FLOOR
         // We also need to check if its direction is the same as the last_dir of the elevator
@@ -137,9 +145,9 @@ Order initialize_new_order(){
 
 void push_back_queue(int floor, HardwareMovement dir) {
     Order new_order = {.target_floor = floor, .dir = dir};
-     for(int order = 0; order < SIZEOF_ARR(QUEUE); order++) {
-        if(p_queue[order].target_floor == -1) {
-            p_queue[order] = new_order;
+     for(int order = 0; order < QUEUE_SIZE; order++) {
+        if(QUEUE[order].target_floor == INVALID_ORDER) {
+            QUEUE[order] = new_order;
         }
     }
 }
