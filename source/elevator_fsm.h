@@ -30,11 +30,12 @@ typedef enum{
 typedef enum{
     EVENT_QUEUE_EMPTY,          /**< No valid elements in the queue*/
     EVENT_QUEUE_NOT_EMPTY,      /**< At least 1 valid element has been added to the queue*/
-    EVENT_TARGET_FLOOR_DIFF,   /**< We have a target floor that is not at the current floor*/
+    EVENT_TARGET_FLOOR_DIFF,    /**< We have a target floor that is not at the current floor*/
     EVENT_FLOOR_MATCH,          /**< We have a target floor at the current floor*/
     EVENT_OBSTRUCTION_HIGH,     /**< The obstruction signal is high*/
     EVENT_STOP_BUTTON_HIGH,     /**< The stop button is high/is pressed in*/
     EVENT_STOP_BUTTON_LOW,      /**< The stop button is low/is not pressed in*/
+    EVENT_NO_EVENT,             /**< No particular event has occured*/
 } elevator_event_t;
 
 
@@ -43,17 +44,13 @@ typedef enum{
  */
 typedef enum {
     ACTION_DO_NOTHING,          /**< Do nothing, corresponding to " - " in the state diagram output slot*/
-    ACTION_CHECK_OBSTRUCTION,   /**< Check for the state of the obstruction switch*/
     ACTION_START_DOOR_TIMER,    /**< Start the door timer*/
     ACTION_OPEN_DOOR,           /**< Open the elevator's doors*/
     ACTION_CLOSE_DOOR,          /**< Close the elevator's doors*/
     ACTION_MOVE_UP,             /**< Start moving upwards*/
     ACTION_MOVE_DOWN,           /**< Start moving downwards*/
     ACTION_STOP_MOVEMENT,       /**< Halt movement*/
-    ACTION_EMERGENCY,           /**< Perform emergency actions*/
-    ACTION_NOT_EMERGENCY,       /**< No emergency, will probably be removed*/
-    ACTION_NOT_OBSTRUCTION,     /**< No obstruction, will probably be removed*/
-    ACTION_OBSTRUCTION          /**< Handle obstruction, will probably be removed*/
+    ACTION_CLEAR_QUEUE,         /**< Clear the elevator's queue*/
 } elevator_action_t;
 
 
@@ -85,7 +82,7 @@ typedef enum {
  * If a guard is not fulfilled, any state transition depending on it will not happen.
  */
 typedef struct{
-    int TIMER;                    /**< Guard for whether or not the timer done counting. 1 = timer is done, 0 = timer still going */
+    int TIMER_DONE;               /**< Guard for whether or not the timer done counting. 1 = timer is done, 0 = timer still going */
     int DIRECTION;                /**< Guard for checking matching elevator direction. 1 = going in the same direction as order, 0 = not going in same dir as order*/
     int TARGET_FLOOR_ABOVE;       /**< Guard for checking target floor location, 1 = target floor above current floor. 0 = target floor at/below current floor*/
     int TARGET_FLOOR_EQUAL;       /**< Guard for checking target floor location, 1 = target floor at current floor. 0 = target floor not at current floor*/
@@ -93,7 +90,7 @@ typedef struct{
     int AT_FLOOR;                 /**< Guard for checking elevator location. 1 = elevator at floor. 0 = elevator not at floor*/
     int NOT_AT_FLOOR;             /**< Guard for checking elevator location. 1 = elevator not at floor. 0 = elevator at floor*/
 } elevator_guard_t;
-
+// Could also add guards for "BELOW_MIN_FLOOR" and "ABOVE_MAX_FLOOR"
 
 /**
  * A struct holding all the data related to the elevator 
@@ -119,6 +116,19 @@ typedef struct{
  * used to control the elevator's movements, depending on the given inputs.
  */
 int update_state(elevator_data_t* p_elevator_data, time_t* p_door_timer);
+
+
+
+
+elevator_event_t elevator_event_handler(elevator_data_t* p_elevator_data);
+elevator_guard_t elevator_guard_handler(elevator_data_t* p_elevator_data, time_t* p_door_timer);
+int check_floor_diff(int target_floor, int current_floor);
+
+
+
+
+
+
 
 
 /**
