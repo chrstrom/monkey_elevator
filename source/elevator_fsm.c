@@ -107,7 +107,7 @@ int update_state(elevator_data_t* p_elevator_data, time_t* p_door_timer) {
             
         }
     } // EOF switch
-
+    
     return ACTION_DO_NOTHING;
 }
 
