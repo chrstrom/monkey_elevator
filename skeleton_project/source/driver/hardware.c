@@ -146,10 +146,6 @@ void hardware_command_door_open(int door_open){
 }
 
 void hardware_command_floor_indicator_on(int floor){
-    if(floor == -1) {
-        return;
-    }
-    
     if(floor & 0x02){
         io_set_bit(LIGHT_FLOOR_IND1);
     }
