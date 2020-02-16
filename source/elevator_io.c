@@ -41,7 +41,7 @@ void set_floor_button_lights() {
 
     // The first floor does not have a down-button: Start at 1.
     for(int floor_down = 1; floor_down <= HARDWARE_NUMBER_OF_FLOORS; floor_down++) {
-        hardware_command_order_light(floor_down, HARDWARE_ORDER_DOWN, ORDERS_UP[floor_down]);
+        hardware_command_order_light(floor_down, HARDWARE_ORDER_DOWN, ORDERS_DOWN[floor_down]);
     }
 }
 
@@ -61,7 +61,7 @@ void set_floor_indicator_light(int last_floor) {
 void cab_button_event_handler() {
     for(int floor = MIN_FLOOR; floor <= HARDWARE_NUMBER_OF_FLOORS; floor++) {
         int order = hardware_read_order(floor, HARDWARE_ORDER_INSIDE);
-        ORDERS_CAB[floor] = order;
+        ORDERS_CAB[floor] |= order;
     }
 
     set_cab_button_lights();

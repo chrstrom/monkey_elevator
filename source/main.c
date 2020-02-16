@@ -2,31 +2,28 @@
  * @file
  * @brief main linker point of elevator program
  */
+
 #include "timer.h"
 #include "queue.h"
 #include "elevator_fsm.h"
 
-
 int elevator_init() {
 
-    // Turn off all button lights and clear all order light arrays (just in case)
+    //Turn off all button lights and clear all order light arrays (just in case)
     for(int floor = 0; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
-        hardware_command_order_light(floor, HARDWARE_ORDER_UP, LIGHT_OFF);
-        hardware_command_order_light(floor, HARDWARE_ORDER_DOWN, LIGHT_OFF);
-        ORDERS_UP[floor] = 0;
-        ORDERS_DOWN[floor] = 0;
-        ORDERS_CAB[floor] = 0;
+        hardware_command_order_light(floor, HARDWARE_ORDER_UP,     LIGHT_OFF);
+        hardware_command_order_light(floor, HARDWARE_ORDER_DOWN,   LIGHT_OFF);
+        hardware_command_order_light(floor, HARDWARE_ORDER_INSIDE, LIGHT_OFF);
     }
 
     hardware_command_stop_light(LIGHT_OFF);
     hardware_command_door_open(DOOR_CLOSE);
     //Kan man anta at obstruksjonsbryteren aldri skal være høy i inittialiseringsfasen?
-    
-    while(at_floor() == -1) {
-        hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
-        hardware_command_floor_indicator_on(at_floor());
-    }
+
+    hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
+    while(at_floor() == -1) {}
     hardware_command_movement(HARDWARE_MOVEMENT_STOP);
+
     hardware_command_floor_indicator_on(at_floor());
    
     return 0;
@@ -57,13 +54,25 @@ int main(){
 
         // Get events
         floor_button_event_handler();
-        // Set floor light
-        hardware_command_floor_indicator_on(elevator_data.last_floor);
+        cab_button_event_handler();
 
+
+        // Set floor light
+        
+        if(at_floor() != -1) {
+            elevator_data.last_floor = at_floor();
+        }
+
+        hardware_command_floor_indicator_on(elevator_data.last_floor);
         // Determine next action
+        if(hardware_read_stop_signal()){
+            hardware_command_stop_light(LIGHT_ON);
+            elevator_data.state = STATE_EMERGENCY;
+        }
+        
         elevator_data.next_action = update_state(&elevator_data, &timer);
 
-        // Execute next action
+        //Execute next action
         switch(elevator_data.next_action) {
             case ACTION_DO_NOTHING:
                 hardware_command_movement(HARDWARE_MOVEMENT_STOP);
