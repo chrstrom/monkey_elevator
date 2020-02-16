@@ -1,3 +1,4 @@
 Queue:
 En cab-knapp == opp OG ned trykket i samme etasje; dette kan forenkle køsystemet betraktlig
-Legge til STATE_DOOR_OPEN? 
+
+lag event_handler som setter neste event i FSM

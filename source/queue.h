@@ -158,4 +158,4 @@ Order initialize_new_order();
 // */
 // //void reset_orders(int* p_order);
 
-#endif
+#endif //QUEUE_H
