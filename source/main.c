@@ -49,10 +49,6 @@ int main(){
 
     // ELEVATOR PROGRAM LOOP
     while(1){
-        if(hardware_read_stop_signal()){
-            exit(1);
-        }
-
         // Get events
         floor_button_event_handler();
         cab_button_event_handler();
@@ -65,11 +61,13 @@ int main(){
         if(hardware_read_stop_signal()){
             hardware_command_stop_light(LIGHT_ON);
             elevator_data.state = STATE_EMERGENCY;
+            elevator_data.next_action = ACTION_EMERGENCY;
         }
-        
-        elevator_data.next_action = update_state(&elevator_data, &timer);
-
+        else{
+            elevator_data.next_action = update_state(&elevator_data, &timer);
+        }
         //Execute next action
+        //possibly it's own function
         switch(elevator_data.next_action) {
             case ACTION_DO_NOTHING:
                 hardware_command_movement(HARDWARE_MOVEMENT_STOP);
@@ -100,11 +98,13 @@ int main(){
             case ACTION_MOVE_UP:
                 hardware_command_movement(HARDWARE_MOVEMENT_UP);
                 elevator_data.last_dir = HARDWARE_MOVEMENT_UP;
+                elevator_data.state = STATE_MOVING_UP;
                 break;
             
             case ACTION_MOVE_DOWN:
                 hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
                 elevator_data.last_dir = HARDWARE_MOVEMENT_DOWN;
+                elevator_data.state = STATE_MOVING_DOWN;
                 break;
 
             case ACTION_STOP_MOVEMENT:

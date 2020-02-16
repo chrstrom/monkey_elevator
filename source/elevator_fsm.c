@@ -7,7 +7,7 @@ int update_state(elevator_data_t* p_elevator_data, time_t* p_door_timer) {
     //need some functions to calculate this exactly/more precise
     //the current way for us to calculate, must take into account the importance for some functions 
     //over other
-    elevator_event_t current_event;
+    elevator_event_t current_event = calculate_next_event(p_elevator_data);
     elevator_guard_t current_guard;
 
     switch(p_elevator_data->state) {
@@ -47,7 +47,6 @@ int update_state(elevator_data_t* p_elevator_data, time_t* p_door_timer) {
                 return ACTION_DO_NOTHING;
             }
         }
-
         case STATE_DOOR_OPEN: {
            hardware_command_movement(HARDWARE_MOVEMENT_STOP);
            hardware_command_door_open(DOOR_OPEN);
@@ -74,12 +73,17 @@ int update_state(elevator_data_t* p_elevator_data, time_t* p_door_timer) {
                return ACTION_CHECK_OBSTRUCTION;
            } 
            case EVENT_TARGET_FLOOR_ABOVE:{
+               // Should be safe, since we test for obstruction earlier/before 
+               // calculating the event to move up
                hardware_command_door_open(DOOR_CLOSE);
                p_elevator_data->state = STATE_MOVING_UP;
                return ACTION_MOVE_UP;
            }
            case EVENT_TARGET_FLOOR_BELOW:{
+               // Should be safe, since we test for obstruction earlier/before 
+               // calculating the event to move down
                hardware_command_door_open(DOOR_CLOSE);
+               p_elevator_data->state = STATE_MOVING_DOWN;
                return ACTION_MOVE_DOWN;
            }
            case EVENT_STOP_BUTTON_HIGH:{
@@ -109,6 +113,7 @@ int update_state(elevator_data_t* p_elevator_data, time_t* p_door_timer) {
             }
 
             default:
+                //should we include event for target floor == current floor || target floor < current floor?
                 break;
             }
         }
@@ -199,11 +204,59 @@ int emergency_action(elevator_data_t* p_elevator_data, time_t* p_door_timer){
 }
 
 int obstruction_check(time_t* p_door_timer, int* p_door_open){
-    if(hardware_read_obstruction_signal()){
+    if(hardware_read_obstruction_signal() && *p_door_open == DOOR_OPEN){
         return ACTION_CHECK_OBSTRUCTION;
     }
     if(check_timer(p_door_timer, NORMAL_WAIT_TIME) == 1 && *p_door_open == DOOR_OPEN){
+        //need to calculate the next action/state here!
         return ACTION_CLOSE_DOOR;
     }
+    // what happens if the door is closed and the obstruction is active/high?
+    // it shouldn't be a problem, since the obstruction-check should only be done by
+    // calculate_next_event, and it takes into account if the door is open or not
     return ACTION_CHECK_OBSTRUCTION;
+}
+
+elevator_event_t calculate_next_event(elevator_data_t* p_elevator_data, time_t* p_door_timer){
+    //calculate the event the fsm will switch over
+    int current_floor = at_floor();
+
+    if(hardware_read_stop_signal()){
+        start_timer(p_door_timer);
+        return EVENT_STOP_BUTTON_HIGH;
+    }
+    //need to take into account that the door should close after 3 seconds
+    if(hardware_read_obstruction_signal() && p_elevator_data->state == DOOR_OPEN){
+        start_timer(p_door_timer);
+        return EVENT_OBSTRUCTION_HIGH;
+    }
+    ///////////NOT FINISHED∕∕∕∕∕∕∕∕/////
+    if(p_elevator_data->state = DOOR_OPEN && check_timer(p_door_timer, NORMAL_WAIT_TIME) == 0){
+        return EVENT_OBSTRUCTION_HIGH;
+    }
+    ////////////////////////////////////
+    
+    //should try to incorporate the changes from obstruction_check
+
+    if(QUEUE[0].target_floor < current_floor && QUEUE[0].target_floor != INVALID_ORDER){
+        return EVENT_TARGET_FLOOR_BELOW;
+    }
+    if(QUEUE[0].target_floor > current_floor && QUEUE[0].target_floor != INVALID_ORDER){
+        return EVENT_TARGET_FLOOR_ABOVE;
+    }
+    if(QUEUE[0].target_floor == current_floor && QUEUE[0].target_floor != INVALID_ORDER){
+        return EVENT_FLOOR_MATCH;
+    }
+    if(QUEUE[0].target_floor != INVALID_ORDER){
+        return EVENT_QUEUE_NOT_EMPTY;
+    }
+    if(QUEUE[0].target_floor == INVALID_ORDER){
+        return EVENT_QUEUE_EMPTY;
+    }
+    return -1;
+}
+
+elevator_guard_t calculate_next_guard(){
+    //calculate the guard the fsm will use to switch
+    //should perhaps just set a struct
 }

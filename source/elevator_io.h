@@ -60,8 +60,6 @@ void set_floor_button_lights();
 /**
  * @brief Set the cab button lights 
  * 
- * @param[in] p_order_up       A pointer to an array containing the states of the cab buttons
- * 
  * Set the lights on/off for each floor button, in accordance to the values 1/0 in @c ORDERS_CAB
  */
 void set_cab_button_lights();

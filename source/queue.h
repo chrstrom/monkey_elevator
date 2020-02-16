@@ -152,7 +152,7 @@ Order initialize_new_order();
 // * @brief Reset the order's to a pointer containing only 
 // * invalid orders. In this case, we use -1 to symbolize
 // * invalid floors/orders.
-// *
+// *    
 // * @param[in] p_order The pointer we would like to reset/
 // * invalidate
 // */

@@ -63,7 +63,6 @@ void cab_button_event_handler() {
         int order = hardware_read_order(floor, HARDWARE_ORDER_INSIDE);
         ORDERS_CAB[floor] |= order;
     }
-
     set_cab_button_lights();
 }
 

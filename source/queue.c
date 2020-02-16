@@ -59,7 +59,10 @@ int check_queue_for_order(int floor, HardwareMovement dir) {
 }
 
 void set_cab_orders(){
+    //ønskelig å utvide funksjonaliteten til å bare benytte orders up/down
     for(int floor = MIN_FLOOR; floor < HARDWARE_NUMBER_OF_FLOORS; floor++){
+        ORDERS_UP[floor] |= hardware_read_order(floor, HARDWARE_ORDER_INSIDE);
+        ORDERS_DOWN[floor] |= hardware_read_order(floor, HARDWARE_ORDER_INSIDE);
         ORDERS_CAB[floor] = hardware_read_order(floor, HARDWARE_ORDER_INSIDE);
     }
 }
@@ -83,7 +86,6 @@ void erase_queue(){
     for(int order = 0; order < SIZEOF_ARR(QUEUE); order++){
         QUEUE[order].dir = HARDWARE_ORDER_INSIDE;
         QUEUE[order].target_floor = -1;
-
     }
 }
 
@@ -137,7 +139,7 @@ Order initialize_new_order(){
 
 void push_back_queue(Order* p_queue, int floor, HardwareMovement dir) {
     Order new_order = {.target_floor = floor, .dir = dir};
-     for(int order = 0; order < SIZEOF_ARR(p_queue); order++) {
+    for(int order = 0; order < SIZEOF_ARR(p_queue); order++) {
         if(p_queue[order].target_floor == -1) {
             p_queue[order] = new_order;
         }

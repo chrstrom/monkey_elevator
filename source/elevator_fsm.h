@@ -125,4 +125,6 @@ int emergency_action(elevator_data_t* p_elevator_data, time_t* p_door_timer);
  */ 
 int obstruction_check(time_t* p_door_timer, int* p_door_open);
 
+elevator_event_t calculate_next_event(elevator_data_t* p_elevator_data);
+
 #endif
