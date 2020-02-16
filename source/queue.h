@@ -19,17 +19,27 @@ typedef struct{
     HardwareMovement dir;               /**< The direction of the order */
 } Order;
 
-
+#define INVALID_ORDER -2
 
 // We choose to make these arrays global, as we operate on them
 // in almost every single major function. The alternative would be to pass
 // pointers to every function, which in this case here unneccesarily clutters
 // the code.
 // Problem with threading/compiler optimization?
+
+// En cab-knapp == opp OG ned trykket i samme etasje
 static int ORDERS_UP[HARDWARE_NUMBER_OF_FLOORS] = {0, 0, 0, 0};
 static int ORDERS_DOWN[HARDWARE_NUMBER_OF_FLOORS] = {0, 0, 0, 0};
 static int ORDERS_CAB[HARDWARE_NUMBER_OF_FLOORS] = {0, 0, 0, 0};
-static Order QUEUE[QUEUE_SIZE];
+
+static Order QUEUE[QUEUE_SIZE] = {{.target_floor = INVALID_ORDER, .dir = HARDWARE_MOVEMENT_STOP},
+                                  {.target_floor = INVALID_ORDER, .dir = HARDWARE_MOVEMENT_STOP},
+                                  {.target_floor = INVALID_ORDER, .dir = HARDWARE_MOVEMENT_STOP},
+                                  {.target_floor = INVALID_ORDER, .dir = HARDWARE_MOVEMENT_STOP},
+                                  {.target_floor = INVALID_ORDER, .dir = HARDWARE_MOVEMENT_STOP},
+                                  {.target_floor = INVALID_ORDER, .dir = HARDWARE_MOVEMENT_STOP},
+                                  {.target_floor = INVALID_ORDER, .dir = HARDWARE_MOVEMENT_STOP},
+                                  {.target_floor = INVALID_ORDER, .dir = HARDWARE_MOVEMENT_STOP}};
 
 
 /**

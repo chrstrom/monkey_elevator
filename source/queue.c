@@ -120,7 +120,7 @@ int check_order_match(int current_floor, HardwareMovement last_dir) {
 
         for(int floor = 0; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
             // Only handle cab orders if we have a cab order AT THE CURRENT FLOOR
-            if(ORDERS_CAB[floor] && floor == current_floor) {
+            if(ORDERS_CAB[floor] == 1 && floor == current_floor) {
                 return 1;
             }
         }
@@ -135,9 +135,9 @@ Order initialize_new_order(){
     return new_order;
 }
 
-void push_back_queue(Order* p_queue, int floor, HardwareMovement dir) {
+void push_back_queue(int floor, HardwareMovement dir) {
     Order new_order = {.target_floor = floor, .dir = dir};
-     for(int order = 0; order < SIZEOF_ARR(p_queue); order++) {
+     for(int order = 0; order < SIZEOF_ARR(QUEUE); order++) {
         if(p_queue[order].target_floor == -1) {
             p_queue[order] = new_order;
         }
