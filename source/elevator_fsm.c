@@ -1,6 +1,7 @@
 #include "elevator_fsm.h"
 
 int update_state(elevator_data_t* p_elevator_data, time_t* p_door_timer) {
+    
 
     int current_floor = at_floor();
     
