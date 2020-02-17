@@ -5,8 +5,7 @@
 #ifndef ELEVATOR_IO_H
 #define ELEVATOR_IO_H
 
-#include "includes.h"
-#include "queue.h"
+#include "elevator_fsm.h"
 
 /**
  * @brief Find what floor the elevator is at
@@ -32,7 +31,7 @@ int at_floor();
  * Upon finding a button that is clicked, that has not already been clicked ( by checking
  * the @c ORDERS_UP and @c ORDERS_DOWN arrays), the corresponding value in the array is set to 1.
  */
-void floor_button_event_handler();
+void floor_button_event_handler(elevator_data_t* data);
 
 
 /**
@@ -46,7 +45,7 @@ void floor_button_event_handler();
  * @warning This function uses @c set_cab_button_lights() to set the cab button lights
  * The function updates the cab orders for the current Order 
  */
-void cab_button_event_handler();
+void cab_button_event_handler(elevator_data_t* data);
 
 
 /**
@@ -55,14 +54,14 @@ void cab_button_event_handler();
  * Set the lights on/off for each floor button, in accordance to the values 1/0
  * in @c ORDERS_UP and @c ORDERS_DOWN
  */
-void set_floor_button_lights();
+void set_floor_button_lights(elevator_data_t* data);
 
 /**
  * @brief Set the cab button lights 
  * 
  * Set the lights on/off for each floor button, in accordance to the values 1/0 in @c ORDERS_CAB
  */
-void set_cab_button_lights();
+void set_cab_button_lights(elevator_data_t* data);
 
 /**
  * @brief Set the floor indicator light

@@ -1,4 +1,13 @@
+#include <stdio.h>
 #include "timer.h"
+
+// void reset_timer(){
+//     door_timer = time(NULL);
+// }
+
+// int check_timer(){
+//     return (time(NULL) - door_timer) >= 3;
+// }
 
 void start_timer(time_t* p_timer){
     *(p_timer) = time(NULL);

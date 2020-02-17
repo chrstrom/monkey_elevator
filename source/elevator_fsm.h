@@ -6,10 +6,8 @@
 #ifndef ELEVATOR_FSM_H
 #define ELEVATOR_FSM_H
 
-#include "includes.h"
-#include "queue.h"
-#include "timer.h"
-#include "elevator_io.h"
+#include "driver/hardware.h"
+#include <time.h>
 
 
 /**
@@ -53,28 +51,20 @@ typedef enum {
     ACTION_EMERGENCY            /**< EMERGENCY-actions*/
 } elevator_action_t;
 
-
-
-// We have a choice between enum and struct for the FSM guards.
-// Enums are good because they allow us to use a nested switch for the guard cases,
-// but it does not encapsulate the idea of guards being on or off (0/1). Because of this
-// only one guard can be active at a time.
-
-// With a struct, we cannot use the nested switches, but have to resort to if() checks,
-// but this also allows for multiple guards to be used at once.
-
 /**
- * Enum of transition guards for the FSM. 
+ * A struct holding all the data related to the elevator 
  */
-// typedef enum{
-//     GUARD_TIMER,                /**< Guard for timer complete*/
-//     GUARD_DIRECTION,            /**< Guard for matching direction for elevator and order*/
-//     GUARD_TARGET_FLOOR_ABOVE,   /**< Guard for target floor located above current floor*/
-//     GUARD_TARGET_FLOOR_EQUAL,   /**< Guard for target floor located at current floor*/
-//     GUARD_TARGET_FLOOR_BELOW,   /**< Guard for target floor located below current floor*/
-//     GUARD_AT_FLOOR,             /**< Guard for elevator located at a floor*/
-//     GUARD_NOT_AT_FLOOR          /**< Guard for elevator located between floors*/
-// } elevator_guard_t;
+typedef struct{
+    int door_open;                              /**< An int representing the door's state: 1 = open, 0 = closed*/
+    int last_floor;                             /**< An int holding the elevator's last valid floor*/
+    HardwareMovement last_dir;                  /**< The last direction the elevator was moving in*/
+    elevator_state_t state;                     /**< The state of the elevator*/
+    elevator_action_t next_action;              /**< The next action to be performed by the elevator*/
+    int ORDERS_UP[HARDWARE_NUMBER_OF_FLOORS];   /**< The elevator's orders going up*/
+    int ORDERS_DOWN[HARDWARE_NUMBER_OF_FLOORS]; /**< The elevator's orders going down*/
+    int ORDERS_CAB[HARDWARE_NUMBER_OF_FLOORS];  /**< The elevator's cab-orders.*/
+    int check_time;                             /**< An int representing if we should check the time or not. Stupid bugfix*/
+} elevator_data_t;
 
 
 /**
@@ -90,18 +80,9 @@ typedef struct{
     int AT_FLOOR;                 /**< Guard for checking elevator location. 1 = elevator at floor. 0 = elevator not at floor*/
     int NOT_AT_FLOOR;             /**< Guard for checking elevator location. 1 = elevator not at floor. 0 = elevator at floor*/
 } elevator_guard_t;
+
 // Could also add guards for "BELOW_MIN_FLOOR" and "ABOVE_MAX_FLOOR"
 
-/**
- * A struct holding all the data related to the elevator 
- */
-typedef struct{
-    int door_open;                  /**< An int representing the door's state: 1 = open, 0 = closed*/
-    int last_floor;                 /**< An int holding the elevator's last valid floor*/
-    HardwareMovement last_dir;      /**< The last direction the elevator was moving in*/
-    elevator_state_t state;         /**< The state of the elevator*/
-    elevator_action_t next_action;  /**< The next action to be performed by the elevator*/
-} elevator_data_t;
 
 /**
  * @brief Update the elevator state
@@ -119,12 +100,9 @@ int update_state(elevator_data_t* p_elevator_data, time_t* p_door_timer);
 
 
 
-
 elevator_event_t elevator_event_handler(elevator_data_t* p_elevator_data);
 elevator_guard_t elevator_guard_handler(elevator_data_t* p_elevator_data, time_t* p_door_timer);
 int check_floor_diff(int target_floor, int current_floor);
-
-
 
 
 
@@ -144,7 +122,7 @@ int check_floor_diff(int target_floor, int current_floor);
  * function to be executed for any given state. It contains most of the logic flow
  * used to control the elevator's movements, depending on the given inputs.
  */
-int determine_direction(elevator_data_t* p_elevator_data, Order* p_current_order, int current_floor);
+//int determine_direction(elevator_data_t* p_elevator_data, Order* p_current_order, int current_floor);
 
 /**
  * @brief Solve the different tasks that much be done if the elevator is in an emergency. This includes
@@ -165,6 +143,6 @@ void emergency_action(elevator_data_t* p_elevator_data, time_t* p_timer);
  * @param[in/out] p_door_open Pointer to the door. Will be closed if a certain amount of time has passed since
  * the obstruction went low, or the door was opened. 
  */ 
-int obstruction_check(time_t* p_door_timer, int* p_door_open);
+//int obstruction_check(time_t* p_door_timer, int* p_door_open);
 
 #endif //ELEVATOR_FSM_H
