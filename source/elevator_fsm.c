@@ -278,7 +278,7 @@ void emergency_action(elevator_data_t* p_elevator_data, time_t* p_timer){
     erase_queue();
     start_timer(p_timer);
     if (at_floor() != -1 && hardware_read_stop_signal()){
-        p_elevator_data->door_open == DOOR_OPEN;
+        p_elevator_data->door_open = DOOR_OPEN;
         hardware_command_door_open(DOOR_OPEN);
     }
 }
