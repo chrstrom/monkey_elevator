@@ -13,70 +13,101 @@
 
 
 /**
- * Enum containing the possible states of the FSM 
+ * Enum for the possible states of the FSM.
  */
 typedef enum{
-    STATE_IDLE,         /**< Elevator standing still*/
-    STATE_DOOR_OPEN,    /**< Elevator's door is open, handling a floor order */
-    STATE_MOVING_UP,    /**< Elevator moving up*/
-    STATE_MOVING_DOWN,  /**< Elevator moving down*/
-    STATE_EMERGENCY     /**< Elevator !!EMERGENCY!!*/
+    STATE_IDLE,                 /**< Elevator standing still*/
+    STATE_DOOR_OPEN,            /**< Elevator's door is open, handling a floor order */
+    STATE_MOVING_UP,            /**< Elevator moving up*/
+    STATE_MOVING_DOWN,          /**< Elevator moving down*/
+    STATE_EMERGENCY             /**< Elevator !!EMERGENCY!!*/
 } elevator_state_t;
 
 
+/**
+ * Enum for the possible events that can occur during runtime 
+ */
 typedef enum{
-    EVENT_QUEUE_EMPTY,
-    EVENT_QUEUE_NOT_EMPTY,
-    EVENT_TARGET_FLOOR_ABOVE,
-    EVENT_TARGET_FLOOR_BELOW,
-    EVENT_FLOOR_MATCH,
-    EVENT_OBSTRUCTION_HIGH,
-    EVENT_STOP_BUTTON_HIGH,
-    EVENT_STOP_BUTTON_LOW,
+    EVENT_QUEUE_EMPTY,          /**< No valid elements in the queue*/
+    EVENT_QUEUE_NOT_EMPTY,      /**< At least 1 valid element has been added to the queue*/
+    EVENT_TARGET_FLOOR_DIFF,    /**< We have a target floor that is not at the current floor*/
+    EVENT_FLOOR_MATCH,          /**< We have a target floor at the current floor*/
+    EVENT_OBSTRUCTION_HIGH,     /**< The obstruction signal is high*/
+    EVENT_STOP_BUTTON_HIGH,     /**< The stop button is high/is pressed in*/
+    EVENT_STOP_BUTTON_LOW,      /**< The stop button is low/is not pressed in*/
+    EVENT_NO_EVENT,             /**< No particular event has occured*/
 } elevator_event_t;
 
 
+/**
+ * Enum for the possible actions to be set to execute by the FSM.
+ */
 typedef enum {
-    ACTION_DO_NOTHING,
-    ACTION_CHECK_OBSTRUCTION,
-    ACTION_START_DOOR_TIMER,
-    ACTION_OPEN_DOOR,             
-    ACTION_CLOSE_DOOR,
-    ACTION_MOVE_UP,
-    ACTION_MOVE_DOWN,
-    ACTION_STOP_MOVEMENT,
-    ACTION_EMERGENCY,
-    ACTION_NOT_EMERGENCY,
-    ACTION_NOT_OBSTRUCTION,
-    ACTION_OBSTRUCTION
+    ACTION_DO_NOTHING,          /**< Do nothing, corresponding to " - " in the state diagram output slot*/
+    ACTION_START_DOOR_TIMER,    /**< Start the door timer*/
+    ACTION_OPEN_DOOR,           /**< Open the elevator's doors*/
+    ACTION_CLOSE_DOOR,          /**< Close the elevator's doors*/
+    ACTION_MOVE_UP,             /**< Start moving upwards*/
+    ACTION_MOVE_DOWN,           /**< Start moving downwards*/
+    ACTION_STOP_MOVEMENT,       /**< Halt movement*/
+    ACTION_EMERGENCY            /**< EMERGENCY-actions*/
 } elevator_action_t;
 
 
-typedef enum{
-    GUARD_TIMER,
-    GUARD_DIRECTION,
-    GUARD_TARGET_FLOOR_BELOW,
-    GUARD_TARGET_FLOOR_ABOVE,
-    GUARD_TARGET_FLOOR_EQUAL,
-    GUARD_AT_FLOOR,
-    GUARD_NOT_AT_FLOOR
-} elevator_guard_t;
+
+// We have a choice between enum and struct for the FSM guards.
+// Enums are good because they allow us to use a nested switch for the guard cases,
+// but it does not encapsulate the idea of guards being on or off (0/1). Because of this
+// only one guard can be active at a time.
+
+// With a struct, we cannot use the nested switches, but have to resort to if() checks,
+// but this also allows for multiple guards to be used at once.
+
+/**
+ * Enum of transition guards for the FSM. 
+ */
+// typedef enum{
+//     GUARD_TIMER,                /**< Guard for timer complete*/
+//     GUARD_DIRECTION,            /**< Guard for matching direction for elevator and order*/
+//     GUARD_TARGET_FLOOR_ABOVE,   /**< Guard for target floor located above current floor*/
+//     GUARD_TARGET_FLOOR_EQUAL,   /**< Guard for target floor located at current floor*/
+//     GUARD_TARGET_FLOOR_BELOW,   /**< Guard for target floor located below current floor*/
+//     GUARD_AT_FLOOR,             /**< Guard for elevator located at a floor*/
+//     GUARD_NOT_AT_FLOOR          /**< Guard for elevator located between floors*/
+// } elevator_guard_t;
 
 
-// Med denne structen kan vi kanskje også holde alle arrays med knapper, samt queue?
+/**
+ * Struct of transition guards for the FSM. 0 = not fulfilled  1 = fulfilled.
+ * If a guard is not fulfilled, any state transition depending on it will not happen.
+ */
 typedef struct{
-    int door_open;
-    int last_floor;
-    HardwareMovement last_dir;
-    elevator_state_t state;
-    elevator_action_t next_action;
+    int TIMER_DONE;               /**< Guard for whether or not the timer done counting. 1 = timer is done, 0 = timer still going */
+    int DIRECTION;                /**< Guard for checking matching elevator direction. 1 = going in the same direction as order, 0 = not going in same dir as order*/
+    int TARGET_FLOOR_ABOVE;       /**< Guard for checking target floor location, 1 = target floor above current floor. 0 = target floor at/below current floor*/
+    int TARGET_FLOOR_EQUAL;       /**< Guard for checking target floor location, 1 = target floor at current floor. 0 = target floor not at current floor*/
+    int TARGET_FLOOR_BELOW;       /**< Guard for checking target floor location, 1 = target floor below current floor. 0 = target floor at/above current floor */
+    int AT_FLOOR;                 /**< Guard for checking elevator location. 1 = elevator at floor. 0 = elevator not at floor*/
+    int NOT_AT_FLOOR;             /**< Guard for checking elevator location. 1 = elevator not at floor. 0 = elevator at floor*/
+} elevator_guard_t;
+// Could also add guards for "BELOW_MIN_FLOOR" and "ABOVE_MAX_FLOOR"
+
+/**
+ * A struct holding all the data related to the elevator 
+ */
+typedef struct{
+    int door_open;                  /**< An int representing the door's state: 1 = open, 0 = closed*/
+    int last_floor;                 /**< An int holding the elevator's last valid floor*/
+    HardwareMovement last_dir;      /**< The last direction the elevator was moving in*/
+    elevator_state_t state;         /**< The state of the elevator*/
+    elevator_action_t next_action;  /**< The next action to be performed by the elevator*/
 } elevator_data_t;
 
 /**
  * @brief Update the elevator state
  * 
- * @param[in][out]  p_elevator_data    A pointer to the elevator data, updates on transitions.
- * @param[in][out]  p_door_timer        A pointer to the door_timer, used to control the door open/close sequence                  
+ * @param[in, out] p_elevator_data     A pointer to the elevator data, updates on transitions.
+ * @param[in, out] p_door_timer        A pointer to the door_timer, used to control the door open/close sequence                  
  * 
  * @return One of the possible commands resulting from the current state.
  * 
@@ -85,6 +116,19 @@ typedef struct{
  * used to control the elevator's movements, depending on the given inputs.
  */
 int update_state(elevator_data_t* p_elevator_data, time_t* p_door_timer);
+
+
+
+
+elevator_event_t elevator_event_handler(elevator_data_t* p_elevator_data);
+elevator_guard_t elevator_guard_handler(elevator_data_t* p_elevator_data, time_t* p_door_timer);
+int check_floor_diff(int target_floor, int current_floor);
+
+
+
+
+
+
 
 
 /**
@@ -109,10 +153,8 @@ int determine_direction(elevator_data_t* p_elevator_data, Order* p_current_order
  * @param[in/out] p_elevator_data Pointer to the @c elevator_data that contain fundamental data about 
  * the elevator
  * @param[in] p_door_timer Pointer to the time. Used to check if a certain amount of time has passed
- *
- * @return The function returns the next action the elevator will perform next. 
  */ 
-int emergency_action(elevator_data_t* p_elevator_data, time_t* p_door_timer);            
+void emergency_action(elevator_data_t* p_elevator_data, time_t* p_timer);            
 
 /**
  * @brief The function will check if the obstruction is activated and if 3 seconds has passed. If the obstruction
@@ -125,6 +167,4 @@ int emergency_action(elevator_data_t* p_elevator_data, time_t* p_door_timer);
  */ 
 int obstruction_check(time_t* p_door_timer, int* p_door_open);
 
-elevator_event_t calculate_next_event(elevator_data_t* p_elevator_data);
-
-#endif
+#endif //ELEVATOR_FSM_H
