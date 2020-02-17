@@ -2,19 +2,15 @@
 * @file
 * @brief Important includes and definitions that all files require
 */
-#ifndef INCLUDES_H
-#define INCLUDES_H
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-#include "driver/hardware.h"
+#ifndef GLOBALS_H
+#define GLOBALS_H
 
 /** 
- * Size of the QUEUE. The max amount of concurrent elements in the QUEUE will be at most 2 * (HARDWARE_NUMBER_OF_FLOORS + 1 )  - 2
+ * Size of the QUEUE. The max amount of concurrent elements in the QUEUE will be at most 2 * (HARDWARE_NUMBER_OF_FLOORS + 1 )  - 2 + HARDWARE_NUMBER_OF_FLOORS+1
  * In this case it will be 6, but we set it to 8 because its a power of 2 (nice) :)
 */
-#define QUEUE_SIZE 8
+
+#define QUEUE_SIZE 10
 
 #define ORDER_SIZE 5        /** Size of the orders. One to spare for each floor */
 
@@ -28,4 +24,5 @@
 #define LIGHT_OFF 0         /** Macro for light off */
 #define LIGHT_ON 1          /** Macro for light on */
 
-#endif //INCLUDES_H
+
+#endif //GLOBALS_H

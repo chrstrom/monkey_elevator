@@ -8,6 +8,28 @@ Vi må bestemme oss for å enten benytte oss av action_close/open_door eller gj�
 For enten den ene eller den andre er best å ta oss av innad i tilstandsmaskinen
 
 
+TODO 17.02
+
+
+oppdater dokumentasjon ):
+forenkle check order match(trenger ikke 3 argument)
+handle_order, som fjerner ordre fra kø, samt fjerner lys.
+
+
 QUEUE:
-Implemneter
-erase_order() (bør ta både opp og ned)
+Implementer erase_single_order()
+Finn ut hvordan håndtere prioritert cab orders: add push front (push front med alle cab orders som blir satt KUN HVIS man kommer til en etasje som følge av en floor button request i QUEUE[0])
+
+Mulighet: Når man trykker på cab button, legg en ny order til QUEUE, hvis vi ikke har en order i QUEUE med type HARDWARE_ORDER_INSIDE.
+I check order match vil vi stoppe for enhver t
+Lag funksjon som tetter igjen hull i køen.
+
+oppdater target floor
+
+
+KNOWN BUGS:
+Door closes right after obstruction goes low
+
+sjekk om vi må stoppe i moving up/down
+
+

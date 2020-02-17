@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "timer.h"
 
 void start_timer(time_t* p_timer){

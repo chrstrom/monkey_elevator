@@ -5,7 +5,9 @@
 #ifndef QUEUE_H
 #define QUEUE_H
 
-#include "includes.h"
+#include "driver/hardware.h"
+#include "elevator_fsm.h"
+#include "globals.h"
 
 /**
  * @struct Order
@@ -14,7 +16,7 @@
  */
 typedef struct{
     int target_floor;                   /**< The floor at which the order comes from */
-    HardwareMovement dir;               /**< The direction of the order */
+    HardwareOrder order_type;           /**< The type of order */
 } Order;
 
 #define INVALID_ORDER -2
@@ -26,11 +28,11 @@ typedef struct{
 // Problem with threading/compiler optimization?
 
 // En cab-knapp == opp OG ned trykket i samme etasje
-static int ORDERS_UP[HARDWARE_NUMBER_OF_FLOORS] = {0, 0, 0, 0};
-static int ORDERS_DOWN[HARDWARE_NUMBER_OF_FLOORS] = {0, 0, 0, 0};
-static int ORDERS_CAB[HARDWARE_NUMBER_OF_FLOORS] = {0, 0, 0, 0};
+// int ORDERS_UP[HARDWARE_NUMBER_OF_FLOORS] = {0, 0, 0, 0};
+// int ORDERS_DOWN[HARDWARE_NUMBER_OF_FLOORS] = {0, 0, 0, 0};
+// int ORDERS_CAB[HARDWARE_NUMBER_OF_FLOORS] = {0, 0, 0, 0};
 
-static Order QUEUE[QUEUE_SIZE];
+Order QUEUE[QUEUE_SIZE];
 
 
 /**
@@ -45,14 +47,13 @@ void init_queue();
 void update_queue();
 
 /**
- * @brief Add orders to the @p p_queue according to the @c ORDERS_UP and @c ORDERS_DOWN arrays
+ * @brief Add orders to the @c QUEUE if an existing order with the same parameters is not in it
  
  * 
  * The function checks each element in the  @c QUEUE, and pushes a new @c Order
- * to it for each truthy value in @c ORDERS_UP and @c ORDERS_DOWN , if the @c QUEUE does not
- * have an @c Order for either of them already.
+ * to the @c QUEUE with the corresponding ...
  */
-void add_order_to_queue();
+void add_order_to_queue(int target_floor, HardwareOrder order_type);
 
 /**
  * @brief Checks the @c QUEUE for an order with specified parameters
@@ -62,12 +63,12 @@ void add_order_to_queue();
  * 
  * @return 1 if the QUEUE contains a matching order, and 0 if it does not
  */
-int check_queue_for_order(int floor, HardwareMovement dir);
+int check_queue_for_order(int target_floor, HardwareOrder order_type);
 
 /**
  * @brief Empty the QUEUE by removing all elements
  */
-void erase_queue();
+void erase_queue(elevator_data_t* data);
 
 
 /**
@@ -89,7 +90,7 @@ int queue_is_empty();
  * 
  * Whenever we are idle at a floor and are accepting orders, we need to set the cab orders.
  */
-void set_cab_orders();
+void set_cab_orders(elevator_data_t* data);
 
 
 /**
@@ -97,19 +98,10 @@ void set_cab_orders();
  * 
  * @param[in]  current_floor    The floor to be used for clearing the cab orders
  */
-void clear_cab_orders(int current_floor);
+void clear_cab_orders(elevator_data_t* data, int current_floor);
 
 
-/**
- * @brief Update the @c target_floor value for a the current order 
- * 
- * @param[out] p_current_order  A pointer to the current order we are updating
- * @param[in]  floor            The floor we wish to update the order's @c target_floor value to.
- * 
- * This function "handles" part of an @c Order by changing the @c target_floor value of the current
- * order we are dealing with, to one of the floors @c CAB_ORDERS
- */
-void update_target_floor(Order* p_current_order, int current_floor);
+void clear_orders_at_floor(elevator_data_t* data, int current_floor);
 
 
 /**
@@ -123,9 +115,10 @@ void update_target_floor(Order* p_current_order, int current_floor);
  * 
  * The function checks if any @c Order in the @c QUEUE has an order set for the @p current_floor .
  * @p last_dir is used to check whether or not we should stop for it. We also check if any
- * of the orders have a cab-order that we can handle.
+ * of the orders have a cab-order that we can handle. A cab order will ALWAYS be handled if the
+ * elevator drives past it.
  */
-int check_order_match(int current_floor, HardwareMovement last_dir);
+int check_order_match(elevator_data_t* data, int current_floor, HardwareMovement last_dir);
 
 /**
  * @brief Pushes a new @c Order to the @c QUEUE
@@ -138,8 +131,6 @@ int check_order_match(int current_floor, HardwareMovement last_dir);
  */
 void push_back_queue(int floor, HardwareMovement dir);
 
-
-Order initialize_new_order();
 
 // /* ALT DETTE KAN LIGGE I UTILITIES OG I QUEUE
 // Men det er bedre at det ligger i QUEUE, da alle disse 
