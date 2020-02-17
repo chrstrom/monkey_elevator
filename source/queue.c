@@ -48,15 +48,6 @@ void add_order_to_queue() {
 
 }
 
-void push_back_queue(int floor, HardwareMovement dir) {
-    Order new_order = {.target_floor = floor, .dir = dir};
-     for(int order = 0; order < QUEUE_SIZE; order++) {
-        if(QUEUE[order].target_floor == -1) {
-            QUEUE[order] = new_order;
-        }
-    }
-}
-
 int check_queue_for_order(int floor, HardwareMovement dir) {
     for(int order = 0; order < QUEUE_SIZE; order++) {
         if(QUEUE[order].target_floor == floor && QUEUE[order].dir == dir) {
@@ -86,12 +77,9 @@ void clear_cab_orders(int current_floor){
 }
 
 void erase_queue(){
-    //skal her slette hele køen
-    //skal kun bli kalt dersom man trykker på stop
     for(int order = 0; order < QUEUE_SIZE; order++){
         QUEUE[order].dir = HARDWARE_ORDER_INSIDE;
         QUEUE[order].target_floor = INVALID_ORDER;
-
     }
 }
 

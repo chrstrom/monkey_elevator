@@ -7,7 +7,7 @@ int update_state(elevator_data_t* p_elevator_data, time_t* p_door_timer) {
     //need some functions to calculate this exactly/more precise
     //the current way for us to calculate, must take into account the importance for some functions 
     //over other
-    elevator_event_t current_event = elevator_event_handler(p_elevator_data, current_floor, current_order.dir);
+    elevator_event_t current_event = elevator_event_handler(p_elevator_data);
     elevator_guard_t guards = elevator_guard_handler(p_elevator_data, p_door_timer);
 
     switch(p_elevator_data->state) {
@@ -18,7 +18,7 @@ int update_state(elevator_data_t* p_elevator_data, time_t* p_door_timer) {
 
                 case EVENT_STOP_BUTTON_HIGH:{
                     p_elevator_data->state = STATE_EMERGENCY;
-                    return ACTION_CLEAR_QUEUE;
+                    return ACTION_EMERGENCY;
                 }
 
                 case EVENT_QUEUE_EMPTY:{
@@ -57,8 +57,10 @@ int update_state(elevator_data_t* p_elevator_data, time_t* p_door_timer) {
                 
                 case EVENT_STOP_BUTTON_HIGH:{
                     p_elevator_data->state = STATE_EMERGENCY;
-                    hardware_command_door_open(DOOR_CLOSE);
-                    return ACTION_CLEAR_QUEUE;
+                    //hardware_command_door_open(DOOR_CLOSE); 
+                    //Here we have to check if the elevator is at a floor, and then open the door
+                    //might be better to have an action_emergency, that will run through every action we have to do 
+                    return ACTION_EMERGENCY;
                 }
 
                 case EVENT_QUEUE_EMPTY:{
@@ -87,7 +89,7 @@ int update_state(elevator_data_t* p_elevator_data, time_t* p_door_timer) {
                     }  
                 }
 
-                EVENT_NO_EVENT: {
+                case EVENT_NO_EVENT: {
                     p_elevator_data->state = STATE_DOOR_OPEN;
                     return ACTION_DO_NOTHING;
                 }
@@ -100,7 +102,7 @@ int update_state(elevator_data_t* p_elevator_data, time_t* p_door_timer) {
 
                 case EVENT_STOP_BUTTON_HIGH:{
                     p_elevator_data->state = STATE_EMERGENCY;
-                    return ACTION_CLEAR_QUEUE;
+                    return ACTION_EMERGENCY;
                 }
                 
                 case EVENT_FLOOR_MATCH: {
@@ -122,7 +124,7 @@ int update_state(elevator_data_t* p_elevator_data, time_t* p_door_timer) {
             
                 case EVENT_STOP_BUTTON_HIGH:{
                     p_elevator_data->state = STATE_EMERGENCY;
-                    return ACTION_CLEAR_QUEUE;
+                    return ACTION_EMERGENCY;
                 }
                 
                 case EVENT_FLOOR_MATCH: {
@@ -143,7 +145,7 @@ int update_state(elevator_data_t* p_elevator_data, time_t* p_door_timer) {
 
             switch(current_event) {
                 case EVENT_STOP_BUTTON_HIGH: {
-                    return ACTION_START_DOOR_TIMER;
+                    return ACTION_EMERGENCY;
                 }
 
                 case EVENT_STOP_BUTTON_LOW: {
@@ -273,30 +275,14 @@ int check_floor_diff(int target_floor, int current_floor) {
     return 0; 
 }
 
-// int emergency_action(elevator_data_t* p_elevator_data, time_t* p_door_timer){
-//     if(hardware_read_stop_signal()){
-//         erase_queue(QUEUE);
-//         hardware_command_movement(HARDWARE_MOVEMENT_STOP);
-//         start_timer(p_door_timer);
-//         if (at_floor() != -1){
-//             p_elevator_data->door_open = DOOR_OPEN;
-//             hardware_command_door_open(DOOR_OPEN);
-//         }
-//         p_elevator_data->state = STATE_EMERGENCY;
-//     }
-
-//     else{
-//         p_elevator_data->state = STATE_IDLE;
-//         if(at_floor() == -1){
-//             return ACTION_DO_NOTHING;
-//         }
-//         else if(check_timer(p_door_timer, NORMAL_WAIT_TIME) == 1){
-//             return ACTION_CHECK_OBSTRUCTION;
-//         }
-       
-//     }
-
-// }
+void emergency_action(elevator_data_t* p_elevator_data, time_t* p_timer){
+    erase_queue();
+    start_timer(p_timer);
+    if (at_floor() != -1 && hardware_read_stop_signal()){
+        p_elevator_data->door_open == DOOR_OPEN;
+        hardware_command_door_open(DOOR_OPEN);
+    }
+}
 
 // int obstruction_check(time_t* p_door_timer, int* p_door_open){
 //     if(hardware_read_obstruction_signal()){

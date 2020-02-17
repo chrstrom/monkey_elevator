@@ -50,7 +50,7 @@ typedef enum {
     ACTION_MOVE_UP,             /**< Start moving upwards*/
     ACTION_MOVE_DOWN,           /**< Start moving downwards*/
     ACTION_STOP_MOVEMENT,       /**< Halt movement*/
-    ACTION_CLEAR_QUEUE,         /**< Clear the elevator's queue*/
+    ACTION_EMERGENCY            /**< EMERGENCY-actions*/
 } elevator_action_t;
 
 
@@ -153,10 +153,8 @@ int determine_direction(elevator_data_t* p_elevator_data, Order* p_current_order
  * @param[in/out] p_elevator_data Pointer to the @c elevator_data that contain fundamental data about 
  * the elevator
  * @param[in] p_door_timer Pointer to the time. Used to check if a certain amount of time has passed
- *
- * @return The function returns the next action the elevator will perform next. 
  */ 
-int emergency_action(elevator_data_t* p_elevator_data, time_t* p_door_timer);            
+void emergency_action(elevator_data_t* p_elevator_data, time_t* p_timer);            
 
 /**
  * @brief The function will check if the obstruction is activated and if 3 seconds has passed. If the obstruction

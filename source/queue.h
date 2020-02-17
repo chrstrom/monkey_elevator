@@ -72,7 +72,6 @@ void erase_queue();
 
 /**
  * @brief Clear the order by removing all elements
- *
  */
 void erase_order();
 

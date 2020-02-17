@@ -97,6 +97,11 @@ int main(){
                 elevator_data.state = STATE_IDLE;
                 break;
             
+            case ACTION_EMERGENCY:
+                hardware_command_movement(HARDWARE_MOVEMENT_STOP);
+                emergency_action(&elevator_data, &timer);
+                break;
+
             default:
                 fprintf(stderr, "Default case reached in switch in main. This should not happen\n");
                 break;

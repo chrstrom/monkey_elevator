@@ -3,3 +3,11 @@ En cab-knapp == opp OG ned trykket i samme etasje; dette kan forenkle køsysteme
 
 lag event_handler som setter neste event i FSM
 Flytt execute next action switch fra main til egen funksjon i elevator_fsm
+
+Vi må bestemme oss for å enten benytte oss av action_close/open_door eller gjøre dette innad i tilstandsmaskinen og så benytte oss av action_start_timer
+For enten den ene eller den andre er best å ta oss av innad i tilstandsmaskinen
+
+
+QUEUE:
+Implemneter
+erase_order() (bør ta både opp og ned)
