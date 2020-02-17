@@ -1,6 +1,6 @@
-<mxfile host="www.draw.io" modified="2020-02-17T08:02:34.763Z" agent="Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:73.0) Gecko/20100101 Firefox/73.0" etag="sDc0XohG3xongZt7Nxx9" version="12.7.0" type="github">
+<mxfile host="www.draw.io" modified="2020-02-17T08:10:59.122Z" agent="Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:73.0) Gecko/20100101 Firefox/73.0" etag="N2vdlJlYvY7F5GPJKOf3" version="12.7.0" type="github">
   <diagram id="tqs7IAVX7RazEy-5wPce" name="Page-1">
-    <mxGraphModel dx="4340" dy="3584" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1085" dy="896" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0"/>
         <mxCell id="1" parent="0"/>
@@ -1042,6 +1042,23 @@
         </mxCell>
         <mxCell id="6MLiAgcc4LPED_NUWuNP-92" value="&lt;div&gt;Will need to change this such that we either use ACTION_OPEN/CLOSE_DOOR&lt;/div&gt;&lt;div&gt;or that we open/close the door in the fsm.&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="1">
           <mxGeometry x="1090" y="2012" width="500" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="6MLiAgcc4LPED_NUWuNP-93" value="hardware_command_door_open(DOOR_CLOSE)" style="html=1;verticalAlign=bottom;endArrow=block;" edge="1" parent="1" target="EGRgIqFLFiozQ41nylDE-79">
+          <mxGeometry x="0.1094" relative="1" as="geometry">
+            <mxPoint x="1623.0035294117652" y="3210.1699999999996" as="sourcePoint"/>
+            <mxPoint x="2180" y="3210" as="targetPoint"/>
+            <Array as="points"/>
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6MLiAgcc4LPED_NUWuNP-94" value="" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;" edge="1" parent="1" source="EGRgIqFLFiozQ41nylDE-79">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="2180" y="3229" as="sourcePoint"/>
+            <mxPoint x="1620.0035294117652" y="3229" as="targetPoint"/>
+            <Array as="points">
+              <mxPoint x="1728.1000000000001" y="3229"/>
+            </Array>
+          </mxGeometry>
         </mxCell>
       </root>
     </mxGraphModel>
