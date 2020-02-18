@@ -104,7 +104,7 @@ int main(){
             case ACTION_EMERGENCY:
                 emergency_action(&elevator_data, &timer);
                 break;
-
+                
             default:
                 fprintf(stderr, "Default case reached in switch in main. This should not happen\n");
                 break;
