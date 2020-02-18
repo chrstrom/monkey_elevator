@@ -7,23 +7,28 @@ TODO 17.02
 
 
 oppdater dokumentasjon ):
-handle_order, som fjerner ordre fra kø, samt fjerner lys.
 
 
 QUEUE:
-Implementer erase_single_order()
 Finn ut hvordan håndtere prioritert cab orders: add push front (push front med alle cab orders som blir satt KUN HVIS man kommer til en etasje som følge av en floor button request i QUEUE[0])
 
 Mulighet: Når man trykker på cab button, legg en ny order til QUEUE, hvis vi ikke har en order i QUEUE med type HARDWARE_ORDER_INSIDE.
 I check order match vil vi stoppe for enhver t
-Lag funksjon som tetter igjen hull i køen.
 
 oppdater target floor
 
 
 KNOWN BUGS:
-Door closes right after obstruction goes low
+The door closes right after the obstruction goes low
+
+Need some major logic updates for the floor-selection! Right now, it may stop in third if moving up to fourth if third floor wants to move down
+
+Sometimes the door will open and the timer will work at a floor, but moreoften the timer will just not work!
+
+When we run the elevator, it will not stop at floors. This is due to the timer being fucking retarded 
 
 sjekk om vi må stoppe i moving up/down
+
+We will poll the cab_buttons even when not in idle
 
 
