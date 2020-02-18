@@ -10,8 +10,8 @@ int update_state(elevator_data_t* p_elevator_data, time_t* p_door_timer) {
     int current_floor = at_floor();
     Order current_order = QUEUE[0];
 
-    elevator_event_t current_event = elevator_event_handler(p_elevator_data);
-    elevator_guard_t guards = elevator_guard_handler(p_elevator_data, p_door_timer);
+    elevator_event_t current_event = elevator_calculate_event(p_elevator_data);
+    elevator_guard_t guards = elevator_calculate_guard(p_elevator_data, p_door_timer);
 
     switch(p_elevator_data->state) {
         case STATE_IDLE: {
@@ -52,7 +52,6 @@ int update_state(elevator_data_t* p_elevator_data, time_t* p_door_timer) {
                 }
             }
         }
-
         case STATE_DOOR_OPEN: {
             hardware_command_movement(HARDWARE_MOVEMENT_STOP);
             hardware_command_door_open(DOOR_OPEN);
@@ -80,6 +79,7 @@ int update_state(elevator_data_t* p_elevator_data, time_t* p_door_timer) {
                     // and then return move up/down in the 2nd run through
                     if(guards.TARGET_FLOOR_ABOVE && guards.TIMER_DONE) {
                         p_elevator_data->state = STATE_MOVING_UP;
+                        p_elevator_data->check_time = NOT_CHECK_DOOR_TIME;
                         hardware_command_door_open(DOOR_CLOSE);
                         p_elevator_data->door_open = DOOR_CLOSE;
                         return ACTION_MOVE_UP;
@@ -87,6 +87,7 @@ int update_state(elevator_data_t* p_elevator_data, time_t* p_door_timer) {
 
                     if(guards.TARGET_FLOOR_BELOW && guards.TIMER_DONE) {
                         p_elevator_data->state = STATE_MOVING_DOWN;
+                        p_elevator_data->check_time = NOT_CHECK_DOOR_TIME;
                         hardware_command_door_open(DOOR_CLOSE);
                         p_elevator_data->door_open = DOOR_CLOSE;
                         return ACTION_MOVE_DOWN;
@@ -184,11 +185,11 @@ int update_state(elevator_data_t* p_elevator_data, time_t* p_door_timer) {
     return ACTION_DO_NOTHING; // Default action if no hits (shouldnt be possible to get here)
 }
 
-elevator_event_t elevator_event_handler(elevator_data_t* p_elevator_data) {
+elevator_event_t elevator_calculate_event(elevator_data_t* p_elevator_data) {
     // Update truth values for all possible events
     int queue_empty = queue_is_empty();
     int target_floor_diff = check_floor_diff(QUEUE[0].target_floor, p_elevator_data->last_floor);
-    int floor_match = check_order_match(p_elevator_data, p_elevator_data->last_floor, p_elevator_data->last_dir);
+    int floor_match = check_order_match(p_elevator_data);
     int obstruction_state = hardware_read_obstruction_signal();
     int stop_button_state = hardware_read_stop_signal();
 
@@ -266,17 +267,23 @@ elevator_event_t elevator_event_handler(elevator_data_t* p_elevator_data) {
     return EVENT_NO_EVENT;
 }
 
-elevator_guard_t elevator_guard_handler(elevator_data_t* p_elevator_data, time_t* p_door_timer) {
+elevator_guard_t elevator_calculate_guard(elevator_data_t* p_elevator_data, time_t* p_door_timer) {
     elevator_guard_t guards;
 
     int floor = p_elevator_data->last_floor;
     int target = QUEUE[0].target_floor;
     int current_floor = at_floor();
-    
-    guards.TIMER_DONE = check_timer(p_door_timer, NORMAL_WAIT_TIME);              
-    guards.DIRECTION = check_order_match(p_elevator_data, floor, p_elevator_data->last_dir);                  
+                  
+    guards.DIRECTION = check_order_match(p_elevator_data);                  
     guards.AT_FLOOR = (current_floor != -1);              
-    guards.NOT_AT_FLOOR = (current_floor == -1);   
+    guards.NOT_AT_FLOOR = (current_floor == -1);
+
+    if(p_elevator_data->check_time == CHECK_DOOR_TIME){
+        guards.TIMER_DONE = check_timer(p_door_timer, NORMAL_WAIT_TIME);
+    }
+    else{
+        guards.TIMER_DONE = 0;
+    }   
 
     if(target == INVALID_ORDER) {
         guards.TARGET_FLOOR_ABOVE = 0;       

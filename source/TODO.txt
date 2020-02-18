@@ -1,6 +1,7 @@
 Queue:
 En cab-knapp == opp OG ned trykket i samme etasje; dette kan forenkle køsystemet betraktlig
 
+<<<<<<< HEAD
 lag event_handler som setter neste event i FSM
 Flytt execute next action switch fra main til egen funksjon i elevator_fsm
 
@@ -18,18 +19,48 @@ handle_order, som fjerner ordre fra kø, samt fjerner lys.
 
 QUEUE:
 Implementer erase_single_order()
+=======
+Flytt execute next action switch fra main til egen funksjon i elevator_fsm
+
+TODO 17.02
+
+Bytte ut at_floor() med current_floor i elevator_data_t
+oppdater dokumentasjon ):
+Rydd opp i modulene (spesielt queue); fjern unødvendig kode, og legg de
+enkleste funksjonene først.
+
+QUEUE:
+>>>>>>> 206f95b42644aae641c527bc952addfcd9f25c4a
 Finn ut hvordan håndtere prioritert cab orders: add push front (push front med alle cab orders som blir satt KUN HVIS man kommer til en etasje som følge av en floor button request i QUEUE[0])
 
 Mulighet: Når man trykker på cab button, legg en ny order til QUEUE, hvis vi ikke har en order i QUEUE med type HARDWARE_ORDER_INSIDE.
 I check order match vil vi stoppe for enhver t
+<<<<<<< HEAD
 Lag funksjon som tetter igjen hull i køen.
+=======
+>>>>>>> 206f95b42644aae641c527bc952addfcd9f25c4a
 
 oppdater target floor
 
 
 KNOWN BUGS:
+<<<<<<< HEAD
 Door closes right after obstruction goes low
 
 sjekk om vi må stoppe i moving up/down
 
+=======
+The door closes right after the obstruction goes low
+
+Need some major logic updates for the floor-selection! Right now, it may stop in third if moving up to fourth if third floor wants to move down
+
+Sometimes the door will open and the timer will work at a floor, but moreoften the timer will just not work!
+
+When we run the elevator, it will not stop at floors. This is due to the timer being fucking retarded 
+
+sjekk om vi må stoppe i moving up/down
+
+We will poll the cab_buttons even when not in idle
+
+>>>>>>> 206f95b42644aae641c527bc952addfcd9f25c4a
 
