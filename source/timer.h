@@ -5,7 +5,13 @@
 #ifndef TIMER_H
 #define TIMER_H
 
-#include "includes.h"
+#include <time.h>
+
+time_t door_timer;
+
+// void reset_timer();
+
+// int check_timer();
 
 /**
  * @brief Start the timer with the current time-value. 

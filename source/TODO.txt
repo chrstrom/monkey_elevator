@@ -1,5 +1,35 @@
 Queue:
 En cab-knapp == opp OG ned trykket i samme etasje; dette kan forenkle køsystemet betraktlig
 
-lag event_handler som setter neste event i FSM
 Flytt execute next action switch fra main til egen funksjon i elevator_fsm
+
+TODO 17.02
+
+Bytte ut at_floor() med current_floor i elevator_data_t
+oppdater dokumentasjon ):
+Rydd opp i modulene (spesielt queue); fjern unødvendig kode, og legg de
+enkleste funksjonene først.
+
+QUEUE:
+Finn ut hvordan håndtere prioritert cab orders: add push front (push front med alle cab orders som blir satt KUN HVIS man kommer til en etasje som følge av en floor button request i QUEUE[0])
+
+Mulighet: Når man trykker på cab button, legg en ny order til QUEUE, hvis vi ikke har en order i QUEUE med type HARDWARE_ORDER_INSIDE.
+I check order match vil vi stoppe for enhver t
+
+oppdater target floor
+
+
+KNOWN BUGS:
+The door closes right after the obstruction goes low
+
+Need some major logic updates for the floor-selection! Right now, it may stop in third if moving up to fourth if third floor wants to move down
+
+Sometimes the door will open and the timer will work at a floor, but moreoften the timer will just not work!
+
+When we run the elevator, it will not stop at floors. This is due to the timer being fucking retarded 
+
+sjekk om vi må stoppe i moving up/down
+
+We will poll the cab_buttons even when not in idle
+
+
