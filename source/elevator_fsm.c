@@ -5,20 +5,19 @@
 #include "queue.h"
 #include "timer.h"
 
-int update_state(elevator_data_t* p_elevator_data, time_t* p_door_timer) {
+elevator_action_t update_state(elevator_data_t* p_elevator_data) {
 
     int current_floor = at_floor();
     Order current_order = QUEUE[0];
 
     elevator_event_t current_event = elevator_calculate_event(p_elevator_data);
-    elevator_guard_t guards = elevator_calculate_guard(p_elevator_data, p_door_timer);
+    elevator_guard_t guards = elevator_calculate_guard(p_elevator_data);
 
     switch(p_elevator_data->state) {
         case STATE_IDLE: {
             hardware_command_movement(HARDWARE_MOVEMENT_STOP);
 
             switch (current_event)  {
-
                 case EVENT_STOP_BUTTON_HIGH:{
                     p_elevator_data->state = STATE_EMERGENCY;
                     return ACTION_EMERGENCY;
@@ -52,6 +51,7 @@ int update_state(elevator_data_t* p_elevator_data, time_t* p_door_timer) {
                 }
             }
         }
+
         case STATE_DOOR_OPEN: {
             hardware_command_movement(HARDWARE_MOVEMENT_STOP);
             hardware_command_door_open(DOOR_OPEN);
@@ -79,7 +79,6 @@ int update_state(elevator_data_t* p_elevator_data, time_t* p_door_timer) {
                     // and then return move up/down in the 2nd run through
                     if(guards.TARGET_FLOOR_ABOVE && guards.TIMER_DONE) {
                         p_elevator_data->state = STATE_MOVING_UP;
-                        p_elevator_data->check_time = NOT_CHECK_DOOR_TIME;
                         hardware_command_door_open(DOOR_CLOSE);
                         p_elevator_data->door_open = DOOR_CLOSE;
                         return ACTION_MOVE_UP;
@@ -87,7 +86,6 @@ int update_state(elevator_data_t* p_elevator_data, time_t* p_door_timer) {
 
                     if(guards.TARGET_FLOOR_BELOW && guards.TIMER_DONE) {
                         p_elevator_data->state = STATE_MOVING_DOWN;
-                        p_elevator_data->check_time = NOT_CHECK_DOOR_TIME;
                         hardware_command_door_open(DOOR_CLOSE);
                         p_elevator_data->door_open = DOOR_CLOSE;
                         return ACTION_MOVE_DOWN;
@@ -179,7 +177,7 @@ int update_state(elevator_data_t* p_elevator_data, time_t* p_door_timer) {
                     return ACTION_DO_NOTHING;
                 }
             }
-        }//
+        }
     } //switch(p_elevator_data->state)
     
     return ACTION_DO_NOTHING; // Default action if no hits (shouldnt be possible to get here)
@@ -197,7 +195,6 @@ elevator_event_t elevator_calculate_event(elevator_data_t* p_elevator_data) {
     // The events we check for depend entirely on the state of the elevator
     switch(p_elevator_data->state) {
         case STATE_IDLE: {
-            //Cases we care about: EVENT_STOP_BUTTON_HIGH, EVENT_QUEUE_EMPTY, EVENT_QUEUE_NOT_EMPTY
             if(stop_button_state == 1) {
                 return EVENT_STOP_BUTTON_HIGH;
             }
@@ -210,7 +207,6 @@ elevator_event_t elevator_calculate_event(elevator_data_t* p_elevator_data) {
             break;
         }                        
         case STATE_DOOR_OPEN: {
-            //Cases we care about: EVENT_STOP_BUTTON_HIGH, EVENT_OBSTRUCTION_HIGH, EVENT_QUEUE_EMPTY, EVENT_TARGET_FLOOR_DIFF:
             if(stop_button_state == 1) {
                 return EVENT_STOP_BUTTON_HIGH;
             }
@@ -226,7 +222,6 @@ elevator_event_t elevator_calculate_event(elevator_data_t* p_elevator_data) {
             break;
         }
         case STATE_MOVING_UP: {
-            //Cases we care about: EVENT_STOP_BUTTON_HIGH, EVENT_FLOOR_MATCH
             if(stop_button_state == 1) {
                 return EVENT_STOP_BUTTON_HIGH;
             }
@@ -237,7 +232,6 @@ elevator_event_t elevator_calculate_event(elevator_data_t* p_elevator_data) {
             break;
         }        
         case STATE_MOVING_DOWN: {
-            //Cases we care about: EVENT_STOP_BUTTON_HIGH, EVENT_FLOOR_MATCH
             if(stop_button_state == 1) {
                 return EVENT_STOP_BUTTON_HIGH;
             }
@@ -247,7 +241,6 @@ elevator_event_t elevator_calculate_event(elevator_data_t* p_elevator_data) {
             break;
         }             
         case STATE_EMERGENCY: {
-            //Cases we care about: EVENT_STOP_BUTTON_HIGH, EVENT_STOP_BUTTON_LOW
             if(stop_button_state == 1) {
                 hardware_command_stop_light(LIGHT_ON);
                 return EVENT_STOP_BUTTON_HIGH;
@@ -267,7 +260,7 @@ elevator_event_t elevator_calculate_event(elevator_data_t* p_elevator_data) {
     return EVENT_NO_EVENT;
 }
 
-elevator_guard_t elevator_calculate_guard(elevator_data_t* p_elevator_data, time_t* p_door_timer) {
+elevator_guard_t elevator_calculate_guard(elevator_data_t* p_elevator_data) {
     elevator_guard_t guards;
 
     int floor = p_elevator_data->last_floor;
@@ -277,14 +270,8 @@ elevator_guard_t elevator_calculate_guard(elevator_data_t* p_elevator_data, time
     guards.DIRECTION = check_order_match(p_elevator_data);                  
     guards.AT_FLOOR = (current_floor != -1);              
     guards.NOT_AT_FLOOR = (current_floor == -1);
-
-    if(p_elevator_data->check_time == CHECK_DOOR_TIME){
-        guards.TIMER_DONE = check_timer(p_door_timer, NORMAL_WAIT_TIME);
-    }
-    else{
-        guards.TIMER_DONE = 0;
-    }   
-
+    guards.TIMER_DONE = check_timer(UINT_NORMAL_WAIT_TIME);
+ 
     if(target == INVALID_ORDER) {
         guards.TARGET_FLOOR_ABOVE = 0;       
         guards.TARGET_FLOOR_EQUAL = 0;    
@@ -299,15 +286,15 @@ elevator_guard_t elevator_calculate_guard(elevator_data_t* p_elevator_data, time
     return guards;
 }
 
-int check_floor_diff(int target_floor, int current_floor) {
-    return (current_floor != target_floor && current_floor != -1);
-}
-
-void emergency_action(elevator_data_t* p_elevator_data, time_t* p_timer){
+void emergency_action(elevator_data_t* p_elevator_data){
     erase_queue(p_elevator_data);
-    start_timer(p_timer);
+    start_timer();
     if (at_floor() != -1 && hardware_read_stop_signal()){
         p_elevator_data->door_open = DOOR_OPEN;
         hardware_command_door_open(DOOR_OPEN);
     }
+}
+
+int check_floor_diff(int target_floor, int current_floor) {
+    return (current_floor != target_floor && current_floor != -1);
 }

@@ -11,7 +11,14 @@ int at_floor() {
     return -1;
 }
 
+void set_floor_indicator_light(int last_floor) {
+    if(last_floor != -1) {
+        hardware_command_floor_indicator_on(last_floor);
+    }
+}
 
+
+// Floor buttons
 void poll_floor_buttons(elevator_data_t* p_data) {
   
     for(int floor_up = MIN_FLOOR ; floor_up < HARDWARE_NUMBER_OF_FLOORS - 1; floor_up++) {
@@ -32,26 +39,6 @@ void poll_floor_buttons(elevator_data_t* p_data) {
     set_floor_button_lights(p_data);
 }
 
-
-void poll_cab_buttons(elevator_data_t* p_data) {
-    for(int floor = MIN_FLOOR; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
-        if(p_data->ORDERS_CAB[floor] == 0 && hardware_read_order(floor, HARDWARE_ORDER_INSIDE)) {
-            add_order_to_queue(floor, HARDWARE_ORDER_INSIDE);
-            p_data->ORDERS_CAB[floor] = 1;
-        }
-    }
-
-    set_cab_button_lights(p_data);
-}
-
-
-void set_floor_indicator_light(int last_floor) {
-    if(last_floor != -1) {
-        hardware_command_floor_indicator_on(last_floor);
-    }
-}
-
-
 void set_floor_button_lights(elevator_data_t* p_data) {
     // The last floor does not have an up-button: Start at 0.
     for(int floor_up = MIN_FLOOR; floor_up < HARDWARE_NUMBER_OF_FLOORS - 1; floor_up++) {
@@ -64,6 +51,18 @@ void set_floor_button_lights(elevator_data_t* p_data) {
     }
 }
 
+
+// Cab buttons
+void poll_cab_buttons(elevator_data_t* p_data) {
+    for(int floor = MIN_FLOOR; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
+        if(p_data->ORDERS_CAB[floor] == 0 && hardware_read_order(floor, HARDWARE_ORDER_INSIDE)) {
+            add_order_to_queue(floor, HARDWARE_ORDER_INSIDE);
+            p_data->ORDERS_CAB[floor] = 1;
+        }
+    }
+
+    set_cab_button_lights(p_data);
+}
 
 void set_cab_button_lights(elevator_data_t* p_data) {
     for(int floor = MIN_FLOOR; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {

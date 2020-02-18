@@ -5,6 +5,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+
 #include "globals.h"
 #include "driver/hardware.h"
 #include "elevator_fsm.h"
@@ -13,7 +14,6 @@
 #include "timer.h"
 
 int elevator_init() {
-
     //Turn off all button lights and clear all order light arrays (just in case)
     for(int floor = 0; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
         hardware_command_order_light(floor, HARDWARE_ORDER_UP,     LIGHT_OFF);
@@ -48,11 +48,11 @@ int main(){
         fprintf(stderr, "Unable to initialize software\n");
         exit(1);
     }
-    elevator_data_t elevator_data = {.door_open = DOOR_CLOSE, .last_floor = at_floor(), .last_dir = HARDWARE_MOVEMENT_STOP, .state = STATE_IDLE, .next_action = ACTION_STOP_MOVEMENT, .check_time = NOT_CHECK_DOOR_TIME};
-    time_t timer = time(NULL);
+    elevator_data_t elevator_data = {.door_open = DOOR_CLOSE, .last_floor = at_floor(), .last_dir = HARDWARE_MOVEMENT_STOP, .state = STATE_IDLE, .next_action = ACTION_STOP_MOVEMENT};
 
     // ELEVATOR PROGRAM LOOP
     while(1){
+        // Temporary
         elevator_data.last_floor = (at_floor() == -1 ? elevator_data.last_floor : at_floor());
 
         // Set floor light   
@@ -63,7 +63,7 @@ int main(){
         poll_cab_buttons(&elevator_data);
 
         // Determine next action
-        elevator_data.next_action = update_state(&elevator_data, &timer);
+        elevator_data.next_action = update_state(&elevator_data);
 
         //Execute next action
         //possibly it's own function
@@ -72,8 +72,7 @@ int main(){
                 break;
 
             case ACTION_START_DOOR_TIMER:
-                start_timer(&timer);
-                elevator_data.check_time = CHECK_DOOR_TIME;
+                start_timer();
                 break;
 
             case ACTION_OPEN_DOOR:
@@ -85,7 +84,6 @@ int main(){
                 update_queue();
                 hardware_command_door_open(DOOR_CLOSE);
                 elevator_data.door_open = DOOR_CLOSE;
-                elevator_data.check_time = NOT_CHECK_DOOR_TIME;
                 break;
 
             case ACTION_MOVE_UP:
@@ -95,7 +93,7 @@ int main(){
                 break;
             
             case ACTION_MOVE_DOWN:
-                //hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
+                hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
                 elevator_data.last_dir = HARDWARE_MOVEMENT_DOWN;
                 elevator_data.state = STATE_MOVING_DOWN;
                 break;
@@ -107,8 +105,7 @@ int main(){
                 break;
             
             case ACTION_EMERGENCY:
-                emergency_action(&elevator_data, &timer);
-                elevator_data.check_time = CHECK_DOOR_TIME;
+                emergency_action(&elevator_data);
                 break;
 
             default:
