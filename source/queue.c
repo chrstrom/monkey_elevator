@@ -16,15 +16,21 @@ void update_queue(){
         return;
     }
 
-    for(int ord = 0; ord < QUEUE_SIZE; ord++){
-        if(QUEUE[ord].target_floor == current_floor && ord < QUEUE_SIZE - 1){
-            QUEUE[ord].target_floor = QUEUE[ord + 1].target_floor;
-            QUEUE[ord].order_type = QUEUE[ord + 1].order_type;
-            ord--;
-        }
-        else if(QUEUE[ord].target_floor == current_floor && ord == QUEUE_SIZE - 1){
-            QUEUE[ord].target_floor = INVALID_ORDER;
-            QUEUE[ord].order_type = HARDWARE_ORDER_NOT_INIT;
+    // If there are any orders with target_floor = INVALID_ORDER, restructurate the queue
+    delete_holes_in_queue();
+    
+    // QUEUE[0].target_floor should be INVALID_ORDER, if we had a target at the current_floor
+    // since we clear the orders before calling this function
+    if(QUEUE[0].target_floor == INVALID_ORDER){ 
+        for (int ord = 0; ord < QUEUE_SIZE; ord++){
+            if (ord < QUEUE_SIZE - 1){
+                QUEUE[ord].target_floor = QUEUE[ord + 1].target_floor;
+                QUEUE[ord].order_type = QUEUE[ord + 1].order_type;
+            }
+            else if (ord == QUEUE_SIZE - 1){
+                QUEUE[ord].target_floor = INVALID_ORDER;
+                QUEUE[ord].order_type = HARDWARE_ORDER_NOT_INIT;
+            }
         }
     }
 }
@@ -57,46 +63,47 @@ int check_queue_for_order(int floor, HardwareOrder order_type) {
 }
 
 
-void set_cab_orders(elevator_data_t* data){
+void set_cab_orders(elevator_data_t* p_data){
     for(int floor = MIN_FLOOR; floor < HARDWARE_NUMBER_OF_FLOORS; floor++){
-        data->ORDERS_CAB[floor] = hardware_read_order(floor, HARDWARE_ORDER_INSIDE);
+        p_data->ORDERS_CAB[floor] = hardware_read_order(floor, HARDWARE_ORDER_INSIDE);
     }
 }
 
 
-void clear_cab_orders(elevator_data_t* data, int current_floor){
+void clear_cab_orders(elevator_data_t* p_data, int current_floor){
     if(current_floor > HARDWARE_NUMBER_OF_FLOORS || current_floor < MIN_FLOOR) {
         printf("current_floor out of bounds in clear_cab_order()!");
     }
 
     for(int floor = MIN_FLOOR; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
-        if(data->ORDERS_CAB[floor] == current_floor){
-            data->ORDERS_CAB[floor] = 0;
+        if(p_data->ORDERS_CAB[floor] == current_floor){
+            p_data->ORDERS_CAB[floor] = 0;
         }
     }
 }
 
 
-void clear_orders_at_floor(elevator_data_t* data, int current_floor) {
+void clear_orders_at_floor(elevator_data_t* p_data, int current_floor) {
     for(int order = 0; order < QUEUE_SIZE; order++) {
         int order_floor = QUEUE[order].target_floor;
         if(order_floor == current_floor) {
-            data->ORDERS_CAB[order_floor] = 0;
-            data->ORDERS_UP[order_floor] = 0;
-            data->ORDERS_DOWN[order_floor] = 0;
+            p_data->ORDERS_CAB[order_floor] = 0;
+            p_data->ORDERS_UP[order_floor] = 0;
+            p_data->ORDERS_DOWN[order_floor] = 0;
             QUEUE[order].target_floor = INVALID_ORDER;
             QUEUE[order].order_type = HARDWARE_ORDER_NOT_INIT;
         }
     }
 
-    set_cab_button_lights(data);
-    set_floor_button_lights(data);
+    set_cab_button_lights(p_data);
+    set_floor_button_lights(p_data);
+    update_queue();
 }
 
 
-void erase_queue(elevator_data_t* data){
+void erase_queue(elevator_data_t* p_data){
     for(int floor = 0; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
-        clear_orders_at_floor(data, floor);
+        clear_orders_at_floor(p_data, floor);
     }
 }
 
@@ -110,7 +117,7 @@ int queue_is_empty() {
 }
 
 
-int check_order_match(elevator_data_t* data) {
+int check_order_match(elevator_data_t* p_data) {
     int current_floor = at_floor();
     if(QUEUE[0].target_floor == current_floor) {
         return 1;
@@ -120,7 +127,7 @@ int check_order_match(elevator_data_t* data) {
         Order current_order = QUEUE[order];
         // Only handle Orders if we have an order AT THIS FLOOR
         // We also need to check if its direction is the same as the last_dir of the elevator
-        if(current_order.target_floor == current_floor && current_order.order_type == data->last_dir) {
+        if(current_order.target_floor == current_floor && current_order.order_type == p_data->last_dir) {
             return 1;
         }
 
@@ -168,6 +175,7 @@ void erase_single_order(int floor, HardwareOrder order_type){
         }
     }
 }
+
 
 void delete_holes_in_queue(){
     for(int ord = 0; ord < QUEUE_SIZE; ord++){

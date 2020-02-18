@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include "timer.h"
 
+//It is something buggy about the timer. By the time of writing, we cannot identify the bug in the code, but it exists!
+
 // void reset_timer(){
 //     door_timer = time(NULL);
 // }

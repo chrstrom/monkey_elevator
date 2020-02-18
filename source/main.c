@@ -59,8 +59,8 @@ int main(){
         set_floor_indicator_light(at_floor());
 
         // Handle button press events
-        floor_button_event_handler(&elevator_data);
-        cab_button_event_handler(&elevator_data);
+        poll_floor_buttons(&elevator_data);
+        poll_cab_buttons(&elevator_data);
 
         // Determine next action
         elevator_data.next_action = update_state(&elevator_data, &timer);
@@ -82,6 +82,7 @@ int main(){
                 break;
 
             case ACTION_CLOSE_DOOR:
+                update_queue();
                 hardware_command_door_open(DOOR_CLOSE);
                 elevator_data.door_open = DOOR_CLOSE;
                 elevator_data.check_time = NOT_CHECK_DOOR_TIME;
@@ -94,7 +95,7 @@ int main(){
                 break;
             
             case ACTION_MOVE_DOWN:
-                //hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
+                hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
                 elevator_data.last_dir = HARDWARE_MOVEMENT_DOWN;
                 elevator_data.state = STATE_MOVING_DOWN;
                 break;
