@@ -5,7 +5,7 @@ Flytt execute next action switch fra main til egen funksjon i elevator_fsm
 
 TODO 17.02
 
-
+Bytte ut at_floor() med current_floor i elevator_data_t
 oppdater dokumentasjon ):
 
 
