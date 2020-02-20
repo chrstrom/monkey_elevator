@@ -14,7 +14,7 @@
  * @warning Because the elevator hardware's floors are indexed at 0, a non-truthy value (0) will
  * be returned when the elevator is at the first floor
  */
-int at_floor();
+int get_current_floor();
 
 
 /**

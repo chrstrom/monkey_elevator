@@ -4,14 +4,13 @@
 
 void init_queue() {
     for(int i = 0; i < QUEUE_SIZE; i++) {
-        QUEUE[i].target_floor = -2;
+        QUEUE[i].target_floor = INVALID_ORDER;
         QUEUE[i].order_type =  HARDWARE_ORDER_NOT_INIT;
     }
 }
 
 void update_queue(){
-    int current_floor = at_floor();
-    if(current_floor == -1){
+    if(get_current_floor() == BETWEEN_FLOORS){
         return;
     }
 
@@ -40,14 +39,14 @@ void erase_queue(int* p_orders_up, int* p_orders_down, int* p_orders_cab){
     }
 }
 
-void erase_single_order(int floor, HardwareOrder order_type){
-    for(int ord = 0; ord < QUEUE_SIZE; ord++){
-        if(QUEUE[ord].target_floor == floor && QUEUE[ord].order_type == order_type){
-            QUEUE[ord].target_floor = INVALID_ORDER;
-            QUEUE[ord].order_type = HARDWARE_ORDER_NOT_INIT;
-        }
-    }
-}
+// void erase_single_order(int floor, HardwareOrder order_type){
+//     for(int ord = 0; ord < QUEUE_SIZE; ord++){
+//         if(QUEUE[ord].target_floor == floor && QUEUE[ord].order_type == order_type){
+//             QUEUE[ord].target_floor = INVALID_ORDER;
+//             QUEUE[ord].order_type = HARDWARE_ORDER_NOT_INIT;
+//         }
+//     }
+// }
 
 void delete_holes_in_queue(){
     for(int ord = 0; ord < QUEUE_SIZE; ord++){
@@ -112,8 +111,8 @@ int check_queue_for_order(int floor, HardwareOrder order_type) {
     return 0;
 }
 
-int check_order_match(HardwareOrder last_dir) {
-    int current_floor = at_floor();
+int check_order_match(HardwareOrder order_type) {
+    int current_floor = get_current_floor();
     if(QUEUE[0].target_floor == current_floor) {
         return 1;
     }
@@ -122,7 +121,7 @@ int check_order_match(HardwareOrder last_dir) {
         Order current_order = QUEUE[order];
         // Only handle Orders if we have an order AT THIS FLOOR
         // We also need to check if its direction is the same as the last_dir of the elevator
-        if(current_order.target_floor == current_floor && current_order.order_type == last_dir) {
+        if(current_order.target_floor == current_floor && current_order.order_type == order_type) {
             return 1;
         }
 
@@ -159,17 +158,17 @@ void set_cab_orders(int* p_order_array){
 }
 
 
-//vi trenger strengt tatt ikke denne, da vi clearer alt inne i clear_orders_at_floor
-void clear_orders(int* p_order_array, int current_floor){
-    if(current_floor > HARDWARE_NUMBER_OF_FLOORS || current_floor < MIN_FLOOR) {
-        printf("current_floor out of bounds in clear_cab_order()!");
-    }
+// //vi trenger strengt tatt ikke denne, da vi clearer alt inne i clear_orders_at_floor
+// void clear_orders(int* p_order_array, int current_floor){
+//     if(current_floor > HARDWARE_NUMBER_OF_FLOORS || current_floor < MIN_FLOOR) {
+//         printf("current_floor out of bounds in clear_cab_order()!");
+//     }
 
-    for(int floor = MIN_FLOOR; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
-        if(p_order_array[floor] == current_floor){
-            p_order_array[floor] = 0;
-        }
-    }
-}
+//     for(int floor = MIN_FLOOR; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
+//         if(p_order_array[floor] == current_floor){
+//             p_order_array[floor] = 0;
+//         }
+//     }
+// }
 
 

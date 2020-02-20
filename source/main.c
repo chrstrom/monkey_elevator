@@ -26,10 +26,10 @@ int elevator_init() {
     hardware_command_door_open(DOOR_CLOSE); 
 
     hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
-    while(at_floor() == -1) {}
+    while(get_current_floor() == BETWEEN_FLOORS) {}
     hardware_command_movement(HARDWARE_MOVEMENT_STOP);
 
-    hardware_command_floor_indicator_on(at_floor());
+    hardware_command_floor_indicator_on(get_current_floor());
    
     init_queue();
     return 0;
@@ -48,15 +48,15 @@ int main(){
         fprintf(stderr, "Unable to initialize software\n");
         exit(1);
     }
-    elevator_data_t elevator_data = {.door_open = DOOR_CLOSE, .last_floor = at_floor(), .last_dir = HARDWARE_MOVEMENT_STOP, .state = STATE_IDLE, .next_action = ACTION_STOP_MOVEMENT};
+    elevator_data_t elevator_data = {.door_open = DOOR_CLOSE, .last_floor = get_current_floor(), .last_dir = HARDWARE_MOVEMENT_STOP, .state = STATE_IDLE, .next_action = ACTION_STOP_MOVEMENT};
 
     // ELEVATOR PROGRAM LOOP
     while (1){
         // Temporary
-        elevator_data.last_floor = (at_floor() == -1 ? elevator_data.last_floor : at_floor());
+        elevator_data.last_floor = (get_current_floor() == BETWEEN_FLOORS ? elevator_data.last_floor : get_current_floor());
 
         // Set floor light
-        set_floor_indicator_light(at_floor());
+        set_floor_indicator_light(get_current_floor());
 
         //Ønskelig at kun main og fsm skal kjenne til elevator_data
         //men dette vil da skape problemer, siden vi ønsker da å endre verdien til 

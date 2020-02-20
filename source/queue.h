@@ -43,17 +43,17 @@ void update_queue();
  */
 void erase_queue(int* p_orders_up, int* p_orders_down, int* p_orders_cab);
 
-/**
- * @brief Reset a spesific order in the queue.
- *    
- * @param[in] floor      The floor we would like to reset an order to
- * @param[in] order_type The @c HardwareOrder we want to search for
- *
- * The function removes an @c Order from the @c QUEUE with given @p floor and @p order_type ,
- * and cleans up the queue by removing the hole it leaves.
- */
+// /**
+//  * @brief Reset a spesific order in the queue.
+//  *    
+//  * @param[in] floor      The floor we would like to reset an order to
+//  * @param[in] order_type The @c HardwareOrder we want to search for
+//  *
+//  * The function removes an @c Order from the @c QUEUE with given @p floor and @p order_type ,
+//  * and cleans up the queue by removing the hole it leaves.
+//  */
 
-void erase_single_order(int floor, HardwareOrder order_type);
+// void erase_single_order(int floor, HardwareOrder order_type);
 
 /**
  * @brief Delete all occurencec of "holes" in the @c QUEUE
@@ -113,14 +113,14 @@ int check_queue_for_order(int target_floor, HardwareOrder order_type);
 /**
  * @brief Check if the QUEUE has a valid order to handle at a floor
  * 
- * @param[in] p_data    Pointer to @c elevator_data_t . Used to validate the checks
+ * @param[in] order_type    The type of order we check for
  * 
  * @return 1 if any @c Order in @c QUEUE has a valid order at the floor, and 0 if not.
  * 
  * @warning A cab order will ALWAYS be handled if the elevator drives past it, but the function will
  * differentiate between orders-up and orders-down.
  */
-int check_order_match(HardwareOrder last_dir);
+int check_order_match(HardwareOrder order_type);
 
 /**
  * @brief Clear all orders in the @c QUEUE for the @p current_floor
@@ -138,12 +138,12 @@ void clear_orders_at_floor(int* p_orders_cab, int* p_orders_up, int* p_orders_do
  */
 void set_cab_orders(int* p_order_array);
 
-/**
- * @brief Clear a cab order for a given floor
- * @param[in, out] p_data        Pointer to @c elevator_data_t that will have it's cab-orders reset
- * @param[in] current_floor     The floor to be used for clearing the cab orders
- */
-void clear_orders(int* p_array, int current_floor);
+// /**
+//  * @brief Clear a cab order for a given floor
+//  * @param[in, out] p_data        Pointer to @c elevator_data_t that will have it's cab-orders reset
+//  * @param[in] current_floor     The floor to be used for clearing the cab orders
+//  */
+// void clear_orders(int* p_array, int current_floor);
 
 
 #endif //QUEUE_H

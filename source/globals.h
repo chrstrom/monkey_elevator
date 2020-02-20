@@ -23,6 +23,7 @@
 #define LIGHT_OFF 0         /** Macro for light off */
 #define LIGHT_ON 1          /** Macro for light on */
 
+#define BETWEEN_FLOORS -1
 #define INVALID_ORDER -2
 
 #endif //GLOBALS_H

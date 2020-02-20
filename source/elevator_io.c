@@ -2,17 +2,17 @@
 #include "globals.h"
 #include "queue.h"
 
-int at_floor() {
+int get_current_floor() {
     for(int floor = MIN_FLOOR; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
        if(hardware_read_floor_sensor(floor)) {
            return floor;
        }
     }
-    return -1;
+    return BETWEEN_FLOORS;
 }
 
 void set_floor_indicator_light(int last_floor) {
-    if(last_floor != -1) {
+    if(last_floor != BETWEEN_FLOORS) {
         hardware_command_floor_indicator_on(last_floor);
     }
 }
