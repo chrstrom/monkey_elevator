@@ -7,9 +7,6 @@
 #define ELEVATOR_FSM_H
 
 #include "driver/hardware.h"
-#include <time.h>
-#include "timer.h"
-
 
 /**
  * Enum for the possible states of the FSM.

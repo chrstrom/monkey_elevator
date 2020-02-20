@@ -3,6 +3,7 @@
 #include "elevator_io.h"
 #include "globals.h"
 #include "queue.h"
+#include "timer.h"
 
 elevator_action_t update_state(elevator_data_t* p_elevator_data) {
 
