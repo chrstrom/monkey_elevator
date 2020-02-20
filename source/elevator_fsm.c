@@ -54,7 +54,7 @@ elevator_action_t update_state(elevator_data_t* p_elevator_data) {
         case STATE_DOOR_OPEN: {
             hardware_command_movement(HARDWARE_MOVEMENT_STOP);
             hardware_command_door_open(DOOR_OPEN);
-            clear_orders_at_floor(p_elevator_data, current_floor);
+            clear_orders_at_floor(p_elevator_data->ORDERS_CAB, p_elevator_data->ORDERS_UP, p_elevator_data->ORDERS_DOWN, current_floor);
 
             switch (current_event) {
                 
@@ -186,7 +186,7 @@ elevator_event_t elevator_calculate_event(elevator_data_t* p_elevator_data) {
     // Update truth values for all possible events
     int queue_empty = check_queue_empty();
     int target_floor_diff = check_floor_diff(QUEUE[0].target_floor, p_elevator_data->last_floor);
-    int floor_match = check_order_match(p_elevator_data);
+    int floor_match = check_order_match(p_elevator_data->last_dir);
     int obstruction_state = hardware_read_obstruction_signal();
     int stop_button_state = hardware_read_stop_signal();
 
@@ -271,7 +271,7 @@ elevator_guard_t elevator_calculate_guard(elevator_data_t* p_elevator_data) {
     int target = QUEUE[0].target_floor;
     int current_floor = at_floor();
                   
-    guards.DIRECTION = check_order_match(p_elevator_data);                  
+    guards.DIRECTION = check_order_match(p_elevator_data->last_dir);                  
     guards.AT_FLOOR = (current_floor != -1);              
     guards.NOT_AT_FLOOR = (current_floor == -1);
     //guards.TIMER_DONE = check_timer(UINT_NORMAL_WAIT_TIME);
@@ -315,7 +315,7 @@ elevator_guard_t elevator_calculate_guard(elevator_data_t* p_elevator_data) {
 }
 
 void emergency_action(elevator_data_t* p_elevator_data){
-    erase_queue(p_elevator_data);
+    erase_queue(p_elevator_data->ORDERS_UP, p_elevator_data->ORDERS_DOWN, p_elevator_data->ORDERS_CAB);
     start_timer();
     if (at_floor() != -1 && hardware_read_stop_signal()){
         p_elevator_data->door_open = DOOR_OPEN;
@@ -323,6 +323,13 @@ void emergency_action(elevator_data_t* p_elevator_data){
     }
 }
 
+
 int check_floor_diff(int target_floor, int current_floor) {
     return (current_floor != target_floor && current_floor != -1);
+}
+
+
+void button_state(elevator_data_t* p_elevator_data){
+    poll_cab_buttons(p_elevator_data->ORDERS_CAB);
+    poll_floor_buttons(p_elevator_data->ORDERS_UP, p_elevator_data->ORDERS_DOWN);
 }

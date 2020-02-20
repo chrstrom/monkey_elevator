@@ -134,6 +134,8 @@ elevator_guard_t elevator_calculate_guard(elevator_data_t* p_elevator_data);
  * 
  * @param[in/out] p_elevator_data   Pointer to the @c elevator_data that contain the elevator's data
  */     
-void emergency_action(elevator_data_t* p_elevator_data);            
+void emergency_action(elevator_data_t* p_elevator_data);  
+
+void button_state(elevator_data_t* p_elevator_data);
 
 #endif //ELEVATOR_FSM_H

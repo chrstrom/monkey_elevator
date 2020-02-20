@@ -58,9 +58,14 @@ int main(){
         // Set floor light
         set_floor_indicator_light(at_floor());
 
+        //Ønskelig at kun main og fsm skal kjenne til elevator_data
+        //men dette vil da skape problemer, siden vi ønsker da å endre verdien til 
+        //elevator_data inne i hver av disse poll-funksjonene
+
+        //kan lage en merge-funksjon inne i FSM som da kun merger kun det vi ønsker fra elevator_data
+
         // Handle button press events
-        poll_floor_buttons(&elevator_data);
-        poll_cab_buttons(&elevator_data);
+        button_state(&elevator_data);
 
         // Determine next action
         elevator_data.next_action = update_state(&elevator_data);

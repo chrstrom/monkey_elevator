@@ -34,9 +34,9 @@ void update_queue(){
     }
 }
 
-void erase_queue(elevator_data_t* p_data){
+void erase_queue(int* p_orders_up, int* p_orders_down, int* p_orders_cab){
     for(int floor = 0; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
-        clear_orders_at_floor(p_data, floor);
+        clear_orders_at_floor(p_orders_cab, p_orders_up, p_orders_down, floor);
     }
 }
 
@@ -113,7 +113,7 @@ int check_queue_for_order(int floor, HardwareOrder order_type) {
     return 0;
 }
 
-int check_order_match(elevator_data_t* p_data) {
+int check_order_match(HardwareOrder last_dir) {
     int current_floor = at_floor();
     if(QUEUE[0].target_floor == current_floor) {
         return 1;
@@ -123,7 +123,7 @@ int check_order_match(elevator_data_t* p_data) {
         Order current_order = QUEUE[order];
         // Only handle Orders if we have an order AT THIS FLOOR
         // We also need to check if its direction is the same as the last_dir of the elevator
-        if(current_order.target_floor == current_floor && current_order.order_type == p_data->last_dir) {
+        if(current_order.target_floor == current_floor && current_order.order_type == last_dir) {
             return 1;
         }
 
@@ -135,38 +135,40 @@ int check_order_match(elevator_data_t* p_data) {
     return 0;
 }
 
-void clear_orders_at_floor(elevator_data_t* p_data, int current_floor) {
+void clear_orders_at_floor(int* p_orders_cab, int* p_orders_up, int* p_orders_down, int current_floor) {
     for(int order = 0; order < QUEUE_SIZE; order++) {
         int order_floor = QUEUE[order].target_floor;
         if(order_floor == current_floor) {
-            p_data->ORDERS_CAB[order_floor] = 0;
-            p_data->ORDERS_UP[order_floor] = 0;
-            p_data->ORDERS_DOWN[order_floor] = 0;
+            p_orders_cab[order_floor] = 0;
+            p_orders_up[order_floor] = 0;
+            p_orders_down[order_floor] = 0;
             QUEUE[order].target_floor = INVALID_ORDER;
             QUEUE[order].order_type = HARDWARE_ORDER_NOT_INIT;
         }
     }
 
-    set_cab_button_lights(p_data);
-    set_floor_button_lights(p_data);
+    set_cab_button_lights(p_orders_cab);
+    set_floor_button_lights(p_orders_up, p_orders_down);
     update_queue();
 }
 
 
-void set_cab_orders(elevator_data_t* p_data){
+void set_cab_orders(int* p_order_array){
     for(int floor = MIN_FLOOR; floor < HARDWARE_NUMBER_OF_FLOORS; floor++){
-        p_data->ORDERS_CAB[floor] = hardware_read_order(floor, HARDWARE_ORDER_INSIDE);
+        p_order_array[floor] = hardware_read_order(floor, HARDWARE_ORDER_INSIDE);
     }
 }
 
-void clear_cab_orders(elevator_data_t* p_data, int current_floor){
+
+//vi trenger strengt tatt ikke denne, da vi clearer alt inne i clear_orders_at_floor
+void clear_orders(int* p_order_array, int current_floor){
     if(current_floor > HARDWARE_NUMBER_OF_FLOORS || current_floor < MIN_FLOOR) {
         printf("current_floor out of bounds in clear_cab_order()!");
     }
 
     for(int floor = MIN_FLOOR; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
-        if(p_data->ORDERS_CAB[floor] == current_floor){
-            p_data->ORDERS_CAB[floor] = 0;
+        if(p_order_array[floor] == current_floor){
+            p_order_array[floor] = 0;
         }
     }
 }
