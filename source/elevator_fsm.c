@@ -5,7 +5,7 @@
 #include "queue.h"
 #include "timer.h"
 
-elevator_action_t update_state(elevator_data_t* p_elevator_data) {
+elevator_action_t elevator_update_state(elevator_data_t* p_elevator_data) {
 
     int current_floor = at_floor();
     Order current_order = QUEUE[0];
@@ -190,6 +190,7 @@ elevator_event_t elevator_calculate_event(elevator_data_t* p_elevator_data) {
     int floor_match = check_order_match(p_elevator_data->last_dir);
     int obstruction_state = hardware_read_obstruction_signal();
     int stop_button_state = hardware_read_stop_signal();
+    int timer_done = check_timer();
 
     //WE HAVE A BUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUG
     //If the elevator is moving from a floor and is between two floors when the stop-button is pressed, it will still
@@ -218,7 +219,7 @@ elevator_event_t elevator_calculate_event(elevator_data_t* p_elevator_data) {
             if(obstruction_state == 1) {
                 return EVENT_OBSTRUCTION_HIGH;
             }
-            if(queue_empty == 1) {
+            if(queue_empty == 1 && timer_done == 1) {
                 return EVENT_QUEUE_EMPTY;
             }
             if(target_floor_diff == 1) {
@@ -275,7 +276,6 @@ elevator_guard_t elevator_calculate_guard(elevator_data_t* p_elevator_data) {
     guards.DIRECTION = check_order_match(p_elevator_data->last_dir);                  
     guards.AT_FLOOR = (current_floor != -1);              
     guards.NOT_AT_FLOOR = (current_floor == -1);
-    //guards.TIMER_DONE = check_timer(UINT_NORMAL_WAIT_TIME);
     guards.TIMER_DONE = check_timer();
 
     if(target == INVALID_ORDER) {
@@ -284,32 +284,9 @@ elevator_guard_t elevator_calculate_guard(elevator_data_t* p_elevator_data) {
         guards.TARGET_FLOOR_BELOW = 0;
     }
     else {
-
-
-
-
-        //Need to updare this pos! 
-        //Here we need to add the possibility that the elevator can stop between the floors, and then we need to calculate the
-        //direction the elevator should move in. Therefore use both last_floor and last_dir to calculate where the elevator is
-
-        //ugly code to start with! Need to update it later
-        // if(!guards.AT_FLOOR){  
-        //     if(p_elevator_data->last_dir == HARDWARE_MOVEMENT_UP){
-        //         current_floor = p_elevator_data->last_floor + 1;
-        //     }
-        //     else if(p_elevator_data->last_dir == HARDWARE_MOVEMENT_DOWN){
-        //         current_floor = p_elevator_data->last_floor - 1;
-        //     }
-        // }
-        //We have a new bug here, where the elevator may proceed to crash in either the top or bottom floor-sensor, after it was stopped
-        //and then tried to proceed
-
-        //else{
-            //Burde vi her benytte oss av p_elevator_data->last_floor istedenfor floor?
-            guards.TARGET_FLOOR_ABOVE = (target > floor);
-            guards.TARGET_FLOOR_EQUAL = (target == current_floor);
-            guards.TARGET_FLOOR_BELOW = (target < floor);
-        //}
+        guards.TARGET_FLOOR_ABOVE = (target > floor);
+        guards.TARGET_FLOOR_EQUAL = (target == current_floor);
+        guards.TARGET_FLOOR_BELOW = (target < floor);
     }
 
     return guards;
@@ -322,6 +299,7 @@ void emergency_action(elevator_data_t* p_elevator_data){
         p_elevator_data->door_open = DOOR_OPEN;
         hardware_command_door_open(DOOR_OPEN);
     }
+    calculate_next_floor(p_elevator_data);
 }
 
 
@@ -330,8 +308,18 @@ int check_floor_diff(int target_floor, int current_floor) {
 }
 
 
-void button_state(elevator_data_t* p_elevator_data){
+void update_button_state(elevator_data_t* p_elevator_data){
     poll_cab_buttons(p_elevator_data->ORDERS_CAB);
     poll_floor_buttons(p_elevator_data->ORDERS_UP, p_elevator_data->ORDERS_DOWN);
 }
 
+int calculate_next_floor(elevator_data_t* p_elevator_data){
+    if(at_floor() == -1 && p_elevator_data->next_action == ACTION_EMERGENCY){
+        if(p_elevator_data->last_dir == HARDWARE_MOVEMENT_UP){
+            p_elevator_data->next_expected_floor = p_elevator_data->last_floor + 1;
+        }
+        if(p_elevator_data->last_dir == HARDWARE_MOVEMENT_DOWN){
+            p_elevator_data->next_expected_floor = p_elevator_data->last_floor - 1;
+        }
+    }
+}

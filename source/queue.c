@@ -95,7 +95,6 @@ void push_front_queue(int floor, HardwareOrder order_type){
 }
 
 int check_queue_empty() {
-    //We assume that the first element is always updated and thus always correct
     delete_holes_in_queue();
     if(QUEUE[0].target_floor == INVALID_ORDER){
         return 1;
@@ -147,8 +146,8 @@ void clear_orders_at_floor(int* p_orders_cab, int* p_orders_up, int* p_orders_do
         }
     }
 
-    set_cab_button_lights(p_orders_cab);
-    set_floor_button_lights(p_orders_up, p_orders_down);
+    //set_cab_button_lights(p_orders_cab);
+    //set_floor_button_lights(p_orders_up, p_orders_down);
     update_queue();
 }
 

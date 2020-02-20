@@ -65,7 +65,7 @@ int main(){
         //kan lage en merge-funksjon inne i FSM som da kun merger kun det vi ønsker fra elevator_data
 
         // Handle button press events
-        button_state(&elevator_data);
+        update_button_state(&elevator_data);
 
         // Determine next action
         elevator_data.next_action = update_state(&elevator_data);
