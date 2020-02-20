@@ -131,12 +131,12 @@ int check_order_match(HardwareOrder order_type);
 void clear_orders_at_floor(int* p_orders_cab, int* p_orders_up, int* p_orders_down, int current_floor);
 
 
-/**
- * @brief Set the cab orders according to cab buttons pressed
- * 
- * @param[in, out] p_data Pointer to @c elevator_data_t that contains the array for cab-orders 
- */
-void set_cab_orders(int* p_order_array);
+// /**
+//  * @brief Set the cab orders according to cab buttons pressed
+//  * 
+//  * @param[in, out] p_data Pointer to @c elevator_data_t that contains the array for cab-orders 
+//  */
+// void set_cab_orders(int* p_order_array);
 
 // /**
 //  * @brief Clear a cab order for a given floor

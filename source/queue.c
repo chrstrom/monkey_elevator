@@ -81,10 +81,6 @@ void push_back_queue(int target_floor, HardwareOrder order_type) {
 }
 
 void push_front_queue(int floor, HardwareOrder order_type){
-    // Add a new order to the front of the queue
-    // We can always assume that the QUEUE will have space, due to simple math (not shown here)
-    
-    // Rightshifting of the queue
     for(int ord = QUEUE_SIZE - 1; ord > 0; ord--){
         QUEUE[ord].order_type = QUEUE[ord - 1].order_type;
         QUEUE[ord].target_floor = QUEUE[ord - 1].target_floor;
@@ -95,10 +91,7 @@ void push_front_queue(int floor, HardwareOrder order_type){
 
 int check_queue_empty() {
     delete_holes_in_queue();
-    if(QUEUE[0].target_floor == INVALID_ORDER){
-        return 1;
-    }
-    return 0;
+    return QUEUE[0].target_floor == INVALID_ORDER;
 }
 
 
@@ -119,17 +112,10 @@ int check_order_match(HardwareOrder order_type) {
 
     for(int order = 1; order < QUEUE_SIZE; order++) {
         Order current_order = QUEUE[order];
-        // Only handle Orders if we have an order AT THIS FLOOR
-        // We also need to check if its direction is the same as the last_dir of the elevator
-        if(current_order.target_floor == current_floor && current_order.order_type == order_type) {
-            return 1;
-        }
-
-        if(current_order.target_floor == current_floor && current_order.order_type == HARDWARE_ORDER_INSIDE) {
+        if(current_order.target_floor == current_floor && (current_order.order_type == order_type || current_order.order_type == HARDWARE_ORDER_INSIDE)) {
             return 1;
         }
     }
-
     return 0;
 }
 
@@ -151,11 +137,11 @@ void clear_orders_at_floor(int* p_orders_cab, int* p_orders_up, int* p_orders_do
 }
 
 
-void set_cab_orders(int* p_order_array){
-    for(int floor = MIN_FLOOR; floor < HARDWARE_NUMBER_OF_FLOORS; floor++){
-        p_order_array[floor] = hardware_read_order(floor, HARDWARE_ORDER_INSIDE);
-    }
-}
+// void set_cab_orders(int* p_order_array){
+//     for(int floor = MIN_FLOOR; floor < HARDWARE_NUMBER_OF_FLOORS; floor++){
+//         p_order_array[floor] = hardware_read_order(floor, HARDWARE_ORDER_INSIDE);
+//     }
+// }
 
 
 // //vi trenger strengt tatt ikke denne, da vi clearer alt inne i clear_orders_at_floor

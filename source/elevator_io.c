@@ -11,9 +11,9 @@ int get_current_floor() {
     return BETWEEN_FLOORS;
 }
 
-void set_floor_indicator_light(int last_floor) {
-    if(last_floor != BETWEEN_FLOORS) {
-        hardware_command_floor_indicator_on(last_floor);
+void set_floor_indicator_light(int floor) {
+    if(floor != BETWEEN_FLOORS) {
+        hardware_command_floor_indicator_on(floor);
     }
 }
 

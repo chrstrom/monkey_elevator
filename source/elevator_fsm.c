@@ -303,7 +303,7 @@ void emergency_action(elevator_data_t* p_elevator_data){
         p_elevator_data->door_open = DOOR_OPEN;
         hardware_command_door_open(DOOR_OPEN);
     }
-    calculate_next_floor(p_elevator_data);
+    //calculate_next_floor(p_elevator_data);
 }
 
 

@@ -21,9 +21,9 @@ int get_current_floor();
  * @brief Set the floor indicator light. The lights will only be set, if the elevator is at a defined
  * floor. Therefore, the light will not be changed when the elevator is between floors
  * 
- * @param[in] last_floor    The floor whos indicator we would like to set  
+ * @param[in] floor    The floor whos indicator we would like to set  
  */
-void set_floor_indicator_light(int last_floor);
+void set_floor_indicator_light(int floor);
 
 
 

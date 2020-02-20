@@ -68,7 +68,7 @@ int main(){
         update_button_state(&elevator_data);
 
         // Determine next action
-        elevator_data.next_action = update_state(&elevator_data);
+        elevator_data.next_action = elevator_update_state(&elevator_data);
 
         //Execute next action
         //possibly it's own function

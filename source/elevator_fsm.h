@@ -90,7 +90,7 @@ typedef struct{
  * function to be executed for any given state. It contains most of the logic flow
  * used to control the elevator's movements, depending on the given inputs.
  */
-elevator_action_t update_state(elevator_data_t* p_elevator_data);
+elevator_action_t elevator_update_state(elevator_data_t* p_elevator_data);
 
 
 /**
@@ -133,6 +133,6 @@ elevator_guard_t elevator_calculate_guard(elevator_data_t* p_elevator_data);
  */     
 void emergency_action(elevator_data_t* p_elevator_data);  
 
-void button_state(elevator_data_t* p_elevator_data);
+void update_button_state(elevator_data_t* p_elevator_data);
 
 #endif //ELEVATOR_FSM_H
