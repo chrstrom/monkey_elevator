@@ -8,6 +8,7 @@
 
 #include "driver/hardware.h"
 #include <time.h>
+#include "timer.h"
 
 
 /**
@@ -51,6 +52,7 @@ typedef enum {
     ACTION_EMERGENCY            /**< EMERGENCY-actions*/
 } elevator_action_t;
 
+<<<<<<< HEAD
 
 /**
  * A struct holding all the data related to the elevator 
@@ -67,6 +69,8 @@ typedef struct{
     int check_time;                             /**< An int representing if we should check the time or not. Stupid bugfix*/
 } elevator_data_t;
 
+=======
+>>>>>>> f2a0415642073f15395b3552302e0a41e9fc1383
 
 /**
  * Struct of transition guards for the FSM. 0 = not fulfilled  1 = fulfilled.
@@ -82,22 +86,44 @@ typedef struct{
     int NOT_AT_FLOOR;             /**< Guard for checking elevator location. 1 = elevator not at floor. 0 = elevator at floor*/
 } elevator_guard_t;
 
-// Could also add guards for "BELOW_MIN_FLOOR" and "ABOVE_MAX_FLOOR"
+/**
+ * A struct holding all the data related to the elevator 
+ */
+typedef struct{
+    int door_open;                              /**< An int representing the door's state: 1 = open, 0 = closed*/
+    int last_floor;                             /**< An int holding the elevator's last valid floor*/
+    HardwareMovement last_dir;                  /**< The last direction the elevator was moving in*/
+    elevator_state_t state;                     /**< The state of the elevator*/
+    elevator_action_t next_action;              /**< The next action to be performed by the elevator*/
+    int ORDERS_UP[HARDWARE_NUMBER_OF_FLOORS];   /**< The elevator's orders going up*/
+    int ORDERS_DOWN[HARDWARE_NUMBER_OF_FLOORS]; /**< The elevator's orders going down*/
+    int ORDERS_CAB[HARDWARE_NUMBER_OF_FLOORS];  /**< The elevator's cab-orders.*/
+} elevator_data_t;
 
 
 /**
  * @brief Update the elevator state
  * 
- * @param[in, out] p_elevator_data     A pointer to the elevator data, updates on transitions.
- * @param[in, out] p_door_timer        A pointer to the door_timer, used to control the door open/close sequence                  
+ * @param[in, out] p_elevator_data     A pointer to the elevator data, updates on transitions.             
  * 
- * @return One of the possible commands resulting from the current state.
+ * @return One of the possible @c elevator_action_t resulting from the current state.
  * 
  * This function updates the elevator's state machine, and yields a resulting
  * function to be executed for any given state. It contains most of the logic flow
  * used to control the elevator's movements, depending on the given inputs.
  */
-int update_state(elevator_data_t* p_elevator_data, time_t* p_door_timer);
+elevator_action_t update_state(elevator_data_t* p_elevator_data);
+
+
+/**
+ * @brief Check if a target floor is equal to the current floor
+ * 
+ * @param[in] target_floor      A given target floor
+ * @param[in] current_floor     The current floor of the elevator
+ * 
+ * The function returns a truth value, 1 = @p target_floor == @p current_floor , 0 = @p target_floor != @p current_floor
+ */
+int check_floor_diff(int target_floor, int current_floor);
 
 
 /**
@@ -118,27 +144,15 @@ elevator_event_t elevator_calculate_event(elevator_data_t* p_elevator_data);
  * 
  * @return All of the guards, depending on the elevator's state, input and queue
  */ 
-elevator_guard_t elevator_calculate_guard(elevator_data_t* p_elevator_data, time_t* p_door_timer);
-
-
-/**
- * @brief Check if the @p current_floor is equal to @p target_floor
- * 
- * @param[in] current_floor The floor the elevator is at 
- * 
- * @param[in] target_floor The current order's target_floor
- */ 
-int check_floor_diff(int target_floor, int current_floor);
+elevator_guard_t elevator_calculate_guard(elevator_data_t* p_elevator_data);
 
 
 /**
  * @brief Solve the different tasks that much be done if the elevator is in an emergency. This includes
  * deleting the queue, making sure the engine is stopped, and open the door if the elevator is at a floor
  * 
- * @param[in/out] p_elevator_data   Pointer to the @c elevator_data that contain fundamental data about 
- * the elevator
- * @param[in] p_door_timer          Pointer to the time. Used to check if a certain amount of time has passed
+ * @param[in/out] p_elevator_data   Pointer to the @c elevator_data that contain the elevator's data
  */     
-void emergency_action(elevator_data_t* p_elevator_data, time_t* p_timer);            
+void emergency_action(elevator_data_t* p_elevator_data);            
 
 #endif //ELEVATOR_FSM_H

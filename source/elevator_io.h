@@ -18,12 +18,20 @@
  */
 int at_floor();
 
+/**
+ * @brief Set the floor indicator light. The lights will only be set, if the elevator is at a defined
+ * floor. Therefore, the light will not be changed when the elevator is between floors
+ * 
+ * @param[in] last_floor    The floor whos indicator we would like to set  
+ */
+void set_floor_indicator_light(int last_floor);
+
+
 
 /**
  * @brief Poll all floor buttons for input
  * 
- * @param[in/out] p_data    Pointer to @c elevator_data_t that contains the arrays for @c ORDERS_UP and @c ORDERS_DOWN.
- * These will be set according to the input from the buttons
+ * @param[in, out] p_data    Pointer to @c elevator_data_t that contains the button arrays @c ORDERS_UP and @c ORDERS_DOW
  * 
  * @warning This function operates on the assumption that @c ORDERS_UP and @c ORDERS_DOWN are 
  * set with 0's and 1's, respectively for "button not clicked" and "button clicked"
@@ -38,36 +46,25 @@ int at_floor();
  */
 void poll_floor_buttons(elevator_data_t* p_data);
 
-
-/**
- * @brief Poll all cab buttons for input
- * 
- * @param[in/out] p_data    A pointer to @c elevator_data_t that contains the @c ORDERS_CAB that
- * will be set according to the input
- *
- * @warning The function will use "logical or" to set @c ORDERS_CAB
- *
- * @warning This function uses @c set_cab_button_lights() to set the cab button lights
- * The function updates the cab orders for the current Order 
- */
-void poll_cab_buttons(elevator_data_t* p_data);
-
-
-/**
- * @brief Set the floor indicator light. The lights will only be set, if the elevator is at a defined
- * floor. Therefore, the light will not be changed when the elevator is between floors
- * 
- * @param[in] last_floor    The floor-indicator we would like to set  
- */
-void set_floor_indicator_light(int last_floor);
-
-
 /**
  * @brief Set the floor button lights in accordance to the values in @c ORDERS_UP and @c ORDERS_DOWN .
  * 
  * @param[in] p_data    A pointer to @c elevator_data_t that contains the @c ORDERS_UP and @c ORDERS_DOWN
  */
 void set_floor_button_lights(elevator_data_t* p_data);
+
+
+
+/**
+ * @brief Poll all cab buttons for input
+ * 
+ * @param[in, out] p_data    A pointer to @c elevator_data_t that contains the @c ORDERS_CAB that
+ * will be set according to the input
+ *
+ * @warning This function uses @c set_cab_button_lights() to set the cab button lights
+ * The function updates the cab orders for the current Order 
+ */
+void poll_cab_buttons(elevator_data_t* p_data);
 
 /**
  * @brief Set the cab button lights in accordance to the values in @c ORDERS_CAB

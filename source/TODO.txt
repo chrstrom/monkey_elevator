@@ -24,11 +24,25 @@ The door closes right after the obstruction goes low
 
 Need some major logic updates for the floor-selection! Right now, it may stop in third if moving up to fourth if third floor wants to move down
 
-Sometimes the door will open and the timer will work at a floor, but moreoften the timer will just not work!
+The timer will work if the QUEUE is not empty. I.e, it needs atleast two different orders to work fully
 
-When we run the elevator, it will not stop at floors. This is due to the timer being fucking retarded 
+The elevator may take in orders before it reaches the poll_buttons 
 
-sjekk om vi må stoppe i moving up/down
+If the elevator gets a stop signal when it is between two floors, it does not know which direction to travel in when it
+recieves an order. Tried to fix it with a couple of if, but it will just go straight up into the physical switch/stop.
+The original code works relativly well, however it may not detect the new order and do the appropriate action to fullfill
+the order
+
+
+Functions we can delete:
+-erase_single_order: not used once in the entire program
+
+
+Failed tests:
+O2, sometimes this fuckes up (may be fixed)
+D1, when the QUEUE is almost empty. The works as long as it is at least two orders in the queue
+D4, the timer is fucked
+H1, right after the STOP-button has been pressed between floors, the elevator will not take new orders into the queue 
 
 We will poll the cab_buttons even when not in idle
 
