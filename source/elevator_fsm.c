@@ -334,3 +334,4 @@ void button_state(elevator_data_t* p_elevator_data){
     poll_cab_buttons(p_elevator_data->ORDERS_CAB);
     poll_floor_buttons(p_elevator_data->ORDERS_UP, p_elevator_data->ORDERS_DOWN);
 }
+
