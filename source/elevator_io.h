@@ -5,8 +5,6 @@
 #ifndef ELEVATOR_IO_H
 #define ELEVATOR_IO_H
 
-#include "elevator_fsm.h"
-
 /**
  * @brief Find what floor the elevator is at
  * 

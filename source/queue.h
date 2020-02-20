@@ -6,10 +6,8 @@
 #define QUEUE_H
 
 #include "driver/hardware.h"
-#include "elevator_fsm.h"
 #include "globals.h"
 
-#define INVALID_ORDER -2
 
 /**
  * @struct Order

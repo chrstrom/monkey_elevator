@@ -11,7 +11,6 @@
 */
 
 #define QUEUE_SIZE 10
-
 #define ORDER_SIZE 5        /** Size of the orders. One to spare for each floor */
 
 #define MIN_FLOOR 0         /**The bottom floor that the elevator runs to. Note that this is 0-indexed */
@@ -24,5 +23,6 @@
 #define LIGHT_OFF 0         /** Macro for light off */
 #define LIGHT_ON 1          /** Macro for light on */
 
+#define INVALID_ORDER -2
 
 #endif //GLOBALS_H
