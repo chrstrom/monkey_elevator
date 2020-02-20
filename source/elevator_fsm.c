@@ -284,11 +284,17 @@ elevator_guard_t elevator_calculate_guard(elevator_data_t* p_elevator_data) {
         guards.TARGET_FLOOR_BELOW = 0;
     }
     else {
-        guards.TARGET_FLOOR_ABOVE = (target > floor);
-        guards.TARGET_FLOOR_EQUAL = (target == current_floor);
-        guards.TARGET_FLOOR_BELOW = (target < floor);
+        if(p_elevator_data->next_expected_floor != INVALID_ORDER && current_floor == -1 && p_elevator_data->next_action == ACTION_DO_NOTHING){
+            guards.TARGET_FLOOR_ABOVE = (target > p_elevator_data->next_expected_floor);
+            guards.TARGET_FLOOR_EQUAL = 0;
+            guards.TARGET_FLOOR_BELOW = (target < p_elevator_data->next_expected_floor);
+        }
+        else{
+            guards.TARGET_FLOOR_ABOVE = (target > floor);
+            guards.TARGET_FLOOR_EQUAL = (target == current_floor);
+            guards.TARGET_FLOOR_BELOW = (target < floor);
+        }
     }
-
     return guards;
 }
 
@@ -313,7 +319,7 @@ void update_button_state(elevator_data_t* p_elevator_data){
     poll_floor_buttons(p_elevator_data->ORDERS_UP, p_elevator_data->ORDERS_DOWN);
 }
 
-int calculate_next_floor(elevator_data_t* p_elevator_data){
+void calculate_next_floor(elevator_data_t* p_elevator_data){
     if(at_floor() == -1 && p_elevator_data->next_action == ACTION_EMERGENCY){
         if(p_elevator_data->last_dir == HARDWARE_MOVEMENT_UP){
             p_elevator_data->next_expected_floor = p_elevator_data->last_floor + 1;

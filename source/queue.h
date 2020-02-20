@@ -122,6 +122,7 @@ int check_queue_for_order(int target_floor, HardwareOrder order_type);
  */
 int check_order_match(HardwareOrder last_dir);
 
+
 /**
  * @brief Clear all orders in the @c QUEUE for the @p current_floor
  * 
@@ -137,13 +138,5 @@ void clear_orders_at_floor(int* p_orders_cab, int* p_orders_up, int* p_orders_do
  * @param[in, out] p_data Pointer to @c elevator_data_t that contains the array for cab-orders 
  */
 void set_cab_orders(int* p_order_array);
-
-/**
- * @brief Clear a cab order for a given floor
- * @param[in, out] p_data        Pointer to @c elevator_data_t that will have it's cab-orders reset
- * @param[in] current_floor     The floor to be used for clearing the cab orders
- */
-void clear_orders(int* p_array, int current_floor);
-
 
 #endif //QUEUE_H

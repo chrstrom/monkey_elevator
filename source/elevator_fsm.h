@@ -70,12 +70,14 @@ typedef struct{
 typedef struct{
     int door_open;                              /**< An int representing the door's state: 1 = open, 0 = closed*/
     int last_floor;                             /**< An int holding the elevator's last valid floor*/
-    HardwareMovement last_dir;                  /**< The last direction the elevator was moving in*/
-    elevator_state_t state;                     /**< The state of the elevator*/
-    elevator_action_t next_action;              /**< The next action to be performed by the elevator*/
+    int next_expected_floor;                    /**< An int holding the elevator's next valid floor. 
+                                                    Will only be used when stop-button is activated during floors*/
     int ORDERS_UP[HARDWARE_NUMBER_OF_FLOORS];   /**< The elevator's orders going up*/
     int ORDERS_DOWN[HARDWARE_NUMBER_OF_FLOORS]; /**< The elevator's orders going down*/
     int ORDERS_CAB[HARDWARE_NUMBER_OF_FLOORS];  /**< The elevator's cab-orders.*/
+    HardwareMovement last_dir;                  /**< The last direction the elevator was moving in*/
+    elevator_state_t state;                     /**< The state of the elevator*/
+    elevator_action_t next_action;              /**< The next action to be performed by the elevator*/
 } elevator_data_t;
 
 
@@ -90,7 +92,7 @@ typedef struct{
  * function to be executed for any given state. It contains most of the logic flow
  * used to control the elevator's movements, depending on the given inputs.
  */
-elevator_action_t update_state(elevator_data_t* p_elevator_data);
+elevator_action_t elevator_update_state(elevator_data_t* p_elevator_data);
 
 
 /**
@@ -133,6 +135,8 @@ elevator_guard_t elevator_calculate_guard(elevator_data_t* p_elevator_data);
  */     
 void emergency_action(elevator_data_t* p_elevator_data);  
 
-void button_state(elevator_data_t* p_elevator_data);
+void update_button_state(elevator_data_t* p_elevator_data);
+
+void calculate_next_floor(elevator_data_t* p_elevator_data)
 
 #endif //ELEVATOR_FSM_H

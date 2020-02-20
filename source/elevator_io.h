@@ -26,7 +26,6 @@ int at_floor();
 void set_floor_indicator_light(int last_floor);
 
 
-
 /**
  * @brief Poll all floor buttons for input
  * 
@@ -42,6 +41,7 @@ void set_floor_indicator_light(int last_floor);
  * the @c ORDERS_UP and @c ORDERS_DOWN arrays), the corresponding value in the array is set to 1.
  */
 void poll_floor_buttons(int* p_orders_up, int* p_orders_down);
+
 
 /**
  * @brief Set the floor button lights in accordance to the values in @c ORDERS_UP and @c ORDERS_DOWN .
@@ -61,6 +61,7 @@ void set_floor_button_lights(int* p_orders_up, int* p_orders_down);
  * The function updates the cab orders for the current Order 
  */
 void poll_cab_buttons(int* p_orders_cab);
+
 
 /**
  * @brief Set the cab button lights in accordance to the values in @c ORDERS_CAB

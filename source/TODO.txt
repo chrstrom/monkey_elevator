@@ -3,30 +3,24 @@ En cab-knapp == opp OG ned trykket i samme etasje; dette kan forenkle køsysteme
 
 Flytt execute next action switch fra main til egen funksjon i elevator_fsm
 
-TODO 17.02
+TODO 20.02
+Bugfixes
+update at_floor to be get_floor(int last) (gets the last or current floor)
+Function name changes (consistency!!!)?
+Clean up comments (put in separate txt file for now)
+Potential cleanup of init?
+Clean up helper functions (remove/simplify) 
+    button lights
+    floor diff
+    check queue for order ???
+Update documentation
 
-Bytte ut at_floor() med current_floor i elevator_data_t
-oppdater dokumentasjon ):
-Rydd opp i modulene (spesielt queue); fjern unødvendig kode, og legg de
-enkleste funksjonene først.
 
-QUEUE:
-Finn ut hvordan håndtere prioritert cab orders: add push front (push front med alle cab orders som blir satt KUN HVIS man kommer til en etasje som følge av en floor button request i QUEUE[0])
-
-Mulighet: Når man trykker på cab button, legg en ny order til QUEUE, hvis vi ikke har en order i QUEUE med type HARDWARE_ORDER_INSIDE.
-I check order match vil vi stoppe for enhver t
-
-oppdater target floor
-
+Instead of returning an ACTION enum val from FSM, change a function pointer to a specific function
+that executes what we have in the switch in main.c already.
 
 KNOWN BUGS:
-The door closes right after the obstruction goes low
 
-Need some major logic updates for the floor-selection! Right now, it may stop in third if moving up to fourth if third floor wants to move down
-
-The timer will work if the QUEUE is not empty. I.e, it needs atleast two different orders to work fully
-
-The elevator may take in orders before it reaches the poll_buttons 
 
 If the elevator gets a stop signal when it is between two floors, it does not know which direction to travel in when it
 recieves an order. Tried to fix it with a couple of if, but it will just go straight up into the physical switch/stop.

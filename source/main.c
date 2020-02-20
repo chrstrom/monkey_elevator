@@ -48,27 +48,20 @@ int main(){
         fprintf(stderr, "Unable to initialize software\n");
         exit(1);
     }
-    elevator_data_t elevator_data = {.door_open = DOOR_CLOSE, .last_floor = at_floor(), .last_dir = HARDWARE_MOVEMENT_STOP, .state = STATE_IDLE, .next_action = ACTION_STOP_MOVEMENT};
+    elevator_data_t elevator_data = {.door_open = DOOR_CLOSE, .last_floor = at_floor(), .next_expected_floor = INVALID_ORDER,
+                    .last_dir = HARDWARE_MOVEMENT_STOP, .state = STATE_IDLE, .next_action = ACTION_STOP_MOVEMENT};
 
     // ELEVATOR PROGRAM LOOP
     while (1){
-        // Temporary
         elevator_data.last_floor = (at_floor() == -1 ? elevator_data.last_floor : at_floor());
 
         // Set floor light
         set_floor_indicator_light(at_floor());
 
-        //Ønskelig at kun main og fsm skal kjenne til elevator_data
-        //men dette vil da skape problemer, siden vi ønsker da å endre verdien til 
-        //elevator_data inne i hver av disse poll-funksjonene
-
-        //kan lage en merge-funksjon inne i FSM som da kun merger kun det vi ønsker fra elevator_data
-
-        // Handle button press events
         update_button_state(&elevator_data);
 
         // Determine next action
-        elevator_data.next_action = update_state(&elevator_data);
+        elevator_data.next_action = elevator_update_state(&elevator_data);
 
         //Execute next action
         //possibly it's own function

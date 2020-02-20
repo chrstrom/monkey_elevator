@@ -146,8 +146,6 @@ void clear_orders_at_floor(int* p_orders_cab, int* p_orders_up, int* p_orders_do
         }
     }
 
-    //set_cab_button_lights(p_orders_cab);
-    //set_floor_button_lights(p_orders_up, p_orders_down);
     update_queue();
 }
 
@@ -157,19 +155,4 @@ void set_cab_orders(int* p_order_array){
         p_order_array[floor] = hardware_read_order(floor, HARDWARE_ORDER_INSIDE);
     }
 }
-
-
-//vi trenger strengt tatt ikke denne, da vi clearer alt inne i clear_orders_at_floor
-void clear_orders(int* p_order_array, int current_floor){
-    if(current_floor > HARDWARE_NUMBER_OF_FLOORS || current_floor < MIN_FLOOR) {
-        printf("current_floor out of bounds in clear_cab_order()!");
-    }
-
-    for(int floor = MIN_FLOOR; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
-        if(p_order_array[floor] == current_floor){
-            p_order_array[floor] = 0;
-        }
-    }
-}
-
 
