@@ -17,7 +17,6 @@
 #define MIN_FLOOR 0         /**The bottom floor that the elevator runs to. Note that this is 0-indexed */
 
 #define NORMAL_WAIT_TIME 3  /** Normal wait-time for the elevator, for obstruction and stop timers */
-unsigned int UINT_NORMAL_WAIT_TIME = 3;
 
 #define DOOR_CLOSE 0        /** Macro for door closed/close door */
 #define DOOR_OPEN 1         /** Macro for door open/open door */

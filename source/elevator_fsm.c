@@ -3,7 +3,6 @@
 #include "elevator_io.h"
 #include "globals.h"
 #include "queue.h"
-#include "timer.h"
 
 elevator_action_t update_state(elevator_data_t* p_elevator_data) {
 
@@ -185,11 +184,16 @@ elevator_action_t update_state(elevator_data_t* p_elevator_data) {
 
 elevator_event_t elevator_calculate_event(elevator_data_t* p_elevator_data) {
     // Update truth values for all possible events
-    int queue_empty = queue_is_empty();
+    int queue_empty = check_queue_empty();
     int target_floor_diff = check_floor_diff(QUEUE[0].target_floor, p_elevator_data->last_floor);
     int floor_match = check_order_match(p_elevator_data);
     int obstruction_state = hardware_read_obstruction_signal();
     int stop_button_state = hardware_read_stop_signal();
+
+    //WE HAVE A BUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUG
+    //If the elevator is moving from a floor and is between two floors when the stop-button is pressed, it will still
+    //think it is at the spesific floor in p_elevator_data, however we also use at_floor() to chjeck if we have reached a 
+    //floor and these will not match!!
 
     // Return event depending on what state we are in;
     // The events we check for depend entirely on the state of the elevator
@@ -270,17 +274,41 @@ elevator_guard_t elevator_calculate_guard(elevator_data_t* p_elevator_data) {
     guards.DIRECTION = check_order_match(p_elevator_data);                  
     guards.AT_FLOOR = (current_floor != -1);              
     guards.NOT_AT_FLOOR = (current_floor == -1);
-    guards.TIMER_DONE = check_timer(UINT_NORMAL_WAIT_TIME);
- 
+    //guards.TIMER_DONE = check_timer(UINT_NORMAL_WAIT_TIME);
+    guards.TIMER_DONE = check_timer();
+
     if(target == INVALID_ORDER) {
         guards.TARGET_FLOOR_ABOVE = 0;       
         guards.TARGET_FLOOR_EQUAL = 0;    
         guards.TARGET_FLOOR_BELOW = 0;
     }
     else {
-        guards.TARGET_FLOOR_ABOVE = (target > floor);       
-        guards.TARGET_FLOOR_EQUAL = (target == current_floor);       
-        guards.TARGET_FLOOR_BELOW = (target < floor);
+
+
+
+
+        //Need to updare this pos! 
+        //Here we need to add the possibility that the elevator can stop between the floors, and then we need to calculate the
+        //direction the elevator should move in. Therefore use both last_floor and last_dir to calculate where the elevator is
+
+        //ugly code to start with! Need to update it later
+        // if(!guards.AT_FLOOR){  
+        //     if(p_elevator_data->last_dir == HARDWARE_MOVEMENT_UP){
+        //         current_floor = p_elevator_data->last_floor + 1;
+        //     }
+        //     else if(p_elevator_data->last_dir == HARDWARE_MOVEMENT_DOWN){
+        //         current_floor = p_elevator_data->last_floor - 1;
+        //     }
+        // }
+        //We have a new bug here, where the elevator may proceed to crash in either the top or bottom floor-sensor, after it was stopped
+        //and then tried to proceed
+
+        //else{
+            //Burde vi her benytte oss av p_elevator_data->last_floor istedenfor floor?
+            guards.TARGET_FLOOR_ABOVE = (target > floor);
+            guards.TARGET_FLOOR_EQUAL = (target == current_floor);
+            guards.TARGET_FLOOR_BELOW = (target < floor);
+        //}
     }
 
     return guards;

@@ -58,6 +58,7 @@ void delete_holes_in_queue(){
                     QUEUE[ord].order_type = QUEUE[inv].order_type;
                     QUEUE[inv].target_floor = INVALID_ORDER;
                     QUEUE[inv].order_type = HARDWARE_ORDER_NOT_INIT;
+                    break;
                 }
             }
         }
@@ -93,8 +94,9 @@ void push_front_queue(int floor, HardwareOrder order_type){
     QUEUE[0].order_type = order_type;
 }
 
-int queue_is_empty() {
+int check_queue_empty() {
     //We assume that the first element is always updated and thus always correct
+    delete_holes_in_queue();
     if(QUEUE[0].target_floor == INVALID_ORDER){
         return 1;
     }

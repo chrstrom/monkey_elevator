@@ -95,7 +95,7 @@ void push_front_queue(int floor, HardwareOrder order_type);
  * @warning We assume that the first element in the queue is always updated! If not, this
  * function will return false results
  */
-int queue_is_empty();
+int check_queue_empty();
 
 /**
  * @brief Checks the @c QUEUE for an order with specified parameters

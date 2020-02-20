@@ -21,7 +21,7 @@ void set_floor_indicator_light(int last_floor) {
 // Floor buttons
 void poll_floor_buttons(elevator_data_t* p_data) {
   
-    for(int floor_up = MIN_FLOOR ; floor_up < HARDWARE_NUMBER_OF_FLOORS - 1; floor_up++) {
+    for(int floor_up = MIN_FLOOR; floor_up < HARDWARE_NUMBER_OF_FLOORS - 1; floor_up++) {
         if(p_data->ORDERS_UP[floor_up] == 0 && hardware_read_order(floor_up, HARDWARE_ORDER_UP) == 1){
             push_back_queue(floor_up, HARDWARE_ORDER_UP);
             p_data->ORDERS_UP[floor_up] = 1;

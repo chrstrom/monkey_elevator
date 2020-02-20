@@ -7,7 +7,18 @@
 
 #include <time.h>
 
+//struct timeval DOOR_TIMER;
+
+//clock_t DOOR_TIMER;
+
 time_t DOOR_TIMER;
+
+// #ifndef NORMAL_WAIT_TIME_P
+// #define NORMAL_WAIT_TIME_P
+
+// unsigned int UINT_NORMAL_WAIT_TIME = 3;
+
+// #endif 
 
 // void reset_timer();
 
@@ -28,6 +39,6 @@ void start_timer();
  * 
  * @warning The return value for this function will not be 
  */
-int check_timer(unsigned int time_req);
+int check_timer();
 
 #endif //TIMER_H

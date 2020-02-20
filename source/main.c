@@ -51,11 +51,11 @@ int main(){
     elevator_data_t elevator_data = {.door_open = DOOR_CLOSE, .last_floor = at_floor(), .last_dir = HARDWARE_MOVEMENT_STOP, .state = STATE_IDLE, .next_action = ACTION_STOP_MOVEMENT};
 
     // ELEVATOR PROGRAM LOOP
-    while(1){
+    while (1){
         // Temporary
         elevator_data.last_floor = (at_floor() == -1 ? elevator_data.last_floor : at_floor());
 
-        // Set floor light   
+        // Set floor light
         set_floor_indicator_light(at_floor());
 
         // Handle button press events
@@ -67,50 +67,51 @@ int main(){
 
         //Execute next action
         //possibly it's own function
-        switch(elevator_data.next_action) {
-            case ACTION_DO_NOTHING:
-                break;
+        switch (elevator_data.next_action){
+        case ACTION_DO_NOTHING:
+            break;
 
-            case ACTION_START_DOOR_TIMER:
-                start_timer();
-                break;
+        case ACTION_START_DOOR_TIMER:
+            start_timer();
+            break;
 
-            case ACTION_OPEN_DOOR:
-                hardware_command_door_open(DOOR_OPEN);
-                elevator_data.door_open = DOOR_OPEN;
-                break;
+        case ACTION_OPEN_DOOR:
+            hardware_command_door_open(DOOR_OPEN);
+            elevator_data.door_open = DOOR_OPEN;
+            break;
 
-            case ACTION_CLOSE_DOOR:
-                update_queue();
-                hardware_command_door_open(DOOR_CLOSE);
-                elevator_data.door_open = DOOR_CLOSE;
-                break;
+        case ACTION_CLOSE_DOOR:
+            update_queue();
+            hardware_command_door_open(DOOR_CLOSE);
+            elevator_data.door_open = DOOR_CLOSE;
+            break;
 
-            case ACTION_MOVE_UP:
-                hardware_command_movement(HARDWARE_MOVEMENT_UP);
-                elevator_data.last_dir = HARDWARE_MOVEMENT_UP;
-                elevator_data.state = STATE_MOVING_UP;
-                break;
-            
-            case ACTION_MOVE_DOWN:
-                hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
-                elevator_data.last_dir = HARDWARE_MOVEMENT_DOWN;
-                elevator_data.state = STATE_MOVING_DOWN;
-                break;
+        case ACTION_MOVE_UP:
+            hardware_command_movement(HARDWARE_MOVEMENT_UP);
+            elevator_data.last_dir = HARDWARE_MOVEMENT_UP;
+            elevator_data.state = STATE_MOVING_UP;
+            break;
 
-            case ACTION_STOP_MOVEMENT:
-                hardware_command_movement(HARDWARE_MOVEMENT_STOP);
-                elevator_data.last_dir = HARDWARE_MOVEMENT_STOP;
-                elevator_data.state = STATE_IDLE;
-                break;
-            
-            case ACTION_EMERGENCY:
-                emergency_action(&elevator_data);
-                break;
+        case ACTION_MOVE_DOWN:
+            hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
+            elevator_data.last_dir = HARDWARE_MOVEMENT_DOWN;
+            elevator_data.state = STATE_MOVING_DOWN;
+            break;
 
-            default:
-                fprintf(stderr, "Default case reached in switch in main. This should not happen\n");
-                break;
-        }   
+        case ACTION_STOP_MOVEMENT:
+            hardware_command_movement(HARDWARE_MOVEMENT_STOP);
+            elevator_data.last_dir = HARDWARE_MOVEMENT_STOP;
+            elevator_data.state = STATE_IDLE;
+            break;
+
+        case ACTION_EMERGENCY:
+            emergency_action(&elevator_data);
+            break;
+
+        default:
+            fprintf(stderr, "Default case reached in switch in main. This should not happen\n");
+            break;
+        }
     }
 }
+
