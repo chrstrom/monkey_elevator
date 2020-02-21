@@ -32,7 +32,7 @@ void update_queue(){
 
 void erase_queue(int* p_orders_up, int* p_orders_down, int* p_orders_cab){
     for(int floor = 0; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
-        clear_orders_at_floor(p_orders_cab, p_orders_up, p_orders_down, floor);
+        clear_orders_at_floor(p_orders_up, p_orders_down, p_orders_cab, floor);
     }
 }
 
@@ -92,16 +92,16 @@ int check_order_match(int current_floor, HardwareOrder order_type) {
     return 0;
 }
 
-void clear_orders_at_floor(int* p_orders_cab, int* p_orders_up, int* p_orders_down, int current_floor) {
+void clear_orders_at_floor(int* p_orders_up, int* p_orders_down, int* p_orders_cab, int current_floor) {
     for(int order = 0; order < QUEUE_SIZE; order++) {
-        int order_floor = QUEUE[order].target_floor;
-        if(order_floor == current_floor) {
-            p_orders_cab[order_floor] = 0;
-            p_orders_up[order_floor] = 0;
-            p_orders_down[order_floor] = 0;
+        if(QUEUE[order].target_floor == current_floor) {
             set_single_order(order, FLOOR_NOT_INIT, HARDWARE_ORDER_NOT_INIT);
         }
     }
+
+    p_orders_cab[current_floor] = 0;
+    p_orders_up[current_floor] = 0;
+    p_orders_down[current_floor] = 0;
 
     update_queue();
 }
