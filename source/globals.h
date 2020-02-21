@@ -19,6 +19,6 @@
 #define LIGHT_ON 1          /** Macro for light on */
 
 #define BETWEEN_FLOORS -1   /** Macro for the elevator being between floors */
-#define INVALID_ORDER -2    /** Macro for invalid order */
+#define FLOOR_NOT_INIT -2    /** Macro for invalid order */
 
 #endif //GLOBALS_H

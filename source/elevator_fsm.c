@@ -272,7 +272,7 @@ elevator_guard_t elevator_calculate_guard(elevator_data_t* p_elevator_data) {
     guards.TIMER_DONE = check_timer();
 
     // Perform no checks for invalid orders
-    if(target == INVALID_ORDER) {
+    if(target == FLOOR_NOT_INIT) {
         guards.TARGET_FLOOR_ABOVE = 0;       
         guards.TARGET_FLOOR_EQUAL = 0;    
         guards.TARGET_FLOOR_BELOW = 0;

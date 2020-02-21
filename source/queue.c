@@ -2,14 +2,10 @@
 #include "elevator_io.h"
 #include <stdio.h>
 
-void set_single_order(int idx, int target_floor, HardwareOrder order_type) {
-    QUEUE[idx].target_floor = target_floor;
-    QUEUE[idx].order_type = order_type;
-}
 
 void init_queue() {
     for(int i = 0; i < QUEUE_SIZE; i++) {
-        set_single_order(i, INVALID_ORDER, HARDWARE_ORDER_NOT_INIT);
+        set_single_order(i, FLOOR_NOT_INIT, HARDWARE_ORDER_NOT_INIT);
     }
 }
 
@@ -18,17 +14,17 @@ void update_queue(){
         return;
     }
 
-    // If there are any orders with target_floor = INVALID_ORDER, restructure the queue
+    // If there are any orders with target_floor = FLOOR_NOT_INIT, restructure the queue
     refactor_queue();
     
-    // QUEUE[0].target_floor should be INVALID_ORDER, if we had a target at the current_floor since we clear the orders before calling this function
-    if(QUEUE[0].target_floor == INVALID_ORDER){ 
+    // QUEUE[0].target_floor should be FLOOR_NOT_INIT, if we had a target at the current_floor since we clear the orders before calling this function
+    if(QUEUE[0].target_floor == FLOOR_NOT_INIT){ 
         for (int ord = 0; ord < QUEUE_SIZE; ord++){
             if (ord < QUEUE_SIZE - 1){
                 set_single_order(ord, QUEUE[ord + 1].target_floor, QUEUE[ord + 1].order_type);
             }
             else if (ord == QUEUE_SIZE - 1){
-                set_single_order(ord, INVALID_ORDER, HARDWARE_ORDER_NOT_INIT);
+                set_single_order(ord, FLOOR_NOT_INIT, HARDWARE_ORDER_NOT_INIT);
             }
         }
     }
@@ -43,11 +39,11 @@ void erase_queue(int* p_orders_up, int* p_orders_down, int* p_orders_cab){
 
 void refactor_queue(){
     for(int order = 0; order < QUEUE_SIZE; order++){
-        if(QUEUE[order].target_floor == INVALID_ORDER){
+        if(QUEUE[order].target_floor == FLOOR_NOT_INIT){
             for(int hole = order; hole < QUEUE_SIZE; hole++){
-                if(QUEUE[hole].target_floor != INVALID_ORDER){
+                if(QUEUE[hole].target_floor != FLOOR_NOT_INIT){
                     set_single_order(order, QUEUE[hole].target_floor, QUEUE[hole].order_type);
-                    set_single_order(hole, INVALID_ORDER, HARDWARE_ORDER_NOT_INIT);
+                    set_single_order(hole, FLOOR_NOT_INIT, HARDWARE_ORDER_NOT_INIT);
                     break;
                 }
             }
@@ -55,6 +51,10 @@ void refactor_queue(){
     }
 }
 
+void set_single_order(int idx, int target_floor, HardwareOrder order_type) {
+    QUEUE[idx].target_floor = target_floor;
+    QUEUE[idx].order_type = order_type;
+}
 void push_back_queue(int target_floor, HardwareOrder order_type) {
     for(int order = 0; order < QUEUE_SIZE; order++) {
         if(check_order_match(target_floor, order_type) == 1) {
@@ -63,7 +63,7 @@ void push_back_queue(int target_floor, HardwareOrder order_type) {
     }
 
     for(int order = 0; order < QUEUE_SIZE; order++) {
-        if(QUEUE[order].target_floor == INVALID_ORDER) {
+        if(QUEUE[order].target_floor == FLOOR_NOT_INIT) {
             set_single_order(order, target_floor, order_type);
             break;
         }
@@ -73,7 +73,7 @@ void push_back_queue(int target_floor, HardwareOrder order_type) {
 
 int check_queue_empty() {
     refactor_queue();
-    return QUEUE[0].target_floor == INVALID_ORDER;
+    return QUEUE[0].target_floor == FLOOR_NOT_INIT;
 }
 
 
@@ -99,7 +99,7 @@ void clear_orders_at_floor(int* p_orders_cab, int* p_orders_up, int* p_orders_do
             p_orders_cab[order_floor] = 0;
             p_orders_up[order_floor] = 0;
             p_orders_down[order_floor] = 0;
-            set_single_order(order, INVALID_ORDER, HARDWARE_ORDER_NOT_INIT);
+            set_single_order(order, FLOOR_NOT_INIT, HARDWARE_ORDER_NOT_INIT);
         }
     }
 

@@ -23,7 +23,6 @@ typedef struct{
 Order QUEUE[QUEUE_SIZE];                /**< The elevator's queue */
 
 
-void set_single_order(int idx, int target_floor, HardwareOrder order_type);
 /**
  * @brief Initialize the @c QUEUE with all invalid orders
  */
@@ -54,6 +53,9 @@ void erase_queue(int* p_orders_up, int* p_orders_down, int* p_orders_cab);
  * an empty order that splits apart an otherwise connected part of the queue.
  */
 void refactor_queue();
+
+
+void set_single_order(int idx, int target_floor, HardwareOrder order_type);
 
 
 /**
