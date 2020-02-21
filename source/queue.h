@@ -74,16 +74,16 @@ void delete_holes_in_queue();
  */
 void push_back_queue(int target_floor, HardwareOrder order_type);
 
-/**
- * @brief Pushes a new @c Order to the front of the @c QUEUE
- * 
- * @param[in] floor         The floor that the @c Order came from
- * @param[in] order_type    The direction of the @c Order
- * 
- * The function right-shifts every element in the @c QUEUE and sets the first element to
- * @p floor and @p order_type 
- */
-void push_front_queue(int floor, HardwareOrder order_type);
+// /**
+//  * @brief Pushes a new @c Order to the front of the @c QUEUE
+//  * 
+//  * @param[in] floor         The floor that the @c Order came from
+//  * @param[in] order_type    The direction of the @c Order
+//  * 
+//  * The function right-shifts every element in the @c QUEUE and sets the first element to
+//  * @p floor and @p order_type 
+//  */
+// void push_front_queue(int floor, HardwareOrder order_type);
 
 /**
  * @brief Check if the @c QUEUE is empty
@@ -145,6 +145,6 @@ void clear_orders_at_floor(int* p_orders_cab, int* p_orders_up, int* p_orders_do
 //  * @param[in] current_floor     The floor to be used for clearing the cab orders
 //  */
 // void clear_orders(int* p_array, int current_floor);
-void sort_queue();
+
 
 #endif //QUEUE_H

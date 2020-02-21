@@ -77,30 +77,30 @@ void push_back_queue(int target_floor, HardwareOrder order_type) {
     //kall en sorteringsfunksjon som sorterer ordrene etter slik logikk som forespeilet øverst
 }
 
-void push_front_queue(int floor, HardwareOrder order_type){
-    //OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOoppdateeeeeeeeeeeeeeeeeeeer
-    // for(int ord = QUEUE_SIZE - 1; ord > 0; ord--){
-    //     QUEUE[ord].order_type = QUEUE[ord - 1].order_type;
-    //     QUEUE[ord].target_floor = QUEUE[ord - 1].target_floor;
-    // }
-    sort_queue();
-    for(int cab_order = 0; cab_order < QUEUE_SIZE; cab_order++){
-        if(QUEUE[cab_order].order_type != HARDWARE_ORDER_INSIDE){
-            Order temp = QUEUE[cab_order];
-            QUEUE[cab_order].target_floor = INVALID_ORDER;
-            QUEUE[cab_order].order_type = HARDWARE_ORDER_NOT_INIT;
-            for(int floor_order = cab_order + 1; floor_order < QUEUE_SIZE; floor_order++){
-                Order temp2 = QUEUE[floor_order];
-                QUEUE[floor_order].target_floor = temp.target_floor;
-                QUEUE[floor_order].order_type = temp.order_type;
-                temp = temp2;
-            }
-            QUEUE[cab_order].target_floor = floor;
-            QUEUE[cab_order].order_type =  order_type;
-            break;
-        }
-    }
-}
+// void push_front_queue(int floor, HardwareOrder order_type){
+//     //OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOoppdateeeeeeeeeeeeeeeeeeeer
+//     // for(int ord = QUEUE_SIZE - 1; ord > 0; ord--){
+//     //     QUEUE[ord].order_type = QUEUE[ord - 1].order_type;
+//     //     QUEUE[ord].target_floor = QUEUE[ord - 1].target_floor;
+//     // }
+//     sort_queue();
+//     for(int cab_order = 0; cab_order < QUEUE_SIZE; cab_order++){
+//         if(QUEUE[cab_order].order_type != HARDWARE_ORDER_INSIDE){
+//             Order temp = QUEUE[cab_order];
+//             QUEUE[cab_order].target_floor = INVALID_ORDER;
+//             QUEUE[cab_order].order_type = HARDWARE_ORDER_NOT_INIT;
+//             for(int floor_order = cab_order + 1; floor_order < QUEUE_SIZE; floor_order++){
+//                 Order temp2 = QUEUE[floor_order];
+//                 QUEUE[floor_order].target_floor = temp.target_floor;
+//                 QUEUE[floor_order].order_type = temp.order_type;
+//                 temp = temp2;
+//             }
+//             QUEUE[cab_order].target_floor = floor;
+//             QUEUE[cab_order].order_type =  order_type;
+//             break;
+//         }
+//     }
+// }
 
 int check_queue_empty() {
     delete_holes_in_queue();
@@ -139,27 +139,27 @@ void clear_orders_at_floor(int* p_orders_cab, int* p_orders_up, int* p_orders_do
     update_queue();
 }
 
-void sort_queue(){
-    //sorteringen skal sortere ordrene i heisen til først å gå etter ordre innenfra
-    //så skal den prioritere ordre utenfra
+// void sort_queue(){
+//     //sorteringen skal sortere ordrene i heisen til først å gå etter ordre innenfra
+//     //så skal den prioritere ordre utenfra
 
-    delete_holes_in_queue();
+//     delete_holes_in_queue();
 
-    Order* temp_queue = QUEUE;
-     for(int floor = 0; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
-        QUEUE[floor].target_floor = INVALID_ORDER;
-        QUEUE[floor].order_type = HARDWARE_ORDER_NOT_INIT;
-    }
+//     Order* temp_queue = QUEUE;
+//      for(int floor = 0; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
+//         QUEUE[floor].target_floor = INVALID_ORDER;
+//         QUEUE[floor].order_type = HARDWARE_ORDER_NOT_INIT;
+//     }
 
-    for(int order = 0; order < QUEUE_SIZE; order++) {
-        Order temp_order = temp_queue[order];
-        if(temp_order.order_type == HARDWARE_ORDER_INSIDE) {
-            push_front_queue(temp_order.target_floor, temp_order.order_type);
-        }
-        else {
-            push_back_queue(temp_order.target_floor, temp_order.order_type);
-        }
-    }
+//     for(int order = 0; order < QUEUE_SIZE; order++) {
+//         Order temp_order = temp_queue[order];
+//         if(temp_order.order_type == HARDWARE_ORDER_INSIDE) {
+//             push_front_queue(temp_order.target_floor, temp_order.order_type);
+//         }
+//         else {
+//             push_back_queue(temp_order.target_floor, temp_order.order_type);
+//         }
+//     }
 
     // //sorting of the HARDWARE_ORDER_INSIDE/cab_buttons
     // int sorted_queue_number = 0;
@@ -193,4 +193,4 @@ void sort_queue(){
     //         }
     //     }
     // }
-}
+// }

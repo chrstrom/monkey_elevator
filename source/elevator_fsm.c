@@ -192,13 +192,6 @@ elevator_event_t elevator_calculate_event(elevator_data_t* p_elevator_data) {
     int stop_button_state = hardware_read_stop_signal();
     int timer_done = check_timer();
 
-    //WE HAVE A BUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUG
-    //If the elevator is moving from a floor and is between two floors when the stop-button is pressed, it will still
-    //think it is at the spesific floor in p_elevator_data, however we also use get_current_floor() to chjeck if we have reached a 
-    //floor and these will not match!!
-
-    // Return event depending on what state we are in;
-    // The events we check for depend entirely on the state of the elevator
     switch(p_elevator_data->state) {
         case STATE_IDLE: {
             if(stop_button_state == 1) {
@@ -278,52 +271,54 @@ elevator_guard_t elevator_calculate_guard(elevator_data_t* p_elevator_data) {
     guards.NOT_AT_FLOOR = (current_floor == BETWEEN_FLOORS);
     guards.TIMER_DONE = check_timer();
 
+    // Perform no checks for invalid orders
     if(target == INVALID_ORDER) {
         guards.TARGET_FLOOR_ABOVE = 0;       
         guards.TARGET_FLOOR_EQUAL = 0;    
         guards.TARGET_FLOOR_BELOW = 0;
+        return guards;
     }
-// Potential bugfix for not taking orders when stopped between floors
-    //else if(current_floor == BETWEEN_FLOORS && p_elevator_data->state == STATE_IDLE){
-    
-    //}
-    else {
-        if(current_floor == -1 && p_elevator_data->next_action == ACTION_DO_NOTHING) {
-            //guards.TARGET_FLOOR_ABOVE = (target > p_elevator_data->next_expected_floor);
-            guards.TARGET_FLOOR_EQUAL = 0;
-            int next_expected_floor;
-            //guards.TARGET_FLOOR_BELOW = (target < p_elevator_data->next_expected_floor);
-            
-            //Hard-coding the shit, due to the program not being able to find p_elevator_data->next_expected_floor
-            if (p_elevator_data->last_dir == HARDWARE_MOVEMENT_UP) {
-                if(target == current_floor){
-                    guards.TARGET_FLOOR_ABOVE = 0;
-                    guards.TARGET_FLOOR_BELOW = 1;
-                }
-                else {
-                    next_expected_floor = p_elevator_data->last_floor + 1;
-                    guards.TARGET_FLOOR_ABOVE = (target >= next_expected_floor);
-                    guards.TARGET_FLOOR_BELOW = (target < next_expected_floor);   
-                }
-                //p_elevator_data->next_expected_floor = p_elevator_data->last_floor + 1;
+
+    // Normal check for the usual case (elevator at floor)
+    if(current_floor != BETWEEN_FLOORS) {
+        guards.TARGET_FLOOR_ABOVE = (target > current_floor);
+        guards.TARGET_FLOOR_EQUAL = (target == current_floor);
+        guards.TARGET_FLOOR_BELOW = (target < current_floor);
+        return guards;
+    }
+  
+    // Stopped between floors (emergency)
+    if(current_floor == BETWEEN_FLOORS && p_elevator_data->next_action == ACTION_DO_NOTHING) {
+        //guards.TARGET_FLOOR_ABOVE = (target > p_elevator_data->next_expected_floor);
+        guards.TARGET_FLOOR_EQUAL = 0;
+        int next_expected_floor;
+        //guards.TARGET_FLOOR_BELOW = (target < p_elevator_data->next_expected_floor);
+                  next_expected_floor = last_valid_floor - 1;
+        //Hard-coding the shit, due to the program not being able to find p_elevator_data->next_expected_floor
+
+        if (p_elevator_data->last_dir == HARDWARE_MOVEMENT_UP) {
+            last_valid_floor++;
+            if(target == current_floor){
+                guards.TARGET_FLOOR_ABOVE = 0;
+                guards.TARGET_FLOOR_BELOW = 1;
             }
-            if (p_elevator_data->last_dir == HARDWARE_MOVEMENT_DOWN) {
-                if(target == current_floor){
-                    guards.TARGET_FLOOR_ABOVE = 1;
-                    guards.TARGET_FLOOR_BELOW = 0;
-                }
-                else {
-                    next_expected_floor = p_elevator_data->last_floor - 1;
-                    guards.TARGET_FLOOR_ABOVE = (target > next_expected_floor);
-                    guards.TARGET_FLOOR_BELOW = (target <= next_expected_floor);   
-                }
-                //p_elevator_data->next_expected_floor = p_elevator_data->last_floor - 1;
+            else {
+                guards.TARGET_FLOOR_ABOVE = (target >= last_valid_floor);
+                guards.TARGET_FLOOR_BELOW = (target < last_valid_floor);   
             }
+            //p_elevator_data->next_expected_floor = p_elevator_data->last_floor + 1;
         }
-        else {
-            guards.TARGET_FLOOR_ABOVE = (target > current_floor);
-            guards.TARGET_FLOOR_EQUAL = (target == current_floor);
-            guards.TARGET_FLOOR_BELOW = (target < current_floor);
+        if (p_elevator_data->last_dir == HARDWARE_MOVEMENT_DOWN) {
+            last_valid_floor--;
+            if(target == current_floor){
+                guards.TARGET_FLOOR_ABOVE = 1;
+                guards.TARGET_FLOOR_BELOW = 0;
+            }
+            else {
+                guards.TARGET_FLOOR_ABOVE = (target > last_valid_floor);
+                guards.TARGET_FLOOR_BELOW = (target <= last_valid_floor);   
+            }
+            //p_elevator_data->next_expected_floor = p_elevator_data->last_floor - 1;
         }
     }
 

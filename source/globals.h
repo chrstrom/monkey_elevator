@@ -6,8 +6,7 @@
 #define GLOBALS_H
 
 
-#define QUEUE_SIZE 16       /** Size of the QUEUE. Mathematical impossible to have more than 10 orders for this elevator, but 16 is a power of 2, and it is better to be on the safe side. */
-#define ORDER_SIZE 5        /** Size of the orders. One to spare for each floor */
+#define QUEUE_SIZE 16       /** Size of the QUEUE. Mathematical impossible to have more than 10 orders for this elevator, but 16 is a power of 2 :), and it is better to be on the safe side. */
 
 #define MIN_FLOOR 0         /**The bottom floor that the elevator runs to. Note that this is 0-indexed */
 
