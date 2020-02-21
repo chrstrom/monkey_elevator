@@ -2,6 +2,29 @@
 #include "globals.h"
 #include "queue.h"
 
+int init_elevator() {
+    //Turn off all button lights and clear all order light arrays (just in case)
+    for(int floor = 0; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
+        hardware_command_order_light(floor, HARDWARE_ORDER_UP,     LIGHT_OFF);
+        hardware_command_order_light(floor, HARDWARE_ORDER_DOWN,   LIGHT_OFF);
+        hardware_command_order_light(floor, HARDWARE_ORDER_INSIDE, LIGHT_OFF);
+    }
+
+    //we assume the obstruction will never be active during setup!
+    hardware_command_stop_light(LIGHT_OFF);
+    hardware_command_door_open(DOOR_CLOSE); 
+
+    hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
+    while(get_current_floor() == BETWEEN_FLOORS) {}
+    hardware_command_movement(HARDWARE_MOVEMENT_STOP);
+
+    hardware_command_floor_indicator_on(get_current_floor());
+
+    init_queue();
+    return 0;
+}
+
+
 int get_current_floor() {
     for(int floor = MIN_FLOOR; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
        if(hardware_read_floor_sensor(floor)) {
@@ -19,7 +42,7 @@ void set_floor_indicator_light(int floor) {
 
 
 // Floor buttons
-void poll_floor_buttons(int* p_orders_up, int* p_orders_down) {
+void update_floor_buttons(int* p_orders_up, int* p_orders_down) {
   
     for(int floor_up = MIN_FLOOR; floor_up < HARDWARE_NUMBER_OF_FLOORS - 1; floor_up++) {
         if(p_orders_up[floor_up] == 0 && hardware_read_order(floor_up, HARDWARE_ORDER_UP) == 1){
@@ -53,7 +76,7 @@ void set_floor_button_lights(int* p_orders_up, int* p_orders_down) {
 
 
 // Cab buttons
-void poll_cab_buttons(int* p_orders_cab) {
+void update_cab_buttons(int* p_orders_cab) {
     for(int floor = MIN_FLOOR; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
         if(p_orders_cab[floor] == 0 && hardware_read_order(floor, HARDWARE_ORDER_INSIDE)) {
             push_back_queue(floor, HARDWARE_ORDER_INSIDE);
