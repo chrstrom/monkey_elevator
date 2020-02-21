@@ -55,7 +55,7 @@ elevator_action_t elevator_update_state(elevator_data_t* p_elevator_data) {
         case STATE_DOOR_OPEN: {
             hardware_command_movement(HARDWARE_MOVEMENT_STOP);
             hardware_command_door_open(DOOR_OPEN);
-            clear_orders_at_floor(p_elevator_data->ORDERS_CAB, p_elevator_data->ORDERS_UP, p_elevator_data->ORDERS_DOWN, current_floor);
+            clear_orders_at_floor(p_elevator_data->orders_cab, p_elevator_data->orders_up, p_elevator_data->orders_down, current_floor);
 
             switch (current_event) {
                 
@@ -289,36 +289,16 @@ elevator_guard_t elevator_calculate_guard(elevator_data_t* p_elevator_data) {
   
     // Stopped between floors (emergency)
     if(current_floor == BETWEEN_FLOORS && p_elevator_data->next_action == ACTION_DO_NOTHING) {
-        //guards.TARGET_FLOOR_ABOVE = (target > p_elevator_data->next_expected_floor);
         guards.TARGET_FLOOR_EQUAL = 0;
-        int next_expected_floor;
-        //guards.TARGET_FLOOR_BELOW = (target < p_elevator_data->next_expected_floor);
-                  next_expected_floor = last_valid_floor - 1;
-        //Hard-coding the shit, due to the program not being able to find p_elevator_data->next_expected_floor
-
         if (p_elevator_data->last_dir == HARDWARE_MOVEMENT_UP) {
             last_valid_floor++;
-            if(target == current_floor){
-                guards.TARGET_FLOOR_ABOVE = 0;
-                guards.TARGET_FLOOR_BELOW = 1;
-            }
-            else {
-                guards.TARGET_FLOOR_ABOVE = (target >= last_valid_floor);
-                guards.TARGET_FLOOR_BELOW = (target < last_valid_floor);   
-            }
-            //p_elevator_data->next_expected_floor = p_elevator_data->last_floor + 1;
+            guards.TARGET_FLOOR_ABOVE = (target >= last_valid_floor);
+            guards.TARGET_FLOOR_BELOW = (target < last_valid_floor);   
         }
         if (p_elevator_data->last_dir == HARDWARE_MOVEMENT_DOWN) {
             last_valid_floor--;
-            if(target == current_floor){
-                guards.TARGET_FLOOR_ABOVE = 1;
-                guards.TARGET_FLOOR_BELOW = 0;
-            }
-            else {
-                guards.TARGET_FLOOR_ABOVE = (target > last_valid_floor);
-                guards.TARGET_FLOOR_BELOW = (target <= last_valid_floor);   
-            }
-            //p_elevator_data->next_expected_floor = p_elevator_data->last_floor - 1;
+            guards.TARGET_FLOOR_ABOVE = (target > last_valid_floor);
+            guards.TARGET_FLOOR_BELOW = (target <= last_valid_floor);   
         }
     }
 
@@ -326,7 +306,7 @@ elevator_guard_t elevator_calculate_guard(elevator_data_t* p_elevator_data) {
 }
 
 void emergency_action(elevator_data_t* p_elevator_data){
-    erase_queue(p_elevator_data->ORDERS_UP, p_elevator_data->ORDERS_DOWN, p_elevator_data->ORDERS_CAB);
+    erase_queue(p_elevator_data->orders_up, p_elevator_data->orders_down, p_elevator_data->orders_cab);
     start_timer();
     if (get_current_floor() != BETWEEN_FLOORS && hardware_read_stop_signal()){
         p_elevator_data->door_open = DOOR_OPEN;
@@ -342,7 +322,7 @@ int check_floor_diff(int target_floor, int current_floor) {
 
 
 void update_button_state(elevator_data_t* p_elevator_data){
-    poll_cab_buttons(p_elevator_data->ORDERS_CAB);
-    poll_floor_buttons(p_elevator_data->ORDERS_UP, p_elevator_data->ORDERS_DOWN);
+    poll_cab_buttons(p_elevator_data->orders_cab);
+    poll_floor_buttons(p_elevator_data->orders_up, p_elevator_data->orders_down);
 }
 

@@ -73,9 +73,9 @@ typedef struct{
     HardwareMovement last_dir;                  /**< The last direction the elevator was moving in*/
     elevator_state_t state;                     /**< The state of the elevator*/
     elevator_action_t next_action;              /**< The next action to be performed by the elevator*/
-    int ORDERS_UP[HARDWARE_NUMBER_OF_FLOORS];   /**< The elevator's orders going up*/
-    int ORDERS_DOWN[HARDWARE_NUMBER_OF_FLOORS]; /**< The elevator's orders going down*/
-    int ORDERS_CAB[HARDWARE_NUMBER_OF_FLOORS];  /**< The elevator's cab-orders.*/
+    int orders_up[HARDWARE_NUMBER_OF_FLOORS];   /**< The elevator's orders going up*/
+    int orders_down[HARDWARE_NUMBER_OF_FLOORS]; /**< The elevator's orders going down*/
+    int orders_cab[HARDWARE_NUMBER_OF_FLOORS];  /**< The elevator's cab-orders.*/
 } elevator_data_t;
 
 
