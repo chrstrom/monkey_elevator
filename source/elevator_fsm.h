@@ -52,25 +52,6 @@ typedef enum {
     ACTION_EMERGENCY            /**< EMERGENCY-actions*/
 } elevator_action_t;
 
-<<<<<<< HEAD
-
-/**
- * A struct holding all the data related to the elevator 
- */
-typedef struct{
-    int door_open;                              /**< An int representing the door's state: 1 = open, 0 = closed*/
-    int last_floor;                             /**< An int holding the elevator's last valid floor*/
-    HardwareMovement last_dir;                  /**< The last direction the elevator was moving in*/
-    elevator_state_t state;                     /**< The state of the elevator*/
-    elevator_action_t next_action;              /**< The next action to be performed by the elevator*/
-    int ORDERS_UP[HARDWARE_NUMBER_OF_FLOORS];   /**< The elevator's orders going up*/
-    int ORDERS_DOWN[HARDWARE_NUMBER_OF_FLOORS]; /**< The elevator's orders going down*/
-    int ORDERS_CAB[HARDWARE_NUMBER_OF_FLOORS];  /**< The elevator's cab-orders.*/
-    int check_time;                             /**< An int representing if we should check the time or not. Stupid bugfix*/
-} elevator_data_t;
-
-=======
->>>>>>> f2a0415642073f15395b3552302e0a41e9fc1383
 
 /**
  * Struct of transition guards for the FSM. 0 = not fulfilled  1 = fulfilled.

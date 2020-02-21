@@ -77,7 +77,6 @@ elevator_action_t update_state(elevator_data_t* p_elevator_data) {
                     // and then return move up/down in the 2nd run through
                     if(guards.TARGET_FLOOR_ABOVE && guards.TIMER_DONE) {
                         p_elevator_data->state = STATE_MOVING_UP;
-                        p_elevator_data->check_time = NOT_CHECK_DOOR_TIME;
                         hardware_command_door_open(DOOR_CLOSE);
                         p_elevator_data->door_open = DOOR_CLOSE;
                         return ACTION_MOVE_UP;
@@ -85,7 +84,6 @@ elevator_action_t update_state(elevator_data_t* p_elevator_data) {
 
                     if(guards.TARGET_FLOOR_BELOW && guards.TIMER_DONE) {
                         p_elevator_data->state = STATE_MOVING_DOWN;
-                        p_elevator_data->check_time = NOT_CHECK_DOOR_TIME;
                         hardware_command_door_open(DOOR_CLOSE);
                         p_elevator_data->door_open = DOOR_CLOSE;
                         return ACTION_MOVE_DOWN;
