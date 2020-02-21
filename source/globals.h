@@ -19,6 +19,8 @@
 #define LIGHT_ON 1          /** Macro for light on */
 
 #define BETWEEN_FLOORS -1   /** Macro for the elevator being between floors */
-#define FLOOR_NOT_INIT -2    /** Macro for invalid order */
+#define FLOOR_NOT_INIT -2   /** Macro for invalid order */
+
+#define DOOR_TIME_REQ 3.0   /** Macro for the standard amount of time, in seconds, that the door should stay open*/
 
 #endif //GLOBALS_H

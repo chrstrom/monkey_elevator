@@ -10,8 +10,8 @@ elevator_action_t elevator_update_state(elevator_data_t* p_elevator_data) {
     int current_floor = get_current_floor();
     Order current_order = QUEUE[0];
 
-    elevator_event_t current_event = elevator_calculate_event(p_elevator_data);
-    elevator_guard_t guards = elevator_calculate_guard(p_elevator_data);
+    elevator_event_t current_event = elevator_update_event(p_elevator_data);
+    elevator_guard_t guards = elevator_update_guards(p_elevator_data);
 
     switch(p_elevator_data->state) {
         case STATE_IDLE: {
@@ -53,6 +53,7 @@ elevator_action_t elevator_update_state(elevator_data_t* p_elevator_data) {
         }
 
         case STATE_DOOR_OPEN: {
+            // Entry actions:
             hardware_command_movement(HARDWARE_MOVEMENT_STOP);
             hardware_command_door_open(DOOR_OPEN);
             clear_orders_at_floor(p_elevator_data->orders_cab, p_elevator_data->orders_up, p_elevator_data->orders_down, current_floor);
@@ -183,14 +184,14 @@ elevator_action_t elevator_update_state(elevator_data_t* p_elevator_data) {
     return ACTION_DO_NOTHING; // Default action if no hits (shouldnt be possible to get here)
 }
 
-elevator_event_t elevator_calculate_event(elevator_data_t* p_elevator_data) {
+elevator_event_t elevator_update_event(elevator_data_t* p_elevator_data) {
     // Update truth values for all possible events
     int queue_empty = check_queue_empty();
     int target_floor_diff = check_floor_diff(QUEUE[0].target_floor, p_elevator_data->last_floor);
     int floor_match = check_order_match(get_current_floor(), p_elevator_data->last_dir);
     int obstruction_state = hardware_read_obstruction_signal();
     int stop_button_state = hardware_read_stop_signal();
-    int timer_done = check_timer();
+    int timer_done = check_timer(DOOR_TIME_REQ);
 
     switch(p_elevator_data->state) {
         case STATE_IDLE: {
@@ -259,7 +260,7 @@ elevator_event_t elevator_calculate_event(elevator_data_t* p_elevator_data) {
     return EVENT_NO_EVENT;
 }
 
-elevator_guard_t elevator_calculate_guard(elevator_data_t* p_elevator_data) {
+elevator_guard_t elevator_update_guards(elevator_data_t* p_elevator_data) {
     elevator_guard_t guards;
 
     int target = QUEUE[0].target_floor;
@@ -269,7 +270,7 @@ elevator_guard_t elevator_calculate_guard(elevator_data_t* p_elevator_data) {
     guards.DIRECTION = check_order_match(current_floor, p_elevator_data->last_dir);                  
     guards.AT_FLOOR = (current_floor != BETWEEN_FLOORS);              
     guards.NOT_AT_FLOOR = (current_floor == BETWEEN_FLOORS);
-    guards.TIMER_DONE = check_timer();
+    guards.TIMER_DONE = check_timer(DOOR_TIME_REQ);
 
     // Perform no checks for invalid orders
     if(target == FLOOR_NOT_INIT) {

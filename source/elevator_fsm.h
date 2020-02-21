@@ -112,7 +112,7 @@ int check_floor_diff(int target_floor, int current_floor);
  * 
  * @return One of the possible events resulting from the elevator's state
  */ 
-elevator_event_t elevator_calculate_event(elevator_data_t* p_elevator_data);
+elevator_event_t elevator_update_event(elevator_data_t* p_elevator_data);
 
 
 /**
@@ -120,16 +120,18 @@ elevator_event_t elevator_calculate_event(elevator_data_t* p_elevator_data);
  * 
  * @param[in] p_elevator_data Pointer to an @c elevator_data_t that contains the required data to calculate the guards
  * 
- * @return All of the guards, depending on the elevator's state, input and queue
+ * @return A struct containing all guards, as determined by the elevator's state, input and queue
  */ 
-elevator_guard_t elevator_calculate_guard(elevator_data_t* p_elevator_data);
+elevator_guard_t elevator_update_guards(elevator_data_t* p_elevator_data);
 
 
 /**
- * @brief Solve the different tasks that much be done if the elevator is in an emergency. This includes
- * deleting the queue, making sure the engine is stopped, and open the door if the elevator is at a floor
+ * @brief Execute the emergency procedure for the elevator.
  * 
  * @param[in/out] p_elevator_data   Pointer to the @c elevator_data that contain the elevator's data
+ * 
+ * Executes everything that the elevator must do when an emergency happens. This includes deleting the queue,
+ * making sure the motor is stopped, and opening the door if the elevator is at a floor
  */     
 void emergency_action(elevator_data_t* p_elevator_data);  
 
