@@ -1,29 +1,24 @@
-Queue:
+Mulige oppdateringer/forbedringer
 
-Implementer:
+Flytt execute next action switch fra main til egen funksjon i elevator_fsm
 
-void update_queue(Order* p_queue) {
-    //slette første element i køen
-}
+TODO 21.02.20
 
-void set_cab_orders(Order* p_current_order){
-    //Funksjonen skal 
-    
-}
+oppdater dokumentasjon ):
+Rydd opp i modulene (spesielt queue); fjern unødvendig kode, og legg de enkleste funksjonene først.
+Cleanup - konsistens med tidligere deklarasjoner o.l.
 
-void erase_queue(Order* p_queue){
-
-}
-
-int queue_is_empty(Order* p_queue) {
-    return 0;
-}
-
-void update_queue_target_floor(Order* p_current_order, int floor) {
-
-}
+QUEUE:
+Finn ut hvordan håndtere prioritert cab orders: add push front (push front med alle cab orders som blir satt KUN HVIS man kommer til en etasje som følge av en floor button request i QUEUE[0])
 
 
-int check_order_match(Order* queue, int current_floor, HardwareMovement last_dir) {
-    return 0;   // Just to compile properly for now
-}
+KNOWN BUGS:
+
+
+
+
+Functions we can delete:
+
+
+
+

@@ -1,61 +1,72 @@
 #include "elevator_io.h"
+#include "globals.h"
+#include "queue.h"
 
-int at_floor() {
-    for(int floor = MIN_FLOOR; floor <= MAX_FLOOR; floor++) {
+int get_current_floor() {
+    for(int floor = MIN_FLOOR; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
        if(hardware_read_floor_sensor(floor)) {
            return floor;
        }
     }
-
-    return -1;
+    return BETWEEN_FLOORS;
 }
 
-// By passing p_order up/down, we make sure to not add a new order for floors that already
-// have orders to them. Note that these arrays are only updated by external buttons.
-// The internal cab-buttons will have no impact on this.
-void poll_floor_buttons(int* p_order_up, int* p_order_down) {
+void set_floor_indicator_light(int floor) {
+    if(floor != BETWEEN_FLOORS) {
+        hardware_command_floor_indicator_on(floor);
+    }
+}
+
+
+// Floor buttons
+void poll_floor_buttons(int* p_orders_up, int* p_orders_down) {
   
-    for(int floor_up = 0; floor_up < MAX_FLOOR; floor_up++) {
-        if(!p_order_up[floor_up] && hardware_read_order(floor_up, HARDWARE_ORDER_UP)){
-            p_order_up[floor_up] = 1;
+    for(int floor_up = MIN_FLOOR; floor_up < HARDWARE_NUMBER_OF_FLOORS - 1; floor_up++) {
+        if(p_orders_up[floor_up] == 0 && hardware_read_order(floor_up, HARDWARE_ORDER_UP) == 1){
+            push_back_queue(floor_up, HARDWARE_ORDER_UP);
+            p_orders_up[floor_up] = 1;
         }
     }
 
     // The first floor does not have a down-button: Start at 1.
-    for(int floor_down = 1; floor_down <= MAX_FLOOR; floor_down++) {
-        if(!p_order_down[floor_down] && hardware_read_order(floor_down, HARDWARE_ORDER_DOWN)){
-            p_order_down[floor_down] = 1;
+    for(int floor_down = MIN_FLOOR + 1; floor_down < HARDWARE_NUMBER_OF_FLOORS; floor_down++) {
+        if(p_orders_down[floor_down] == 0 && hardware_read_order(floor_down, HARDWARE_ORDER_DOWN) == 1){
+            push_back_queue(floor_down, HARDWARE_ORDER_DOWN);
+            p_orders_down[floor_down] = 1;
         }
     }
-
-    // if(order_floor != 0){ 
-    //     Order order = {.target_floor = order_floor};
-    //     queue_push_back(queue, order);
-    // }
-
+    // After getting all button events, add orders to queue and set the button lights
+    set_floor_button_lights(p_orders_up, p_orders_down);
 }
 
-void set_floor_button_lights(int* p_order_up, int* p_order_down) {
+void set_floor_button_lights(int* p_orders_up, int* p_orders_down) {
     // The last floor does not have an up-button: Start at 0.
-    for(int floor_up = 0; floor_up < MAX_FLOOR; floor_up++) {
-        hardware_command_order_light(floor_up, HARDWARE_ORDER_UP, p_order_up[floor_up]);
+    for(int floor_up = MIN_FLOOR; floor_up < HARDWARE_NUMBER_OF_FLOORS - 1; floor_up++) {
+        hardware_command_order_light(floor_up, HARDWARE_ORDER_UP, p_orders_up[floor_up]);
     }
 
     // The first floor does not have a down-button: Start at 1.
-    for(int floor_down = 1; floor_down <= MAX_FLOOR; floor_down++) {
-        hardware_command_order_light(floor_down, HARDWARE_ORDER_DOWN, p_order_down[floor_down]);
+    for(int floor_down = MIN_FLOOR + 1; floor_down < HARDWARE_NUMBER_OF_FLOORS; floor_down++) {
+        hardware_command_order_light(floor_down, HARDWARE_ORDER_DOWN, p_orders_down[floor_down]);
     }
 }
 
 
-
-//May want to change the in-argument to queue
-void update_cab_buttons(Order* p_queue) {
-    for(int cab_button = MIN_FLOOR; cab_button <= MAX_FLOOR; cab_button++) {
-        int order = hardware_read_order(cab_button, HARDWARE_ORDER_INSIDE);
-        p_queue[0].cab_orders[cab_button] = order;
-        hardware_command_order_light(cab_button, HARDWARE_ORDER_INSIDE, order);
+// Cab buttons
+void poll_cab_buttons(int* p_orders_cab) {
+    for(int floor = MIN_FLOOR; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
+        if(p_orders_cab[floor] == 0 && hardware_read_order(floor, HARDWARE_ORDER_INSIDE)) {
+            push_back_queue(floor, HARDWARE_ORDER_INSIDE);
+            p_orders_cab[floor] = 1;
+        }
     }
+
+    set_cab_button_lights(p_orders_cab);
 }
 
+void set_cab_button_lights(int* p_orders_cab) {
+    for(int floor = MIN_FLOOR; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
+        hardware_command_order_light(floor, HARDWARE_ORDER_INSIDE, p_orders_cab[floor]);
+    }
+}
 

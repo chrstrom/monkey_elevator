@@ -1,115 +1,196 @@
 #include "queue.h"
+#include "elevator_io.h"
+#include <stdio.h>
 
-void update_queue(Order* p_queue) {
-    //tar inn en kø og skal så slette dette elementet, ved at det er ferdig håndtert.
-    //skal da left-skifte resten
-    if(QUEUE_SIZE < 2){
+void init_queue() {
+    for(int i = 0; i < QUEUE_SIZE; i++) {
+        QUEUE[i].target_floor = INVALID_ORDER;
+        QUEUE[i].order_type =  HARDWARE_ORDER_NOT_INIT;
+    }
+}
+
+void update_queue(){
+    if(get_current_floor() == BETWEEN_FLOORS){
         return;
     }
-    Order current_order = p_queue[0];
-    Order next_order = p_queue[1];
-    for(int i = 0; i < QUEUE_SIZE - 1; i++){
-        current_order.target_floor = next_order.target_floor;
-        for (int fl = MIN_FLOOR; fl < MAX_FLOOR; fl++){
-            current_order.cab_orders[fl] = next_order.cab_orders[fl];
-        }
-        p_queue[i] = current_order;
-        if (i + 2 <= QUEUE_SIZE - 1){
-            next_order = p_queue[i + 2];
-        }
-        else{
-            //might be error-prone. Here 
-            next_order = initialize_new_order();
-        }
-        current_order = p_queue[i + 1];
-    }
-}
 
-void set_cab_orders(Order* p_current_order, int current_idx){
-    //skal polle alle knappene og sjekke om cab_orders_skal bli satt
-    //alle knappene som skal bli satt, må endres fra -1 til 1. Alle som ikke er endret på,
-    //skal da bli satt til 0
-    if(current_idx > QUEUE_SIZE){
-        fprintf(stderr, "Out of range-error for set_cab_orders!");
-        exit(1);
-    }
-    Order current_order = p_current_order[current_idx];
-    for(int fl = MIN_FLOOR; fl < MAX_FLOOR; fl++){
-        current_order.cab_orders[fl] = hardware_read_order(fl,HARDWARE_ORDER_INSIDE);
-    }
-}
-
-
-void clear_cab_orders(Order* p_current_order, int current_floor){
-    for(int fl = MIN_FLOOR; fl <= MAX_FLOOR; fl++) {
-        if(p_current_order->cab_orders[fl] == current_floor){
-            p_current_order->cab_orders[fl] = 0;
-        }
-    }
-}
-
-void erase_queue(Order* p_queue){
-    //skal her slette hele køen
-    //skal kun bli kalt dersom man trykker på stop
-    for(int qu = 0; qu < QUEUE_SIZE; qu++){
-        Order temp = p_queue[qu];
-        temp.target_floor = -1;
-        temp.dir = HARDWARE_ORDER_INSIDE;
-        for(int fl = MIN_FLOOR; fl < MAX_FLOOR; fl++){
-            temp.cab_orders[fl] = -1;
-        }
-    }
-}
-
-int queue_is_empty(Order* p_queue) {
-    Order temp = p_queue[0]; //We assume that the first element is always updated and thus always correct
-    if(temp.target_floor == -1){
-        return 1;
-    }
-    return 0;
-}
-
-void update_queue_target_floor(Order* p_current_order, int floor) {
-
-}
-
-int queue_is_empty(Order* p_queue) {
-    return 0;
-}
-
-void update_queue_target_floor(Order* p_current_order, int current_floor) {
-    for(int cab_order; cab_order < SIZEOF_ARR(p_current_order); cab_order++) {
-        if(p_current_order->cab_orders[cab_order] == 1) {
-            p_current_order->target_floor = cab_order;
-            p_current_order->cab_orders[cab_order] = 0;
-            return;
-        }
-    }
-    // If we make it to this point, all orders are 0
-    // We can therefore set the order to be handled!
-}
-
-
-int check_order_match(Order* queue, int current_floor, HardwareMovement last_dir) {
-    for(int order = 0; order < SIZEOF_ARR(queue); order++) {
-        Order current_order = queue[order];
-        // Only handle Orders if we have an order AT THIS FLOOR
-        // We also need to check if its direction is the same as the last_dir of the elevator
-        if(current_order.target_floor == current_floor && current_order.dir == last_dir) {
-            return 1;
-        }
-
-        int* cab_orders = current_order.cab_orders;
-        for(int floor = 0; floor < SIZEOF_ARR(cab_orders); floor++) {
-            // Only handle cab orders if we have a cab order AT THE CURRENT FLOOR
-            if(cab_orders[floor] && floor == current_floor) {
-                return 1;
+    // If there are any orders with target_floor = INVALID_ORDER, restructurate the queue
+    delete_holes_in_queue();
+    
+    // QUEUE[0].target_floor should be INVALID_ORDER, if we had a target at the current_floor
+    // since we clear the orders before calling this function
+    if(QUEUE[0].target_floor == INVALID_ORDER){ 
+        for (int ord = 0; ord < QUEUE_SIZE; ord++){
+            if (ord < QUEUE_SIZE - 1){
+                QUEUE[ord].target_floor = QUEUE[ord + 1].target_floor;
+                QUEUE[ord].order_type = QUEUE[ord + 1].order_type;
+            }
+            else if (ord == QUEUE_SIZE - 1){
+                QUEUE[ord].target_floor = INVALID_ORDER;
+                QUEUE[ord].order_type = HARDWARE_ORDER_NOT_INIT;
             }
         }
     }
+}
+
+void erase_queue(int* p_orders_up, int* p_orders_down, int* p_orders_cab){
+    for(int floor = 0; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
+        clear_orders_at_floor(p_orders_cab, p_orders_up, p_orders_down, floor);
+    }
+}
+
+
+void delete_holes_in_queue(){
+    for(int ord = 0; ord < QUEUE_SIZE; ord++){
+        if(QUEUE[ord].target_floor == INVALID_ORDER){
+            for(int inv = ord; inv < QUEUE_SIZE; inv++){
+                if(QUEUE[inv].target_floor != INVALID_ORDER){
+                    QUEUE[ord].target_floor = QUEUE[inv].target_floor;
+                    QUEUE[ord].order_type = QUEUE[inv].order_type;
+                    QUEUE[inv].target_floor = INVALID_ORDER;
+                    QUEUE[inv].order_type = HARDWARE_ORDER_NOT_INIT;
+                    break;
+                }
+            }
+        }
+    }
+}
+
+void push_back_queue(int target_floor, HardwareOrder order_type) {
+    //her burde det være en logikk som legger ting i rett rekkefølge
+    //altså dersom man har en ordre som skal ned i en høyere etasje, så kjører man først til den etasjen før man tar den lenger ned
+    //også motsatt: dersom man får ordre fra en etasje lengre ned som skal opp, så kjører man først til den etasjen
+    for(int order = 0; order < QUEUE_SIZE; order++) {
+        if(check_order_match(target_floor, order_type) == 1) {
+            return;
+        }
+    }
+
+    for(int order = 0; order < QUEUE_SIZE; order++) {
+        if(QUEUE[order].target_floor == INVALID_ORDER) {
+            QUEUE[order].target_floor = target_floor;
+            QUEUE[order].order_type = order_type;
+            break;
+        }
+    }
+
+    //kall en sorteringsfunksjon som sorterer ordrene etter slik logikk som forespeilet øverst
+}
+
+// void push_front_queue(int floor, HardwareOrder order_type){
+//     //OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOoppdateeeeeeeeeeeeeeeeeeeer
+//     // for(int ord = QUEUE_SIZE - 1; ord > 0; ord--){
+//     //     QUEUE[ord].order_type = QUEUE[ord - 1].order_type;
+//     //     QUEUE[ord].target_floor = QUEUE[ord - 1].target_floor;
+//     // }
+//     sort_queue();
+//     for(int cab_order = 0; cab_order < QUEUE_SIZE; cab_order++){
+//         if(QUEUE[cab_order].order_type != HARDWARE_ORDER_INSIDE){
+//             Order temp = QUEUE[cab_order];
+//             QUEUE[cab_order].target_floor = INVALID_ORDER;
+//             QUEUE[cab_order].order_type = HARDWARE_ORDER_NOT_INIT;
+//             for(int floor_order = cab_order + 1; floor_order < QUEUE_SIZE; floor_order++){
+//                 Order temp2 = QUEUE[floor_order];
+//                 QUEUE[floor_order].target_floor = temp.target_floor;
+//                 QUEUE[floor_order].order_type = temp.order_type;
+//                 temp = temp2;
+//             }
+//             QUEUE[cab_order].target_floor = floor;
+//             QUEUE[cab_order].order_type =  order_type;
+//             break;
+//         }
+//     }
+// }
+
+int check_queue_empty() {
+    delete_holes_in_queue();
+    return QUEUE[0].target_floor == INVALID_ORDER;
+}
+
+
+int check_order_match(int current_floor, HardwareOrder order_type) {
+    if(QUEUE[0].target_floor == current_floor) {
+        return 1;
+    }
+
+    for(int order = 1; order < QUEUE_SIZE; order++) {
+        Order current_order = QUEUE[order];
+        if(current_order.target_floor == current_floor && (current_order.order_type == order_type || current_order.order_type == HARDWARE_ORDER_INSIDE)) {
+            return 1;
+        }
+    }
     return 0;
 }
 
-Order initialize_new_order(){
-    Order new_order = {.target_floor = -1, .dir = HARDWARE_ORDER_INSIDE, .cab_orders = { -1, -1, -1, -1 }};
+void clear_orders_at_floor(int* p_orders_cab, int* p_orders_up, int* p_orders_down, int current_floor) {
+    for(int order = 0; order < QUEUE_SIZE; order++) {
+        int order_floor = QUEUE[order].target_floor;
+        if(order_floor == current_floor) {
+            p_orders_cab[order_floor] = 0;
+            p_orders_up[order_floor] = 0;
+            p_orders_down[order_floor] = 0;
+            QUEUE[order].target_floor = INVALID_ORDER;
+            QUEUE[order].order_type = HARDWARE_ORDER_NOT_INIT;
+        }
+    }
+
+    //set_cab_button_lights(p_orders_cab);
+    //set_floor_button_lights(p_orders_up, p_orders_down);
+    update_queue();
 }
+
+// void sort_queue(){
+//     //sorteringen skal sortere ordrene i heisen til først å gå etter ordre innenfra
+//     //så skal den prioritere ordre utenfra
+
+//     delete_holes_in_queue();
+
+//     Order* temp_queue = QUEUE;
+//      for(int floor = 0; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
+//         QUEUE[floor].target_floor = INVALID_ORDER;
+//         QUEUE[floor].order_type = HARDWARE_ORDER_NOT_INIT;
+//     }
+
+//     for(int order = 0; order < QUEUE_SIZE; order++) {
+//         Order temp_order = temp_queue[order];
+//         if(temp_order.order_type == HARDWARE_ORDER_INSIDE) {
+//             push_front_queue(temp_order.target_floor, temp_order.order_type);
+//         }
+//         else {
+//             push_back_queue(temp_order.target_floor, temp_order.order_type);
+//         }
+//     }
+
+    // //sorting of the HARDWARE_ORDER_INSIDE/cab_buttons
+    // int sorted_queue_number = 0;
+    // for(int ord = 0; ord < QUEUE_SIZE; ord++){
+    //     if(QUEUE[ord].order_type == HARDWARE_ORDER_INSIDE){
+    //         if(QUEUE[sorted_queue_number].order_type != HARDWARE_ORDER_INSIDE){
+    //             int temp_floor = QUEUE[sorted_queue_number].target_floor;
+    //             HardwareOrder temp_order_type = QUEUE[sorted_queue_number].order_type;
+    //             QUEUE[sorted_queue_number].target_floor = QUEUE[ord].target_floor;
+    //             QUEUE[sorted_queue_number].order_type = QUEUE[ord].order_type;
+    //             QUEUE[ord].target_floor = temp_floor;
+    //             QUEUE[ord].order_type = temp_order_type;
+    //             sorted_queue_number++;
+    //         }
+    //     }
+    // }
+
+    // //skal sortere køen etter rekkefølgen som heisen skal prioritere av eksterne ordre
+
+    // //funksjonen vil endre target_floor til heisen
+
+    // int possible_target_floor = INVALID_ORDER;
+    // if (current_dir == HARDWARE_ORDER_UP){
+    //     for (int ord = 0; ord < QUEUE_SIZE; ord++){
+    //         if (QUEUE[ord].order_type == HARDWARE_ORDER_DOWN)
+    //         {
+    //             if(possible_target_floor == INVALID_ORDER){
+    //                 possible_target_floor = QUEUE[ord].target_floor;
+    //             }
+    //             possible_target_floor = QUEUE[ord].target_floor;
+    //         }
+    //     }
+    // }
+// }

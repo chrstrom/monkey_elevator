@@ -27,8 +27,7 @@ typedef enum {
 typedef enum {
     HARDWARE_ORDER_UP,
     HARDWARE_ORDER_INSIDE,
-    HARDWARE_ORDER_DOWN,
-    HARDWARE_ORDER_NOT_INIT
+    HARDWARE_ORDER_DOWN
 } HardwareOrder;
 
 /**
