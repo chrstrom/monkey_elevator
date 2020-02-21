@@ -48,8 +48,7 @@ int main(){
         fprintf(stderr, "Unable to initialize software\n");
         exit(1);
     }
-    elevator_data_t elevator_data = {.door_open = DOOR_CLOSE, .last_floor = at_floor(), .next_expected_floor = INVALID_ORDER,
-                    .last_dir = HARDWARE_MOVEMENT_STOP, .state = STATE_IDLE, .next_action = ACTION_STOP_MOVEMENT};
+    elevator_data_t elevator_data = {.door_open = DOOR_CLOSE, .last_floor = at_floor(), /*.next_expected_floor = INVALID_ORDER,*/ .last_dir = HARDWARE_MOVEMENT_STOP, .state = STATE_IDLE, .next_action = ACTION_STOP_MOVEMENT};
 
     // ELEVATOR PROGRAM LOOP
     while (1){

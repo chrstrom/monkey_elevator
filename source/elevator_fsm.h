@@ -70,8 +70,8 @@ typedef struct{
 typedef struct{
     int door_open;                              /**< An int representing the door's state: 1 = open, 0 = closed*/
     int last_floor;                             /**< An int holding the elevator's last valid floor*/
-    int next_expected_floor;                    /**< An int holding the elevator's next valid floor. 
-                                                    Will only be used when stop-button is activated during floors*/
+    //int next_expected_floor;                    /**< An int holding the elevator's next valid floor. 
+    //                                                Will only be used when stop-button is activated during floors*/
     int ORDERS_UP[HARDWARE_NUMBER_OF_FLOORS];   /**< The elevator's orders going up*/
     int ORDERS_DOWN[HARDWARE_NUMBER_OF_FLOORS]; /**< The elevator's orders going down*/
     int ORDERS_CAB[HARDWARE_NUMBER_OF_FLOORS];  /**< The elevator's cab-orders.*/

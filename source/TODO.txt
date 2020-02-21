@@ -15,6 +15,9 @@ Clean up helper functions (remove/simplify)
     check queue for order ???
 Update documentation
 
+Optimalization
+    Try to develop logic that first check if all orders are in wrong direction, and then goto the floor furthest away
+
 
 Instead of returning an ACTION enum val from FSM, change a function pointer to a specific function
 that executes what we have in the switch in main.c already.
@@ -26,6 +29,7 @@ If the elevator gets a stop signal when it is between two floors, it does not kn
 recieves an order. Tried to fix it with a couple of if, but it will just go straight up into the physical switch/stop.
 The original code works relativly well, however it may not detect the new order and do the appropriate action to fullfill
 the order
+
 
 
 Functions we can delete:

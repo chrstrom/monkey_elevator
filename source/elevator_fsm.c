@@ -284,12 +284,39 @@ elevator_guard_t elevator_calculate_guard(elevator_data_t* p_elevator_data) {
         guards.TARGET_FLOOR_BELOW = 0;
     }
     else {
-        if(p_elevator_data->next_expected_floor != INVALID_ORDER && current_floor == -1 && p_elevator_data->next_action == ACTION_DO_NOTHING){
-            guards.TARGET_FLOOR_ABOVE = (target > p_elevator_data->next_expected_floor);
+        if(current_floor == -1 && p_elevator_data->next_action == ACTION_DO_NOTHING) {
+            //guards.TARGET_FLOOR_ABOVE = (target > p_elevator_data->next_expected_floor);
             guards.TARGET_FLOOR_EQUAL = 0;
-            guards.TARGET_FLOOR_BELOW = (target < p_elevator_data->next_expected_floor);
+            int next_expected_floor;
+            //guards.TARGET_FLOOR_BELOW = (target < p_elevator_data->next_expected_floor);
+            
+            //Hard-coding the shit, due to the program not being able to find p_elevator_data->next_expected_floor
+            if (p_elevator_data->last_dir == HARDWARE_MOVEMENT_UP) {
+                if(target == floor){
+                    guards.TARGET_FLOOR_ABOVE = 0;
+                    guards.TARGET_FLOOR_BELOW = 1;
+                }
+                else {
+                    next_expected_floor = p_elevator_data->last_floor + 1;
+                    guards.TARGET_FLOOR_ABOVE = (target >= next_expected_floor);
+                    guards.TARGET_FLOOR_BELOW = (target < next_expected_floor);   
+                }
+                //p_elevator_data->next_expected_floor = p_elevator_data->last_floor + 1;
+            }
+            if (p_elevator_data->last_dir == HARDWARE_MOVEMENT_DOWN) {
+                if(target == floor){
+                    guards.TARGET_FLOOR_ABOVE = 1;
+                    guards.TARGET_FLOOR_BELOW = 0;
+                }
+                else {
+                    next_expected_floor = p_elevator_data->last_floor - 1;
+                    guards.TARGET_FLOOR_ABOVE = (target > next_expected_floor);
+                    guards.TARGET_FLOOR_BELOW = (target <= next_expected_floor);   
+                }
+                //p_elevator_data->next_expected_floor = p_elevator_data->last_floor - 1;
+            }
         }
-        else{
+        else {
             guards.TARGET_FLOOR_ABOVE = (target > floor);
             guards.TARGET_FLOOR_EQUAL = (target == current_floor);
             guards.TARGET_FLOOR_BELOW = (target < floor);
@@ -322,10 +349,10 @@ void update_button_state(elevator_data_t* p_elevator_data){
 void calculate_next_floor(elevator_data_t* p_elevator_data){
     if(at_floor() == -1 && p_elevator_data->next_action == ACTION_EMERGENCY){
         if(p_elevator_data->last_dir == HARDWARE_MOVEMENT_UP){
-            p_elevator_data->next_expected_floor = p_elevator_data->last_floor + 1;
+            //p_elevator_data->next_expected_floor = p_elevator_data->last_floor + 1;
         }
         if(p_elevator_data->last_dir == HARDWARE_MOVEMENT_DOWN){
-            p_elevator_data->next_expected_floor = p_elevator_data->last_floor - 1;
+            //p_elevator_data->next_expected_floor = p_elevator_data->last_floor - 1;
         }
     }
 }
