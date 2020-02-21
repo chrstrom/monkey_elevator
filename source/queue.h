@@ -112,7 +112,8 @@ int check_queue_for_order(int target_floor, HardwareOrder order_type);
 
 /**
  * @brief Check if the QUEUE has a valid order to handle at a floor
- * 
+ *
+ * @param[in] target_floor  The floor used in the @c QUEUE check
  * @param[in] order_type    The type of order we check for
  * 
  * @return 1 if any @c Order in @c QUEUE has a valid order at the floor, and 0 if not.
@@ -120,7 +121,7 @@ int check_queue_for_order(int target_floor, HardwareOrder order_type);
  * @warning A cab order will ALWAYS be handled if the elevator drives past it, but the function will
  * differentiate between orders-up and orders-down.
  */
-int check_order_match(HardwareOrder order_type);
+int check_order_match(int target_floor, HardwareOrder order_type);
 
 /**
  * @brief Clear all orders in the @c QUEUE for the @p current_floor
@@ -144,6 +145,6 @@ void clear_orders_at_floor(int* p_orders_cab, int* p_orders_up, int* p_orders_do
 //  * @param[in] current_floor     The floor to be used for clearing the cab orders
 //  */
 // void clear_orders(int* p_array, int current_floor);
-
+void sort_queue();
 
 #endif //QUEUE_H
