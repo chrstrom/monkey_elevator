@@ -105,3 +105,74 @@ void clear_orders_at_floor(int* p_orders_up, int* p_orders_down, int* p_orders_c
 
     update_queue();
 }
+
+
+//Trenger en sorteringsalgoritme slik at vi kan styre heisen til rett etasje
+void sort_queue(HardwareMovement current_dir){
+    int num_cab_orders = 0;
+    int num_up_orders = 0;
+    int num_down_orders = 0;
+    //get state of the current queue
+    Order cab_order[QUEUE_SIZE];
+    Order up_order[QUEUE_SIZE];
+    Order down_order[QUEUE_SIZE];
+    for(int order = 0; order < QUEUE_SIZE; order++){
+        if(QUEUE[order].order_type == HARDWARE_ORDER_UP){
+            up_order[num_up_orders] = QUEUE[order];
+            num_up_orders++;
+        }
+        if(QUEUE[order].order_type == HARDWARE_ORDER_DOWN){
+            down_order[num_down_orders] = QUEUE[order];
+            num_down_orders++;
+        }
+        if(QUEUE[order].order_type == HARDWARE_ORDER_INSIDE){
+            cab_order[num_cab_orders] = QUEUE[order];
+            num_cab_orders++;
+        }
+    }
+    //prioriteten mellom de ordrene med samme type, baseres på etasje
+    for(int ord_up = 0; ord_up < num_up_orders; ord_up++){
+        for(int temp = ord_up; temp < num_up_orders; temp++){
+            if(up_order[ord_up].target_floor > up_order[temp].target_floor){
+                Order temp_order;
+                temp_order.target_floor = up_order[temp].target_floor;
+                temp_order.order_type = up_order[temp].order_type;
+                up_order[ord_up] = up_order[temp];
+                up_order[temp] = temp_order;
+            }
+        }
+    }
+    for(int ord_down = 0; ord_down < num_down_orders; ord_down++){
+        for(int temp = ord_down; temp < num_down_orders; temp++){
+            if(down_order[ord_down].target_floor < down_order[temp].target_floor){
+                Order temp_order;
+                temp_order.target_floor = down_order[temp].target_floor;
+                temp_order.order_type = down_order[temp].order_type;
+                down_order[ord_down] = down_order[temp];
+                down_order[temp] = temp_order;
+            }
+        }
+    }
+
+    for(int num_cab = 0; num_cab < num_cab_orders; num_cab++){
+        QUEUE[num_cab] = cab_order[num_cab];
+    }
+    if(current_dir == HARDWARE_MOVEMENT_DOWN){
+        //prioritet gis til ordre ned
+        for(int num_down = 0; num_down < num_down_orders; num_down++){
+            QUEUE[num_down + num_cab_orders] = down_order[num_down];
+        }
+        for(int num_up = 0; num_up < num_up_orders; num_up++){
+            QUEUE[num_up + num_cab_orders + num_down_orders] = up_order[num_up];
+        }
+    }
+    if(current_dir == HARDWARE_MOVEMENT_UP){
+        //prioritet gis til ordre opp
+        for(int num_up = 0; num_up < num_up_orders; num_up++){
+            QUEUE[num_up + num_cab_orders] = up_order[num_up];
+        }
+        for(int num_down = 0; num_down < num_down_orders; num_down++){
+            QUEUE[num_down + num_cab_orders + num_up_orders] = down_order[num_down];
+        }
+    }
+}
