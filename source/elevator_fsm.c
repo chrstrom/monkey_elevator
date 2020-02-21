@@ -15,6 +15,7 @@ elevator_action_t elevator_update_state(elevator_data_t* p_elevator_data) {
 
     switch(p_elevator_data->state) {
         case STATE_IDLE: {
+            // Entry actions:
             hardware_command_movement(HARDWARE_MOVEMENT_STOP);
 
             switch (current_event)  {
@@ -76,8 +77,7 @@ elevator_action_t elevator_update_state(elevator_data_t* p_elevator_data) {
                 } 
 
                 case EVENT_TARGET_FLOOR_DIFF: {
-                    // could maybe return close door and not transition
-                    // and then return move up/down in the 2nd run through
+
                     if(guards.TARGET_FLOOR_ABOVE && guards.TIMER_DONE) {
                         p_elevator_data->state = STATE_MOVING_UP;
                         hardware_command_door_open(DOOR_CLOSE);
@@ -140,8 +140,8 @@ elevator_action_t elevator_update_state(elevator_data_t* p_elevator_data) {
                 
                 case EVENT_FLOOR_MATCH: {
                     if(guards.DIRECTION) {
-                        p_elevator_data->state = STATE_DOOR_OPEN;
                         hardware_command_movement(HARDWARE_MOVEMENT_STOP);
+                        p_elevator_data->state = STATE_DOOR_OPEN;
                         return ACTION_START_DOOR_TIMER;
                     }
                 }
@@ -306,6 +306,7 @@ elevator_guard_t elevator_update_guards(elevator_data_t* p_elevator_data) {
     return guards;
 }
 
+
 void emergency_action(elevator_data_t* p_elevator_data){
     erase_queue(p_elevator_data->orders_up, p_elevator_data->orders_down, p_elevator_data->orders_cab);
     start_timer();
@@ -313,14 +314,12 @@ void emergency_action(elevator_data_t* p_elevator_data){
         p_elevator_data->door_open = DOOR_OPEN;
         hardware_command_door_open(DOOR_OPEN);
     }
-    //calculate_next_floor(p_elevator_data);
 }
 
 
 int check_floor_diff(int target_floor, int current_floor) {
     return (current_floor != target_floor && current_floor != BETWEEN_FLOORS);
 }
-
 
 void update_button_state(elevator_data_t* p_elevator_data){
     update_cab_buttons(p_elevator_data->orders_cab);

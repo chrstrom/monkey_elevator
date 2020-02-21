@@ -10,8 +10,7 @@
 
 #define MIN_FLOOR 0         /**The bottom floor that the elevator runs to. Note that this is 0-indexed */
 
-#define NORMAL_WAIT_TIME 3  /** Normal wait-time for the elevator, for obstruction and stop timers */
-
+#define DOOR_TIME_REQ 3.0   /** Macro for the standard amount of time, in seconds, that the door should stay open*/
 #define DOOR_CLOSE 0        /** Macro for door closed/close door */
 #define DOOR_OPEN 1         /** Macro for door open/open door */
 
@@ -21,6 +20,5 @@
 #define BETWEEN_FLOORS -1   /** Macro for the elevator being between floors */
 #define FLOOR_NOT_INIT -2   /** Macro for invalid order */
 
-#define DOOR_TIME_REQ 3.0   /** Macro for the standard amount of time, in seconds, that the door should stay open*/
 
 #endif //GLOBALS_H

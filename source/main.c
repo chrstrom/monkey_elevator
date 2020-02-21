@@ -22,7 +22,7 @@ int main(){
         exit(1);
     }
     
-    error = init_elevator();
+    error = elevator_init();
     if(error != 0){
         fprintf(stderr, "Unable to initialize software\n");
         exit(1);

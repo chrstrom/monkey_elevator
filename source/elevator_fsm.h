@@ -135,6 +135,13 @@ elevator_guard_t elevator_update_guards(elevator_data_t* p_elevator_data);
  */     
 void emergency_action(elevator_data_t* p_elevator_data);  
 
+/**
+ * @brief Update all elevator buttons
+ * 
+ * @param[in/out] p_elevator_data   Pointer to the @c elevator_data that contain the elevator's data
+ * 
+ * The function collectively polls and updates both the cab and floor buttons
+ */
 void update_button_state(elevator_data_t* p_elevator_data);
 
 #endif //ELEVATOR_FSM_H
