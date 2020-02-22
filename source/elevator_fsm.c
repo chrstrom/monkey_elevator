@@ -18,8 +18,8 @@ void update_button_state(elevator_data_t* p_elevator_data){
 
 
 void emergency_action(elevator_data_t* p_elevator_data){
-    erase_queue(p_elevator_data->orders_up, p_elevator_data->orders_down, p_elevator_data->orders_cab);
-    start_timer();
+    queue_erase(p_elevator_data->orders_up, p_elevator_data->orders_down, p_elevator_data->orders_cab);
+    timer_start();
     if (get_current_floor() != BETWEEN_FLOORS && hardware_read_stop_signal()){
         p_elevator_data->door_open = DOOR_OPEN;
         hardware_command_door_open(DOOR_OPEN);
@@ -33,7 +33,7 @@ void elevator_execute_next_action(elevator_data_t* p_elevator_data){
         break;
 
     case ACTION_START_DOOR_TIMER:
-        start_timer();
+        timer_start();
         break;
 
     case ACTION_OPEN_DOOR:
@@ -42,7 +42,7 @@ void elevator_execute_next_action(elevator_data_t* p_elevator_data){
         break;
 
     case ACTION_CLOSE_DOOR:
-        update_queue();
+        queue_update();
         hardware_command_door_open(DOOR_CLOSE);
         p_elevator_data->door_open = DOOR_CLOSE;
         break;
@@ -83,10 +83,10 @@ elevator_guard_t elevator_update_guards(elevator_data_t* p_elevator_data) {
     int current_floor = get_current_floor();
     int last_valid_floor = p_elevator_data->last_floor;
                   
-    guards.DIRECTION = check_order_match(current_floor, p_elevator_data->last_dir);                  
+    guards.DIRECTION = queue_check_order_match(current_floor, p_elevator_data->last_dir);                  
     guards.AT_FLOOR = (current_floor != BETWEEN_FLOORS);              
     guards.NOT_AT_FLOOR = (current_floor == BETWEEN_FLOORS);
-    guards.TIMER_DONE = check_timer(DOOR_TIME_REQ);
+    guards.TIMER_DONE = timer_check(DOOR_TIME_REQ);
 
     // Perform no checks for invalid orders
     if(target == FLOOR_NOT_INIT) {
@@ -125,22 +125,22 @@ elevator_guard_t elevator_update_guards(elevator_data_t* p_elevator_data) {
 
 elevator_event_t elevator_update_event(elevator_data_t* p_elevator_data) {
     // Update truth values for all possible events
-    int queue_empty = check_queue_empty();
+    int queue_is_empty = queue_empty();
     int target_floor_diff = check_floor_diff(QUEUE[0].target_floor, p_elevator_data->last_floor);
-    int floor_match = check_order_match(get_current_floor(), p_elevator_data->last_dir);
+    int floor_match = queue_check_order_match(get_current_floor(), p_elevator_data->last_dir);
     int obstruction_state = hardware_read_obstruction_signal();
     int stop_button_state = hardware_read_stop_signal();
-    int timer_done = check_timer(DOOR_TIME_REQ);
+    int timer_done = timer_check(DOOR_TIME_REQ);
 
     switch(p_elevator_data->state) {
         case STATE_IDLE: {
             if(stop_button_state == 1) {
                 return EVENT_STOP_BUTTON_HIGH;
             }
-            if(queue_empty == 1) {
+            if(queue_is_empty == 1) {
                 return EVENT_QUEUE_EMPTY;
             }
-            if(queue_empty == 0) {
+            if(queue_is_empty == 0) {
                 return EVENT_QUEUE_NOT_EMPTY;
             }
             break;
@@ -152,7 +152,7 @@ elevator_event_t elevator_update_event(elevator_data_t* p_elevator_data) {
             if(obstruction_state == 1) {
                 return EVENT_OBSTRUCTION_HIGH;
             }
-            if(queue_empty == 1 && timer_done == 1) {
+            if(queue_is_empty == 1 && timer_done == 1) {
                 return EVENT_QUEUE_EMPTY;
             }
             if(target_floor_diff == 1) {
@@ -252,7 +252,7 @@ elevator_action_t elevator_update_state(elevator_data_t* p_elevator_data) {
             // Entry actions:
             hardware_command_movement(HARDWARE_MOVEMENT_STOP);
             hardware_command_door_open(DOOR_OPEN);
-            clear_orders_at_floor(p_elevator_data->orders_cab, p_elevator_data->orders_up, p_elevator_data->orders_down, current_floor);
+            queue_clear_order_at_floor(p_elevator_data->orders_cab, p_elevator_data->orders_up, p_elevator_data->orders_down, current_floor);
 
             switch (current_event) {
                 

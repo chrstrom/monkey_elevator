@@ -3,10 +3,10 @@
 
 #include "timer.h"
 
-void start_timer(){
+void timer_start(){
     DOOR_TIMER = time(NULL);
 }
 
-int check_timer(double time_req){
+int timer_check(double time_req){
     return (difftime(time(NULL), DOOR_TIMER) >= time_req);
 }
