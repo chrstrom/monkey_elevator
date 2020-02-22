@@ -8,6 +8,7 @@
 
 #include "driver/hardware.h"
 
+
 /**
  * Enum for the possible states of the FSM.
  */
@@ -64,6 +65,7 @@ typedef struct{
     int NOT_AT_FLOOR;             /**< Guard for checking elevator location. 1 = elevator not at floor. 0 = elevator at floor*/
 } elevator_guard_t;
 
+
 /**
  * A struct holding all the data related to the elevator 
  */
@@ -80,20 +82,6 @@ typedef struct{
 
 
 /**
- * @brief Update the elevator state
- * 
- * @param[in, out] p_elevator_data     A pointer to the elevator data, updates on transitions.             
- * 
- * @return One of the possible @c elevator_action_t resulting from the current state.
- * 
- * This function updates the elevator's state machine, and yields a resulting
- * function to be executed for any given state. It contains most of the logic flow
- * used to control the elevator's movements, depending on the given inputs.
- */
-elevator_action_t elevator_update_state(elevator_data_t* p_elevator_data);
-
-
-/**
  * @brief Check if a target floor is equal to the current floor
  * 
  * @param[in] target_floor      A given target floor
@@ -105,24 +93,13 @@ int check_floor_diff(int target_floor, int current_floor);
 
 
 /**
- * @brief Calculate the next event, based on the elevator's current state @c elevator_data_t . The events will be used
- * to differentiate between the states in the fsm.
+ * @brief Update all elevator buttons
  * 
- * @param[in] p_elevator_data Pointer to an @c elevator_data_t that contains the required data to calculate the event
+ * @param[in/out] p_elevator_data   Pointer to the @c elevator_data that contain the elevator's data
  * 
- * @return One of the possible events resulting from the elevator's state
- */ 
-elevator_event_t elevator_update_event(elevator_data_t* p_elevator_data);
-
-
-/**
- * @brief Calculate the next guards. The guards will be used to differentiate between the events in the fsm
- * 
- * @param[in] p_elevator_data Pointer to an @c elevator_data_t that contains the required data to calculate the guards
- * 
- * @return A struct containing all guards, as determined by the elevator's state, input and queue
- */ 
-elevator_guard_t elevator_update_guards(elevator_data_t* p_elevator_data);
+ * The function collectively polls and updates both the cab and floor buttons
+ */
+void update_button_state(elevator_data_t* p_elevator_data);
 
 
 /**
@@ -135,13 +112,40 @@ elevator_guard_t elevator_update_guards(elevator_data_t* p_elevator_data);
  */     
 void emergency_action(elevator_data_t* p_elevator_data);  
 
+
 /**
- * @brief Update all elevator buttons
+ * @brief Calculate the next guards. The guards will be used to differentiate between the events in the fsm
  * 
- * @param[in/out] p_elevator_data   Pointer to the @c elevator_data that contain the elevator's data
+ * @param[in] p_elevator_data   Pointer to an @c elevator_data_t that contains the required data to calculate the guards
  * 
- * The function collectively polls and updates both the cab and floor buttons
+ * @return A struct containing all guards, as determined by the elevator's state, input and queue
+ */ 
+elevator_guard_t elevator_update_guards(elevator_data_t* p_elevator_data);
+
+
+/**
+ * @brief Calculate the next event, based on the elevator's current state @c elevator_data_t . The events will be used
+ * to differentiate between the states in the fsm.
+ * 
+ * @param[in] p_elevator_data   Pointer to an @c elevator_data_t that contains the required data to calculate the event
+ * 
+ * @return One of the possible events resulting from the elevator's state
+ */ 
+elevator_event_t elevator_update_event(elevator_data_t* p_elevator_data);
+
+
+/**
+ * @brief Update the elevator state
+ * 
+ * @param[in, out] p_elevator_data     A pointer to the elevator data, updates on transitions.             
+ * 
+ * @return One of the possible @c elevator_action_t resulting from the current state.
+ * 
+ * This function updates the elevator's state machine, and yields a resulting
+ * function to be executed for any given state. It contains most of the logic flow
+ * used to control the elevator's movements, depending on the given inputs.
  */
-void update_button_state(elevator_data_t* p_elevator_data);
+elevator_action_t elevator_update_state(elevator_data_t* p_elevator_data);
+
 
 #endif //ELEVATOR_FSM_H
