@@ -22,7 +22,7 @@ int main(){
         exit(1);
     }
     
-    error = elevator_init();
+    error = init_elevator();
     if(error != 0){
         fprintf(stderr, "Unable to initialize software\n");
         exit(1);
@@ -37,12 +37,6 @@ int main(){
 
         // Set floor light
         set_floor_indicator_light(get_current_floor());
-
-        //Ønskelig at kun main og fsm skal kjenne til elevator_data
-        //men dette vil da skape problemer, siden vi ønsker da å endre verdien til 
-        //elevator_data inne i hver av disse poll-funksjonene
-
-        //kan lage en merge-funksjon inne i FSM som da kun merger kun det vi ønsker fra elevator_data
 
         // Handle button press events
         update_button_state(&elevator_data);
