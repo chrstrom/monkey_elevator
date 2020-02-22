@@ -9,6 +9,7 @@ void init_queue() {
     }
 }
 
+
 void update_queue(){
     if(get_current_floor() == BETWEEN_FLOORS){
         return;
@@ -29,6 +30,7 @@ void update_queue(){
         }
     }
 }
+
 
 void erase_queue(int* p_orders_up, int* p_orders_down, int* p_orders_cab){
     for(int floor = 0; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
@@ -51,11 +53,16 @@ void refactor_queue(){
     }
 }
 
+
 void set_single_order(int idx, int target_floor, HardwareOrder order_type) {
     QUEUE[idx].target_floor = target_floor;
     QUEUE[idx].order_type = order_type;
 }
-void push_back_queue(int target_floor, HardwareOrder order_type) {
+
+
+void push_back_queue(int target_floor, HardwareOrder order_type, HardwareMovement current_dir) {
+    int added_to_queue = 0;
+
     for(int order = 0; order < QUEUE_SIZE; order++) {
         if(check_order_match(target_floor, order_type) == 1) {
             return; // Return if we have an order with the same parameters in the queue already
@@ -65,8 +72,13 @@ void push_back_queue(int target_floor, HardwareOrder order_type) {
     for(int order = 0; order < QUEUE_SIZE; order++) {
         if(QUEUE[order].target_floor == FLOOR_NOT_INIT) {
             set_single_order(order, target_floor, order_type);
+            added_to_queue = 1;
             break;
         }
+    }
+    
+    if(added_to_queue){
+        sort_queue(current_dir);
     }
 }
 
@@ -92,6 +104,7 @@ int check_order_match(int current_floor, HardwareOrder order_type) {
     return 0;
 }
 
+
 void clear_orders_at_floor(int* p_orders_up, int* p_orders_down, int* p_orders_cab, int current_floor) {
     for(int order = 0; order < QUEUE_SIZE; order++) {
         if(QUEUE[order].target_floor == current_floor) {
@@ -107,12 +120,10 @@ void clear_orders_at_floor(int* p_orders_up, int* p_orders_down, int* p_orders_c
 }
 
 
-//Trenger en sorteringsalgoritme slik at vi kan styre heisen til rett etasje
 void sort_queue(HardwareMovement current_dir){
     int num_cab_orders = 0;
     int num_up_orders = 0;
     int num_down_orders = 0;
-    //get state of the current queue
     Order cab_order[QUEUE_SIZE];
     Order up_order[QUEUE_SIZE];
     Order down_order[QUEUE_SIZE];
@@ -130,7 +141,6 @@ void sort_queue(HardwareMovement current_dir){
             num_cab_orders++;
         }
     }
-    //prioriteten mellom de ordrene med samme type, baseres på etasje
     for(int ord_up = 0; ord_up < num_up_orders; ord_up++){
         for(int temp = ord_up; temp < num_up_orders; temp++){
             if(up_order[ord_up].target_floor > up_order[temp].target_floor){
@@ -158,21 +168,22 @@ void sort_queue(HardwareMovement current_dir){
         QUEUE[num_cab] = cab_order[num_cab];
     }
     if(current_dir == HARDWARE_MOVEMENT_DOWN){
-        //prioritet gis til ordre ned
+        //priority to orders going down
         for(int num_down = 0; num_down < num_down_orders; num_down++){
             QUEUE[num_down + num_cab_orders] = down_order[num_down];
         }
         for(int num_up = 0; num_up < num_up_orders; num_up++){
             QUEUE[num_up + num_cab_orders + num_down_orders] = up_order[num_up];
         }
+        return;
     }
-    if(current_dir == HARDWARE_MOVEMENT_UP){
-        //prioritet gis til ordre opp
-        for(int num_up = 0; num_up < num_up_orders; num_up++){
-            QUEUE[num_up + num_cab_orders] = up_order[num_up];
-        }
-        for(int num_down = 0; num_down < num_down_orders; num_down++){
-            QUEUE[num_down + num_cab_orders + num_up_orders] = down_order[num_down];
-        }
+
+    //priority to orders going up
+    for(int num_up = 0; num_up < num_up_orders; num_up++){
+        QUEUE[num_up + num_cab_orders] = up_order[num_up];
     }
+    for(int num_down = 0; num_down < num_down_orders; num_down++){
+        QUEUE[num_down + num_cab_orders + num_up_orders] = down_order[num_down];
+    }
+
 }

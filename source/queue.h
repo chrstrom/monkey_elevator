@@ -86,7 +86,7 @@ void set_single_order(int idx, int target_floor, HardwareOrder order_type);
  * to the @c QUEUE with values given by @p target_floor and @p order_type if
  * and only if the queue does not contain an identical order already.
  */
-void push_back_queue(int target_floor, HardwareOrder order_type);
+void push_back_queue(int target_floor, HardwareOrder order_type, HardwareMovement current_dir);
 
 
 /**
@@ -126,5 +126,6 @@ int check_order_match(int target_floor, HardwareOrder order_type);
  */
 void clear_orders_at_floor(int* p_orders_up, int* p_orders_down, int* p_orders_cab, int current_floor);
 
+void sort_queue(HardwareMovement current_dir);
 
 #endif //QUEUE_H

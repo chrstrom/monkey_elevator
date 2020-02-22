@@ -21,6 +21,5 @@ Functions we can delete:
 
 
 
-We will poll the cab_buttons even when not in idle
 
 

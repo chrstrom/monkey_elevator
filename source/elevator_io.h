@@ -5,6 +5,7 @@
 #ifndef ELEVATOR_IO_H
 #define ELEVATOR_IO_H
 
+#include "driver/hardware.h"
 
 /**
  * @brief Initialize the elevator
@@ -57,7 +58,7 @@ void set_floor_indicator_light(int floor);
  * Upon finding a button that is clicked, that has not already been clicked ( by checking
  * the @p p_orders_up and @p p_orders_down arrays), the corresponding value in the array is set to 1.
  */
-void update_floor_buttons(int* p_orders_up, int* p_orders_down);
+void update_floor_buttons(int* p_orders_up, int* p_orders_down, HardwareMovement current_dir);
 
 /**
  * @brief Set the floor button lights in accordance with the values @p p_orders_up and @p p_orders_down .
@@ -79,7 +80,7 @@ void set_floor_button_lights(int* p_orders_up, int* p_orders_down);
  * 
  * The function updates the cab orders for the current Order 
  */
-void update_cab_buttons(int* p_orders_cab);
+void update_cab_buttons(int* p_orders_cab, HardwareMovement current_dir);
 
 /**
  * @brief Set the cab button lights in accordance with the values in @p p_orders_cab

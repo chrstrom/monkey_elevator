@@ -321,7 +321,7 @@ int check_floor_diff(int target_floor, int current_floor) {
 }
 
 void update_button_state(elevator_data_t* p_elevator_data){
-    update_cab_buttons(p_elevator_data->orders_cab);
-    update_floor_buttons(p_elevator_data->orders_up, p_elevator_data->orders_down);
+    update_cab_buttons(p_elevator_data->orders_cab, p_elevator_data->last_dir);
+    update_floor_buttons(p_elevator_data->orders_up, p_elevator_data->orders_down, p_elevator_data->last_dir);
 }
 

@@ -42,11 +42,11 @@ void set_floor_indicator_light(int floor) {
 
 
 // Floor buttons
-void update_floor_buttons(int* p_orders_up, int* p_orders_down) {
+void update_floor_buttons(int* p_orders_up, int* p_orders_down, HardwareMovement current_dir) {
   
     for(int floor_up = MIN_FLOOR; floor_up < HARDWARE_NUMBER_OF_FLOORS - 1; floor_up++) {
         if(p_orders_up[floor_up] == 0 && hardware_read_order(floor_up, HARDWARE_ORDER_UP) == 1){
-            push_back_queue(floor_up, HARDWARE_ORDER_UP);
+            push_back_queue(floor_up, HARDWARE_ORDER_UP, current_dir);
             p_orders_up[floor_up] = 1;
         }
     }
@@ -54,7 +54,7 @@ void update_floor_buttons(int* p_orders_up, int* p_orders_down) {
     // The first floor does not have a down-button: Start at 1.
     for(int floor_down = MIN_FLOOR + 1; floor_down < HARDWARE_NUMBER_OF_FLOORS; floor_down++) {
         if(p_orders_down[floor_down] == 0 && hardware_read_order(floor_down, HARDWARE_ORDER_DOWN) == 1){
-            push_back_queue(floor_down, HARDWARE_ORDER_DOWN);
+            push_back_queue(floor_down, HARDWARE_ORDER_DOWN, current_dir);
             p_orders_down[floor_down] = 1;
         }
     }
@@ -76,10 +76,10 @@ void set_floor_button_lights(int* p_orders_up, int* p_orders_down) {
 
 
 // Cab buttons
-void update_cab_buttons(int* p_orders_cab) {
+void update_cab_buttons(int* p_orders_cab, HardwareMovement current_dir) {
     for(int floor = MIN_FLOOR; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
         if(p_orders_cab[floor] == 0 && hardware_read_order(floor, HARDWARE_ORDER_INSIDE)) {
-            push_back_queue(floor, HARDWARE_ORDER_INSIDE);
+            push_back_queue(floor, HARDWARE_ORDER_INSIDE, current_dir);
             p_orders_cab[floor] = 1;
         }
     }
