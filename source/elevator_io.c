@@ -58,6 +58,10 @@ int get_current_floor() {
     return BETWEEN_FLOORS;
 }
 
+int update_valid_floor(int valid_floor) {
+    return (get_current_floor() == BETWEEN_FLOORS ? valid_floor : get_current_floor());
+}
+
 void update_cab_buttons(int* p_orders_cab) {
     for(int floor = MIN_FLOOR; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
         if(p_orders_cab[floor] == 0 && hardware_read_order(floor, HARDWARE_ORDER_INSIDE)) {

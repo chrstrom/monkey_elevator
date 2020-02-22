@@ -46,6 +46,18 @@ void set_floor_indicator_light(int floor);
  */
 int get_current_floor();
 
+/**
+ * @brief Updates the a floor value to a valid floor
+ * 
+ * @param[in] floor     The last valid floor
+ * 
+ * @return A new valid floor if the elevator is at a valid floor, and @p valid_floor if the
+ * elevator is between floors.
+ * 
+ * @warning Correct usage of this function requires @p valid_floor to actually be a valid floor. 
+ */
+int update_valid_floor(int valid_floor);
+
 
 /**
  * @brief Updates the cab buttons based on current input

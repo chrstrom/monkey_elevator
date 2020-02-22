@@ -34,9 +34,7 @@ int main(){
                                      .next_action = ACTION_STOP_MOVEMENT};
 
     while (1){
-        // Temporary
-        elevator_data.last_floor = (get_current_floor() == BETWEEN_FLOORS ? elevator_data.last_floor : get_current_floor());
-
+        elevator_data.last_floor = update_valid_floor(elevator_data.last_floor);
         set_floor_indicator_light(get_current_floor());
 
         update_button_state(&elevator_data);
