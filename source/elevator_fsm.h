@@ -82,6 +82,17 @@ typedef struct{
 
 
 /**
+ * @brief Initialize the elevator
+ * 
+ * @return Elevator data initialized to its default values.
+ * 
+ * Initiailize the elevator by setting all connected values to its default values, and, 
+ * if the elevator isn't already at a floor, drive the elevator down to the first valid floor.
+ */
+elevator_data_t elevator_init();
+
+
+/**
  * @brief Update the elevator state
  * 
  * @param[in, out] p_elevator_data     A pointer to the elevator data, updates on transitions.             

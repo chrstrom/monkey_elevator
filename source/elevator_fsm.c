@@ -6,6 +6,35 @@
 #include "queue.h"
 #include "timer.h"
 
+elevator_data_t elevator_init() {
+    //Turn off all button lights and clear all order light arrays (just in case)
+    for(int floor = 0; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
+        hardware_command_order_light(floor, HARDWARE_ORDER_UP,     LIGHT_OFF);
+        hardware_command_order_light(floor, HARDWARE_ORDER_DOWN,   LIGHT_OFF);
+        hardware_command_order_light(floor, HARDWARE_ORDER_INSIDE, LIGHT_OFF);
+    }
+
+    //we assume the obstruction will never be active during setup!
+    hardware_command_stop_light(LIGHT_OFF);
+    hardware_command_door_open(DOOR_CLOSE); 
+
+    hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
+    while(get_current_floor() == BETWEEN_FLOORS) {}
+    hardware_command_movement(HARDWARE_MOVEMENT_STOP);
+
+    hardware_command_floor_indicator_on(get_current_floor());
+
+    queue_init();
+
+    elevator_data_t elevator_data = {.door_open = DOOR_CLOSE,
+                                    .last_floor = get_current_floor(),
+                                    .last_dir = HARDWARE_MOVEMENT_STOP,
+                                    .state = STATE_IDLE,
+                                    .next_action = ACTION_STOP_MOVEMENT};
+
+    return elevator_data;
+}
+
 elevator_action_t elevator_update_state(elevator_data_t* p_elevator_data) {
 
     int current_floor = get_current_floor();
@@ -278,7 +307,7 @@ elevator_guard_t elevator_update_guards(elevator_data_t* p_elevator_data) {
         guards.TARGET_FLOOR_BELOW = 0;
         return guards;
     }
-    
+
     // Stopped between floors (emergency)
     if(current_floor == BETWEEN_FLOORS && p_elevator_data->next_action == ACTION_DO_NOTHING) {
         guards.TARGET_FLOOR_EQUAL = 0;

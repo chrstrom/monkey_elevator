@@ -5,16 +5,6 @@
 #ifndef ELEVATOR_IO_H
 #define ELEVATOR_IO_H
 
-/**
- * @brief Initialize the elevator
- * 
- * @return A true value on successful initialization, 0 if it failed.
- * 
- * Initiailize the elevator by setting all connected values to its default values, and, 
- * if the elevator isn't already at a floor, drive the elevator down to the first valid floor.
- */
-int elevator_init();
-
 
 // /**
 //  * @brief Set the cab button lights in accordance with the values in @p p_orders_cab
@@ -45,6 +35,7 @@ void set_floor_indicator_light(int floor);
  * be returned when the elevator is at the first floor
  */
 int get_current_floor();
+
 
 /**
  * @brief Updates the a floor value to a valid floor

@@ -2,28 +2,6 @@
 #include "globals.h"
 #include "queue.h"
 
-int elevator_init() {
-    //Turn off all button lights and clear all order light arrays (just in case)
-    for(int floor = 0; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
-        hardware_command_order_light(floor, HARDWARE_ORDER_UP,     LIGHT_OFF);
-        hardware_command_order_light(floor, HARDWARE_ORDER_DOWN,   LIGHT_OFF);
-        hardware_command_order_light(floor, HARDWARE_ORDER_INSIDE, LIGHT_OFF);
-    }
-
-    //we assume the obstruction will never be active during setup!
-    hardware_command_stop_light(LIGHT_OFF);
-    hardware_command_door_open(DOOR_CLOSE); 
-
-    hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
-    while(get_current_floor() == BETWEEN_FLOORS) {}
-    hardware_command_movement(HARDWARE_MOVEMENT_STOP);
-
-    hardware_command_floor_indicator_on(get_current_floor());
-
-    queue_init();
-    return 0;
-}
-
 //Kanskje ønskelig å bruke disse funksjonene, slik at vi ikke trenger å kjenne til hardware i andre moduler!
 int check_stop_button(){
     return hardware_read_stop_signal();
