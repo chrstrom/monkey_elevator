@@ -27,6 +27,55 @@ void emergency_action(elevator_data_t* p_elevator_data){
 }
 
 
+void elevator_execute_next_action(elevator_data_t* p_elevator_data){
+    switch (p_elevator_data->next_action){
+    case ACTION_DO_NOTHING:
+        break;
+
+    case ACTION_START_DOOR_TIMER:
+        start_timer();
+        break;
+
+    case ACTION_OPEN_DOOR:
+        hardware_command_door_open(DOOR_OPEN);
+        p_elevator_data->door_open = DOOR_OPEN;
+        break;
+
+    case ACTION_CLOSE_DOOR:
+        update_queue();
+        hardware_command_door_open(DOOR_CLOSE);
+        p_elevator_data->door_open = DOOR_CLOSE;
+        break;
+
+    case ACTION_MOVE_UP:
+        hardware_command_movement(HARDWARE_MOVEMENT_UP);
+        p_elevator_data->last_dir = HARDWARE_MOVEMENT_UP;
+        p_elevator_data->state = STATE_MOVING_UP;
+        break;
+
+    case ACTION_MOVE_DOWN:
+        hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
+        p_elevator_data->last_dir = HARDWARE_MOVEMENT_DOWN;
+        p_elevator_data->state = STATE_MOVING_DOWN;
+        break;
+
+    case ACTION_STOP_MOVEMENT:
+        hardware_command_movement(HARDWARE_MOVEMENT_STOP);
+        p_elevator_data->last_dir = HARDWARE_MOVEMENT_STOP;
+        p_elevator_data->state = STATE_IDLE;
+        break;
+
+    case ACTION_EMERGENCY:
+        emergency_action(p_elevator_data);
+        break;
+
+    default:
+        fprintf(stderr, "Default case reached in switch in main. This should not happen\n");
+        break;
+    }
+}
+
+
 elevator_guard_t elevator_update_guards(elevator_data_t* p_elevator_data) {
     elevator_guard_t guards;
 

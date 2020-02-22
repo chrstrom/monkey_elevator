@@ -2,6 +2,21 @@
 #include "globals.h"
 #include "queue.h"
 
+//Kanskje ønskelig å bruke disse funksjonene, slik at vi ikke trenger å kjenne til hardware i andre moduler!
+int check_stop_button(){
+    return hardware_read_stop_signal();
+}
+
+
+int check_obstruction(){
+    return hardware_read_obstruction_signal();
+}
+
+
+void drive_elevator(HardwareMovement dir){
+    hardware_command_movement(dir);
+}
+
 
 void set_cab_button_lights(int* p_orders_cab) {
     for(int floor = MIN_FLOOR; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
@@ -50,6 +65,7 @@ void set_floor_button_lights(int* p_orders_up, int* p_orders_down) {
         hardware_command_order_light(floor_down, HARDWARE_ORDER_DOWN, p_orders_down[floor_down]);
     }
 }
+
 
 
 void update_floor_buttons(int* p_orders_up, int* p_orders_down) {

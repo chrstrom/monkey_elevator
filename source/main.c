@@ -44,51 +44,6 @@ int main(){
         elevator_data.next_action = elevator_update_state(&elevator_data);
 
         //Execute next action
-        //possibly it's own function
-        switch (elevator_data.next_action){
-        case ACTION_DO_NOTHING:
-            break;
-
-        case ACTION_START_DOOR_TIMER:
-            start_timer();
-            break;
-
-        case ACTION_OPEN_DOOR:
-            hardware_command_door_open(DOOR_OPEN);
-            elevator_data.door_open = DOOR_OPEN;
-            break;
-
-        case ACTION_CLOSE_DOOR:
-            update_queue();
-            hardware_command_door_open(DOOR_CLOSE);
-            elevator_data.door_open = DOOR_CLOSE;
-            break;
-
-        case ACTION_MOVE_UP:
-            hardware_command_movement(HARDWARE_MOVEMENT_UP);
-            elevator_data.last_dir = HARDWARE_MOVEMENT_UP;
-            elevator_data.state = STATE_MOVING_UP;
-            break;
-
-        case ACTION_MOVE_DOWN:
-            hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
-            elevator_data.last_dir = HARDWARE_MOVEMENT_DOWN;
-            elevator_data.state = STATE_MOVING_DOWN;
-            break;
-
-        case ACTION_STOP_MOVEMENT:
-            hardware_command_movement(HARDWARE_MOVEMENT_STOP);
-            elevator_data.last_dir = HARDWARE_MOVEMENT_STOP;
-            elevator_data.state = STATE_IDLE;
-            break;
-
-        case ACTION_EMERGENCY:
-            emergency_action(&elevator_data);
-            break;
-
-        default:
-            fprintf(stderr, "Default case reached in switch in main. This should not happen\n");
-            break;
-        }
+        elevator_execute_next_action(&elevator_data);
     }
 }

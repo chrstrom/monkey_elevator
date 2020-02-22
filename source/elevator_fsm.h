@@ -114,6 +114,16 @@ void emergency_action(elevator_data_t* p_elevator_data);
 
 
 /**
+ * @brief Execute the elevator's next action.
+ * 
+ * @param[in/out] p_elevator_data   Pointer to the @c elevator_data that contain the elevator's data
+ * 
+ * Executes everything that the elevator must do given an action. 
+ */    
+void elevator_execute_next_action(elevator_data_t* p_elevator_data);
+
+
+/**
  * @brief Calculate the next guards. The guards will be used to differentiate between the events in the fsm
  * 
  * @param[in] p_elevator_data   Pointer to an @c elevator_data_t that contains the required data to calculate the guards

@@ -91,21 +91,6 @@ int check_order_match(int current_floor, HardwareOrder order_type) {
 }
 
 
-void clear_orders_at_floor(int* p_orders_up, int* p_orders_down, int* p_orders_cab, int current_floor) {
-    for(int order = 0; order < QUEUE_SIZE; order++) {
-        if(QUEUE[order].target_floor == current_floor) {
-            set_single_order(order, FLOOR_NOT_INIT, HARDWARE_ORDER_NOT_INIT);
-        }
-    }
-
-    p_orders_cab[current_floor] = 0;
-    p_orders_up[current_floor] = 0;
-    p_orders_down[current_floor] = 0;
-
-    update_queue();
-}
-
-
 void update_queue(){
     if(get_current_floor() == BETWEEN_FLOORS){
         return;
