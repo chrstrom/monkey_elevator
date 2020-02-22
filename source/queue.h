@@ -24,20 +24,32 @@ Order QUEUE[QUEUE_SIZE];                /**< The elevator's queue */
 
 
 /**
- * @brief Initialize the @c QUEUE with all invalid orders
+ * @brief Sets a single order in the queue
+ * 
+ * @param[in] idx               The index of the element in the queue we wish to modify
+ * @param[in] target_floor      The new target_floor for the queue element
+ * @param[in] order_type        The new order type for the queue element
+ * 
+ * Set an @c Order in the @c QUEUE at index @p idx to the values of @p target_floor and @p order_type
+ * regardless of what the @c QUEUE contains at the given @p idx .
  */
-void init_queue();
+void set_single_order(int idx, int target_floor, HardwareOrder order_type);
 
 
 /**
- * @brief Update the @c QUEUE by removing the first element.
+ * @brief Check if the @c QUEUE is empty
  * 
- * @warning Will only work if the elevator is at a defined floor
+ * @return 1 if the @c QUEUE is empty and 0 if not
  * 
- * The function will both refactor and shift the entire queue one element to the left,
- * thereby deleting the first element: effectively "handling" an order.
+ * @warning We assume that the first element in the queue is always updated! If not, the return value is invalid
  */
-void update_queue();
+int check_queue_empty();
+
+
+/**
+ * @brief Initialize the @c QUEUE with all invalid orders
+ */
+void init_queue();
 
 
 /**
@@ -53,6 +65,20 @@ void erase_queue(int* p_orders_up, int* p_orders_down, int* p_orders_cab);
 
 
 /**
+ * @brief Clear all orders in the @c QUEUE for the @p current_floor
+ * 
+ * @param[out] p_orders_up      A pointer to the array containing the up-button button states
+ * @param[out] p_orders_down    A pointer to the array containing the down-buttons button states
+ * @param[out] p_orders_cab     A pointer to the array containing the cab button states
+ * @param[in]  current_floor    The current floor the elevator is at
+ * 
+ * The function clears all @c Order elements in the queue whos target_floor is equal to @p current_floor .
+ * And clears the values of the button arrays at index @p current_floor
+ */
+void clear_orders_at_floor(int* p_orders_up, int* p_orders_down, int* p_orders_cab, int current_floor);
+
+
+/**
  * @brief Delete all occurencec of "holes" in the @c QUEUE
  * 
  * The function will left-shift orders until the @c QUEUE contains no holes. A hole is defined as
@@ -60,19 +86,6 @@ void erase_queue(int* p_orders_up, int* p_orders_down, int* p_orders_cab);
  * element at index 0
  */
 void refactor_queue();
-
-
-/**
- * @brief Sets a single order in the queue
- * 
- * @param[in] idx               The index of the element in the queue we wish to modify
- * @param[in] target_floor      The new target_floor for the queue element
- * @param[in] order_type        The new order type for the queue element
- * 
- * Set an @c Order in the @c QUEUE at index @p idx to the values of @p target_floor and @p order_type
- * regardless of what the @c QUEUE contains at the given @p idx .
- */
-void set_single_order(int idx, int target_floor, HardwareOrder order_type);
 
 
 /**
@@ -86,16 +99,6 @@ void set_single_order(int idx, int target_floor, HardwareOrder order_type);
  * and only if the queue does not contain an identical order already.
  */
 void push_back_queue(int target_floor, HardwareOrder order_type);
-
-
-/**
- * @brief Check if the @c QUEUE is empty
- * 
- * @return 1 if the @c QUEUE is empty and 0 if not
- * 
- * @warning We assume that the first element in the queue is always updated! If not, the return value is invalid
- */
-int check_queue_empty();
 
 
 /**
@@ -124,6 +127,17 @@ int check_order_match(int target_floor, HardwareOrder order_type);
  * And clears the values of the button arrays at index @p current_floor
  */
 void clear_orders_at_floor(int* p_orders_up, int* p_orders_down, int* p_orders_cab, int current_floor);
+
+
+/**
+ * @brief Update the @c QUEUE by removing the first element.
+ * 
+ * @warning Will only work if the elevator is at a defined floor
+ * 
+ * The function will both refactor and shift the entire queue one element to the left,
+ * thereby deleting the first element: effectively "handling" an order.
+ */
+void update_queue();
 
 
 #endif //QUEUE_H

@@ -104,3 +104,25 @@ void clear_orders_at_floor(int* p_orders_up, int* p_orders_down, int* p_orders_c
 
     update_queue();
 }
+
+
+void update_queue(){
+    if(get_current_floor() == BETWEEN_FLOORS){
+        return;
+    }
+
+    // If there are any orders with target_floor = FLOOR_NOT_INIT, restructure the queue
+    refactor_queue();
+    
+    // QUEUE[0].target_floor should be FLOOR_NOT_INIT, if we had a target at the current_floor since we clear the orders before calling this function
+    if(QUEUE[0].target_floor == FLOOR_NOT_INIT){ 
+        for (int ord = 0; ord < QUEUE_SIZE; ord++){
+            if (ord < QUEUE_SIZE - 1){
+                set_single_order(ord, QUEUE[ord + 1].target_floor, QUEUE[ord + 1].order_type);
+            }
+            else if (ord == QUEUE_SIZE - 1){
+                set_single_order(ord, FLOOR_NOT_INIT, HARDWARE_ORDER_NOT_INIT);
+            }
+        }
+    }
+}
