@@ -82,6 +82,20 @@ typedef struct{
 
 
 /**
+ * @brief Update the elevator state
+ * 
+ * @param[in, out] p_elevator_data     A pointer to the elevator data, updates on transitions.             
+ * 
+ * @return One of the possible @c elevator_action_t resulting from the current state.
+ * 
+ * This function updates the elevator's state machine, and yields a resulting
+ * function to be executed for any given state. It contains most of the logic flow
+ * used to control the elevator's movements, depending on the given inputs.
+ */
+elevator_action_t elevator_update_state(elevator_data_t* p_elevator_data);
+
+
+/**
  * @brief Check if a target floor is equal to the current floor
  * 
  * @param[in] target_floor      A given target floor
@@ -142,20 +156,5 @@ elevator_guard_t elevator_update_guards(elevator_data_t* p_elevator_data);
  * @return One of the possible events resulting from the elevator's state
  */ 
 elevator_event_t elevator_update_event(elevator_data_t* p_elevator_data);
-
-
-/**
- * @brief Update the elevator state
- * 
- * @param[in, out] p_elevator_data     A pointer to the elevator data, updates on transitions.             
- * 
- * @return One of the possible @c elevator_action_t resulting from the current state.
- * 
- * This function updates the elevator's state machine, and yields a resulting
- * function to be executed for any given state. It contains most of the logic flow
- * used to control the elevator's movements, depending on the given inputs.
- */
-elevator_action_t elevator_update_state(elevator_data_t* p_elevator_data);
-
 
 #endif //ELEVATOR_FSM_H

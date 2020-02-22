@@ -106,7 +106,7 @@ void queue_refactor();
  * @warning Will only work if the elevator is at a defined floor
  * 
  * The function will both refactor and shift the entire queue one element to the left,
- * thereby deleting the first element: effectively "handling" an order.
+ * thereby deleting the first element; effectively "handling" an order.
  */
 void queue_update();
 
@@ -119,8 +119,9 @@ void queue_update();
  * 
  * @return 1 if any @c Order in @c QUEUE has a valid order at the floor, and 0 if not.
  * 
- * @warning A cab order will ALWAYS be handled if the elevator drives past it, but the function will
- * differentiate between orders-up and orders-down.
+ * The function determines if the @c QUEUE contains an order with matching @p target_floor and @p order_type . 
+ * Note that a cab order only needs a matching @p target_floor to count as matching, while an up/down order will
+ * require both parameters matching.
  */
 int queue_check_order_match(int target_floor, HardwareOrder order_type);
 

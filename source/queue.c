@@ -7,7 +7,6 @@ int queue_empty() {
     return QUEUE[0].target_floor == FLOOR_NOT_INIT;
 }
 
-
 void queue_init() {
     for(int i = 0; i < QUEUE_SIZE; i++) {
         queue_set_order(i, FLOOR_NOT_INIT, HARDWARE_ORDER_NOT_INIT);

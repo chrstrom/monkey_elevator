@@ -29,16 +29,13 @@ int check_stop_button(){
     return hardware_read_stop_signal();
 }
 
-
 int check_obstruction(){
     return hardware_read_obstruction_signal();
 }
 
-
 void drive_elevator(HardwareMovement dir){
     hardware_command_movement(dir);
 }
-
 
 // void set_cab_button_lights(int* p_orders_cab) {
 //     for(int floor = MIN_FLOOR; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
@@ -46,13 +43,11 @@ void drive_elevator(HardwareMovement dir){
 //     }
 // }
 
-
 void set_floor_indicator_light(int floor) {
     if(floor != BETWEEN_FLOORS) {
         hardware_command_floor_indicator_on(floor);
     }
 }
-
 
 int get_current_floor() {
     for(int floor = MIN_FLOOR; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
@@ -62,7 +57,6 @@ int get_current_floor() {
     }
     return BETWEEN_FLOORS;
 }
-
 
 void update_cab_buttons(int* p_orders_cab) {
     for(int floor = MIN_FLOOR; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {

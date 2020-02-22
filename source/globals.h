@@ -8,7 +8,7 @@
 
 #define QUEUE_SIZE 16       /** Size of the QUEUE. Mathematical impossible to have more than 10 orders for this elevator, but 16 is a power of 2 :), and it is better to be on the safe side. */
 
-#define MIN_FLOOR 0         /**The bottom floor that the elevator runs to. Note that this is 0-indexed */
+#define MIN_FLOOR 0         /**The bottom floor that the elevator runs to. Note that this is 0-indexed, meaning that the lowest floor is always 0 */
 
 #define DOOR_TIME_REQ 3.0   /** Macro for the standard amount of time, in seconds, that the door should stay open*/
 #define DOOR_CLOSE 0        /** Macro for door closed/close door */
