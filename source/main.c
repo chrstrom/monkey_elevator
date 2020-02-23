@@ -5,12 +5,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "driver/hardware.h"
-#include "globals.h"
 #include "elevator_fsm.h"
-#include "queue.h"
 #include "elevator_io.h"
-#include "timer.h"
 
 
 int main(){
@@ -27,7 +23,6 @@ int main(){
         elevator_data.last_floor = update_valid_floor(elevator_data.last_floor);
 
         set_floor_indicator_light(get_current_floor());
-
         update_button_state(&elevator_data);
 
         elevator_data.next_action = elevator_update_state(&elevator_data);
