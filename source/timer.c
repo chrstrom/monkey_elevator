@@ -3,6 +3,7 @@
 
 #include "timer.h"
 
+
 void timer_start(){
     DOOR_TIMER = time(NULL);
 }

@@ -2,30 +2,18 @@
 #include "globals.h"
 #include "queue.h"
 
-//Kanskje ønskelig å bruke disse funksjonene, slik at vi ikke trenger å kjenne til hardware i andre moduler!
-int check_stop_button(){
-    return hardware_read_stop_signal();
+
+int update_valid_floor(int valid_floor) {
+    return (get_current_floor() == BETWEEN_FLOORS ? valid_floor : get_current_floor());
 }
 
-int check_obstruction(){
-    return hardware_read_obstruction_signal();
-}
-
-void drive_elevator(HardwareMovement dir){
-    hardware_command_movement(dir);
-}
-
-// void set_cab_button_lights(int* p_orders_cab) {
-//     for(int floor = MIN_FLOOR; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
-//         hardware_command_order_light(floor, HARDWARE_ORDER_INSIDE, p_orders_cab[floor]);
-//     }
-// }
 
 void set_floor_indicator_light(int floor) {
     if(floor != BETWEEN_FLOORS) {
         hardware_command_floor_indicator_on(floor);
     }
 }
+
 
 int get_current_floor() {
     for(int floor = MIN_FLOOR; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
@@ -36,9 +24,6 @@ int get_current_floor() {
     return BETWEEN_FLOORS;
 }
 
-int update_valid_floor(int valid_floor) {
-    return (get_current_floor() == BETWEEN_FLOORS ? valid_floor : get_current_floor());
-}
 
 void update_cab_buttons(int* p_orders_cab) {
     for(int floor = MIN_FLOOR; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
@@ -48,21 +33,8 @@ void update_cab_buttons(int* p_orders_cab) {
         }
         hardware_command_order_light(floor, HARDWARE_ORDER_INSIDE, p_orders_cab[floor]);
     }
-
-    //set_cab_button_lights(p_orders_cab);
 }
 
-// void set_floor_button_lights(int* p_orders_up, int* p_orders_down) {
-//     // The last floor does not have an up-button: Start at 0.
-//     for(int floor_up = MIN_FLOOR; floor_up < HARDWARE_NUMBER_OF_FLOORS - 1; floor_up++) {
-//         hardware_command_order_light(floor_up, HARDWARE_ORDER_UP, p_orders_up[floor_up]);
-//     }
-
-//     // The first floor does not have a down-button: Start at 1.
-//     for(int floor_down = MIN_FLOOR + 1; floor_down < HARDWARE_NUMBER_OF_FLOORS; floor_down++) {
-//         hardware_command_order_light(floor_down, HARDWARE_ORDER_DOWN, p_orders_down[floor_down]);
-//     }
-// }
 
 void update_floor_buttons(int* p_orders_up, int* p_orders_down) {
     // The last floor does not have an up-button: Start at 0.
@@ -82,6 +54,4 @@ void update_floor_buttons(int* p_orders_up, int* p_orders_down) {
         }
         hardware_command_order_light(floor_down, HARDWARE_ORDER_DOWN, p_orders_down[floor_down]);
     }
-    // After getting all button events, add orders to queue and set the button lights
-    //set_floor_button_lights(p_orders_up, p_orders_down);
 }

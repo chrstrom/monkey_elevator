@@ -82,31 +82,6 @@ typedef struct{
 
 
 /**
- * @brief Initialize the elevator
- * 
- * @return Elevator data initialized to its default values.
- * 
- * Initiailize the elevator by setting all connected values to its default values, and, 
- * if the elevator isn't already at a floor, drive the elevator down to the first valid floor.
- */
-elevator_data_t elevator_init();
-
-
-/**
- * @brief Update the elevator state
- * 
- * @param[in, out] p_elevator_data     A pointer to the elevator data, updates on transitions.             
- * 
- * @return One of the possible @c elevator_action_t resulting from the current state.
- * 
- * This function updates the elevator's state machine, and yields a resulting
- * function to be executed for any given state. It contains most of the logic flow
- * used to control the elevator's movements, depending on the given inputs.
- */
-elevator_action_t elevator_update_state(elevator_data_t* p_elevator_data);
-
-
-/**
  * @brief Check if a target floor is equal to the current floor
  * 
  * @param[in] target_floor      A given target floor
@@ -139,6 +114,17 @@ void emergency_action(elevator_data_t* p_elevator_data);
 
 
 /**
+ * @brief Initialize the elevator
+ * 
+ * @return Elevator data initialized to its default values.
+ * 
+ * Initiailize the elevator by setting all connected values to its default values, and, 
+ * if the elevator isn't already at a floor, drive the elevator down to the first valid floor.
+ */
+elevator_data_t elevator_init();
+
+
+/**
  * @brief Execute the elevator's next action.
  * 
  * @param[in/out] p_elevator_data   Pointer to the @c elevator_data that contain the elevator's data
@@ -167,5 +153,20 @@ elevator_guard_t elevator_update_guards(elevator_data_t* p_elevator_data);
  * @return One of the possible events resulting from the elevator's state
  */ 
 elevator_event_t elevator_update_event(elevator_data_t* p_elevator_data);
+
+
+/**
+ * @brief Update the elevator state
+ * 
+ * @param[in, out] p_elevator_data     A pointer to the elevator data, updates on transitions.             
+ * 
+ * @return One of the possible @c elevator_action_t resulting from the current state.
+ * 
+ * This function updates the elevator's state machine, and yields a resulting
+ * function to be executed for any given state. It contains most of the logic flow
+ * used to control the elevator's movements, depending on the given inputs.
+ */
+elevator_action_t elevator_update_state(elevator_data_t* p_elevator_data);
+
 
 #endif //ELEVATOR_FSM_H

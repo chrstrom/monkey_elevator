@@ -2,10 +2,12 @@
 #include "elevator_io.h"
 #include <stdio.h>
 
+
 int queue_empty() {
     queue_refactor();
     return QUEUE[0].target_floor == FLOOR_NOT_INIT;
 }
+
 
 void queue_init() {
     for(int i = 0; i < QUEUE_SIZE; i++) {
@@ -13,10 +15,19 @@ void queue_init() {
     }
 }
 
+
 void queue_set_order(int idx, int target_floor, HardwareOrder order_type) {
     QUEUE[idx].target_floor = target_floor;
     QUEUE[idx].order_type = order_type;
 }
+
+
+void queue_erase(int* p_orders_up, int* p_orders_down, int* p_orders_cab){
+    for(int floor = 0; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
+        queue_clear_order_at_floor(p_orders_up, p_orders_down, p_orders_cab, floor);
+    }
+}
+
 
 void queue_push_back(int target_floor, HardwareOrder order_type) {
     for(int order = 0; order < QUEUE_SIZE; order++) {
@@ -33,6 +44,7 @@ void queue_push_back(int target_floor, HardwareOrder order_type) {
     }
 }
 
+
 void queue_clear_order_at_floor(int* p_orders_up, int* p_orders_down, int* p_orders_cab, int current_floor) {
     for(int order = 0; order < QUEUE_SIZE; order++) {
         if(QUEUE[order].target_floor == current_floor) {
@@ -47,11 +59,6 @@ void queue_clear_order_at_floor(int* p_orders_up, int* p_orders_down, int* p_ord
     queue_update();
 }
 
-void queue_erase(int* p_orders_up, int* p_orders_down, int* p_orders_cab){
-    for(int floor = 0; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
-        queue_clear_order_at_floor(p_orders_up, p_orders_down, p_orders_cab, floor);
-    }
-}
 
 void queue_refactor(){
     for(int order = 0; order < QUEUE_SIZE; order++){
@@ -66,6 +73,23 @@ void queue_refactor(){
         }
     }
 }
+
+
+int queue_check_order_match(int current_floor, HardwareOrder order_type) {
+    if(QUEUE[0].target_floor == current_floor) {
+        return 1;
+    }
+
+    for(int order = 1; order < QUEUE_SIZE; order++) {
+        Order current_order = QUEUE[order];
+        if(current_order.target_floor == current_floor && (current_order.order_type == order_type || current_order.order_type == HARDWARE_ORDER_INSIDE)) {
+            return 1;
+        }
+    }
+
+    return 0;
+}
+
 
 void queue_update(){
     if(get_current_floor() == BETWEEN_FLOORS){
@@ -86,19 +110,4 @@ void queue_update(){
             }
         }
     }
-}
-
-int queue_check_order_match(int current_floor, HardwareOrder order_type) {
-    if(QUEUE[0].target_floor == current_floor) {
-        return 1;
-    }
-
-    for(int order = 1; order < QUEUE_SIZE; order++) {
-        Order current_order = QUEUE[order];
-        if(current_order.target_floor == current_floor && (current_order.order_type == order_type || current_order.order_type == HARDWARE_ORDER_INSIDE)) {
-            return 1;
-        }
-    }
-
-    return 0;
 }

@@ -53,6 +53,18 @@ void queue_set_order(int idx, int target_floor, HardwareOrder order_type);
 
 
 /**
+ * @brief Empty the @c QUEUE by removing all elements
+ * 
+ * @param[out] p_orders_cab     A pointer to the array containing the cab button states
+ * @param[out] p_orders_up      A pointer to the array containing the up-button button states
+ * @param[out] p_orders_down    A pointer to the array containing the down-buttons button states
+ * 
+ * @warning This function invalidates every element in the queue unconditionally.
+ */
+void queue_erase(int* p_orders_up, int* p_orders_down, int* p_orders_cab);
+
+
+/**
  * @brief Add orders to the @c QUEUE if an existing order with the same parameters is not in it
  * 
  * @param[in] target_floor  The floor for the new @c Order
@@ -79,18 +91,6 @@ void queue_clear_order_at_floor(int* p_orders_up, int* p_orders_down, int* p_ord
 
 
 /**
- * @brief Empty the @c QUEUE by removing all elements
- * 
- * @param[out] p_orders_cab     A pointer to the array containing the cab button states
- * @param[out] p_orders_up      A pointer to the array containing the up-button button states
- * @param[out] p_orders_down    A pointer to the array containing the down-buttons button states
- * 
- * @warning This function invalidates every element in the queue unconditionally.
- */
-void queue_erase(int* p_orders_up, int* p_orders_down, int* p_orders_cab);
-
-
-/**
  * @brief Delete all occurencec of "holes" in the @c QUEUE
  * 
  * The function will left-shift orders until the @c QUEUE contains no holes. A hole is defined as
@@ -98,17 +98,6 @@ void queue_erase(int* p_orders_up, int* p_orders_down, int* p_orders_cab);
  * element at index 0
  */
 void queue_refactor();
-
-
-/**
- * @brief Update the @c QUEUE by removing the first element.
- * 
- * @warning Will only work if the elevator is at a defined floor
- * 
- * The function will both refactor and shift the entire queue one element to the left,
- * thereby deleting the first element; effectively "handling" an order.
- */
-void queue_update();
 
 
 /**
@@ -124,5 +113,17 @@ void queue_update();
  * require both parameters matching.
  */
 int queue_check_order_match(int target_floor, HardwareOrder order_type);
+
+
+/**
+ * @brief Update the @c QUEUE by removing the first element.
+ * 
+ * @warning Will only work if the elevator is at a defined floor
+ * 
+ * The function will both refactor and shift the entire queue one element to the left,
+ * thereby deleting the first element; effectively "handling" an order.
+ */
+void queue_update();
+
 
 #endif //QUEUE_H
