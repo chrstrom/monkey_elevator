@@ -15,6 +15,7 @@ elevator_action_t elevator_update_state(elevator_data_t* p_elevator_data) {
     elevator_event_t current_event = elevator_update_event(p_elevator_data);
     elevator_guard_t guards = elevator_update_guards(p_elevator_data);
 
+    failsafe_invalid_state(p_elevator_data);
     switch(p_elevator_data->state) {
         case STATE_IDLE: {
             // Entry actions:
@@ -413,4 +414,15 @@ elevator_event_t elevator_update_event(elevator_data_t* p_elevator_data) {
 
     //If we get here, we did not get a hit on the specific events we checked for, so we simply do nothing
     return EVENT_NO_EVENT;
+}
+
+
+void failsafe_invalid_state(elevator_data_t* p_elevator_data) {
+    if(p_elevator_data->state == STATE_MOVING_UP && get_current_floor() == HARDWARE_NUMBER_OF_FLOORS) {
+        p_elevator_data->state = STATE_IDLE;
+    }
+
+    if(p_elevator_data->state == STATE_MOVING_DOWN && get_current_floor() == MIN_FLOOR) {
+        p_elevator_data->state = STATE_IDLE;
+    }
 }

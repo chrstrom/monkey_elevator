@@ -169,4 +169,14 @@ elevator_guard_t elevator_update_guards(elevator_data_t* p_elevator_data);
 elevator_event_t elevator_update_event(elevator_data_t* p_elevator_data);
 
 
+/**
+ * @brief Make sure the elevator doesn't do something it's not supposed to
+ * 
+ * @param[in] p_elevator_data   Pointer to an @c elevator_data_t that contains the data needed to check for invalid states 
+ *  
+ * The function is meant to be used as extra protective measures before entering the FSM, by making sure that the elevator does not perform
+ * any action it is not supposed to do.
+ */
+void failsafe_invalid_state(elevator_data_t* p_elevator_data);
+
 #endif //ELEVATOR_FSM_H
