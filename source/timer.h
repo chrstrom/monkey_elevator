@@ -7,27 +7,18 @@
 
 #include <time.h>
 
-//struct timeval DOOR_TIMER;
 
-//clock_t DOOR_TIMER;
-
+/**
+ * A global timer for the door. This will be reset by @c timer_start() and used by
+ * @c timer_check() to compare against a given time reference. 
+ */
 time_t DOOR_TIMER;
 
-// #ifndef NORMAL_WAIT_TIME_P
-// #define NORMAL_WAIT_TIME_P
-
-// unsigned int UINT_NORMAL_WAIT_TIME = 3;
-
-// #endif 
-
-// void reset_timer();
-
-// int check_timer();
 
 /**
  * @brief Start the timer by setting the global variable @c DOOR_TIMER to the current time
  */
-void start_timer();
+void timer_start();
 
 
 /**
@@ -35,10 +26,9 @@ void start_timer();
  * 
  * @param[in] time_req  The time requirement to which we compare time passed.
  * 
- * @return 1 if @p time_req amount of time has passed since @c start_timer() was called, 0 if not.
- * 
- * @warning The return value for this function will not be 
+ * @return 1 if @p time_req amount of time has passed since @c timer_start() was called, 0 if not.
  */
-int check_timer();
+int timer_check(double time_req);
+
 
 #endif //TIMER_H

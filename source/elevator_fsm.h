@@ -8,6 +8,7 @@
 
 #include "driver/hardware.h"
 
+
 /**
  * Enum for the possible states of the FSM.
  */
@@ -64,6 +65,7 @@ typedef struct{
     int NOT_AT_FLOOR;             /**< Guard for checking elevator location. 1 = elevator not at floor. 0 = elevator at floor*/
 } elevator_guard_t;
 
+
 /**
  * A struct holding all the data related to the elevator 
  */
@@ -73,10 +75,84 @@ typedef struct{
     HardwareMovement last_dir;                  /**< The last direction the elevator was moving in*/
     elevator_state_t state;                     /**< The state of the elevator*/
     elevator_action_t next_action;              /**< The next action to be performed by the elevator*/
-    int ORDERS_UP[HARDWARE_NUMBER_OF_FLOORS];   /**< The elevator's orders going up*/
-    int ORDERS_DOWN[HARDWARE_NUMBER_OF_FLOORS]; /**< The elevator's orders going down*/
-    int ORDERS_CAB[HARDWARE_NUMBER_OF_FLOORS];  /**< The elevator's cab-orders.*/
+    int orders_up[HARDWARE_NUMBER_OF_FLOORS];   /**< The elevator's orders going up*/
+    int orders_down[HARDWARE_NUMBER_OF_FLOORS]; /**< The elevator's orders going down*/
+    int orders_cab[HARDWARE_NUMBER_OF_FLOORS];  /**< The elevator's cab-orders.*/
 } elevator_data_t;
+
+
+/**
+ * @brief Check if a target floor is equal to the current floor
+ * 
+ * @param[in] target_floor      A given target floor
+ * @param[in] current_floor     The current floor of the elevator
+ * 
+ * The function returns a truth value, 1 = @p target_floor == @p current_floor , 0 = @p target_floor != @p current_floor
+ */
+int check_floor_diff(int target_floor, int current_floor);
+
+
+/**
+ * @brief Update all elevator buttons
+ * 
+ * @param[in/out] p_elevator_data   Pointer to the @c elevator_data that contain the elevator's data
+ * 
+ * The function collectively polls and updates both the cab and floor buttons
+ */
+void update_button_state(elevator_data_t* p_elevator_data);
+
+
+/**
+ * @brief Execute the emergency procedure for the elevator.
+ * 
+ * @param[in/out] p_elevator_data   Pointer to the @c elevator_data that contain the elevator's data
+ * 
+ * Executes everything that the elevator must do when an emergency happens. This includes deleting the queue,
+ * making sure the motor is stopped, and opening the door if the elevator is at a floor
+ */     
+void emergency_action(elevator_data_t* p_elevator_data);  
+
+
+/**
+ * @brief Initialize the elevator
+ * 
+ * @return Elevator data initialized to its default values.
+ * 
+ * Initiailize the elevator by setting all connected values to its default values, and, 
+ * if the elevator isn't already at a floor, drive the elevator down to the first valid floor.
+ */
+elevator_data_t elevator_init();
+
+
+/**
+ * @brief Execute the elevator's next action.
+ * 
+ * @param[in/out] p_elevator_data   Pointer to the @c elevator_data that contain the elevator's data
+ * 
+ * Executes everything that the elevator must do given an action. 
+ */    
+void elevator_execute_next_action(elevator_data_t* p_elevator_data);
+
+
+/**
+ * @brief Calculate the next guards. The guards will be used to differentiate between the events in the fsm
+ * 
+ * @param[in] p_elevator_data   Pointer to an @c elevator_data_t that contains the required data to calculate the guards
+ * 
+ * @return A struct containing all guards, as determined by the elevator's state, input and queue
+ */ 
+elevator_guard_t elevator_update_guards(elevator_data_t* p_elevator_data);
+
+
+/**
+ * @brief Calculate the next event, based on the elevator's current state @c elevator_data_t . The events will be used
+ * to differentiate between the states in the fsm.
+ * 
+ * @param[in] p_elevator_data   Pointer to an @c elevator_data_t that contains the required data to calculate the event
+ * 
+ * @return One of the possible events resulting from the elevator's state
+ */ 
+elevator_event_t elevator_update_event(elevator_data_t* p_elevator_data);
 
 
 /**
@@ -92,47 +168,5 @@ typedef struct{
  */
 elevator_action_t elevator_update_state(elevator_data_t* p_elevator_data);
 
-
-/**
- * @brief Check if a target floor is equal to the current floor
- * 
- * @param[in] target_floor      A given target floor
- * @param[in] current_floor     The current floor of the elevator
- * 
- * The function returns a truth value, 1 = @p target_floor == @p current_floor , 0 = @p target_floor != @p current_floor
- */
-int check_floor_diff(int target_floor, int current_floor);
-
-
-/**
- * @brief Calculate the next event, based on the elevator's current state @c elevator_data_t . The events will be used
- * to differentiate between the states in the fsm.
- * 
- * @param[in] p_elevator_data Pointer to an @c elevator_data_t that contains the required data to calculate the event
- * 
- * @return One of the possible events resulting from the elevator's state
- */ 
-elevator_event_t elevator_calculate_event(elevator_data_t* p_elevator_data);
-
-
-/**
- * @brief Calculate the next guards. The guards will be used to differentiate between the events in the fsm
- * 
- * @param[in] p_elevator_data Pointer to an @c elevator_data_t that contains the required data to calculate the guards
- * 
- * @return All of the guards, depending on the elevator's state, input and queue
- */ 
-elevator_guard_t elevator_calculate_guard(elevator_data_t* p_elevator_data);
-
-
-/**
- * @brief Solve the different tasks that much be done if the elevator is in an emergency. This includes
- * deleting the queue, making sure the engine is stopped, and open the door if the elevator is at a floor
- * 
- * @param[in/out] p_elevator_data   Pointer to the @c elevator_data that contain the elevator's data
- */     
-void emergency_action(elevator_data_t* p_elevator_data);  
-
-void update_button_state(elevator_data_t* p_elevator_data);
 
 #endif //ELEVATOR_FSM_H

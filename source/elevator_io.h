@@ -5,6 +5,31 @@
 #ifndef ELEVATOR_IO_H
 #define ELEVATOR_IO_H
 
+
+/**
+ * @brief Updates the a floor value to a valid floor
+ * 
+ * @param[in] floor     The last valid floor
+ * 
+ * @return A new valid floor if the elevator is at a valid floor, and @p valid_floor if the
+ * elevator is between floors.
+ * 
+ * @warning Correct usage of this function requires @p valid_floor to actually be a valid floor. 
+ */
+int update_valid_floor(int valid_floor);
+
+
+/**
+ * @brief Set the floor indicator light
+ * 
+ * @param[in] floor    The floor whos indicator we would like to set  
+ * 
+ * The lights will only be set, if the elevator is at a defined floor. Therefore,
+ * the light will not be changed when the elevator is between floors.
+ */
+void set_floor_indicator_light(int floor);
+
+
 /**
  * @brief Find what floor the elevator is at
  * 
@@ -18,57 +43,29 @@ int get_current_floor();
 
 
 /**
- * @brief Set the floor indicator light. The lights will only be set, if the elevator is at a defined
- * floor. Therefore, the light will not be changed when the elevator is between floors
+ * @brief Polls the cab buttons, and updates the cab orders for the current input
  * 
- * @param[in] floor    The floor whos indicator we would like to set  
+ * @param[in, out] p_orders_cab      A pointer to an array of the cab-button states
  */
-void set_floor_indicator_light(int floor);
-
+void update_cab_buttons(int* p_orders_cab);
 
 
 /**
- * @brief Poll all floor buttons for input
+ * @brief Updates the floor buttons based on current input
  * 
- * @param[in, out] p_data    Pointer to @c elevator_data_t that contains the button arrays @c ORDERS_UP and @c ORDERS_DOW
+ * @param[in, out] p_orders_up      A pointer to an array of the up-button states
+ * @param[in, out] p_orders_down    A pointer to an array of the down-button states
  * 
- * @warning This function operates on the assumption that @c ORDERS_UP and @c ORDERS_DOWN are 
+ * @warning This function operates on the assumption that @p p_orders_up and @p p_orders_down are 
  * set with 0's and 1's, respectively for "button not clicked" and "button clicked"
  * 
- * @warning This function also uses @c set_floor_button_lights() to set the button lights
+ * @warning This function also uses @c hardware_command_order_light() to set the button lights
  * 
  * The function checks every external elevator button, from the first floor to the last floor.
  * Upon finding a button that is clicked, that has not already been clicked ( by checking
- * the @c ORDERS_UP and @c ORDERS_DOWN arrays), the corresponding value in the array is set to 1.
+ * the @p p_orders_up and @p p_orders_down arrays), the corresponding value in the array is set to 1.
  */
-void poll_floor_buttons(int* p_orders_up, int* p_orders_down);
-
-/**
- * @brief Set the floor button lights in accordance to the values in @c ORDERS_UP and @c ORDERS_DOWN .
- * 
- * @param[in] p_data    A pointer to @c elevator_data_t that contains the @c ORDERS_UP and @c ORDERS_DOWN
- */
-void set_floor_button_lights(int* p_orders_up, int* p_orders_down);
-
-
-/**
- * @brief Poll all cab buttons for input
- * 
- * @param[in, out] p_data    A pointer to @c elevator_data_t that contains the @c ORDERS_CAB that
- * will be set according to the input
- *
- * @warning This function uses @c set_cab_button_lights() to set the cab button lights
- * The function updates the cab orders for the current Order 
- */
-void poll_cab_buttons(int* p_orders_cab);
-
-/**
- * @brief Set the cab button lights in accordance to the values in @c ORDERS_CAB
- * 
- * @param[in] p_data    A pointer to @c elevator_data_t that contains the @c ORDERS_CAB
- */
-void set_cab_button_lights(int* p_orders_cab);
+void update_floor_buttons(int* p_orders_up, int* p_orders_down);
 
 
 #endif //ELEVATOR_IO_H
-
