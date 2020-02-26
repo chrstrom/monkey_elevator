@@ -1,6 +1,6 @@
-<mxfile host="www.draw.io" modified="2020-02-26T16:28:24.314Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36" etag="ixQ5NhD-b8ek19OZDv-d" version="12.7.7" type="github">
+<mxfile host="www.draw.io" modified="2020-02-26T16:33:58.060Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36" etag="BZEGlZzHsxS3pQwuc8oH" version="12.7.7" type="github">
   <diagram id="tqs7IAVX7RazEy-5wPce" name="Page-1">
-    <mxGraphModel dx="3460" dy="1827" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="415" dy="219" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -1096,10 +1096,10 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-9" value="&lt;div&gt;Constantly checking for new orders (and if there is, adding them to the queue), setting the floor indicator if at a new floor.&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Assume that floor 1 has been reached&lt;/div&gt;" style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=-6;" vertex="1" parent="1">
+        <mxCell id="HXjpbs-df3sevuLWiSnq-9" value="&lt;div&gt;Constantly checking for new orders (and if there is, adding them to the queue), setting the floor indicator if at a new floor.&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Assuming that floor 1 has been reached&lt;/div&gt;" style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=-6;" vertex="1" parent="1">
           <mxGeometry x="342.09000000000003" y="4297" width="190" height="150" as="geometry" />
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-10" value="&lt;div&gt;Constantly checking for the timer here.&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Assume that the time-control has been reached&amp;nbsp;&lt;/div&gt;" style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=-6;" vertex="1" parent="1">
+        <mxCell id="HXjpbs-df3sevuLWiSnq-10" value="&lt;div&gt;Constantly checking for the timer here.&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Assuming that the time-control has been reached&amp;nbsp;&lt;/div&gt;" style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=-6;" vertex="1" parent="1">
           <mxGeometry x="342.09000000000003" y="5030" width="190" height="150" as="geometry" />
         </mxCell>
         <mxCell id="HXjpbs-df3sevuLWiSnq-11" value="&lt;div&gt;Constantly check if we have reached the target floor (floor 4)&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Assuming that the elevator has reached the target floor&lt;/div&gt;" style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=-6;" vertex="1" parent="1">
