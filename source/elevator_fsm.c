@@ -418,7 +418,7 @@ elevator_event_t elevator_update_event(elevator_data_t* p_elevator_data) {
 
 
 void failsafe_invalid_state(elevator_data_t* p_elevator_data) {
-    if(p_elevator_data->state == STATE_MOVING_UP && get_current_floor() == HARDWARE_NUMBER_OF_FLOORS) {
+    if(p_elevator_data->state == STATE_MOVING_UP && get_current_floor() == HARDWARE_NUMBER_OF_FLOORS - 1) {
         p_elevator_data->state = STATE_IDLE;
     }
 
