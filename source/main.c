@@ -8,9 +8,7 @@
 #include "elevator_fsm.h"
 #include "elevator_io.h"
 
-
 int main(){
-    // ELEVATOR INITIAL SETUP
     int error = hardware_init();
     if(error != 0){
         fprintf(stderr, "Unable to initialize hardware\n");
