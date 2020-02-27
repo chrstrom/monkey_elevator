@@ -214,7 +214,7 @@ elevator_action_t elevator_update_state(elevator_data_t* p_elevator_data) {
 
 elevator_guard_t elevator_update_guards(elevator_data_t* p_elevator_data) {
     elevator_guard_t guards;
-
+    int above, equal, below = 0;
     int target = QUEUE[0].target_floor;
     int current_floor = get_current_floor();
     int last_valid_floor = p_elevator_data->last_floor;
@@ -224,39 +224,37 @@ elevator_guard_t elevator_update_guards(elevator_data_t* p_elevator_data) {
     guards.NOT_AT_FLOOR = (current_floor == BETWEEN_FLOORS);
     guards.TIMER_DONE = timer_check(DOOR_TIME_REQ);
 
+    // The guards for checking orientation of current and target floor depends on the current position/state of the elevator
     // Normal check for the usual case (elevator at floor)
     if(current_floor != BETWEEN_FLOORS) {
-        guards.TARGET_FLOOR_ABOVE = (target > current_floor);
-        guards.TARGET_FLOOR_EQUAL = (target == current_floor);
-        guards.TARGET_FLOOR_BELOW = (target < current_floor);
-        return guards;
+        above = (target > current_floor);
+        equal = (target == current_floor);
+        below = (target < current_floor);
     }
-
     // Perform no checks for invalid orders
-    if(target == FLOOR_NOT_INIT) {
-        guards.TARGET_FLOOR_ABOVE = 0;       
-        guards.TARGET_FLOOR_EQUAL = 0;    
-        guards.TARGET_FLOOR_BELOW = 0;
-        return guards;
+    else if(target == FLOOR_NOT_INIT) {     
+        above = 0;       
+        equal = 0;    
+        below = 0;
     }
-
     // Stopped between floors (emergency)
-    if(current_floor == BETWEEN_FLOORS && p_elevator_data->next_action == ACTION_DO_NOTHING) {
-        guards.TARGET_FLOOR_EQUAL = 0;
-
-        if (p_elevator_data->last_dir == HARDWARE_MOVEMENT_UP) {
-            last_valid_floor++;
-            guards.TARGET_FLOOR_ABOVE = (target >= last_valid_floor);
-            guards.TARGET_FLOOR_BELOW = (target < last_valid_floor);   
-        }
-        if (p_elevator_data->last_dir == HARDWARE_MOVEMENT_DOWN) {
-            last_valid_floor--;
-            guards.TARGET_FLOOR_ABOVE = (target > last_valid_floor);
-            guards.TARGET_FLOOR_BELOW = (target <= last_valid_floor);   
-        }
-
+    else if(p_elevator_data->state == STATE_EMERGENCY && p_elevator_data->last_dir == HARDWARE_MOVEMENT_UP) {    
+        last_valid_floor++;
+        above = (target >= last_valid_floor);
+        equal = 0;
+        below = (target < last_valid_floor);   
+    }
+    else if(p_elevator_data->state == STATE_EMERGENCY && p_elevator_data->last_dir == HARDWARE_MOVEMENT_DOWN) {
+        last_valid_floor--;
+        above = (target > last_valid_floor);
+        equal = 0;
+        below = (target <= last_valid_floor);  
     }
 
+    guards.TARGET_FLOOR_ABOVE = above;       
+    guards.TARGET_FLOOR_EQUAL = equal;    
+    guards.TARGET_FLOOR_BELOW = below;
+    
     return guards;
 }
 
