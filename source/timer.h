@@ -9,7 +9,7 @@
 
 
 /**
- * A global timer for the door. This will be reset by @c timer_start() and used by
+ * A global timer for the door. This will be set by @c timer_start() and used by
  * @c timer_check() to compare against a given time reference. 
  */
 time_t DOOR_TIMER;

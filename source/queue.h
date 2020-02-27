@@ -24,6 +24,12 @@ Order QUEUE[QUEUE_SIZE];                /**< The elevator's queue */
 
 
 /**
+ * @brief Initialize the @c QUEUE with all invalid orders
+ */
+void queue_init();
+
+
+/**
  * @brief Check if the @c QUEUE is empty
  * 
  * @return 1 if the @c QUEUE is empty and 0 if not
@@ -31,12 +37,6 @@ Order QUEUE[QUEUE_SIZE];                /**< The elevator's queue */
  * @warning We assume that the first element in the queue is always updated! If not, the return value is invalid
  */
 int queue_empty();
-
-
-/**
- * @brief Initialize the @c QUEUE with all invalid orders
- */
-void queue_init();
 
 
 /**

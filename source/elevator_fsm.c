@@ -7,15 +7,42 @@
 #include "timer.h"
 
 
-elevator_action_t elevator_update_state(elevator_data_t* p_elevator_data) {
+elevator_data_t elevator_init() {
+    //Turn off all button lights and clear all order light arrays (just in case)
+    for(int floor = 0; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
+        hardware_command_order_light(floor, HARDWARE_ORDER_UP,     LIGHT_OFF);
+        hardware_command_order_light(floor, HARDWARE_ORDER_DOWN,   LIGHT_OFF);
+        hardware_command_order_light(floor, HARDWARE_ORDER_INSIDE, LIGHT_OFF);
+    }
 
-    int current_floor = get_current_floor();
-    Order current_order = QUEUE[0];
+    //we assume the obstruction will never be active during setup!
+    hardware_command_stop_light(LIGHT_OFF);
+    hardware_command_door_open(DOOR_CLOSE); 
+
+    hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
+    while(get_current_floor() == BETWEEN_FLOORS) {}
+    hardware_command_movement(HARDWARE_MOVEMENT_STOP);
+
+    hardware_command_floor_indicator_on(get_current_floor());
+
+    queue_init();
+
+    elevator_data_t elevator_data = {.last_floor = get_current_floor(), .last_dir = HARDWARE_MOVEMENT_STOP,
+                                     .state = STATE_IDLE,               .next_action = ACTION_STOP_MOVEMENT
+                                    };
+
+    return elevator_data;
+}
+
+
+// FSM
+elevator_action_t elevator_update_state(elevator_data_t* p_elevator_data) {
 
     elevator_event_t current_event = elevator_update_event(p_elevator_data);
     elevator_guard_t guards = elevator_update_guards(p_elevator_data);
 
     failsafe_invalid_state(p_elevator_data);
+
     switch(p_elevator_data->state) {
         case STATE_IDLE: {
             // Entry actions:
@@ -60,7 +87,7 @@ elevator_action_t elevator_update_state(elevator_data_t* p_elevator_data) {
             // Entry actions:
             hardware_command_movement(HARDWARE_MOVEMENT_STOP);
             hardware_command_door_open(DOOR_OPEN);
-            queue_clear_order_at_floor(p_elevator_data->orders_cab, p_elevator_data->orders_up, p_elevator_data->orders_down, current_floor);
+            queue_clear_order_at_floor(p_elevator_data->orders_cab, p_elevator_data->orders_up, p_elevator_data->orders_down, get_current_floor());
 
             switch (current_event) {
                 
@@ -83,14 +110,12 @@ elevator_action_t elevator_update_state(elevator_data_t* p_elevator_data) {
                     if(guards.TARGET_FLOOR_ABOVE && guards.TIMER_DONE) {
                         p_elevator_data->state = STATE_MOVING_UP;
                         hardware_command_door_open(DOOR_CLOSE);
-                        p_elevator_data->door_open = DOOR_CLOSE;
                         return ACTION_MOVE_UP;
                     }
 
                     if(guards.TARGET_FLOOR_BELOW && guards.TIMER_DONE) {
                         p_elevator_data->state = STATE_MOVING_DOWN;
                         hardware_command_door_open(DOOR_CLOSE);
-                        p_elevator_data->door_open = DOOR_CLOSE;
                         return ACTION_MOVE_DOWN;
                     }  
                 }
@@ -184,110 +209,6 @@ elevator_action_t elevator_update_state(elevator_data_t* p_elevator_data) {
     } //switch(p_elevator_data->state)
     
     return ACTION_DO_NOTHING; // Default action if no hits (shouldnt be possible to get here)
-}
-
-
-int check_floor_diff(int target_floor, int current_floor) {
-    return (current_floor != target_floor && current_floor != BETWEEN_FLOORS);
-}
-
-
-void update_button_state(elevator_data_t* p_elevator_data){
-    update_cab_buttons(p_elevator_data->orders_cab);
-    update_floor_buttons(p_elevator_data->orders_up, p_elevator_data->orders_down);
-}
-
-
-void emergency_action(elevator_data_t* p_elevator_data){
-    queue_erase(p_elevator_data->orders_up, p_elevator_data->orders_down, p_elevator_data->orders_cab);
-    timer_start();
-    if (get_current_floor() != BETWEEN_FLOORS && hardware_read_stop_signal()){
-        p_elevator_data->door_open = DOOR_OPEN;
-        hardware_command_door_open(DOOR_OPEN);
-    }
-}
-
-
-elevator_data_t elevator_init() {
-    //Turn off all button lights and clear all order light arrays (just in case)
-    for(int floor = 0; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
-        hardware_command_order_light(floor, HARDWARE_ORDER_UP,     LIGHT_OFF);
-        hardware_command_order_light(floor, HARDWARE_ORDER_DOWN,   LIGHT_OFF);
-        hardware_command_order_light(floor, HARDWARE_ORDER_INSIDE, LIGHT_OFF);
-    }
-
-    //we assume the obstruction will never be active during setup!
-    hardware_command_stop_light(LIGHT_OFF);
-    hardware_command_door_open(DOOR_CLOSE); 
-
-    hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
-    while(get_current_floor() == BETWEEN_FLOORS) {}
-    hardware_command_movement(HARDWARE_MOVEMENT_STOP);
-
-    hardware_command_floor_indicator_on(get_current_floor());
-
-    queue_init();
-
-    elevator_data_t elevator_data = {.door_open = DOOR_CLOSE,
-                                    .last_floor = get_current_floor(),
-                                    .last_dir = HARDWARE_MOVEMENT_STOP,
-                                    .state = STATE_IDLE,
-                                    .next_action = ACTION_STOP_MOVEMENT};
-
-    return elevator_data;
-}
-
-
-void elevator_execute_next_action(elevator_data_t* p_elevator_data){
-    switch (p_elevator_data->next_action){
-    case ACTION_DO_NOTHING:
-        break;
-
-    case ACTION_START_DOOR_TIMER:
-        timer_start();
-        break;
-
-    case ACTION_OPEN_DOOR:
-        hardware_command_door_open(DOOR_OPEN);
-        p_elevator_data->door_open = DOOR_OPEN;
-        break;
-
-    case ACTION_CLOSE_DOOR:
-        queue_update();
-        hardware_command_door_open(DOOR_CLOSE);
-        p_elevator_data->door_open = DOOR_CLOSE;
-        break;
-
-    case ACTION_MOVE_UP:
-        if(get_current_floor() != BETWEEN_FLOORS) {
-            p_elevator_data->last_dir = HARDWARE_MOVEMENT_UP;
-        }
-        hardware_command_movement(HARDWARE_MOVEMENT_UP);
-        p_elevator_data->state = STATE_MOVING_UP;
-        break;
-
-    case ACTION_MOVE_DOWN:
-        if(get_current_floor() != BETWEEN_FLOORS) {
-            p_elevator_data->last_dir = HARDWARE_MOVEMENT_DOWN;
-        }
-        hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
-        p_elevator_data->state = STATE_MOVING_DOWN;
-        break;
-
-    case ACTION_STOP_MOVEMENT:
-        hardware_command_movement(HARDWARE_MOVEMENT_STOP);
-        p_elevator_data->last_dir = HARDWARE_MOVEMENT_STOP;
-        p_elevator_data->state = STATE_IDLE;
-        break;
-
-    case ACTION_EMERGENCY:
-        emergency_action(p_elevator_data);
-        break;
-
-    default:
-        fprintf(stderr, "Default case reached in switch in main. This should not happen\n");
-        break;
-    }
 }
 
 
@@ -414,6 +335,74 @@ elevator_event_t elevator_update_event(elevator_data_t* p_elevator_data) {
 
     //If we get here, we did not get a hit on the specific events we checked for, so we simply do nothing
     return EVENT_NO_EVENT;
+}
+
+
+void elevator_execute_next_action(elevator_data_t* p_elevator_data){
+    switch (p_elevator_data->next_action){
+        case ACTION_DO_NOTHING:
+            break;
+
+        case ACTION_START_DOOR_TIMER:
+            timer_start();
+            break;
+
+        case ACTION_OPEN_DOOR:
+            hardware_command_door_open(DOOR_OPEN);
+            break;
+
+        case ACTION_CLOSE_DOOR:
+            queue_update();
+            hardware_command_door_open(DOOR_CLOSE);
+            break;
+
+        case ACTION_MOVE_UP:
+            if(get_current_floor() != BETWEEN_FLOORS) {                 // This check is to prevent errors when stopping and moving again between floors
+                p_elevator_data->last_dir = HARDWARE_MOVEMENT_UP;
+            }
+            hardware_command_movement(HARDWARE_MOVEMENT_UP);
+            p_elevator_data->state = STATE_MOVING_UP;
+            break;
+
+        case ACTION_MOVE_DOWN:
+            if(get_current_floor() != BETWEEN_FLOORS) {                 // This check is to prevent errors when stopping and moving again between floors
+                p_elevator_data->last_dir = HARDWARE_MOVEMENT_DOWN;
+            }
+            hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
+            p_elevator_data->state = STATE_MOVING_DOWN;
+            break;
+
+        case ACTION_STOP_MOVEMENT:
+            hardware_command_movement(HARDWARE_MOVEMENT_STOP);
+            p_elevator_data->last_dir = HARDWARE_MOVEMENT_STOP;
+            p_elevator_data->state = STATE_IDLE;
+            break;
+
+        case ACTION_EMERGENCY:
+            queue_erase(p_elevator_data->orders_up, p_elevator_data->orders_down, p_elevator_data->orders_cab);
+            timer_start();
+            if (get_current_floor() != BETWEEN_FLOORS && hardware_read_stop_signal()){
+                hardware_command_door_open(DOOR_OPEN);
+            }
+            break;
+
+        default:
+            fprintf(stderr, "Default case reached in switch in main. This should not happen\n");
+            break;
+        }
+}
+
+
+// Helper function for the FSM logic
+
+int check_floor_diff(int target_floor, int current_floor) {
+    return (current_floor != target_floor && current_floor != BETWEEN_FLOORS);
+}
+
+
+void update_button_state(elevator_data_t* p_elevator_data){
+    update_cab_buttons(p_elevator_data->orders_cab);
+    update_floor_buttons(p_elevator_data->orders_up, p_elevator_data->orders_down);
 }
 
 
