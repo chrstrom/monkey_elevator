@@ -1,6 +1,6 @@
-<mxfile host="www.draw.io" modified="2020-02-26T16:33:58.060Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36" etag="BZEGlZzHsxS3pQwuc8oH" version="12.7.7" type="github">
+<mxfile host="www.draw.io" modified="2020-02-27T10:37:00.495Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36" etag="BjFiO3ZD7yQo3wWjdunn" version="12.7.8" type="github">
   <diagram id="tqs7IAVX7RazEy-5wPce" name="Page-1">
-    <mxGraphModel dx="415" dy="219" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="-162.43" dy="-5438.88" grid="0" gridSize="10" guides="0" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -1060,32 +1060,32 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-1" value="Main" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;" vertex="1" parent="1">
-          <mxGeometry x="597.09" y="3880" width="100" height="2507" as="geometry" />
+        <mxCell id="HXjpbs-df3sevuLWiSnq-1" value="Main" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;" parent="1" vertex="1">
+          <mxGeometry x="597.09" y="3880" width="100" height="2713" as="geometry" />
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-2" value="Elevator_IO" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;" vertex="1" parent="1">
-          <mxGeometry x="1157.0900000000001" y="3880" width="130" height="2506" as="geometry" />
+        <mxCell id="HXjpbs-df3sevuLWiSnq-2" value="Elevator_IO" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;" parent="1" vertex="1">
+          <mxGeometry x="1157.09" y="3880" width="130" height="2701" as="geometry" />
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-3" value="Timer" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;" vertex="1" parent="1">
-          <mxGeometry x="1347.0900000000001" y="3880" width="100" height="2493" as="geometry" />
+        <mxCell id="HXjpbs-df3sevuLWiSnq-3" value="Timer" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;" parent="1" vertex="1">
+          <mxGeometry x="1347.09" y="3880" width="100" height="2703" as="geometry" />
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-4" value="Queue" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;" vertex="1" parent="1">
-          <mxGeometry x="987.09" y="3880" width="100" height="2514" as="geometry" />
+        <mxCell id="HXjpbs-df3sevuLWiSnq-4" value="Queue" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;" parent="1" vertex="1">
+          <mxGeometry x="987.09" y="3880" width="100" height="2707" as="geometry" />
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-5" value="FSM" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;" vertex="1" parent="1">
-          <mxGeometry x="787.09" y="3880" width="100" height="2511" as="geometry" />
+        <mxCell id="HXjpbs-df3sevuLWiSnq-5" value="FSM" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;" parent="1" vertex="1">
+          <mxGeometry x="787.09" y="3880" width="100" height="2706" as="geometry" />
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="HXjpbs-df3sevuLWiSnq-7" target="HXjpbs-df3sevuLWiSnq-1">
+        <mxCell id="HXjpbs-df3sevuLWiSnq-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="HXjpbs-df3sevuLWiSnq-7" target="HXjpbs-df3sevuLWiSnq-1" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="646.09" y="3935" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-7" value="" style="ellipse;html=1;shape=startState;fillColor=#000000;strokeColor=#ff0000;" vertex="1" parent="1">
+        <mxCell id="HXjpbs-df3sevuLWiSnq-7" value="" style="ellipse;html=1;shape=startState;fillColor=#000000;strokeColor=#ff0000;" parent="1" vertex="1">
           <mxGeometry x="520.09" y="3920" width="30" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-8" value="" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;" edge="1" parent="1" source="HXjpbs-df3sevuLWiSnq-2" target="HXjpbs-df3sevuLWiSnq-4">
+        <mxCell id="HXjpbs-df3sevuLWiSnq-8" value="" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;" parent="1" source="HXjpbs-df3sevuLWiSnq-2" target="HXjpbs-df3sevuLWiSnq-4" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="837.09" y="4040" as="sourcePoint" />
             <mxPoint x="1036.0900000000001" y="4040" as="targetPoint" />
@@ -1096,16 +1096,16 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-9" value="&lt;div&gt;Constantly checking for new orders (and if there is, adding them to the queue), setting the floor indicator if at a new floor.&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Assuming that floor 1 has been reached&lt;/div&gt;" style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=-6;" vertex="1" parent="1">
-          <mxGeometry x="342.09000000000003" y="4297" width="190" height="150" as="geometry" />
+        <mxCell id="HXjpbs-df3sevuLWiSnq-9" value="&lt;div&gt;Constantly checking for new orders (and if there is, adding them to the queue), setting the floor indicator if at a new floor.&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Assuming that floor 1 has been reached&lt;/div&gt;" style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=-6;" parent="1" vertex="1">
+          <mxGeometry x="342.09" y="4301" width="200.91" height="146" as="geometry" />
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-10" value="&lt;div&gt;Constantly checking for the timer here.&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Assuming that the time-control has been reached&amp;nbsp;&lt;/div&gt;" style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=-6;" vertex="1" parent="1">
+        <mxCell id="HXjpbs-df3sevuLWiSnq-10" value="&lt;div&gt;Constantly checking for the timer here.&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Assuming that the time-control has been reached&amp;nbsp;&lt;/div&gt;" style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=-6;" parent="1" vertex="1">
           <mxGeometry x="342.09000000000003" y="5030" width="190" height="150" as="geometry" />
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-11" value="&lt;div&gt;Constantly check if we have reached the target floor (floor 4)&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Assuming that the elevator has reached the target floor&lt;/div&gt;" style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=-6;" vertex="1" parent="1">
+        <mxCell id="HXjpbs-df3sevuLWiSnq-11" value="&lt;div&gt;Constantly check if we have reached the target floor (floor 4)&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Assuming that the elevator has reached the target floor&lt;/div&gt;" style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=-6;" parent="1" vertex="1">
           <mxGeometry x="345.09000000000003" y="5472" width="190" height="150" as="geometry" />
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-12" value="read buttons" style="html=1;verticalAlign=bottom;endArrow=block;" edge="1" parent="1" source="HXjpbs-df3sevuLWiSnq-1" target="HXjpbs-df3sevuLWiSnq-2">
+        <mxCell id="HXjpbs-df3sevuLWiSnq-12" value="read buttons" style="html=1;verticalAlign=bottom;endArrow=block;" parent="1" source="HXjpbs-df3sevuLWiSnq-1" target="HXjpbs-df3sevuLWiSnq-2" edge="1">
           <mxGeometry x="-0.0167" relative="1" as="geometry">
             <mxPoint x="650.09" y="3972" as="sourcePoint" />
             <mxPoint x="836.59" y="3972" as="targetPoint" />
@@ -1116,7 +1116,7 @@
             <mxPoint x="1" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-13" value="" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;" edge="1" parent="1" source="HXjpbs-df3sevuLWiSnq-4" target="HXjpbs-df3sevuLWiSnq-1">
+        <mxCell id="HXjpbs-df3sevuLWiSnq-13" value="" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;" parent="1" source="HXjpbs-df3sevuLWiSnq-4" target="HXjpbs-df3sevuLWiSnq-1" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="1231.5900000000001" y="4050" as="sourcePoint" />
             <mxPoint x="1046.0900000000001" y="4050" as="targetPoint" />
@@ -1127,10 +1127,10 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-14" value="add floor order at&lt;br&gt;floor 1 to queue" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="1">
+        <mxCell id="HXjpbs-df3sevuLWiSnq-14" value="add floor order at&lt;br&gt;floor 1 to queue" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
           <mxGeometry x="1083.5900000000001" y="4030" width="101" height="31" as="geometry" />
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-15" value="update state" style="html=1;verticalAlign=bottom;endArrow=block;" edge="1" parent="1">
+        <mxCell id="HXjpbs-df3sevuLWiSnq-15" value="update state" style="html=1;verticalAlign=bottom;endArrow=block;" parent="1" edge="1">
           <mxGeometry x="-0.0167" relative="1" as="geometry">
             <mxPoint x="646.09" y="4130" as="sourcePoint" />
             <mxPoint x="836.09" y="4130" as="targetPoint" />
@@ -1138,7 +1138,7 @@
             <mxPoint x="1" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-16" value="update event and guard" style="html=1;verticalAlign=bottom;endArrow=block;rounded=0;" edge="1" parent="1" source="HXjpbs-df3sevuLWiSnq-5" target="HXjpbs-df3sevuLWiSnq-5">
+        <mxCell id="HXjpbs-df3sevuLWiSnq-16" value="update event and guard" style="html=1;verticalAlign=bottom;endArrow=block;rounded=0;" parent="1" source="HXjpbs-df3sevuLWiSnq-5" target="HXjpbs-df3sevuLWiSnq-5" edge="1">
           <mxGeometry x="-0.2163" y="22" relative="1" as="geometry">
             <mxPoint x="840.09" y="4159" as="sourcePoint" />
             <mxPoint x="895.09" y="4200" as="targetPoint" />
@@ -1149,7 +1149,7 @@
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-17" value="" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;" edge="1" parent="1">
+        <mxCell id="HXjpbs-df3sevuLWiSnq-17" value="" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;" parent="1" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="839.09" y="4253.29" as="sourcePoint" />
             <mxPoint x="644.0914285714288" y="4253.29" as="targetPoint" />
@@ -1159,7 +1159,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-18" value="set floor-light at floor 1" style="html=1;verticalAlign=bottom;endArrow=block;entryX=0;entryY=0;" edge="1" parent="1">
+        <mxCell id="HXjpbs-df3sevuLWiSnq-18" value="set floor-light at floor 1" style="html=1;verticalAlign=bottom;endArrow=block;entryX=0;entryY=0;" parent="1" edge="1">
           <mxGeometry x="-0.0167" relative="1" as="geometry">
             <mxPoint x="650.2466666666668" y="4561" as="sourcePoint" />
             <mxPoint x="1220.58" y="4561" as="targetPoint" />
@@ -1169,7 +1169,7 @@
             <mxPoint x="1" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-19" value="" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;" edge="1" parent="1">
+        <mxCell id="HXjpbs-df3sevuLWiSnq-19" value="" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;" parent="1" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="1224.92" y="4592.5" as="sourcePoint" />
             <mxPoint x="650.086666666666" y="4592.5" as="targetPoint" />
@@ -1181,7 +1181,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-20" value="update valid floor" style="html=1;verticalAlign=bottom;endArrow=block;entryX=0;entryY=0;" edge="1" parent="1">
+        <mxCell id="HXjpbs-df3sevuLWiSnq-20" value="update valid floor" style="html=1;verticalAlign=bottom;endArrow=block;entryX=0;entryY=0;" parent="1" edge="1">
           <mxGeometry x="-0.0167" relative="1" as="geometry">
             <mxPoint x="650.2466666666668" y="4482.07" as="sourcePoint" />
             <mxPoint x="1220.58" y="4482.07" as="targetPoint" />
@@ -1191,7 +1191,7 @@
             <mxPoint x="1" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-21" value="" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;" edge="1" parent="1">
+        <mxCell id="HXjpbs-df3sevuLWiSnq-21" value="" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;" parent="1" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="1224.92" y="4513.57" as="sourcePoint" />
             <mxPoint x="650.086666666666" y="4513.57" as="targetPoint" />
@@ -1203,7 +1203,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-22" value="" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;" edge="1" parent="1">
+        <mxCell id="HXjpbs-df3sevuLWiSnq-22" value="" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;" parent="1" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="1036.5900000000001" y="4647" as="sourcePoint" />
             <mxPoint x="646.1614285714285" y="4647" as="targetPoint" />
@@ -1214,7 +1214,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-23" value="update state" style="html=1;verticalAlign=bottom;endArrow=block;" edge="1" parent="1">
+        <mxCell id="HXjpbs-df3sevuLWiSnq-23" value="update state" style="html=1;verticalAlign=bottom;endArrow=block;" parent="1" edge="1">
           <mxGeometry x="-0.0167" relative="1" as="geometry">
             <mxPoint x="646.09" y="4684" as="sourcePoint" />
             <mxPoint x="836.09" y="4684" as="targetPoint" />
@@ -1222,7 +1222,7 @@
             <mxPoint x="1" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-24" value="start timer" style="html=1;verticalAlign=bottom;endArrow=block;" edge="1" parent="1">
+        <mxCell id="HXjpbs-df3sevuLWiSnq-24" value="start timer" style="html=1;verticalAlign=bottom;endArrow=block;" parent="1" edge="1">
           <mxGeometry x="-0.0167" relative="1" as="geometry">
             <mxPoint x="836.0914285714288" y="4791" as="sourcePoint" />
             <mxPoint x="1395.0900000000001" y="4791" as="targetPoint" />
@@ -1232,10 +1232,10 @@
             <mxPoint x="1" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-25" value="Start moving down" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="1">
+        <mxCell id="HXjpbs-df3sevuLWiSnq-25" value="Start moving down" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
           <mxGeometry x="687.09" y="4231" width="109" height="17" as="geometry" />
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-26" value="" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;" edge="1" parent="1">
+        <mxCell id="HXjpbs-df3sevuLWiSnq-26" value="" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;" parent="1" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="1395.5899999999992" y="4820.29" as="sourcePoint" />
             <mxPoint x="835.0914285714288" y="4820.29" as="targetPoint" />
@@ -1246,7 +1246,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-27" value="" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;" edge="1" parent="1">
+        <mxCell id="HXjpbs-df3sevuLWiSnq-27" value="" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;" parent="1" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="1221.5900000000001" y="4965" as="sourcePoint" />
             <mxPoint x="1036.0900000000001" y="4965" as="targetPoint" />
@@ -1256,7 +1256,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-28" value="read buttons" style="html=1;verticalAlign=bottom;endArrow=block;" edge="1" parent="1">
+        <mxCell id="HXjpbs-df3sevuLWiSnq-28" value="read buttons" style="html=1;verticalAlign=bottom;endArrow=block;" parent="1" edge="1">
           <mxGeometry x="-0.0167" relative="1" as="geometry">
             <mxPoint x="647.1614285714285" y="4895" as="sourcePoint" />
             <mxPoint x="1222.5900000000001" y="4895" as="targetPoint" />
@@ -1267,7 +1267,7 @@
             <mxPoint x="1" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-29" value="" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;" edge="1" parent="1">
+        <mxCell id="HXjpbs-df3sevuLWiSnq-29" value="" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;" parent="1" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="1035.5200000000004" y="4998" as="sourcePoint" />
             <mxPoint x="645.0914285714288" y="4998" as="targetPoint" />
@@ -1278,10 +1278,10 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-30" value="add cab order at&lt;br&gt;floor 4 to queue" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="1">
+        <mxCell id="HXjpbs-df3sevuLWiSnq-30" value="add cab order at&lt;br&gt;floor 4 to queue" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
           <mxGeometry x="1083.5900000000001" y="4922" width="97" height="31" as="geometry" />
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-31" value="" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;" edge="1" parent="1">
+        <mxCell id="HXjpbs-df3sevuLWiSnq-31" value="" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;" parent="1" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="835.09" y="4852" as="sourcePoint" />
             <mxPoint x="645.0914285714288" y="4852" as="targetPoint" />
@@ -1291,7 +1291,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-32" value="check timer" style="html=1;verticalAlign=bottom;endArrow=block;" edge="1" parent="1">
+        <mxCell id="HXjpbs-df3sevuLWiSnq-32" value="check timer" style="html=1;verticalAlign=bottom;endArrow=block;" parent="1" edge="1">
           <mxGeometry x="-0.0167" relative="1" as="geometry">
             <mxPoint x="837.0914285714288" y="5354" as="sourcePoint" />
             <mxPoint x="1396.0900000000001" y="5354" as="targetPoint" />
@@ -1301,7 +1301,7 @@
             <mxPoint x="1" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-33" value="" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;" edge="1" parent="1">
+        <mxCell id="HXjpbs-df3sevuLWiSnq-33" value="" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;" parent="1" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="1396.5900000000001" y="5383.29" as="sourcePoint" />
             <mxPoint x="836.0914285714288" y="5383.29" as="targetPoint" />
@@ -1312,7 +1312,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-34" value="update state" style="html=1;verticalAlign=bottom;endArrow=block;" edge="1" parent="1">
+        <mxCell id="HXjpbs-df3sevuLWiSnq-34" value="update state" style="html=1;verticalAlign=bottom;endArrow=block;" parent="1" edge="1">
           <mxGeometry x="-0.0167" relative="1" as="geometry">
             <mxPoint x="649.09" y="5233" as="sourcePoint" />
             <mxPoint x="839.09" y="5233" as="targetPoint" />
@@ -1320,7 +1320,7 @@
             <mxPoint x="1" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-35" value="" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;" edge="1" parent="1">
+        <mxCell id="HXjpbs-df3sevuLWiSnq-35" value="" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;" parent="1" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="842.09" y="5429" as="sourcePoint" />
             <mxPoint x="647.0914285714288" y="5429" as="targetPoint" />
@@ -1330,49 +1330,49 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-36" value="close door and start moving up" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="1">
+        <mxCell id="HXjpbs-df3sevuLWiSnq-36" value="close door and start moving up" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
           <mxGeometry x="653.59" y="5407" width="174" height="17" as="geometry" />
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-37" value="" style="endArrow=none;html=1;entryX=0;entryY=0;entryDx=190;entryDy=82;entryPerimeter=0;" edge="1" parent="1" target="HXjpbs-df3sevuLWiSnq-10">
+        <mxCell id="HXjpbs-df3sevuLWiSnq-37" value="" style="endArrow=none;html=1;entryX=0;entryY=0;entryDx=190;entryDy=82;entryPerimeter=0;" parent="1" target="HXjpbs-df3sevuLWiSnq-10" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="1766.0900000000001" y="5108" as="sourcePoint" />
             <mxPoint x="500.09000000000003" y="5216" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-38" value="" style="endArrow=none;html=1;exitX=0;exitY=0;exitDx=190;exitDy=82;exitPerimeter=0;" edge="1" parent="1" source="HXjpbs-df3sevuLWiSnq-11">
+        <mxCell id="HXjpbs-df3sevuLWiSnq-38" value="" style="endArrow=none;html=1;exitX=0;exitY=0;exitDx=190;exitDy=82;exitPerimeter=0;" parent="1" source="HXjpbs-df3sevuLWiSnq-11" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="1111.0900000000001" y="5499" as="sourcePoint" />
             <mxPoint x="1694.0900000000001" y="5547" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-39" value="" style="endArrow=none;html=1;exitX=0;exitY=0;exitDx=190;exitDy=82;exitPerimeter=0;" edge="1" parent="1" source="HXjpbs-df3sevuLWiSnq-9">
+        <mxCell id="HXjpbs-df3sevuLWiSnq-39" value="" style="endArrow=none;html=1;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="823.09" y="4202" as="sourcePoint" />
+            <mxPoint x="543" y="4379" as="sourcePoint" />
             <mxPoint x="1782.0900000000001" y="4379" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-40" value="" style="shape=link;html=1;exitX=0;exitY=0;exitDx=190;exitDy=82;exitPerimeter=0;" edge="1" parent="1" source="HXjpbs-df3sevuLWiSnq-9">
+        <mxCell id="HXjpbs-df3sevuLWiSnq-40" value="" style="shape=link;html=1;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="846.09" y="4197" as="sourcePoint" />
+            <mxPoint x="544" y="4379" as="sourcePoint" />
             <mxPoint x="1783.004132254464" y="4379" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-41" value="" style="shape=link;html=1;exitX=0;exitY=0;exitDx=190;exitDy=82;exitPerimeter=0;" edge="1" parent="1" source="HXjpbs-df3sevuLWiSnq-10">
+        <mxCell id="HXjpbs-df3sevuLWiSnq-41" value="" style="shape=link;html=1;exitX=0;exitY=0;exitDx=190;exitDy=82;exitPerimeter=0;" parent="1" source="HXjpbs-df3sevuLWiSnq-10" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="1011.09" y="5208" as="sourcePoint" />
             <mxPoint x="1770.0900000000001" y="5108" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-42" value="" style="shape=link;html=1;exitX=0;exitY=0;exitDx=190;exitDy=82;exitPerimeter=0;" edge="1" parent="1" source="HXjpbs-df3sevuLWiSnq-11">
+        <mxCell id="HXjpbs-df3sevuLWiSnq-42" value="" style="shape=link;html=1;exitX=0;exitY=0;exitDx=190;exitDy=82;exitPerimeter=0;" parent="1" source="HXjpbs-df3sevuLWiSnq-11" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="1044.0900000000001" y="5644" as="sourcePoint" />
             <mxPoint x="1695.0900000000001" y="5547" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-43" value="open door" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="1">
+        <mxCell id="HXjpbs-df3sevuLWiSnq-43" value="open door" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
           <mxGeometry x="708.59" y="4824" width="64" height="17" as="geometry" />
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-44" value="set floor-light at floor 4" style="html=1;verticalAlign=bottom;endArrow=block;entryX=0;entryY=0;" edge="1" parent="1">
+        <mxCell id="HXjpbs-df3sevuLWiSnq-44" value="set floor-light at floor 4" style="html=1;verticalAlign=bottom;endArrow=block;entryX=0;entryY=0;" parent="1" edge="1">
           <mxGeometry x="-0.0167" relative="1" as="geometry">
             <mxPoint x="652.2466666666668" y="5695.93" as="sourcePoint" />
             <mxPoint x="1222.58" y="5695.93" as="targetPoint" />
@@ -1382,7 +1382,7 @@
             <mxPoint x="1" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-45" value="" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;" edge="1" parent="1">
+        <mxCell id="HXjpbs-df3sevuLWiSnq-45" value="" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;" parent="1" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="1226.92" y="5727.43" as="sourcePoint" />
             <mxPoint x="652.086666666666" y="5727.43" as="targetPoint" />
@@ -1394,7 +1394,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-46" value="update valid floor" style="html=1;verticalAlign=bottom;endArrow=block;entryX=0;entryY=0;" edge="1" parent="1">
+        <mxCell id="HXjpbs-df3sevuLWiSnq-46" value="update valid floor" style="html=1;verticalAlign=bottom;endArrow=block;entryX=0;entryY=0;" parent="1" edge="1">
           <mxGeometry x="-0.0167" relative="1" as="geometry">
             <mxPoint x="652.2466666666668" y="5617" as="sourcePoint" />
             <mxPoint x="1222.58" y="5617" as="targetPoint" />
@@ -1404,7 +1404,7 @@
             <mxPoint x="1" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-47" value="" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;" edge="1" parent="1">
+        <mxCell id="HXjpbs-df3sevuLWiSnq-47" value="" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;" parent="1" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="1226.92" y="5648.5" as="sourcePoint" />
             <mxPoint x="652.086666666666" y="5648.5" as="targetPoint" />
@@ -1416,7 +1416,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-48" value="update state" style="html=1;verticalAlign=bottom;endArrow=block;" edge="1" parent="1">
+        <mxCell id="HXjpbs-df3sevuLWiSnq-48" value="update state" style="html=1;verticalAlign=bottom;endArrow=block;" parent="1" edge="1">
           <mxGeometry x="-0.0167" relative="1" as="geometry">
             <mxPoint x="646.59" y="5802" as="sourcePoint" />
             <mxPoint x="836.59" y="5802" as="targetPoint" />
@@ -1424,7 +1424,7 @@
             <mxPoint x="1" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-49" value="start timer" style="html=1;verticalAlign=bottom;endArrow=block;" edge="1" parent="1">
+        <mxCell id="HXjpbs-df3sevuLWiSnq-49" value="start timer" style="html=1;verticalAlign=bottom;endArrow=block;" parent="1" edge="1">
           <mxGeometry x="-0.0167" relative="1" as="geometry">
             <mxPoint x="836.0914285714288" y="5926" as="sourcePoint" />
             <mxPoint x="1395.0900000000001" y="5926" as="targetPoint" />
@@ -1434,7 +1434,7 @@
             <mxPoint x="1" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-50" value="" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;" edge="1" parent="1">
+        <mxCell id="HXjpbs-df3sevuLWiSnq-50" value="" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;" parent="1" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="1395.5900000000001" y="5955.290000000001" as="sourcePoint" />
             <mxPoint x="835.0914285714288" y="5955.290000000001" as="targetPoint" />
@@ -1445,7 +1445,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-51" value="" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;" edge="1" parent="1">
+        <mxCell id="HXjpbs-df3sevuLWiSnq-51" value="" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;" parent="1" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="835.09" y="5987" as="sourcePoint" />
             <mxPoint x="645.0914285714288" y="5987" as="targetPoint" />
@@ -1455,67 +1455,67 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-52" value="open door" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="1">
+        <mxCell id="HXjpbs-df3sevuLWiSnq-52" value="open door" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
           <mxGeometry x="708.59" y="5959" width="64" height="17" as="geometry" />
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-53" value="&lt;div&gt;Constantly checking for the timer here.&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Assume that the time-control has been reached&amp;nbsp;&lt;/div&gt;" style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=-6;" vertex="1" parent="1">
-          <mxGeometry x="342.09000000000003" y="5985" width="190" height="150" as="geometry" />
+        <mxCell id="HXjpbs-df3sevuLWiSnq-53" value="&lt;div&gt;Constantly checking for the timer here.&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Assume that the time-control has been reached&amp;nbsp;&lt;/div&gt;" style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=-6;" parent="1" vertex="1">
+          <mxGeometry x="347.00000000000006" y="6079" width="190" height="150" as="geometry" />
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-54" value="check timer" style="html=1;verticalAlign=bottom;endArrow=block;" edge="1" parent="1">
+        <mxCell id="HXjpbs-df3sevuLWiSnq-54" value="check timer" style="html=1;verticalAlign=bottom;endArrow=block;" parent="1" edge="1">
           <mxGeometry x="-0.0167" relative="1" as="geometry">
-            <mxPoint x="837.0914285714288" y="6260" as="sourcePoint" />
-            <mxPoint x="1396.0900000000001" y="6260" as="targetPoint" />
+            <mxPoint x="837.0914285714288" y="6422" as="sourcePoint" />
+            <mxPoint x="1396.0900000000001" y="6422" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="876.0200000000001" y="6260" />
+              <mxPoint x="876.0200000000001" y="6422" />
             </Array>
             <mxPoint x="1" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-55" value="" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;" edge="1" parent="1">
+        <mxCell id="HXjpbs-df3sevuLWiSnq-55" value="" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;" parent="1" edge="1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="1396.5900000000001" y="6289.29" as="sourcePoint" />
-            <mxPoint x="836.0914285714288" y="6289.29" as="targetPoint" />
+            <mxPoint x="1396.5900000000001" y="6451.29" as="sourcePoint" />
+            <mxPoint x="836.0914285714288" y="6451.29" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="1153.02" y="6289.29" />
-              <mxPoint x="1123.02" y="6289.29" />
-              <mxPoint x="1097.02" y="6289.29" />
+              <mxPoint x="1153.02" y="6451.29" />
+              <mxPoint x="1123.02" y="6451.29" />
+              <mxPoint x="1097.02" y="6451.29" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-56" value="update state" style="html=1;verticalAlign=bottom;endArrow=block;" edge="1" parent="1">
+        <mxCell id="HXjpbs-df3sevuLWiSnq-56" value="update state" style="html=1;verticalAlign=bottom;endArrow=block;" parent="1" edge="1">
           <mxGeometry x="-0.0167" relative="1" as="geometry">
-            <mxPoint x="649.09" y="6139" as="sourcePoint" />
-            <mxPoint x="839.09" y="6139" as="targetPoint" />
+            <mxPoint x="649.09" y="6301" as="sourcePoint" />
+            <mxPoint x="839.09" y="6301" as="targetPoint" />
             <Array as="points" />
             <mxPoint x="1" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-57" value="" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;" edge="1" parent="1">
+        <mxCell id="HXjpbs-df3sevuLWiSnq-57" value="" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;" parent="1" edge="1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="842.09" y="6335" as="sourcePoint" />
-            <mxPoint x="647.0914285714288" y="6335" as="targetPoint" />
+            <mxPoint x="842.09" y="6497" as="sourcePoint" />
+            <mxPoint x="647.0914285714288" y="6497" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="770.09" y="6335" />
-              <mxPoint x="734.09" y="6335" />
+              <mxPoint x="770.09" y="6497" />
+              <mxPoint x="734.09" y="6497" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-58" value="close door and stay in idle" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="1">
-          <mxGeometry x="666.59" y="6313" width="149" height="17" as="geometry" />
+        <mxCell id="HXjpbs-df3sevuLWiSnq-58" value="close door and stay in idle" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
+          <mxGeometry x="666.59" y="6475" width="149" height="17" as="geometry" />
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-59" value="" style="endArrow=none;html=1;entryX=0;entryY=0;entryDx=190;entryDy=82;entryPerimeter=0;" edge="1" parent="1" target="HXjpbs-df3sevuLWiSnq-53">
+        <mxCell id="HXjpbs-df3sevuLWiSnq-59" value="" style="endArrow=none;html=1;entryX=0;entryY=0;entryDx=190;entryDy=82;entryPerimeter=0;" parent="1" target="HXjpbs-df3sevuLWiSnq-53" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="1759.0900000000001" y="6060" as="sourcePoint" />
+            <mxPoint x="1751" y="6154" as="sourcePoint" />
             <mxPoint x="500.09000000000003" y="6122" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-60" value="" style="shape=link;html=1;exitX=0;exitY=0;exitDx=190;exitDy=82;exitPerimeter=0;" edge="1" parent="1" source="HXjpbs-df3sevuLWiSnq-53">
+        <mxCell id="HXjpbs-df3sevuLWiSnq-60" value="" style="shape=link;html=1;exitX=0;exitY=0;exitDx=190;exitDy=82;exitPerimeter=0;" parent="1" source="HXjpbs-df3sevuLWiSnq-53" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="1011.09" y="6114" as="sourcePoint" />
-            <mxPoint x="1763.0900000000001" y="6060" as="targetPoint" />
+            <mxPoint x="1754" y="6154" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-61" value="update event and guard" style="html=1;verticalAlign=bottom;endArrow=block;rounded=0;" edge="1" parent="1">
+        <mxCell id="HXjpbs-df3sevuLWiSnq-61" value="update event and guard" style="html=1;verticalAlign=bottom;endArrow=block;rounded=0;" parent="1" edge="1">
           <mxGeometry x="-0.2057" y="18" relative="1" as="geometry">
             <mxPoint x="835.4135294117649" y="4736" as="sourcePoint" />
             <mxPoint x="837.0914285714288" y="4768" as="targetPoint" />
@@ -1526,7 +1526,7 @@
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-62" value="update event and guard" style="html=1;verticalAlign=bottom;endArrow=block;rounded=0;" edge="1" parent="1" source="HXjpbs-df3sevuLWiSnq-5">
+        <mxCell id="HXjpbs-df3sevuLWiSnq-62" value="update event and guard" style="html=1;verticalAlign=bottom;endArrow=block;rounded=0;" parent="1" source="HXjpbs-df3sevuLWiSnq-5" edge="1">
           <mxGeometry x="-0.2057" y="17" relative="1" as="geometry">
             <mxPoint x="842.0200000000001" y="5274" as="sourcePoint" />
             <mxPoint x="838.0914285714288" y="5306" as="targetPoint" />
@@ -1537,7 +1537,7 @@
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-63" value="update event and guard" style="html=1;verticalAlign=bottom;endArrow=block;rounded=0;" edge="1" parent="1" source="HXjpbs-df3sevuLWiSnq-5" target="HXjpbs-df3sevuLWiSnq-5">
+        <mxCell id="HXjpbs-df3sevuLWiSnq-63" value="update event and guard" style="html=1;verticalAlign=bottom;endArrow=block;rounded=0;" parent="1" source="HXjpbs-df3sevuLWiSnq-5" target="HXjpbs-df3sevuLWiSnq-5" edge="1">
           <mxGeometry x="-0.2054" y="14" relative="1" as="geometry">
             <mxPoint x="844.0200000000001" y="5861" as="sourcePoint" />
             <mxPoint x="840.0914285714285" y="5893" as="targetPoint" />
@@ -1549,13 +1549,13 @@
             <mxPoint x="-2" y="-8" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="HXjpbs-df3sevuLWiSnq-64" value="update event and guard" style="html=1;verticalAlign=bottom;endArrow=block;rounded=0;" edge="1" parent="1" source="HXjpbs-df3sevuLWiSnq-5">
+        <mxCell id="HXjpbs-df3sevuLWiSnq-64" value="update event and guard" style="html=1;verticalAlign=bottom;endArrow=block;rounded=0;" parent="1" edge="1">
           <mxGeometry x="-0.2057" y="23" relative="1" as="geometry">
-            <mxPoint x="842.0199999999999" y="6183" as="sourcePoint" />
-            <mxPoint x="838.0914285714288" y="6215" as="targetPoint" />
+            <mxPoint x="836.4135294117647" y="6345" as="sourcePoint" />
+            <mxPoint x="838.0914285714288" y="6377" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="897.0199999999999" y="6183" />
-              <mxPoint x="897.0199999999999" y="6215" />
+              <mxPoint x="897.0199999999999" y="6345" />
+              <mxPoint x="897.0199999999999" y="6377" />
             </Array>
             <mxPoint as="offset" />
           </mxGeometry>

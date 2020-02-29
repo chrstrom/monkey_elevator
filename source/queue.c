@@ -95,12 +95,9 @@ void queue_update(){
     if(get_current_floor() == BETWEEN_FLOORS){
         return;
     }
-
-    // If there are any orders with target_floor = FLOOR_NOT_INIT, restructure the queue
     queue_refactor();
-    
-    // QUEUE[0].target_floor should be FLOOR_NOT_INIT, if we had a target at the current_floor since we clear the orders before calling this function
-    if(QUEUE[0].target_floor == FLOOR_NOT_INIT){ 
+
+    if(QUEUE[0].target_floor == FLOOR_NOT_INIT){  // In the usual case this is true, as we call the update function whenever we clear the first element of the queue
         for (int ord = 0; ord < QUEUE_SIZE; ord++){
             if (ord < QUEUE_SIZE - 1){
                 queue_set_order(ord, QUEUE[ord + 1].target_floor, QUEUE[ord + 1].order_type);
